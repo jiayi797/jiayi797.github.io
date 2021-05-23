@@ -1,0 +1,1262 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="L2R," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要对排序模型做一个简要的整理。首先介绍了一些传统的排序模型，然后介绍比较新的learning to rank. 要想了解L2R，首先我们要了解一下传统的排序模型。 传统的排序模型传统的排序模型主要分为两类：相关度排序模型和重要性排序模型。 相关度排序模型(Relevance Ranking Model)相关度排序模型根据查询和文档之间的相似度来对文档进行排序。常用的模型包括：布尔模型(Boo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法-初识Learning to Rank">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/08/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%88%9D%E8%AF%86Learning-to-Rank/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="本文主要对排序模型做一个简要的整理。首先介绍了一些传统的排序模型，然后介绍比较新的learning to rank. 要想了解L2R，首先我们要了解一下传统的排序模型。 传统的排序模型传统的排序模型主要分为两类：相关度排序模型和重要性排序模型。 相关度排序模型(Relevance Ranking Model)相关度排序模型根据查询和文档之间的相似度来对文档进行排序。常用的模型包括：布尔模型(Boo">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2017/08/30/59a69397eeec7.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/08/30/59a69437ecc6a.png">
+<meta property="og:image" content="https://i.loli.net/2017/08/30/59a694b19797c.png">
+<meta property="og:image" content="https://i.loli.net/2017/08/30/59a6951348a74.png">
+<meta property="article:published_time" content="2017-08-30T10:10:45.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:02.000Z">
+<meta property="article:author" content="jiayi797">
+<meta property="article:tag" content="L2R">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2017/08/30/59a69397eeec7.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/08/30/机器学习算法-初识Learning-to-Rank/"/>
+
+
+
+
+
+  <title>机器学习算法-初识Learning to Rank | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/08/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%88%9D%E8%AF%86Learning-to-Rank/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习算法-初识Learning to Rank</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-30T10:10:45+00:00">
+                2017-08-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:02+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/08/30/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%88%9D%E8%AF%86Learning-to-Rank/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/30/机器学习算法-初识Learning-to-Rank/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要对排序模型做一个简要的整理。首先介绍了一些传统的排序模型，然后介绍比较新的learning to rank.</p>
+<p>要想了解L2R，首先我们要了解一下传统的排序模型。</p>
+<h1 id="传统的排序模型"><a href="#传统的排序模型" class="headerlink" title="传统的排序模型"></a>传统的排序模型</h1><p>传统的排序模型主要分为两类：相关度排序模型和重要性排序模型。</p>
+<h2 id="相关度排序模型-Relevance-Ranking-Model"><a href="#相关度排序模型-Relevance-Ranking-Model" class="headerlink" title="相关度排序模型(Relevance Ranking Model)"></a>相关度排序模型(Relevance Ranking Model)</h2><p>相关度排序模型根据查询和文档之间的相似度来对文档进行排序。常用的模型包括：布尔模型(Boolean Model)，向量空间模型(Vector Space Model)，隐语义分析(Latent Semantic Analysis)，BM25，LMIR模型等等。</p>
+<p>相关度排序模型主要用在查询（例如搜索引擎）上，它主要是要计算【关键字】与【文档】之间的相关性，给出【关于关键字】的排序。</p>
+<h2 id="重要性排序模型-Importance-Ranking-Model"><a href="#重要性排序模型-Importance-Ranking-Model" class="headerlink" title="重要性排序模型(Importance Ranking Model)"></a>重要性排序模型(Importance Ranking Model)</h2><p>重要性排序模型就不考虑上述提到的【查询】，而仅仅根据网页(亦即文档)之间的图结构来判断文档的权威程度，典型的权威网站包括Google，Yahoo!等。常用的模型包括PageRank，HITS，HillTop，TrustRank等等。</p>
+<h2 id="传统排序模型的缺陷"><a href="#传统排序模型的缺陷" class="headerlink" title="传统排序模型的缺陷"></a>传统排序模型的缺陷</h2><p>以上的这些传统的排序模型，单个模型往往只能考虑某一个方面(相关度或者重要性)，所以只是用单个模型达不到要求。搜索引擎通常会组合多种排序模型来进行排序，但是，如何组合多个排序模型来形成一个新的排序模型，以及如何调节这些参数，都是一个很大的问题。</p>
+<p>因此，伟大的科学家们提出了Learning to Rank，来解决上述问题。</p>
+<h1 id="Learning-to-Rank"><a href="#Learning-to-Rank" class="headerlink" title="Learning to Rank"></a>Learning to Rank</h1><p>Learning to Rank是一种机器学习模型。它使用机器学习的方法，我们可以把各个现有排序模型的【输出作为特征】，然后训练一个新的模型，并自动学得这个新的模型的参数，从而很方便的可以组合多个现有的排序模型来生成新的排序模型。</p>
+<h1 id="L2R特征的选取"><a href="#L2R特征的选取" class="headerlink" title="L2R特征的选取"></a>L2R特征的选取</h1><p>与文本分类不同，L2R考虑的是【给定查询的文档集合的排序】。所以，L2R用到的特征不仅仅包含文档d本身的一些特征(比如是否是Spam)等，也包括文档d和给定查询q之间的相关度，以及文档在整个网络上的重要性(比如PageRank值等)，亦即我们可以使用相关性排序模型和重要性排序模型的输出来作为L2R的特征。</p>
+<p>总结来说，L2R的特征有以下两点：</p>
+<ol>
+<li>传统排序模型的输出，既包括相关性排序模型的输出f(q,d)，也包括重要性排序模型的输出。</li>
+<li>文档本身的一些特征，比如是否是Spam等。</li>
+</ol>
+<h1 id="L2R训练数据的构造"><a href="#L2R训练数据的构造" class="headerlink" title="L2R训练数据的构造"></a>L2R训练数据的构造</h1><p>L2R的训练数据可以有三种形式：</p>
+<ol>
+<li>对于每个查询，各个文档的绝对相关值(非常相关，比较相关，不相关，等等)；</li>
+<li>对于每个查询，两两文档之间的相对相关值(文档1比文档2相关，文档4比文档3相关，等等)；</li>
+<li>对于每个查询，所有文档的按相关度排序的列表(文档1&gt;文档2&gt;文档3)。</li>
+</ol>
+<p>这三种形式的训练数据之间可以相互转换，详见[1]。</p>
+<p>训练数据的获取有两种主要方法：人工标注[3]和从日志文件中挖掘[4]:</p>
+<p>人工标注：首先从搜索引擎的搜索记录中随机抽取一些查询，将这些查询提交给多个不同的搜索引擎，然后选取各个搜索引擎返回结果的前K个，最后由专业人员来对这些文档按照和查询的相关度进行标注。</p>
+<p>从日志中挖掘：搜索引擎都有大量的日志记录用户的行为，我们可以从中提取出L2R的训练数据。Joachims提出了一种很有意思的方法[4]：给定一个查询，搜索引擎返回的结果列表为L，用户点击的文档的集合为C，如果一个文档di被点击过，另外一个文档dj没有被点击过，并且dj在结果列表中排在di之前，则di&gt;dj就是一条训练记录。亦即训练数据为：{di&gt;dj|di属于C，dj属于L-C，p(dj) &lt; p(di)}，其中p(d)表示文档d在查询结果列表中的位置，越小表示越靠前。</p>
+<h1 id="L2R模型训练"><a href="#L2R模型训练" class="headerlink" title="L2R模型训练"></a>L2R模型训练</h1><p>L2R是一个有监督学习过程。</p>
+<p>对与每个给定的查询-文档对(query document pair)，抽取相应的特征(既包括查询和文档之间的各种相关度，也包括文档本身的特征以及重要性等)，另外通过或者人工标注或者从日志中挖掘的方法来得到给定查询下文档集合的真实序列。然后我们使用L2R的各种算法来学到一个排序模型，使其输出的文档序列和真实序列尽可能相似。</p>
+<h1 id="L2R算法分类和简介"><a href="#L2R算法分类和简介" class="headerlink" title="L2R算法分类和简介"></a>L2R算法分类和简介</h1><p>L2R算法主要包括三种类别：PointWise，PairWise，ListWise。</p>
+<h2 id="PointWise-L2R"><a href="#PointWise-L2R" class="headerlink" title="PointWise L2R"></a>PointWise L2R</h2><p><strong>pointwise简介</strong><br>PointWise方法只考虑【给定查询下】，单个文档的绝对相关度，而不考虑其他文档和给定查询的相关度。亦即给定查询q的一个真实文档序列，我们只需要考虑【单个文档di和该查询的相关程度ci】，亦即输入数据应该是如下的形式：<br><img src="https://i.loli.net/2017/08/30/59a69397eeec7.png"> </p>
+<p>一种思想是将query与doc之间的相关程度作为标签，比如标签有三档，问题就变为多类分类问题,模型有McRank,svm，最大熵等。另一种思想是将query与doc之间的相关程度作为分数利用回归模型拟合，经典回归模型有线性回归，dnn，mart等。</p>
+<p><strong>pointwise形式</strong><br>输入：doc 的特征向量<br>输出：每个doc的相关性分数<br>损失函数: 回归loss，分类loss，有序回归loss</p>
+<p><strong>pointwise常用算法</strong><br>Pointwise方法主要包括以下算法：Pranking (NIPS 2002), OAP-BPM (EMCL 2003), Ranking with Large Margin Principles (NIPS 2002), Constraint Ordinal Regression (ICML 2005)。</p>
+<p><strong>pointwise特点</strong><br>Pointwise方法仅仅使用传统的分类，回归或者Ordinal Regression方法来对给定查询下单个文档的相关度进行建模。这种方法没有考虑到排序的一些特征，比如文档之间的排序结果针对的是给定查询下的文档集合，而Pointwise方法仅仅考虑单个文档的绝对相关度；另外，在排序中，排在最前的几个文档对排序效果的影响非常重要，Pointwise没有考虑这方面的影响。</p>
+<h2 id="PairWise"><a href="#PairWise" class="headerlink" title="PairWise"></a>PairWise</h2><p><strong>pairwise简介</strong><br>Pairwise方法考虑给定查询下，【两个文档之间】的相对相关度。亦即给定查询q的一个真实文档序列，我们只需要考虑任意两个相关度不同的文档之间的相对相关度：di&gt;dj，或者di &lt; dj 。</p>
+<p><strong>pairwise原理</strong><br>Pairwise的方法是将文档组成文档对，不单考虑单个文档，而是考虑文档组对是否合理，比如对于query 1返回的三个文档 doc1，doc2，doc3, 有三种组对方式，&lt;doc1,doc2&gt;,&lt;doc2,doc3&gt;,&lt;doc1,doc3&gt;。当三个文档原来的label为3,4,2时，这样组对之后的三个例子就有了新的分数（表达这种顺序是否合理），可以利用这种数据进行分类学习，模型如SVM Rank, 还有RankNet(C. Burges, et al. ICML 2005)， FRank(M.Tsai, T.Liu, et al. SIGIR 2007)，RankBoost(Y. Freund, et al. JMLR 2003)。</p>
+<p>参考文献<a target="_blank" rel="noopener" href="http://www.javashuo.com/content/p-5980716.html">机器学习排序之Learning to Rank简单介绍</a>对pairwise方法做出了比较容易理解的介绍：<br>文档对方法（parwise）则将重点转向量对文档顺序关系是否合理进行判断。<br>之所以被称为文档对方法，是因为这种机器学习方法的训练过程和训练目标，是判断任意两个文档组成的文档对&lt;D0C1，D0C2&gt;是否满足顺序关系，即判断是否D0C1应该排在DOC2的前面。图3展示了一个训练实例：査询Q1对应的搜索结果列表如何转换为文档对的形式，因为从人工标注的相关性得分可以看出，D0C2得分最高，D0C3次之，D0C1得分最低，于是我们可以按照得分大小顺序关系得到3个如图3所示的文档对，将每个文档对的文档转换为特征向量后，就形成了一个具体的训练实例。【备注：根据我的理解，下图有了一些错误。doc1分数应该为3，doc2分数应该为5】。<br><img src="https://ooo.0o0.ooo/2017/08/30/59a69437ecc6a.png"><br>                         图3  文档对的方法训练实例</p>
+<p>根据转换后的训练实例，就可以利用机器学习方法进行分类函数的学习，具体的学习方法有很多，比如SVM. Boosts、神经网络等都可以作为具体的学习方法，但是不论具体方法是什么，其学习目标都是一致的，即输入- 个査询和文档对&lt;Docl，DOC2&gt;, 机器学习排序能够判断这种顺序关系是否成立，如果成立，那么在搜索结果中D0C1应该排在D0C2 前面，否则Doe2应该摔在Docl前面，通过这种方式，就完成搜索结果的排序任务。</p>
+<p>那么，<strong>如何将排序问题转化为机器学习能够学习的分类问题呢？</strong></p>
+<p>参考文献<a target="_blank" rel="noopener" href="http://www.cnblogs.com/kemaswill/p/3241963.html">Learning to Rank之Ranking SVM 简介</a>给出了一个很好的例子解释这个问题：给定查询q, 文档d1&gt;d2&gt;d3(亦即文档d1比文档d2相关, 文档d2比文档d3相关, x1, x2, x3分别是d1, d2, d3的特征)。为了使用机器学习的方法进行排序，我们将排序转化为一个分类问题。我们定义新的训练样本, 令x1-x2, x1-x3, x2-x3为正样本,令x2-x1, x3-x1, x3-x2为负样本, 然后训练一个二分类器(支持向量机)来对这些新的训练样本进行分类，如下图所示:<br><img src="https://i.loli.net/2017/08/30/59a694b19797c.png"><br>左图中每个椭圆代表一个查询, 椭圆内的点代表那些要计算和该查询的相关度的文档, 三角代表很相关, 圆圈代表一般相关, 叉号代表不相关。我们把左图中的单个的文档转换成右图中的文档对(di, dj), 实心方块代表正样本, 亦即di&gt;dj, 空心方块代表负样本, 亦即di &lt; dj。将【排序问题转化为分类问题】之后, 我们就可以使用常用的机器学习方法解决该问题。</p>
+<p><strong>pairwise存在的问题</strong></p>
+<p>尽管文档对方法相对单文档方法做出了改进，但是这种方法也存在两个明显的问题：</p>
+<p>一个问题是：文档对方法只考虑了两个文档对的相对先后顺序，却没有考虑文档出现在搜索列表中的位置，排在搜索站果前列的文档更为重要，如果前列文档出现判断错误，代价明显高于排在后面的文档。针对这个问题的改进思路是引入代价敏感因素，即每个文档对根据其在列表中的顺序具有不同的权重，越是排在前列的权重越大，即在搜索列表前列如 果排错顺序的话其付出的代价更高?</p>
+<p>另外一个问题是：不同的査询，其相关文档数量差异很大，所以转换为文档对之后， 有的查询对能有几百个对应的文档对，而有的查询只有十几个对应的文档对，这对机器学习系统的效果评价造成困难 ?我们设想有两个查询，査询Q1对应500个文文档对，查询Q2 对应10个文档对，假设学习系统对于査询Ql的文档对能够判断正确480个，对于査询 Q2的义格对能够判新正确2个，如果从总的文档对数量来看，这个学习系统的准确率是 (480+2)/（500+10）=0.95.即95%的准确率，但是从査询的角度，两个査询对应的准确率 分别为：96%和20%,两者平均为58%,与纯粹从文档对判断的准确率相差甚远，这对如何继续调优机器学习系统会带来困扰。</p>
+<h2 id="ListWise（文档列表方法）"><a href="#ListWise（文档列表方法）" class="headerlink" title="ListWise（文档列表方法）"></a>ListWise（文档列表方法）</h2><p><strong>listwise简介</strong><br>单文档方法将训练集里每一个文档当做一个训练实例，文档对方法将同一个査询的搜索结果里任意两个文档对作为一个训练实例。与Pointwise和Pairwise方法不同，文档列表方法与上述两种表示方式不同，是将每一个查询对应的【所有搜索结果列表整体】作为一个训练实例，这也是为何称之为文档列表方法的原因。</p>
+<p><strong>listwise原理</strong><br>文档列表方法根据K个训练实例（一个査询及其对应的所有搜索结果评分作为一个实 例）训练得到最优评分函数F， 对于一个新的用户査询，函数F 对每一个文档打分，之后按照得分顺序由高到低排序，就是对应的搜索结果。 </p>
+<p>所以关键问题是：<strong>拿到训练数据，如何才能训练得到最优的打分函数？</strong></p>
+<p>这里介绍一种训练方法，它是基于搜索结果排列组合的概率分布情况来训练的，图4是这种方式训练过程的图解示意。<br><img src="https://i.loli.net/2017/08/30/59a6951348a74.png"><br>            图4 不同评分函数的KL距离</p>
+<p>首先解释下什么是搜索结果排列组合的概率分布，我们知道，对于搜索引擎来说，用户输入査询Q， 搜索引擎返回搜索结果，我们假设搜索结果集合包含A、B和C 3个文档，搜索引擎要对搜索结果排序，而这3个文档的顺序共有6种排列组合方式:</p>
+<p>ABC, ACB, BAG, BCA, CAB和CBA,</p>
+<p>而每种排列组合都是一种可能的搜索结果排序方法。</p>
+<p>对于某个评分函数F来说，对3个搜索结果文档的相关性打分，得到3个不同的相关度得分F(A)、F(B)和F(C)，根据这3个得分就可以计算6种排列组合情况各自的概率值。</p>
+<p>不同的评分函数，其6种搜索结果排列组合的概率分布是不一样的。</p>
+<p>了解了什么是搜索结果排列组合的概率分布，我们介绍如何根据训练实例找到最优的评分函数。图4展示了一个具体的训练实例，即査询Q1及其对应的3个文档的得分情况，这个得分是由人工打上去的，所以可以看做是标准答案。</p>
+<p>可以设想存在一个最优的评分函数g，对查询Q1来说，其打分结果是：A文档得6分，B文档得4分，C文档得3分， </p>
+<p>因为得分是人工打的，所以具体这个函数g是怎样的我们不清楚，我们的任务就是找到一 个函数，使得函数对Ql的搜索结果打分顺序和人工打分顺序尽可能相同。既然人工打分 (虚拟的函数g) 已知，那么我们可以计算函数g对应的搜索结果排列组合概率分布，其具体分布情况如图4中间的概率分布所示。</p>
+<p>假设存在两个其他函数h和f，它们的计算方法已知，对应的对3个搜索结果的打分在图上可以看到，由打分结果也可以推出每个函数对应的搜索结果排列组合概率分布，那么h与f哪个与虚拟的最优评分函数g更接近呢？</p>
+<p>一般可以用两个分布概率之间的距离远近来度量相似性，KL距离就是一种衡量概率分布差异大小的计算工具，通过分别计算h与g的差异大小及f与g的差异大小，可以看出f比h更接近的最优函数g，那么在这个函数中，我们应该优先选f作为将来搜索可用的评分函数，训练过程就是在可能的函数中寻找最接近虚拟最优函数g的那个函数作为训练结果，将来作为在搜索时的评分函数。</p>
+<p>上述例子只是描述了对于单个训练实例如何通过训练找到最优函数，事实上我们有K 个训练实例，虽然如此，其训练过程与上述说明是类似的，可以认为存在一个虚拟的最优 评分函数g(实际上是人工打分），训练过程就是在所有训练实例基础上，探寻所有可能的 候选函数，从中选择那个KL距离最接近于函数g的，以此作为实际使用的评分函数。 经验结果表明，基于文档列表方法的机器学习排序效果要好于前述两种方法。</p>
+<p><strong>常用算法</strong><br>Listwise算法主要包括以下几种算法：LambdaRank (NIPS 2006), AdaRank (SIGIR 2007), SVM-MAP (SIGIR 2007), SoftRank (LR4IR 2007), GPRank (LR4IR 2007), CCA (SIGIR 2007), RankCosine (IP&amp;M 2007), ListNet (ICML 2007), ListMLE (ICML 2008) 。</p>
+<p>相比于Pointwise和Pairwise方法，Listwise方法直接优化给定查询下，整个文档集合的序列，所以比较好的解决了克服了以上算法的缺陷。Listwise方法中的LambdaMART(是对RankNet和LambdaRank的改进)在Yahoo Learning to Rank Challenge表现出最好的性能。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1]. Learning to Rank for Information Retrieval. Tie-yan Liu.<br>[2]. Learning to Rank for Information Retrieval and Natural Language Processing. Hang Li.<br>[3]. A Short Introduction to Learning to Rank. Hang Li.<br>[4]. Optimizing Search Engines using Clickthrough Data. Thorsten Joachims. SIGKDD,2002.<br>[5]. Learning to Rank小结</p>
+<ol>
+<li> <a target="_blank" rel="noopener" href="http://www.cnblogs.com/kemaswill/archive/2013/06/01/3109497.html">Learning to Rank 简介</a></li>
+<li> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26221188">https://zhuanlan.zhihu.com/p/26221188</a></li>
+<li> <a target="_blank" rel="noopener" href="http://www.javashuo.com/content/p-5980716.html">机器学习排序之Learning to Rank简单介绍</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/L2R/" rel="tag"># L2R</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/25/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/" rel="next" title="数据库常用语句">
+                <i class="fa fa-chevron-left"></i> 数据库常用语句
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/04/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%BC%95%E8%A8%80-LR%E7%9A%84%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95/" rel="prev" title="深度学习算法-引言-LR的梯度下降法">
+                深度学习算法-引言-LR的梯度下降法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B"><span class="nav-text">传统的排序模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%BA%A6%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-Relevance-Ranking-Model"><span class="nav-text">相关度排序模型(Relevance Ranking Model)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E8%A6%81%E6%80%A7%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B-Importance-Ranking-Model"><span class="nav-text">重要性排序模型(Importance Ranking Model)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E6%8E%92%E5%BA%8F%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%BC%BA%E9%99%B7"><span class="nav-text">传统排序模型的缺陷</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Learning-to-Rank"><span class="nav-text">Learning to Rank</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L2R%E7%89%B9%E5%BE%81%E7%9A%84%E9%80%89%E5%8F%96"><span class="nav-text">L2R特征的选取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L2R%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-text">L2R训练数据的构造</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L2R%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="nav-text">L2R模型训练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L2R%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB%E5%92%8C%E7%AE%80%E4%BB%8B"><span class="nav-text">L2R算法分类和简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PointWise-L2R"><span class="nav-text">PointWise L2R</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PairWise"><span class="nav-text">PairWise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ListWise%EF%BC%88%E6%96%87%E6%A1%A3%E5%88%97%E8%A1%A8%E6%96%B9%E6%B3%95%EF%BC%89"><span class="nav-text">ListWise（文档列表方法）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

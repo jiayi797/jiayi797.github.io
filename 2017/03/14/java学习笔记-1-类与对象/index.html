@@ -1,0 +1,1425 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文主要总结了一些自己不太熟悉的概念。 对象与对象变量Date birthday &#x3D; new Date();  对象变量：birthday对象：右边的部分 一个对象变量并没有实际包含一个对象，仅仅是引用一个对象。 可以显示地将对象变量设置为null，表明这个对象变量目前没有引用任何对象： birthday &#x3D; null;  隐式参数与显式参数例，methodName()是类class1的方法， c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习笔记1-类与对象">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/03/14/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="本文主要总结了一些自己不太熟悉的概念。 对象与对象变量Date birthday &#x3D; new Date();  对象变量：birthday对象：右边的部分 一个对象变量并没有实际包含一个对象，仅仅是引用一个对象。 可以显示地将对象变量设置为null，表明这个对象变量目前没有引用任何对象： birthday &#x3D; null;  隐式参数与显式参数例，methodName()是类class1的方法， c">
+<meta property="og:locale">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-14-10-47-16.png">
+<meta property="article:published_time" content="2017-03-14T01:56:21.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:41:59.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-14-10-47-16.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/03/14/java学习笔记-1-类与对象/"/>
+
+
+
+
+
+  <title>Java学习笔记1-类与对象 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/14/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java学习笔记1-类与对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-14T01:56:21+00:00">
+                2017-03-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:41:59+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/03/14/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/03/14/java学习笔记-1-类与对象/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要总结了一些自己不太熟悉的概念。</p>
+<h1 id="对象与对象变量"><a href="#对象与对象变量" class="headerlink" title="对象与对象变量"></a>对象与对象变量</h1><pre><code>Date birthday = new Date();
+</code></pre>
+<p>对象变量：birthday<br>对象：右边的部分</p>
+<p>一个对象变量并没有实际包含一个对象，仅仅是引用一个对象。</p>
+<p>可以显示地将对象变量设置为<code>null</code>，表明这个对象变量目前没有引用任何对象：</p>
+<pre><code>birthday = null;
+</code></pre>
+<h1 id="隐式参数与显式参数"><a href="#隐式参数与显式参数" class="headerlink" title="隐式参数与显式参数"></a>隐式参数与显式参数</h1><p>例，methodName()是类class1的方法，</p>
+<pre><code>calss class1&#123;
+int a;
+    public void methodName(int b)&#123;
+    this.a = b ;
+&#125;
+</code></pre>
+<ul>
+<li>显式参数(explicit)：括号里面的，例如double pName</li>
+<li>隐式参数(implicit)：出现在方法名前的class1类对象</li>
+<li><ul>
+<li>关键词<code>this</code>表示隐式参数。例如<code>this.a</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h1><p>不能编写返回<code>引用可变对象</code>的访问器方法！例如：</p>
+<pre><code>class class1&#123;
+    private Date a;
+    public Date get()&#123;
+        return Date a; //会破坏封装性！
+    &#125;
+&#125;
+</code></pre>
+<p>以上操作破坏了<code>a</code>的私有性。</p>
+<p>改正方法：克隆（clone）</p>
+<pre><code>class class1&#123;
+    private Date a;
+    public Date get()&#123;
+        return Date a.clone(); //使用clone()
+    &#125;
+&#125;
+</code></pre>
+<h1 id="final实例域"><a href="#final实例域" class="headerlink" title="final实例域"></a>final实例域</h1><pre><code>class class1&#123;
+    private final String name;
+&#125;
+</code></pre>
+<p>final域的特征：</p>
+<ol>
+<li>构造对象时，必须初始化final</li>
+<li>后面操作中，不能再改动</li>
+<li>但并不等于常量！</li>
+<li>属于对象，并不是类！</li>
+</ol>
+<h1 id="static静态"><a href="#static静态" class="headerlink" title="static静态"></a>static静态</h1><h2 id="static域"><a href="#static域" class="headerlink" title="static域"></a>static域</h2><ol>
+<li>每个类只能有一个static域</li>
+<li>同一类的所有对象共享一个static域</li>
+<li>即使没有对象，static域也存在。它属于类，不属于任何一个对象</li>
+</ol>
+<pre><code>class Employee&#123;
+    private static int nextId = 1;
+    private int id;
+&#125;
+</code></pre>
+<h2 id="static常量"><a href="#static常量" class="headerlink" title="static常量"></a>static常量</h2><ol>
+<li>如下例，在程序中，可以使用<code>Math.PI</code>来获取这个常量。</li>
+</ol>
+<pre><code>public class Math&#123;
+    public static final double PI = 3.14;
+&#125;
+</code></pre>
+<h2 id="static方法"><a href="#static方法" class="headerlink" title="static方法"></a>static方法</h2><pre><code>Math.pow(x,a)
+</code></pre>
+<ol>
+<li>不使用任何对象；</li>
+<li>不能操作实例域（即类内的非static方法和变量），因为它不能操作对象；</li>
+<li>可以访问自身类的static域；</li>
+<li>对象也可以调用static方法。</li>
+</ol>
+<p>在下面两种情况使用静态方法：</p>
+<ol>
+<li>一个方法不需要访问对象；</li>
+<li>一个方法只需要访问类的static域。</li>
+</ol>
+<h2 id="工厂方法"><a href="#工厂方法" class="headerlink" title="工厂方法"></a>工厂方法</h2><p>工厂方法是静态方法的一种常见用途。<br>例如，<code>NumberFormat</code>使用工厂方法(而不是构造器)产生<strong>不同风格</strong>的格式对象。</p>
+<pre><code>NumberFormat a = NumberFormat.getSytleA();
+NumberFormat b = NumberFormat.getStyleB();
+</code></pre>
+<h2 id="main方法"><a href="#main方法" class="headerlink" title="main方法"></a>main方法</h2><pre><code>public class Application&#123;
+    public static void main(String[] args)&#123;
+        // construct objects here
+    &#125;
+&#125;
+</code></pre>
+<ol>
+<li>每一个类可以有一个main方法，用来单元测试；</li>
+<li>多个类被调用时，只会执行一个main方法；</li>
+</ol>
+<h1 id="初始化块"><a href="#初始化块" class="headerlink" title="初始化块"></a>初始化块</h1><p>构造对象时，先运行初始化块，才运行构造器主体部分。</p>
+<pre><code>class Employee&#123;
+    private static int nextId;
+    private int id;
+    //初始化块
+    &#123;
+        id=nextId;
+    &#125;
+&#125;
+</code></pre>
+<p>如果对类的静态域进行初始化的代码比较复杂，就可以使用静态的初始化块：</p>
+<pre><code>static&#123;
+    Random generator = new Random();
+    nextId = generator.nextId(10000);
+&#125;
+</code></pre>
+<p>类（！！！不是对象）第一次加载时，将会进行static域的初始化。</p>
+<h1 id="初始化数据域的三种方法"><a href="#初始化数据域的三种方法" class="headerlink" title="初始化数据域的三种方法"></a>初始化数据域的三种方法</h1><ol>
+<li>在构造器中设置值</li>
+<li>在声明中赋值</li>
+<li>在初始化块中赋值</li>
+</ol>
+<h1 id="类的初始化顺序"><a href="#类的初始化顺序" class="headerlink" title="类的初始化顺序"></a>类的初始化顺序</h1><p>对于静态变量、静态初始化块、变量、初始化块、构造器，它们的初始化顺序依次是（静态变量、静态初始化块）&gt;（变量、初始化块）&gt;构造器。</p>
+<p>例如，</p>
+<pre><code>public class InitialOrderTest &#123;   
+    // 静态变量   
+    public static String staticField = &quot;静态变量&quot;;   
+    // 变量   
+    public String field = &quot;变量&quot;;   
+    // 静态初始化块   
+    static &#123;   
+        System.out.println(staticField);   
+        System.out.println(&quot;静态初始化块&quot;);   
+    &#125;   
+    // 初始化块   
+    &#123;   
+        System.out.println(field);   
+        System.out.println(&quot;初始化块&quot;);   
+    &#125;   
+    // 构造器   
+    public InitialOrderTest() &#123;   
+        System.out.println(&quot;构造器&quot;);   
+    &#125;   
+    public static void main(String[] args) &#123;   
+        new InitialOrderTest();   
+    &#125;   
+&#125;  
+</code></pre>
+<p>运行以上代码，我们会得到如下的输出结果： </p>
+<pre><code>静态变量
+静态初始化块
+变量
+初始化块
+构造器
+</code></pre>
+<p>对于继承的情况：</p>
+<pre><code>class Parent &#123;   
+    // 静态变量   
+    public static String p_StaticField = &quot;父类--静态变量&quot;;   
+    // 变量   
+    public String p_Field = &quot;父类--变量&quot;;   
+  
+    // 静态初始化块   
+    static &#123;   
+        System.out.println(p_StaticField);   
+        System.out.println(&quot;父类--静态初始化块&quot;);   
+    &#125;   
+  
+    // 初始化块   
+    &#123;   
+        System.out.println(p_Field);   
+        System.out.println(&quot;父类--初始化块&quot;);   
+    &#125;   
+  
+    // 构造器   
+    public Parent() &#123;   
+        System.out.println(&quot;父类--构造器&quot;);   
+    &#125;   
+&#125;   
+  
+public class SubClass extends Parent &#123;   
+    // 静态变量   
+    public static String s_StaticField = &quot;子类--静态变量&quot;;   
+    // 变量   
+    public String s_Field = &quot;子类--变量&quot;;   
+    // 静态初始化块   
+    static &#123;   
+        System.out.println(s_StaticField);   
+        System.out.println(&quot;子类--静态初始化块&quot;);   
+    &#125;   
+    // 初始化块   
+    &#123;   
+        System.out.println(s_Field);   
+        System.out.println(&quot;子类--初始化块&quot;);   
+    &#125;   
+  
+    // 构造器   
+    public SubClass() &#123;   
+        System.out.println(&quot;子类--构造器&quot;);   
+    &#125;   
+  
+    // 程序入口   
+    public static void main(String[] args) &#123;   
+        new SubClass();   
+    &#125;   
+&#125;  
+</code></pre>
+<p>运行一下上面的代码，结果马上呈现在我们的眼前： </p>
+<pre><code>父类--静态变量
+父类--静态初始化块
+子类--静态变量
+子类--静态初始化块
+父类--变量
+父类--初始化块
+父类--构造器
+子类--变量
+子类--初始化块
+子类--构造器
+</code></pre>
+<p>总得来说，是先静态后变量，先父类后子类</p>
+<h1 id="其他重点"><a href="#其他重点" class="headerlink" title="其他重点"></a>其他重点</h1><ol>
+<li>基于类的访问权限：一个方法可以访问所属类的所有私有数据。</li>
+<li>java的值引用（基本数据类型、对象引用）</li>
+<li>如果类中提供了至少一个有参构造器，而没有无参构造器，则在构造无参对象时会出错。</li>
+</ol>
+<h1 id="Java类库中的GregorianCalendar类-（删除本节）"><a href="#Java类库中的GregorianCalendar类-（删除本节）" class="headerlink" title="Java类库中的GregorianCalendar类 （删除本节）"></a>Java类库中的GregorianCalendar类 （删除本节）</h1><h2 id="纪元"><a href="#纪元" class="headerlink" title="纪元"></a>纪元</h2><p>时间是用距离一个固定时间点的毫秒数表示的，这个点就是纪元(epoch)。</p>
+<h2 id="时间与日历"><a href="#时间与日历" class="headerlink" title="时间与日历"></a>时间与日历</h2><p>为了将<strong>时间</strong>与<strong>日历</strong>分开，标准Java类库分别包含两个类：</p>
+<ul>
+<li>Date类：用来表示时间点的类；</li>
+<li>GregorianCalendar类：用来表示公历法的类；（通过它还有一个扩展类——Calendar类，描述了日历的一般属性）</li>
+</ul>
+<h3 id="Date类"><a href="#Date类" class="headerlink" title="Date类"></a>Date类</h3><p>用来表示时间的类；</p>
+<p>只有少量的方法，例如比较两个时间点before(),after()：</p>
+<pre><code>doday.before(birthday)
+</code></pre>
+<h3 id="GregorianCalendar类"><a href="#GregorianCalendar类" class="headerlink" title="GregorianCalendar类"></a>GregorianCalendar类</h3><p>常见方法：</p>
+<p><code>new GregorianCalendar()</code>，构造新的对象，用于表示对象构造时的日期和时间；</p>
+<p>例如:</p>
+<pre><code> GregorianCalendar g1 = new GregorianCalendar();
+</code></pre>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-14-10-47-16.png"> </p>
+<p><code>new GregorianCalendar(1999,11,31)</code>，提供年月日构造一个表示特定日期午夜的日历对象。（月份从0开始计数，11表示12月）</p>
+<p><code>new GregorianCalendar(1991,Calendar.DECEMBER,31)</code>,与上等价</p>
+<p><code>new GregorianCalendar(1991,Calendar.DECEMBER,31,23,59,59)</code>,设置时间</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E5%AF%B9%E7%AC%AC%E4%B8%80%E5%90%8D%E7%9A%84%E6%80%9D%E8%B7%AF%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next" title="机器学习实践-O2O优惠券预测-对第一名的思路源码分析（二）">
+                <i class="fa fa-chevron-left"></i> 机器学习实践-O2O优惠券预测-对第一名的思路源码分析（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/14/blog-jacman-hexo%E7%9B%AE%E5%BD%95%E6%94%B9%E6%88%90%E6%B5%AE%E5%8A%A8/" rel="prev" title="jacman/hexo目录改成浮动">
+                jacman/hexo目录改成浮动 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%8F%98%E9%87%8F"><span class="nav-text">对象与对象变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E5%8F%82%E6%95%B0%E4%B8%8E%E6%98%BE%E5%BC%8F%E5%8F%82%E6%95%B0"><span class="nav-text">隐式参数与显式参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-text">封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#final%E5%AE%9E%E4%BE%8B%E5%9F%9F"><span class="nav-text">final实例域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static%E9%9D%99%E6%80%81"><span class="nav-text">static静态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#static%E5%9F%9F"><span class="nav-text">static域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static%E5%B8%B8%E9%87%8F"><span class="nav-text">static常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static%E6%96%B9%E6%B3%95"><span class="nav-text">static方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95"><span class="nav-text">工厂方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main%E6%96%B9%E6%B3%95"><span class="nav-text">main方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%9D%97"><span class="nav-text">初始化块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%95%B0%E6%8D%AE%E5%9F%9F%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-text">初始化数据域的三种方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F"><span class="nav-text">类的初始化顺序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%87%8D%E7%82%B9"><span class="nav-text">其他重点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E7%B1%BB%E5%BA%93%E4%B8%AD%E7%9A%84GregorianCalendar%E7%B1%BB-%EF%BC%88%E5%88%A0%E9%99%A4%E6%9C%AC%E8%8A%82%EF%BC%89"><span class="nav-text">Java类库中的GregorianCalendar类 （删除本节）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%AA%E5%85%83"><span class="nav-text">纪元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E4%B8%8E%E6%97%A5%E5%8E%86"><span class="nav-text">时间与日历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Date%E7%B1%BB"><span class="nav-text">Date类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GregorianCalendar%E7%B1%BB"><span class="nav-text">GregorianCalendar类</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1261 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="这里主要是我自己学习笔记。主要有以下几类： 算法与数据结构为了方便，在本站统称为算法（事实上还是很有必要搞清算法和数据结构的关系）。算法分类传送门：主要围绕Leetcode中的各种题型整理的。每篇文章之下都是相关概念及相关题。总结起来有以下专题： 数组与数模块 算法-数组与数。整理了数组相关的题。个人感觉数组需要的技巧相对多一些。比如子数组、双指针、滑动窗口等等。 Java-String 。之所以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="本站简介">
+<meta property="og:url" content="http://jiayi797.github.io/about/2048/10/23/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="这里主要是我自己学习笔记。主要有以下几类： 算法与数据结构为了方便，在本站统称为算法（事实上还是很有必要搞清算法和数据结构的关系）。算法分类传送门：主要围绕Leetcode中的各种题型整理的。每篇文章之下都是相关概念及相关题。总结起来有以下专题： 数组与数模块 算法-数组与数。整理了数组相关的题。个人感觉数组需要的技巧相对多一些。比如子数组、双指针、滑动窗口等等。 Java-String 。之所以">
+<meta property="og:locale">
+<meta property="article:published_time" content="2048-10-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:00.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2048/10/23/本站简介/"/>
+
+
+
+
+
+  <title>本站简介 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2048/10/23/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">本站简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2048-10-23T16:00:00+00:00">
+                2048-10-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:00+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2048/10/23/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2048/10/23/本站简介/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这里主要是我自己学习笔记。主要有以下几类：</p>
+<h1 id="算法与数据结构"><a href="#算法与数据结构" class="headerlink" title="算法与数据结构"></a>算法与数据结构</h1><p>为了方便，在本站统称为算法（事实上还是很有必要搞清算法和数据结构的关系）。<a href="http://jiayi797.github.io/categories/%E7%AE%97%E6%B3%95/">算法分类传送门</a>：主要围绕Leetcode中的各种题型整理的。每篇文章之下都是相关概念及相关题。总结起来有以下专题：</p>
+<h2 id="数组与数模块"><a href="#数组与数模块" class="headerlink" title="数组与数模块"></a>数组与数模块</h2><ul>
+<li><a href="/2017/12/11/%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E4%B8%8E%E6%95%B0/" title="算法-数组与数">算法-数组与数</a>。整理了数组相关的题。个人感觉数组需要的技巧相对多一些。比如子数组、双指针、滑动窗口等等。</li>
+<li><a href="/2017/11/16/Java-String/" title="Java-String">Java-String</a> 。之所以将String放入数组，我是觉得由于str底层就是一个char类型的数组。</li>
+<li><a href="/2017/11/24/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" title="算法-二分查找">算法-二分查找</a>。二分查找是有序数组查找target的有利算法。</li>
+<li><a href="/2018/01/19/%E7%AE%97%E6%B3%95-%E4%BD%8D%E6%93%8D%E4%BD%9C/" title="算法-位操作">算法-位操作</a> 。 位操作对于某些程序的优化来说，还是起着很大的作用。理解计算机处理数字的方式，才会写出更好的程序。</li>
+<li><a href="/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/" title="算法-数学相关习题">算法-数学相关习题</a> 。介绍了素数晒、概率等相关基础知识。</li>
+<li><a href="/2018/03/05/%E7%AE%97%E6%B3%95-%E5%8D%A1%E5%85%B0%E7%89%B9%E6%95%B0/" title="算法-卡兰特数">算法-卡兰特数</a></li>
+<li><a href="/2018/03/10/%E7%AE%97%E6%B3%95-%E6%8E%92%E5%BA%8F%E6%80%BB%E7%BB%93/" title="算法-排序总结">算法-排序总结</a></li>
+</ul>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
+<li><a href="/2017/11/17/%E7%AE%97%E6%B3%95-DP/" title="算法-DP">算法-DP</a> 。本来动态规划应该放入数组里，因为DP很多都是应用在数组里解决重复计算的问题。但这块对我来说实在是有点难。因此特意开坑。</li>
+<li><a href="/2017/11/02/%E7%AE%97%E6%B3%95-DP-%E9%92%A2%E6%9D%A1%E5%88%87%E5%89%B2%E9%97%AE%E9%A2%98/" title="算法-DP-钢条切割问题">算法-DP-钢条切割问题</a> 。《算法导论》的动态规划章节笔记。</li>
+<li><a href="#">Post not found: 算法-DP-贪心法 算法-DP-贪心法</a> 。贪心法不知道放哪儿合适，就随便放这里吧。</li>
+</ul>
+<h2 id="链表模块"><a href="#链表模块" class="headerlink" title="链表模块"></a>链表模块</h2><ul>
+<li><a href="/2017/12/04/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8/" title="算法-链表">算法-链表</a>。链表的基本原理和操作非常重要，比如增、删、反转、合并、找中点等等。涉及到的技巧不多，大概就是dummy Node和快慢指针，个人觉得其终极原则就是链表这个数据结构的形式，以及这个形式造成了哪些优缺点。</li>
+<li><a href="/2017/12/25/%E7%AE%97%E6%B3%95-%E6%A0%88/" title="算法-栈">算法-栈</a> 。一般来说栈可以用数组和链表实现。但链表实现的栈更容易扩充一些。本文记录了一些栈的常见题型。</li>
+</ul>
+<h2 id="树模块"><a href="#树模块" class="headerlink" title="树模块"></a>树模块</h2><ul>
+<li><a href="/2017/11/28/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%88%86%E6%B2%BB/" title="算法-二叉树与分治">算法-二叉树与分治</a> 。树上面的很多东西与链表很相似，它们都不能访问它前一个节点（父节点）。而树的前中后遍历体现了DFS的思想，层序遍历体现了BFS的思想，这两个都是树的搜索问题。当然在二叉树里，还有一个分治的思想，将大问题分解为不相干的子问题，这一点非常重要。</li>
+<li><a href="/2017/11/03/%E7%AE%97%E6%B3%95-%E5%A0%86/" title="算法-堆">算法-堆</a> 。堆，也就是优先队列，我的理解，它是树个结构，始终维护树顶为极值。</li>
+<li><a href="/2017/11/13/%E7%AE%97%E6%B3%95-Trie%E6%A0%91/" title="算法-Trie树">算法-Trie树</a> 。 用树状结构表示很多个单词，以此加速单词的搜索。我想采用此结构的原因在于单词中的字母只有26个，数分支较少。如果是中文的话恐怕情况就不那么乐观了。（但这仅仅是个人猜测，待验证）</li>
+<li><a href="/2018/01/23/%E7%AE%97%E6%B3%95-%E7%BA%BF%E6%AE%B5%E6%A0%91/" title="算法-线段树">算法-线段树</a> 。介绍了线段树的概念和一道经典题目</li>
+<li><a href="/2018/03/03/%E7%AE%97%E6%B3%95-B%E6%A0%91/" title="算法-B树">算法-B树</a> 简单介绍了B树的原理</li>
+<li><a href="/2018/03/09/%E7%AE%97%E6%B3%95-%E7%BA%A2%E9%BB%91%E6%A0%91/" title="算法-红黑树">算法-红黑树</a> 简单介绍了红黑树的原理</li>
+</ul>
+<h2 id="图模块"><a href="#图模块" class="headerlink" title="图模块"></a>图模块</h2><ul>
+<li><a href="/2017/11/21/%E7%AE%97%E6%B3%95-DFS/" title="算法-DFS">算法-DFS</a> 。深度优先遍历看似简单，但事实上写起程序来还是有点棘手的。因为每道题的边界条件不同，细节之处就不同了。</li>
+<li><a href="/2017/12/21/%E7%AE%97%E6%B3%95-%E5%9B%9E%E6%BA%AF%E6%B3%95/" title="算法-回溯法">算法-回溯法</a> 。 回溯法是一种选优搜索法，一般与DFS联合使用。经典的八皇后问题非常好地诠释了回溯法。</li>
+<li><a href="/2017/11/05/%E7%AE%97%E6%B3%95-%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="算法-并查集">算法-并查集</a> 。 并查集非常适用于解决动态连通性的问题。如果图是静态的，其实DFS更快一些。</li>
+<li><a href="/2018/01/11/%E7%AE%97%E6%B3%95-%E5%9B%BE/" title="算法-图">算法-图</a> 。树其实是一种有强约束的图。而图里算法非常多，截止现在这篇文章涉及到的只有拓扑排序。</li>
+<li><a href="/2017/03/23/%E7%AE%97%E6%B3%95-%E5%8D%95%E6%BA%90%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98/" title="算法-单源最短路径问题">算法-单源最短路径问题</a> 。早期的文章。</li>
+<li><a href="/2017/03/26/%E7%AE%97%E6%B3%95-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91%E7%AE%97%E6%B3%95/" title="算法-最小生成树算法">算法-最小生成树算法</a> 。这篇文章写得比较早了。简单地描述了最小生成树算法。</li>
+</ul>
+<h2 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h2><ul>
+<li><a href="/2018/01/14/Java-HashMap%E7%9A%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" title="Java-HashMap的原理探究">Java-HashMap的原理探究</a> 。对Java中HashMap的实现进行了简单的整理。</li>
+<li><a href="/2018/01/28/Java-Hashtable%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" title="Java-Hashtable原理探究">Java-Hashtable原理探究</a> </li>
+<li><a href="/2018/01/29/Java-LinkedHashMap%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" title="Java-LinkedHashMap原理探究">Java-LinkedHashMap原理探究</a> </li>
+<li><a href="#">Post not found: 算法-常见数据结构 算法-常见数据结构</a> 。这篇文章整理了几道我自己认为较复杂的Hash相关题。</li>
+</ul>
+<h1 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h1><p>系统设计这里坑比较大。</p>
+<h2 id="搜索引擎设计"><a href="#搜索引擎设计" class="headerlink" title="搜索引擎设计"></a>搜索引擎设计</h2><ul>
+<li><a href="/2017/07/09/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="搜索引擎-简单搜索引擎的实现">搜索引擎-简单搜索引擎的实现</a> </li>
+<li><a href="/2018/03/02/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E7%BC%96%E7%A8%8B%E4%B9%8B%E7%BE%8E%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%9B%9E%E9%A1%BE/" title="搜索引擎-编程之美搜索引擎回顾">搜索引擎-编程之美搜索引擎回顾</a> </li>
+</ul>
+<h2 id="系统设计课程"><a href="#系统设计课程" class="headerlink" title="系统设计课程"></a>系统设计课程</h2><ul>
+<li><a href="/2018/01/15/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E6%96%B0%E9%B2%9C%E4%BA%8B%E7%B3%BB%E7%BB%9F/" title="系统设计-新鲜事系统">系统设计-新鲜事系统</a> </li>
+<li><a href="/2018/01/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95/" title="系统设计-缓存算法">系统设计-缓存算法</a> </li>
+<li><a href="/2018/02/03/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1%E7%9F%AD%E7%BD%91%E5%9D%80%E7%B3%BB%E7%BB%9FTiny-URL/" title="系统设计-设计短网址系统Tiny-URL">系统设计-设计短网址系统Tiny-URL</a> </li>
+<li><a href="/2018/01/26/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%8E%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ECache/" title="系统设计-从用户系统中理解数据库与Cache">系统设计-从用户系统中理解数据库与Cache</a> </li>
+<li><a href="/2018/03/11/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E7%88%AC%E8%99%AB%E7%B3%BB%E7%BB%9F%E4%B8%8E%E6%90%9C%E7%B4%A2%E5%BB%BA%E8%AE%AE%E7%B3%BB%E7%BB%9F/" title="系统设计-爬虫系统与搜索建议系统">系统设计-爬虫系统与搜索建议系统</a> </li>
+<li><a href="/2018/03/08/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%A5GFS%E4%B8%BA%E4%BE%8B%E6%8E%A2%E7%B4%A2%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" title="系统设计-以GFS为例探索分布式文件系统">系统设计-以GFS为例探索分布式文件系统</a> </li>
+<li><a href="/2018/03/18/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F-Map-Reduce%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E5%BA%94%E7%94%A8/" title="系统设计-分布式计算系统-Map Reduce的原理与应用">系统设计-分布式计算系统-Map Reduce的原理与应用</a> </li>
+<li><a href="/2018/01/21/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1Uber/" title="系统设计-设计Uber">系统设计-设计Uber</a> </li>
+</ul>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><ul>
+<li><a href="/2018/01/30/Java-Iterator/" title="Java-Iterator">Java-Iterator</a> </li>
+<li>​</li>
+</ul>
+<h1 id="机器学习、深度学习"><a href="#机器学习、深度学习" class="headerlink" title="机器学习、深度学习"></a>机器学习、深度学习</h1><h2 id="机器学习基础"><a href="#机器学习基础" class="headerlink" title="机器学习基础"></a>机器学习基础</h2><p>基础的模型主要了解了两个方面，一个是线性模型，一个是树模型。而树模型又阐述了Bagging和Boosting两种思想。</p>
+<h3 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h3><ul>
+<li><a href="/2017/02/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-PLA-%E7%BA%BF%E6%80%A7%E6%84%9F%E7%9F%A5%E6%9C%BA/" title="机器学习算法-PLA-线性感知机">机器学习算法-PLA-线性感知机</a>  </li>
+<li><a href="/2017/03/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-LR/" title="机器学习算法-LR">机器学习算法-LR</a>  </li>
+<li><a href="/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-SVM/" title="机器学习算法-SVM">机器学习算法-SVM</a>  </li>
+</ul>
+<h3 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h3><ul>
+<li><a href="/2017/03/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-boosting%E5%92%8Cbagging/" title="机器学习算法-boosting和bagging">机器学习算法-boosting和bagging</a>  </li>
+</ul>
+<ul>
+<li><strong>Bagging</strong><ul>
+<li><a href="/2017/03/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E7%AE%97%E6%B3%95/" title="机器学习算法-随机森林算法">机器学习算法-随机森林算法</a>  </li>
+</ul>
+</li>
+<li><strong>Boosting</strong><ul>
+<li><a href="/2017/03/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-AdaBoost/" title="机器学习算法-AdaBoost">机器学习算法-AdaBoost</a>  </li>
+<li><a href="/2017/03/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8CCART/" title="机器学习算法-决策树和CART">机器学习算法-决策树和CART</a>  </li>
+<li><a href="/2017/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E6%8F%90%E5%8D%87%E5%86%B3%E7%AD%96%E6%A0%91/" title="机器学习算法-提升决策树">机器学习算法-提升决策树</a>  </li>
+<li><a href="/2017/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-GBDT/" title="机器学习算法-GBDT">机器学习算法-GBDT</a>  </li>
+</ul>
+</li>
+</ul>
+<h1 id="竞赛"><a href="#竞赛" class="headerlink" title="竞赛"></a>竞赛</h1><h2 id="O2O优惠券预测"><a href="#O2O优惠券预测" class="headerlink" title="O2O优惠券预测"></a>O2O优惠券预测</h2><ul>
+<li><a href="/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" title="机器学习实践-O2O优惠券预测-思路总结">机器学习实践-O2O优惠券预测-思路总结</a>  </li>
+<li><a href="/2017/03/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E5%AF%B9%E7%AC%AC%E4%B8%80%E5%90%8D%E7%9A%84%E6%80%9D%E8%B7%AF%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%B8%80%EF%BC%89/" title="机器学习实践-O2O优惠券预测-对第一名的思路源码分析（一）">机器学习实践-O2O优惠券预测-对第一名的思路源码分析（一）</a>  </li>
+<li><a href="/2017/03/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E5%AF%B9%E7%AC%AC%E4%B8%80%E5%90%8D%E7%9A%84%E6%80%9D%E8%B7%AF%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E4%BA%8C%EF%BC%89/" title="机器学习实践-O2O优惠券预测-对第一名的思路源码分析（二）">机器学习实践-O2O优惠券预测-对第一名的思路源码分析（二）</a>  </li>
+<li><a href="/2017/04/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/" title="机器学习实践-O2O优惠券预测-特征工程">机器学习实践-O2O优惠券预测-特征工程</a>  </li>
+</ul>
+<h2 id="腾讯社交广告CVR转化率预估"><a href="#腾讯社交广告CVR转化率预估" class="headerlink" title="腾讯社交广告CVR转化率预估"></a>腾讯社交广告CVR转化率预估</h2><ul>
+<li><a href="/2017/06/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-Tencent_CVR%E9%A2%84%E4%BC%B0%E5%88%9D%E8%B5%9B&%E5%A4%8D%E8%B5%9B%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" title="机器学习实践-CVR-Tencent_CVR预估初赛&amp;复赛思路总结">机器学习实践-CVR-Tencent_CVR预估初赛&amp;复赛思路总结</a>  </li>
+<li><a href="/2017/06/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-word-embedding/" title="机器学习实践-CVR-word-embedding">机器学习实践-CVR-word-embedding</a>  </li>
+<li><a href="/2017/05/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E8%B5%84%E6%96%99/" title="机器学习实践-CVR-转化率预估资料">机器学习实践-CVR-转化率预估资料</a>  </li>
+</ul>
+<h2 id="其它实践相关"><a href="#其它实践相关" class="headerlink" title="其它实践相关"></a>其它实践相关</h2><ul>
+<li><a href="/2017/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E4%B8%8D%E5%B9%B3%E8%A1%A1%E7%B1%BB%E7%9A%84%E5%A4%84%E7%90%86/" title="机器学习实践-不平衡类的处理">机器学习实践-不平衡类的处理</a>  </li>
+<li><a href="/2017/07/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/" title="机器学习实践-转化率预估之贝叶斯平滑">机器学习实践-转化率预估之贝叶斯平滑</a>  </li>
+<li><a href="/2017/04/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6-xgboost%E5%8F%82%E6%95%B0%E8%B0%83%E8%8A%82%E6%8C%87%E5%8D%97%EF%BC%88Python%E7%89%88%EF%BC%89/" title="机器学习框架-xgboost参数调节指南（Python版">机器学习框架-xgboost参数调节指南（Python版</a>  </li>
+<li><a href="/2017/03/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-ROC%E5%92%8CAUC/" title="机器学习算法-ROC和AUC">机器学习算法-ROC和AUC</a>  </li>
+</ul>
+<p>===========================================================</p>
+<p>路漫漫其悠远兮，吾将上下而求索。</p>
+<p>===========================================================</p>
+<span id="more"></span>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/23/ms%E5%AE%9E%E4%B9%A0-AR%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9&bound/" rel="next" title="AR模型选择&bound">
+                <i class="fa fa-chevron-left"></i> AR模型选择&bound
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">算法与数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E6%95%B0%E6%A8%A1%E5%9D%97"><span class="nav-text">数组与数模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8%E6%A8%A1%E5%9D%97"><span class="nav-text">链表模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E6%A8%A1%E5%9D%97"><span class="nav-text">树模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E6%A8%A1%E5%9D%97"><span class="nav-text">图模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-text">散列表</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="nav-text">系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E8%AE%BE%E8%AE%A1"><span class="nav-text">搜索引擎设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E8%AF%BE%E7%A8%8B"><span class="nav-text">系统设计课程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java"><span class="nav-text">Java</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E3%80%81%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0"><span class="nav-text">机器学习、深度学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80"><span class="nav-text">机器学习基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0"><span class="nav-text">集成学习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AB%9E%E8%B5%9B"><span class="nav-text">竞赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B"><span class="nav-text">O2O优惠券预测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%85%BE%E8%AE%AF%E7%A4%BE%E4%BA%A4%E5%B9%BF%E5%91%8ACVR%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0"><span class="nav-text">腾讯社交广告CVR转化率预估</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E5%AE%9E%E8%B7%B5%E7%9B%B8%E5%85%B3"><span class="nav-text">其它实践相关</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

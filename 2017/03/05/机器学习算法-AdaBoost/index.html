@@ -1,0 +1,1323 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Boosting提升（boosting）：从弱学习算法（正确率低）出发，反复学习，得到一系列弱分类器（基本分类器），然后组合这些弱分类器，构成一个强分类器。（三个臭皮匠顶个诸葛亮） 提升（boosting）方法需要解决的问题：  如何获得更多的弱分类器————如何改变训练数据的权值或概率分布————提高被前一轮错误分类样本的权值，降低被正确分类样本的权值。 如何将弱分类器合成一个强分类器————加">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法-AdaBoost">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/03/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-AdaBoost/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="Boosting提升（boosting）：从弱学习算法（正确率低）出发，反复学习，得到一系列弱分类器（基本分类器），然后组合这些弱分类器，构成一个强分类器。（三个臭皮匠顶个诸葛亮） 提升（boosting）方法需要解决的问题：  如何获得更多的弱分类器————如何改变训练数据的权值或概率分布————提高被前一轮错误分类样本的权值，降低被正确分类样本的权值。 如何将弱分类器合成一个强分类器————加">
+<meta property="og:locale">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-06-22-49-14.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-06-22-49-54.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-17-37-57.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-29-41.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-31-04.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-39-48.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-41-02.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-45-01.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-47-12.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-51-21.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-02-12.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-21-25.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-25-49.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-26-16.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-27-24.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-27-48.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-28-27.png">
+<meta property="article:published_time" content="2017-03-05T09:31:52.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:01.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-06-22-49-14.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/03/05/机器学习算法-AdaBoost/"/>
+
+
+
+
+
+  <title>机器学习算法-AdaBoost | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-AdaBoost/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习算法-AdaBoost</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-05T09:31:52+00:00">
+                2017-03-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:01+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/03/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-AdaBoost/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/03/05/机器学习算法-AdaBoost/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h1><p>提升（boosting）：从弱学习算法（正确率低）出发，反复学习，得到一系列弱分类器（基本分类器），然后组合这些弱分类器，构成一个强分类器。（三个臭皮匠顶个诸葛亮）</p>
+<p>提升（boosting）方法需要解决的问题：</p>
+<ul>
+<li>如何获得更多的弱分类器————如何改变训练数据的权值或概率分布————提高被前一轮错误分类样本的权值，降低被正确分类样本的权值。</li>
+<li>如何将弱分类器合成一个强分类器————加权多数表决：加大误差小的分类器的权值，减小误差大的分类器的权值。</li>
+</ul>
+<p>提升方法有很多，最具代表性的就是AdaBoost算法。</p>
+<h1 id="AdaBoost算法"><a href="#AdaBoost算法" class="headerlink" title="AdaBoost算法"></a>AdaBoost算法</h1><p>假设给定一个二分类训练数据集$T=\{(x_1,y_1),(x_2,y_2),…,(x_N,y_N)\}$</p>
+<p>其中，每个样本点由【特征+标签】组成</p>
+<p>特征：$x_i\in X \subseteq R^n $</p>
+<p>标签：$y_i \in Y={-1,+1}$</p>
+<p>AdaBoost利用以下算法，从训练数据中学习一系列弱分类器或基本分类器，并将这些弱分类器线性组合成一个强分类器</p>
+<p><strong>输入</strong>:</p>
+<ul>
+<li>数据集$T={(x_1,y_1),(x_2,y_2),…,(x_N,y_N)}$</li>
+<li>弱学习算法</li>
+</ul>
+<p><strong>输出</strong>：最终分类器$G(x)$</p>
+<p><strong>步骤</strong>：</p>
+<ol>
+<li>初始化训练数据的权值(每个都设为1/N)：<br>$$D_1=(w_{11},w_{1i},…,w_{1N}),w_{1i}=\frac{1}{N},i=1,2,…,N$$<br>其中$w_{ki}$ 代表迭代第k次时，第i个样本被抽到的概率！！！</li>
+<li>对$m=1,2,…,M$:<br>使用带权值$D_m$的训练集学习，得到基本分类器$G_m(x):X\rightarrow \{-1,+1\}$<br>计算$G_m(x)$在训练集上的分类误差率：$$e_m=P(G_m(x_i)\neq y_i)=\sum_{n=1}^N w_{mi}I(G_m(x_i)\neq y_i)$$</li>
+<li>计算$G_m(x)$的系数：$$\alpha_m=\frac{1}{2}log\frac{1-e_m}{e_m}$$</li>
+<li>更新训练集权值：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-06-22-49-14.png"></li>
+<li>将上面迭代k次后，得到M个基本分类器。构建基本分类器的线性组合：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-06-22-49-54.png"></li>
+</ol>
+<h1 id="AdaBoost详解"><a href="#AdaBoost详解" class="headerlink" title="AdaBoost详解"></a>AdaBoost详解</h1><h2 id="Boot-strapping"><a href="#Boot-strapping" class="headerlink" title="Boot strapping"></a>Boot strapping</h2><p>Boot strapping，拔靴法：利用有限的样本资料经由<strong>多次重复抽样</strong>，重新建立起足以代表母体样本分布之新样本。</p>
+<p>多次之后，得到一个非线性的结果（黑色线）<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-17-37-57.png"> </p>
+<h2 id="基本算法引入权重"><a href="#基本算法引入权重" class="headerlink" title="基本算法引入权重"></a>基本算法引入权重</h2><p>已知：一笔数据$D={(x_1,y_1),(x_2,y_2),(x_3,y_3),(x_4,y_4)}$。根据D算出来的输入误差Ein为：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-29-41.png"> </p>
+<p>通过Boot strapping，得到新的一笔数据$D_t={(x_1,y_1),(x_1,y_1),(x_2,y_2),(x_4,y_4)}$。对应地，根据Dt算出来的Ein为：（增加一个权重u即可）<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-31-04.png"> </p>
+<p>$u1=2,u2=1,u3=0,u4=1$</p>
+<p><strong>结论：每一个bootstrapping得到了一个权重u</strong></p>
+<h2 id="优化权重u"><a href="#优化权重u" class="headerlink" title="优化权重u"></a>优化权重u</h2><h3 id="优化原理"><a href="#优化原理" class="headerlink" title="优化原理"></a>优化原理</h3><ul>
+<li>每一个bootstrapping得到了一个权重u。</li>
+<li>为了综合得到更好的g,则需要抽取的数据集得到的g尽量地不同。</li>
+<li>改变u，使得g差异更大，才会更好地改进最终结果</li>
+</ul>
+<p>得到g差异很大的方法：</p>
+<ul>
+<li>第一轮$u_n^t$时，得到$g_t$<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-39-48.png"> </li>
+<li>第二轮，选择一个 在$g_t$ 表现不好的 $u_n^{t+1}$  ，得到 $g_{t+1}$ <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-41-02.png"><br>– 表现不好的定义：<br>— 将$u_n^{t+1}$作用在$g_t$上，得到一个归一化的错误率<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-45-01.png"><br>— 为了简便，定义橙色方块为所有犯错误的$u_n^{t+1}$的累加，绿色圆形为所有正确的$u_n^{t+1}$累加<br>— 即：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-47-12.png"><br>– 表现不好的选择方法：<br>— 将本次正确的$u_n^t$，除以一个错误的比例（缩小正确），赋给$u_n^{t+1}$<br>— 将本次错误的$u_n^t$，乘以一个正确的比例（放大错误），赋给$u_n^{t+1}$<br>— 这样得到的$u_n^{t+1}$的比率就会为2/1<br>— 即：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-19-51-21.png"> </li>
+</ul>
+<h3 id="优化权重u的方法————放缩因子"><a href="#优化权重u的方法————放缩因子" class="headerlink" title="优化权重u的方法————放缩因子"></a>优化权重<code>u</code>的方法————放缩因子</h3><p>放缩因子-Adaptive Boosting Algorithm<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-02-12.png"> </p>
+<ul>
+<li>◆t有更清晰的物理意义，通常情况下εt &lt; 1/2（因为是学习之后的结果，错误率应该小于0.5），</li>
+<li>◆t将大于1；</li>
+<li>那么，犯错的数据将乘上大于1的数，正确数据将除以大于1的数</li>
+<li>使得提升了犯错数据的权重(scale up incorrect)，</li>
+<li>降低做对数据的权重(scale down correct)</li>
+<li>这样使得更加专注在犯了错的地方，来得到不一样的假设(diverse hypotheses)。</li>
+</ul>
+<h2 id="Linear-Aggregation（聚集）-合成最终的g"><a href="#Linear-Aggregation（聚集）-合成最终的g" class="headerlink" title="Linear Aggregation（聚集） - 合成最终的g"></a>Linear Aggregation（聚集） - 合成最终的g</h2><p>目标：合成最终的的$G(x)=sign(\sum_{t=1}^T\alpha_t g_t(x)$</p>
+<ul>
+<li>其中 $\alpha_t$是系数</li>
+<li>要求好的$g_t$（错误率低），$\alpha_t$应该大一些</li>
+<li>坏的$g_t$（错误率高），$\alpha_t$应该小一些</li>
+<li>而◆t与错误率成反比</li>
+<li>则可令$\alpha_t=ln(\text{◆t})$</li>
+</ul>
+<p>算法流程：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-21-25.png"> </p>
+<p>这里之所以认为αt = ln(◆t)，处于下面的考虑：<br>如果εt = 1/2， 那么◆t = 1，则αt = 0，意思是随机乱猜的情况下（二元分类错误率为0.5），认为是坏的g，则一票不给个，不使用该g<br>如果εt = 0， 那么◆t = ∞，则αt = ∞，意思是正确率为0的情况，给它无限多票数</p>
+<h1 id="AdaBoost-自适应优化算法总结"><a href="#AdaBoost-自适应优化算法总结" class="headerlink" title="AdaBoost 自适应优化算法总结"></a>AdaBoost 自适应优化算法总结</h1><p>自适应优化算法 = 简单的学习A + 放缩权重 + 合成得到g<br>即：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-25-49.png"> </p>
+<p>AdaBoost算法完整流程<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-26-16.png"> </p>
+<h1 id="AdaBoost理论特性"><a href="#AdaBoost理论特性" class="headerlink" title="AdaBoost理论特性"></a>AdaBoost理论特性</h1><p>通过之前的VC Bound，来约束测试误差，其中蓝色的部分是模型的复杂度，O(dvc(H))为g的模型复杂度，而O(dvc(H))·T·logT是模型G的复杂度。原作者证明说，可以用O(logN)次迭代可以将Ein(G)做到很小，并且当数据量N足够多的情况下，又可以使得模型复杂度变得很小，从而使得模型复杂度得到控制。最终预测效果Eout也会很好。<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-27-24.png"><br>AdaBoost的保证是让一个很弱的算法不断变强，最终得到一个很强是算法（Ein=0，Eout is small）。<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-27-48.png"> </p>
+<h1 id="Adaptive-Boosting的实际应用表现"><a href="#Adaptive-Boosting的实际应用表现" class="headerlink" title="Adaptive Boosting的实际应用表现"></a>Adaptive Boosting的实际应用表现</h1><p>上面的AdaBoost只需要一个很弱的算法就可以使用。<br>一般情况下，可以使用决策桩(Decision Stump)，该模型相当于在某一个维度上的Perceptron模型。<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-04-20-28-27.png"> </p>
+<h1 id="聚合（aggregation）模型总结"><a href="#聚合（aggregation）模型总结" class="headerlink" title="聚合（aggregation）模型总结"></a>聚合（aggregation）模型总结</h1><p>aggregation 模型主要应用在将得到的多个预测函数$g_t$聚合在一起，得到更好的$g_t$（即更好的分类器）的方式</p>
+<p>聚合方式主要面向两种情况：</p>
+<ul>
+<li>blending:已经有了一堆$g_t$在手上（可能是已知的，可能是求得的）。</li>
+<li>learning：不已知$g_t$，需要通过一定方式求得很多$g_t$</li>
+</ul>
+<p>learning的分为三种情况</p>
+<ul>
+<li>把g看做是同等地位，通过投票或者平均的方式将它们合起来，称为Bagging</li>
+<li>g是不平等的，有好有坏，一个可行的做法是把g当成是特征的转换，然后丢进线性模型训练就可以了，这称为AdaBoost</li>
+<li>如果是不同的条件下，使用不同的g，那么我们仍然可以将g当做是特征转换，接下来使用一个非线性模型来得到最终的模型参数，这就是下文要介绍的决策树算法</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>$g_t$类型</th>
+<th align="right">blending</th>
+<th align="center">learning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>各$g_t$等权重型（uniform）</td>
+<td align="right">投票方式/平均方式</td>
+<td align="center">Bagging</td>
+</tr>
+<tr>
+<td>$g_t$权重不等型（non-uniform）</td>
+<td align="right">线性聚合</td>
+<td align="center">AdaBoost</td>
+</tr>
+<tr>
+<td>不同情形用不同$g_t$（conditional）</td>
+<td align="right">stacking</td>
+<td align="center">决策树</td>
+</tr>
+</tbody></table>
+<h1 id="AdaBoost思路总结"><a href="#AdaBoost思路总结" class="headerlink" title="AdaBoost思路总结"></a>AdaBoost思路总结</h1><ul>
+<li>一般，数据量过少时，我们无法得到更好的g.</li>
+<li>因此我们采取BootStrapping方法，生成多个数据集，得到多个g</li>
+<li>最后合成最好的g</li>
+</ul>
+<h1 id="AdaBoost伪代码"><a href="#AdaBoost伪代码" class="headerlink" title="AdaBoost伪代码"></a>AdaBoost伪代码</h1><pre><code>对每次迭代：
+    用buildStump()函数找到最佳单层决策树
+    将最佳单层决策树加入到单层决策树数组
+    计算alpha
+    计算新的权重向量D
+    更新累积类别估计值
+    如果错误率等于0，则退出循环
+</code></pre>
+<p>参考文献</p>
+<ol>
+<li>《机器学习技法》，林轩田</li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/JasonDing1354/article/details/46462711">Jason Ding，【机器学习基础】自适应提升</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.jasonding.top/2015/07/22/Machine%20Learning/%E3%80%90%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80%E3%80%91%E5%86%B3%E7%AD%96%E6%A0%91%E7%AE%97%E6%B3%95/">Jason Ding，【机器学习基础】决策树算法</a></li>
+</ol>
+<p>备注：本节是《机器学习技法》第8章+《统计学习方法》第8章笔记</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E9%9A%8F%E6%9C%BA%E6%A3%AE%E6%9E%97%E7%AE%97%E6%B3%95/" rel="next" title="机器学习算法-随机森林算法">
+                <i class="fa fa-chevron-left"></i> 机器学习算法-随机森林算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E6%8F%90%E5%8D%87%E5%86%B3%E7%AD%96%E6%A0%91/" rel="prev" title="机器学习算法-提升决策树">
+                机器学习算法-提升决策树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Boosting"><span class="nav-text">Boosting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AdaBoost%E7%AE%97%E6%B3%95"><span class="nav-text">AdaBoost算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AdaBoost%E8%AF%A6%E8%A7%A3"><span class="nav-text">AdaBoost详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Boot-strapping"><span class="nav-text">Boot strapping</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%AE%97%E6%B3%95%E5%BC%95%E5%85%A5%E6%9D%83%E9%87%8D"><span class="nav-text">基本算法引入权重</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%9D%83%E9%87%8Du"><span class="nav-text">优化权重u</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%8E%9F%E7%90%86"><span class="nav-text">优化原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%9D%83%E9%87%8Du%E7%9A%84%E6%96%B9%E6%B3%95%E2%80%94%E2%80%94%E2%80%94%E2%80%94%E6%94%BE%E7%BC%A9%E5%9B%A0%E5%AD%90"><span class="nav-text">优化权重u的方法————放缩因子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linear-Aggregation%EF%BC%88%E8%81%9A%E9%9B%86%EF%BC%89-%E5%90%88%E6%88%90%E6%9C%80%E7%BB%88%E7%9A%84g"><span class="nav-text">Linear Aggregation（聚集） - 合成最终的g</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AdaBoost-%E8%87%AA%E9%80%82%E5%BA%94%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-text">AdaBoost 自适应优化算法总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AdaBoost%E7%90%86%E8%AE%BA%E7%89%B9%E6%80%A7"><span class="nav-text">AdaBoost理论特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Adaptive-Boosting%E7%9A%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E8%A1%A8%E7%8E%B0"><span class="nav-text">Adaptive Boosting的实际应用表现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%9A%E5%90%88%EF%BC%88aggregation%EF%BC%89%E6%A8%A1%E5%9E%8B%E6%80%BB%E7%BB%93"><span class="nav-text">聚合（aggregation）模型总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AdaBoost%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93"><span class="nav-text">AdaBoost思路总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AdaBoost%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-text">AdaBoost伪代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

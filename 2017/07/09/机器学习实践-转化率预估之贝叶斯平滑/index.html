@@ -1,0 +1,1272 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CVR,贝叶斯平滑," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="问题描述在做比赛的过程中，我们发现了有转化率这个指标在大量数据下是有效的。理想情况下，例如某个广告点击量是10000次，转化量是100次，那转化率就是1%。但有时，例如某个广告点击量是2次，转化量是1次，这样算来转化率为50%。但此时这个指标在数学上是无效的。因为大数定律告诉我们，在试验不变的条件下，重复试验多次，随机事件的频率近似于它的概率。后者点击量只有2次，不满足“重复试验多次”的条件。 那">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习实践-转化率预估之贝叶斯平滑">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/07/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="问题描述在做比赛的过程中，我们发现了有转化率这个指标在大量数据下是有效的。理想情况下，例如某个广告点击量是10000次，转化量是100次，那转化率就是1%。但有时，例如某个广告点击量是2次，转化量是1次，这样算来转化率为50%。但此时这个指标在数学上是无效的。因为大数定律告诉我们，在试验不变的条件下，重复试验多次，随机事件的频率近似于它的概率。后者点击量只有2次，不满足“重复试验多次”的条件。 那">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-07-09T12:11:32.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:01.000Z">
+<meta property="article:author" content="jiayi797">
+<meta property="article:tag" content="CVR,贝叶斯平滑">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/07/09/机器学习实践-转化率预估之贝叶斯平滑/"/>
+
+
+
+
+
+  <title>机器学习实践-转化率预估之贝叶斯平滑 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习实践-转化率预估之贝叶斯平滑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-09T12:11:32+00:00">
+                2017-07-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:01+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%85%BE%E8%AE%AF%E7%AE%97%E6%B3%95%E5%A4%A7%E8%B5%9B-CVR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">腾讯算法大赛-CVR预估</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/07/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/07/09/机器学习实践-转化率预估之贝叶斯平滑/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在做比赛的过程中，我们发现了有转化率这个指标在大量数据下是有效的。理想情况下，例如某个广告点击量是10000次，转化量是100次，那转化率就是1%。但有时，例如某个广告点击量是2次，转化量是1次，这样算来转化率为50%。但此时这个指标在数学上是无效的。因为大数定律告诉我们，在试验不变的条件下，重复试验多次，随机事件的频率近似于它的概率。后者点击量只有2次，不满足“重复试验多次”的条件。</p>
+<p>那么如何解决这个问题呢？</p>
+<p><strong>整体思路</strong>：用估计值来模拟实际CVR。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>实际上，广告妆化率是随着时间迁移和用户喜好变化而变化的。因此我们可以利用先验知识来持续性地调整CVR。<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21724759">计算广告训练与平滑思想</a>给出了一个很好的解决方案：贝叶斯平滑。</p>
+<p>考虑到时序序列模型，我们把从第一天到第n天的所有先验知识汇总到第n天的结果，并以此来对第n+1天的CTR进行平滑。在广告平滑上，没有什么方法比贝叶斯平滑能够更好的利用先验知识了，而帮助贝叶斯平滑方法实现目标的就是Beta分布。Beta分布的强大之处在于，通过改变其中的两个参数α和β，你可以让Beta分布的图形变成任意形状，而且在加入先验知识前后，通过贝叶斯变换，对CTR的预估都可以表示为Beta分布。</p>
+<p>Beta分布中参数α和β的本质含义，即：α表示点击数，β表示曝光数。因为贝叶斯平滑的具体公式（后面再讲这个公式的原理）就是：</p>
+<p>$$SmoothCTR = \frac{(α + CurrentC - 1)}{( α + β + CurrentI -2)}$$</p>
+<p>公式由来：</p>
+<ul>
+<li>一般来说，点击还是不点击，这是服从伯努利二项分布的。</li>
+<li>而二项分布的共轭分布就是Beta分布，也就是说，点击率服从Beta分布</li>
+<li>我们可以从历史数据当中学到历史数据的Beta分布的具体参数，也就是先验分布$\pi(r)$ （不加任何条件限制的分布）</li>
+<li>共轭先验有一个特性：如果找到一个$\pi(r)$，它是$\pi(x|r)$的共轭先验，那么r的后验分布$\pi(r|x)$和先验分布$\pi(r)$会有一样的形式。</li>
+<li>这个特性告诉我们：先验分布$\pi(r)$ （也就是历史数据）的分布与后验分布$\pi(r|x)$ （也就是x条件下点击率r的分布）是一个形式的</li>
+<li>既然我们知道了先验分布$\pi(r)$ （也就是历史数据）的分布是beta分布，那么我们就知道了后验分布$\pi(r|x)$ （也就是x条件下点击率r的分布）分布也是beta分布</li>
+<li>也就是说 ：先验分布$\pi(r)$ （也就是历史数据） + 后验知识 —-&gt; 后验分布$\pi(r|x)$ （也就是x条件下点击率r的分布）</li>
+<li>那么接下来我们就需要求解后验分布$\pi(r|x)$的beta分布参数了</li>
+<li>根据什么什么证明，后验分布的参数$\alpha = \alpha<code> + C, \beta = \beta</code> + I  - C$</li>
+<li>其中I是展示数量，C是点击数量，$\alpha<code> 和 \beta</code>$ 是历史数据的beta分布参数</li>
+<li>那么后验分布$\pi(r|x)$ 就是 $beta( \alpha<code> + C,  \beta</code> + I -  C)$</li>
+<li>如果我们要让点击率误差最小，那么取后验分布的均值，就是最好的点击率了！！！！也就是：<br>$$mean = \frac{\alpha}{\alpha + \beta} =  \frac{\alpha` + C}{\alpha + \beta + I}$$</li>
+<li>是不是很机智！！！</li>
+</ul>
+<h1 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h1><p>能不能直接把历史点击和历史曝光分别赋值给α和β来进行计算呢？显然不行，因为这么做就会犯之前我们提到的那些问题，比如不同日期的曝光、点击权重应该不一样。所以基础的贝叶斯平滑是不能解决我们刚才提到的问题的，我们需要深入研究Beta分布的特性，用一种新的方法通过先验知识求解α和β，从而计算SmoothCTR。</p>
+<p>参考文献<a target="_blank" rel="noopener" href="https://www.bbsmax.com/A/A7zgmjRk54/">CTR预估中的贝叶斯平滑方法（二）参数估计和代码实现</a></p>
+<h2 id="矩估计"><a href="#矩估计" class="headerlink" title="矩估计"></a>矩估计</h2><p>矩估计的方法要追溯到19世纪的Karl Pearson，是基于一种简单的 “替换” 思想建立起来的一种估计方法。 其基本思想是用样本矩估计总体矩. 由大数定理，如果未知参数和总体的某个(些)矩有关系，我们可以很自然地来构造未知参数的估计。具体计算步骤如下：</p>
+<p>Beta分布除了两个显性的重要参数α和β外，还有两个相对隐形但同样重要的参数，均值和方差，通过均值和方差可以唯一确定α和β的值，它们的数学关系如下：(见参考链接<a target="_blank" rel="noopener" href="http://www.mathchina.net/dvbbs/dispbbs.asp?boardid=5&Id=842">beta（贝塔）分布的数学期望和方差</a>)</p>
+<p>$$均值 mean =\frac{\alpha}{\alpha+\beta}$$<br>$$方差 var =\frac{\alpha\beta}{(\alpha+\beta)^2(\alpha+\beta + 1)}$$</p>
+<p>因此，如果我们根据数据集统计了平均值和方差，那么α和β的值也就确定了：</p>
+<p>$$\alpha = mean \frac{mean(1-mean)}{var - 1}$$</p>
+<p>$$\beta = (1-mean)\frac{mean(1-mean)}{var-1}$$</p>
+<h2 id="EM估计"><a href="#EM估计" class="headerlink" title="EM估计"></a>EM估计</h2><p>这种估计方法其实叫Fixed-point iteration。只是有点类似EM的思想。</p>
+<p>首先构造出似然函数，然后利用Fixed-point iteration来求得似然函数的最大值。</p>
+<p>1）首先给出参数的一个初始值（通常可以使用矩估计得到的结果作为初始值）。</p>
+<p>2）在初始值处，构造似然函数的一个紧的下界函数。这个下界函数可以求得其最大值处的闭式解，将此解作为新的估计用于下一次迭代中。</p>
+<p>3）不断重复上述（2）的步骤，直至收敛。此时便可到达似然函数的stationary point。如果似然函数是convex的，那么此时就是唯一的最优解。</p>
+<p>其实Fixed-point iteration的思想与EM类似。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> scipy.special <span class="keyword">as</span> special</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> log</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HyperParam</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, alpha, beta</span>):</span></span><br><span class="line">        self.alpha = alpha</span><br><span class="line">        self.beta = beta</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sample_from_beta</span>(<span class="params">self, alpha, beta, num, imp_upperbound</span>):</span></span><br><span class="line">        sample = numpy.random.beta(alpha, beta, num)</span><br><span class="line">        I = []</span><br><span class="line">        C = []</span><br><span class="line">        <span class="keyword">for</span> click_ratio <span class="keyword">in</span> sample:</span><br><span class="line">            imp = random.random() * imp_upperbound</span><br><span class="line">            <span class="comment">#imp = imp_upperbound</span></span><br><span class="line">            click = imp * click_ratio</span><br><span class="line">            I.append(imp)</span><br><span class="line">            C.append(click)</span><br><span class="line">        <span class="keyword">return</span> I, C</span><br><span class="line">    <span class="comment"># 平滑方式1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_from_data_by_FPI</span>(<span class="params">self, tries, success, iter_num, epsilon</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;estimate alpha, beta using fixed point iteration&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;tries ： 展示次数</span></span><br><span class="line"><span class="string">           success : 点击次数</span></span><br><span class="line"><span class="string">           iter_num : 迭代次数</span></span><br><span class="line"><span class="string">           epsilon : 精度</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(iter_num):</span><br><span class="line">            new_alpha, new_beta = self.__fixed_point_iteration(tries, success, self.alpha, self.beta)</span><br><span class="line">            <span class="comment"># 当迭代稳定时，停止迭代</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">abs</span>(new_alpha-self.alpha)&lt;epsilon <span class="keyword">and</span> <span class="built_in">abs</span>(new_beta-self.beta)&lt;epsilon:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            self.alpha = new_alpha</span><br><span class="line">            self.beta = new_beta</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__fixed_point_iteration</span>(<span class="params">self, tries, success, alpha, beta</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;fixed point iteration&#x27;&#x27;&#x27;</span></span><br><span class="line">        sumfenzialpha = <span class="number">0.0</span></span><br><span class="line">        sumfenzibeta = <span class="number">0.0</span></span><br><span class="line">        sumfenmu = <span class="number">0.0</span></span><br><span class="line">        <span class="comment"># digamma 指伽马函数，是阶乘在实数与复数域的扩展</span></span><br><span class="line">        sumfenzialpha = special.digamma(success+alpha) - special.digamma(alpha)</span><br><span class="line">        <span class="built_in">print</span> sumfenzialpha</span><br><span class="line">        <span class="comment"># for i in range(len(tries)):</span></span><br><span class="line">        <span class="comment">#     sumfenzialpha += (special.digamma(success[i]+alpha) - special.digamma(alpha))</span></span><br><span class="line">        <span class="comment">#     sumfenzibeta += (special.digamma(tries[i]-success[i]+beta) - special.digamma(beta))</span></span><br><span class="line">        <span class="comment">#     sumfenmu += (special.digamma(tries[i]+alpha+beta) - special.digamma(alpha+beta))</span></span><br><span class="line">        <span class="keyword">return</span> alpha*(sumfenzialpha/sumfenmu), beta*(sumfenzibeta/sumfenmu)</span><br><span class="line">      </span><br><span class="line">    <span class="comment"># 平滑方式2</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_from_data_by_moment</span>(<span class="params">self, tries, success</span>):</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;estimate alpha, beta using moment estimation&#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="comment"># 求均值和方差</span></span><br><span class="line">        mean, var = self.__compute_moment(tries, success)</span><br><span class="line">        <span class="comment">#print &#x27;mean and variance: &#x27;, mean, var</span></span><br><span class="line">        <span class="comment">#self.alpha = mean*(mean*(1-mean)/(var+0.000001)-1)</span></span><br><span class="line">        self.alpha = (mean+<span class="number">0.000001</span>) * ((mean+<span class="number">0.000001</span>) * (<span class="number">1.000001</span> - mean) / (var+<span class="number">0.000001</span>) - <span class="number">1</span>)</span><br><span class="line">        <span class="comment">#self.beta = (1-mean)*(mean*(1-mean)/(var+0.000001)-1)</span></span><br><span class="line">        self.beta = (<span class="number">1.000001</span> - mean) * ((mean+<span class="number">0.000001</span>) * (<span class="number">1.000001</span> - mean) / (var+<span class="number">0.000001</span>) - <span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__compute_moment</span>(<span class="params">self, tries, success</span>):</span></span><br><span class="line">        <span class="comment"># 求均值和方差</span></span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;moment estimation&#x27;&#x27;&#x27;</span></span><br><span class="line">        ctr_list = []</span><br><span class="line">        <span class="comment"># var = 0.0</span></span><br><span class="line">        mean = (success / tries).mean()</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(tries) == <span class="number">1</span>:</span><br><span class="line">            var = <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            var = (success / tries).var()</span><br><span class="line">        <span class="comment"># for i in range(len(tries)):</span></span><br><span class="line">        <span class="comment">#     ctr_list.append(float(success[i])/tries[i])</span></span><br><span class="line">        <span class="comment"># mean = sum(ctr_list)/len(ctr_list)</span></span><br><span class="line">        <span class="comment"># for ctr in ctr_list:</span></span><br><span class="line">        <span class="comment">#     var += pow(ctr-mean, 2)</span></span><br><span class="line">        <span class="keyword">return</span> mean, var</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>():</span></span><br><span class="line">    <span class="comment">#设定初始值</span></span><br><span class="line">    hyper = HyperParam(<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="comment">#--------sample training data--------</span></span><br><span class="line">    <span class="comment"># I, C = hyper.sample_from_beta(10, 1000, 10000, 1000)</span></span><br><span class="line">    <span class="comment"># print I, C</span></span><br><span class="line">    train_data = pd.read_csv(<span class="string">&#x27;data.csv&#x27;</span>,nrows=<span class="number">10000</span>)</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;read finish&#x27;</span></span><br><span class="line">    <span class="comment"># 统计点击次数和转化次数</span></span><br><span class="line">    key = [<span class="string">&#x27;creativeID&#x27;</span>]</span><br><span class="line">    train_data[<span class="string">&#x27;count&#x27;</span>] = <span class="number">1</span></span><br><span class="line">    train_data = train_data.groupby(key).agg(<span class="string">&#x27;sum&#x27;</span>).reset_index()</span><br><span class="line">    <span class="comment"># 此时，train_data[&#x27;count&#x27;]是点击次数</span></span><br><span class="line">    <span class="comment"># train_data[&#x27;label&#x27;]是点击次数</span></span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;cal finish&#x27;</span></span><br><span class="line">    I = train_data[<span class="string">&#x27;count&#x27;</span>]</span><br><span class="line">    C = train_data[<span class="string">&#x27;label&#x27;</span>]</span><br><span class="line">    <span class="built_in">print</span> key</span><br><span class="line">    start = time.clock()</span><br><span class="line">    <span class="comment">#--------estimate parameter using fixed-point iteration--------</span></span><br><span class="line">    <span class="comment"># 计算平滑</span></span><br><span class="line">    hyper.update_from_data_by_FPI(I, C, <span class="number">1000</span>, <span class="number">0.00000001</span>)</span><br><span class="line">    end = time.clock()</span><br><span class="line">    <span class="built_in">print</span> hyper.alpha, hyper.beta</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;run time: &#x27;</span>,end - start</span><br><span class="line"></span><br><span class="line">    start1 = time.clock()</span><br><span class="line">    <span class="comment">#--------estimate parameter using moment estimation--------</span></span><br><span class="line">    hyper.update_from_data_by_moment(I, C)</span><br><span class="line">    end1 = time.clock()</span><br><span class="line">    <span class="built_in">print</span> hyper.alpha, hyper.beta</span><br><span class="line">    <span class="built_in">print</span> <span class="string">&#x27;EM run time: &#x27;</span>, end1 - start1</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    test()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="贝叶斯估计"><a href="#贝叶斯估计" class="headerlink" title="贝叶斯估计"></a>贝叶斯估计</h1><p>参考文献<a target="_blank" rel="noopener" href="http://blog.csdn.net/jinping_shi/article/details/78334362">转化率（CTR）预测的贝叶斯平滑</a></p>
+<h2 id="点击率平滑的假设"><a href="#点击率平滑的假设" class="headerlink" title="点击率平滑的假设"></a>点击率平滑的假设</h2><p>对于一件商品或一条广告，对于某次曝光，用户要么点击，要么没点击，这符合二项分布。因此下文中对于点击率类的贝叶斯平滑，都是基于以下假设：<strong>对于某件商品或广告XX，其是否被点击是一个伯努利分布（Bernoulli）</strong>。</p>
+<p>$$X \sim Ber( r) \tag{3}$$</p>
+<p>其中X表示某个广告是否被点击，点击取1，未被点击取0，r是某件商品被点击的概率，即<strong>点击率</strong>。</p>
+<h2 id="冷启动问题——点击率极大似然估计"><a href="#冷启动问题——点击率极大似然估计" class="headerlink" title="冷启动问题——点击率极大似然估计"></a>冷启动问题——点击率极大似然估计</h2><p>在(3)式的假设下，可以使用极大似然法计算出点击率的估计值$\hat{r}$ 。具体做法为：</p>
+<p>从用户日志中随机抽取n条记录，对任一条记录i都有</p>
+<p>$$X_i \sim Ber( r) \tag{4}$$</p>
+<p>那么所有记录的点击数的联合概率密度就是上式的连乘，也就是构造了极大似然函数。将极大似然函数对r求导并令导数等于0，就可以解出$r$ 的估计值$\hat{r}$ 。$\hat{r}$ 就是点击率的极大似然估计。当某个商品的点击次数或者曝光次数为0时，可以用$\hat{r}$ 当成它的初始值。</p>
+<p>然而这样并没有解决新上线广告问题。例如有两件商品A和B，其点击率分别为$r_A=\frac{5}{10}$和$r_B=\frac{50}{100}$，$r_A=r_B$，但商品A的曝光只有10次，商品B的曝光有100次，这样比较是否合理？那么我们就要用到贝叶斯估计来解决这个问题了！</p>
+<h2 id="广告投放不足问题——点击率的贝叶斯估计"><a href="#广告投放不足问题——点击率的贝叶斯估计" class="headerlink" title="广告投放不足问题——点击率的贝叶斯估计"></a>广告投放不足问题——点击率的贝叶斯估计</h2><p>在贝叶斯框架下，我们假设点击率r服从某个分布：</p>
+<p>$$r \sim \pi(r)  \tag{5}$$</p>
+<p>因为这是基于经验的，这个分布称为先验分布。贝叶斯参数估计可以同时解决最开始提出的两个问题。其过程是基于经验或历史数据先给出一个r的估计值，然后基于现有的数据在这个估计值上修正，得到最终的点击率估计，此时的估计值已经是修正过的。更美好的是我们可以分离出修正参数，来进行更好的估计（即(2)式中的a和b）。</p>
+<p>$$r = \frac{C+a}{I+b} \tag{2}$$</p>
+<p>既然有先验分布，就有后验分布。r的后验分布记作$\pi(r|x)$ 。 其中x表示输入数据或特征，对于点击率预测，x就是点击次数和曝光量。因为已经看到了数据，才确定r的分布，因此叫做『后验』分布。贝叶斯估计的实质就是求后验分布。即基于当前的点击次数和曝光量，求点击率的分布；而未看到数据之前点击率的分布是$\pi(r)$。下面会讲解如何计算后验分布$\pi(r|x)$.</p>
+<p>贝叶斯估计的过程可以简单认为：</p>
+<p>用历史数据根据$\pi(r)$估计r，记作$\hat{r}<em>{history}$；用当前数据根据$\pi(r|x)$估计r，记作$\hat{r}</em>{current}$，然后用$\hat{r}<em>{history}$修正$\hat{r}</em>{current}$。</p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>r 的后验分布$\pi(r|x)$是个概率密度函数，无法知道r确切的值。需要求出最接近真实情况的r需要损失函数来约束。</p>
+<p>适用于点击率的损失函数有：</p>
+<p>$$L(\hat{r}, r) = (\hat{r} - r)^2$$</p>
+<p>$$L(\hat{r}, r) = |\hat{r} - r|$$</p>
+<p>贝叶斯参数估计的过程可以简单描述为：求$\hat{r}$，使得损失函数在r的后验分布上的期望最小。这句话的数学定义为：</p>
+<p>$$\arg \min \int L(r, \hat{r}) \pi(r|\boldsymbol{x})\ dr = E_{\pi} L(r, \hat{r}) \tag{6}$$</p>
+<p>因此需要知道$\pi(r|x)$的形式，然而$\pi(r|x)$的形式一般不知道的，但是可以知道$\pi(r)$的形式（经验值嘛，我们指定的）。此外，数据的分布我们也是知道的，其概率密度函数（pdf）记为$f(x|r)$，表示数据的分布跟参数r有关，r是要求解的参数，在这里就是点击率。</p>
+<p>这时可以根据贝叶斯公式计算出$\pi(r|x)$：</p>
+<p>$$\pi(r|\boldsymbol{x}) = \frac{f(\boldsymbol{x}|r)\pi(r)}{f(\boldsymbol{x})} \tag{7}$$</p>
+<p>其中，</p>
+<p>$$f(\boldsymbol{x}) =  \int_0^\infty f(\boldsymbol{x}|r) \pi(r) dr\  \mbox{ (边缘概率密度定义)}$$</p>
+<p>上式好复杂，但其实一些常见的分布都可以求出上式积分的具体形式。但通常不用实际去积分，因为满足一定条件，$\pi(r)$跟$\pi(r|x)$有一样的形式。$\pi(r)$是已知的，如果形式一样，$\pi(r|x)$也就容易求得了。下面介绍共轭先验的概念。</p>
+<p><strong>共轭先验：</strong><br><strong>如果找到一个$\pi(r)$，它是$f(x|r)$的共轭先验，那么r的后验分布$\pi(r|x)$和先验分布$\pi(r)$会有一样的形式。</strong></p>
+<p>『轭』是指驾车时套在牲口脖子上的曲木。古代拉扯的牲口通常有两只，因此轭是连接两只牲口的工具。在这里共轭是指$\pi(r)$和$\pi(r|x)$通过$f(x|r)$联系起来了。</p>
+<p>之前假设广告是否点击服从伯努利分布，参数为r；对于点击次数，服从的是二项分布，即$f(C, I|r) \sim Bin(r)$ ，<strong>二项分布的共轭先验是Beta分布</strong>。Beta分布的参数是α和β，即$\pi(r) =Beta(\alpha, \beta)$ ,根据共轭先验的定义，r的后验分布$\pi(r|x)$的形式跟其先验分布$\pi(r)$一样，即$\pi(r|x)  = Beta(\alpha’, \beta’)$。</p>
+<p>对于点击率预测，求出$\pi(r|x)$，带入公式(6)，当$L(\hat{r}, r) = (\hat{r} - r)^2$时， </p>
+<p>$$\hat{r} = \frac{C + \alpha}{I + \alpha + \beta} \tag{8}$$</p>
+<p>上式的求解过程可以参考<a target="_blank" rel="noopener" href="http://blog.csdn.net/jinping_shi/article/details/53444100">贝叶斯参数估计</a>最后的例子。(8)式就是点击率估计（平滑）的最终形式。其中C和I就是点击次数和曝光量，α即为公式(2)中的a，α+β是公式(2)中的b。α和β是从历史数据中得到的。</p>
+<p>上面的内容给出了为什么很多文章会假设点击率服从Beta分布的理由，因为最终的平滑的因子是Beta分布（先验分布）中的两个参数。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21724759">计算广告训练与平滑思想</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bbsmax.com/A/A7zgmjRk54/">CTR预估中的贝叶斯平滑方法（二）参数估计和代码实现</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/jinping_shi/article/details/78334362">转化率（CTR）预测的贝叶斯平滑</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.mathchina.net/dvbbs/dispbbs.asp?boardid=5&Id=842">beta（贝塔）分布的数学期望和方差</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/jinping_shi/article/details/53444100">贝叶斯参数估计</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CVR-%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/" rel="tag"># CVR,贝叶斯平滑</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-word-embedding/" rel="next" title="机器学习实践-CVR-word-embedding">
+                <i class="fa fa-chevron-left"></i> 机器学习实践-CVR-word-embedding
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/09/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E5%AE%9E%E7%8E%B0/" rel="prev" title="简单搜索引擎的实现">
+                简单搜索引擎的实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1"><span class="nav-text">参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A9%E4%BC%B0%E8%AE%A1"><span class="nav-text">矩估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EM%E4%BC%B0%E8%AE%A1"><span class="nav-text">EM估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1"><span class="nav-text">贝叶斯估计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%B9%E5%87%BB%E7%8E%87%E5%B9%B3%E6%BB%91%E7%9A%84%E5%81%87%E8%AE%BE"><span class="nav-text">点击率平滑的假设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B7%E5%90%AF%E5%8A%A8%E9%97%AE%E9%A2%98%E2%80%94%E2%80%94%E7%82%B9%E5%87%BB%E7%8E%87%E6%9E%81%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1"><span class="nav-text">冷启动问题——点击率极大似然估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE%E4%B8%8D%E8%B6%B3%E9%97%AE%E9%A2%98%E2%80%94%E2%80%94%E7%82%B9%E5%87%BB%E7%8E%87%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E4%BC%B0%E8%AE%A1"><span class="nav-text">广告投放不足问题——点击率的贝叶斯估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-text">损失函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

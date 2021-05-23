@@ -1,0 +1,1402 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="矩阵分解," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="LU分解:可以将一个矩阵分解为一个单位下三角矩阵和一个上三角矩阵的乘积（有时是它们和一个置换矩阵的乘积）。LU分解主要应用在数值分析中，用来解线性方程、求反矩阵或计算行列式。   LU分解条件如果n阶方阵A的各阶顺序主子式 ，即A的各阶顺序主子矩阵Ak都可逆，则存在唯一的单位下三角矩阵L与唯一的非奇异上三角矩阵U，使得A&#x3D;LU 其中k阶顺序主子式指  LU分解方法由于L存在可逆矩阵L’，即LL’&#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵LU分解及其实现">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/03/29/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5LU%E5%88%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="LU分解:可以将一个矩阵分解为一个单位下三角矩阵和一个上三角矩阵的乘积（有时是它们和一个置换矩阵的乘积）。LU分解主要应用在数值分析中，用来解线性方程、求反矩阵或计算行列式。   LU分解条件如果n阶方阵A的各阶顺序主子式 ，即A的各阶顺序主子矩阵Ak都可逆，则存在唯一的单位下三角矩阵L与唯一的非奇异上三角矩阵U，使得A&#x3D;LU 其中k阶顺序主子式指  LU分解方法由于L存在可逆矩阵L’，即LL’&#x3D;">
+<meta property="og:locale">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-19-31-33.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-19-34-31.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-19-36-08.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-13-15.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-54-39.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-55-24.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-57-24.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-57-48.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-58-09.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-59-09.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-21-05-36.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-21-00-46.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-21-02-44.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-10-36-28.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-14-16-46.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-14-22-05.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-14-39-25.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-31-11-02-01.png">
+<meta property="article:published_time" content="2017-03-29T11:27:31.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:03.000Z">
+<meta property="article:author" content="jiayi797">
+<meta property="article:tag" content="矩阵分解">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-19-31-33.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/03/29/数学-矩阵LU分解/"/>
+
+
+
+
+
+  <title>矩阵LU分解及其实现 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/29/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5LU%E5%88%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">矩阵LU分解及其实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-29T11:27:31+00:00">
+                2017-03-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:03+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/03/29/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5LU%E5%88%86%E8%A7%A3/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/03/29/数学-矩阵LU分解/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>LU分解:可以将一个矩阵分解为一个<strong>单位下三角矩阵</strong>和一个<strong>上三角矩阵</strong>的<strong>乘积</strong>（有时是它们和一个置换矩阵的乘积）。LU分解主要应用在数值分析中，用来解线性方程、求反矩阵或计算行列式。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-19-31-33.png"> </p>
+<h1 id="LU分解条件"><a href="#LU分解条件" class="headerlink" title="LU分解条件"></a>LU分解条件</h1><p>如果n阶方阵A的各阶顺序主子式<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-19-34-31.png"> ，即A的各阶顺序主子矩阵Ak都可逆，则存在唯一的单位下三角矩阵L与唯一的非奇异上三角矩阵U，使得A=LU</p>
+<p>其中k阶顺序主子式指<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-19-36-08.png"> </p>
+<h1 id="LU分解方法"><a href="#LU分解方法" class="headerlink" title="LU分解方法"></a>LU分解方法</h1><p>由于L存在可逆矩阵L’，即LL’=E<br>则L’A=LL’U=U<br>因此得出一般的分解方法：<br>通过对(A,E)做初等行变换得到(U,L’),再由L’得到L.</p>
+<p>其中：</p>
+<ol>
+<li>L是单位下三角矩阵（对角线上的系数都为1的下三角矩阵）；L’也是单位上三角矩阵；</li>
+<li>U是非奇异上三角矩阵；</li>
+</ol>
+<h1 id="直接消去法的矩阵解释"><a href="#直接消去法的矩阵解释" class="headerlink" title="直接消去法的矩阵解释"></a>直接消去法的矩阵解释</h1><p>计算过程如图所示：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-13-15.png"> </p>
+<p><strong>目的</strong>：将[A|E]–&gt;[U|L]形式，其中U是上三角矩阵</p>
+<p><strong>过程</strong>：每轮将一列的下三角消为0，就相当于给A左乘一个下三角单位矩阵Lk（对角线为1，保证变换后对角线元素不变）。</p>
+<p><strong>第一轮消元</strong>：将第一列的下三角消为0，相当于对A1左乘矩阵L1，即：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-54-39.png"><br>其中，<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-55-24.png"><br>我们注意到li1恰好使得第i行的第一列元素变为零，即ai1-li1*a11=0。</p>
+<p><strong>第二轮消元</strong>：将第二列的下三角消为0，对应于<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-57-24.png"> </p>
+<p><strong>第k轮消元</strong>:<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-57-48.png"><br>其中，<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-58-09.png"> </p>
+<p>把k轮消元相乘，即：<br><strong>整个消元过程为</strong>：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-20-59-09.png"> </p>
+<p><strong>总结</strong><br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-21-05-36.png"><br>初始（第一步）：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-21-00-46.png"> </p>
+<p>迭代第r步：<br>即<br>ur=f(u1,u2,…,u(r-1),l1,l2,…,l(r-1)),第r项由前r-1项计算得到<br>lr=g(u1,u2,…,u(r-1),l1,l2,…,l(r-1))<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-29-21-02-44.png"> </p>
+<p>计算顺序：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-10-36-28.png"> </p>
+<p>需要注意的是，我们在计算时需要判断本阶的顺序主子式是否为零。</p>
+<p><strong>代码实现</strong><br>备注：其中的piovt暂时没有卵用。</p>
+<p>输入矩阵：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-14-16-46.png"> </p>
+<pre><code>bool lu(double *a,int *pivot,int n)&#123;//矩阵是n*n的
+double test = det(a,r,n);//检验本阶顺序主子式是否为0
+ if(test==0)&#123;
+    return true;
+ &#125;
+//数组a在内存中按行优先次序存放
+//pivot:输出参数
+//pivot[0,n)中存放主元的位置排列
+//成功时返回false，否则返回ture
+//int len = sizeof(a)/sizeof(a[0]);
+double *U,*L;
+U = new double[n*n];
+L = new double[n*n];
+set0(U,n);
+set0(L,n);
+//先算urj(固定r，计算完所有的urj)，再算ljr(固定i，计算完所有的ljr)
+for(int r=0;r&lt;n;r++)&#123;
+    //计算urj(固定r，计算完所有的urj)
+    //计算ljr(固定i，计算完所有的ljr)
+    for(int j=r;j&lt;n;j++)&#123;
+        double sum_lu1=0;
+        double sum_lu2=0;
+        for(int k=0;k&lt;r;k++)&#123;
+            sum_lu1 = sum_lu1+L[r*n+k]*U[k*n+j];
+            sum_lu2 = sum_lu2+L[j*n+k]*U[k*n+r];
+        &#125;
+        U[r*n+j]=a[r*n+j]-sum_lu1;
+        if(j==r)&#123;
+            L[j*n+r]=1;
+        &#125;else&#123;
+            L[j*n+r]=a[j*n+r]-sum_lu2;
+            L[j*n+r]=L[j*n+r]/U[r*n+r];
+        &#125;
+    &#125;
+&#125;
+return false;
+&#125;
+</code></pre>
+<p>结果：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-14-22-05.png"> </p>
+<p>不知道为什么，我的答案与网上的之前学长做过的这道题的答案统统不一样。仔细检查后还是查不出来。又用Matlab验证了一下LU分解，MATLAB跑的结果为：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-30-14-39-25.png"><br>与我自己的L矩阵一致。决定还是相信自己。</p>
+<h1 id="列主元高斯消去法"><a href="#列主元高斯消去法" class="headerlink" title="列主元高斯消去法"></a>列主元高斯消去法</h1><p>主要思想是在每次计算第r行时，选取当前第r列下的最大的a[i,r]的所在的第i行作为主元，即将第i行与第r行交换，再进行计算。</p>
+<p>主要理论见参考文献-北邮理学院数值分析课件chapter5.</p>
+<p>代码：</p>
+<pre><code>#include &lt;iostream&gt;
+#include&lt;cstdio&gt;
+#include&lt;cstdlib&gt;
+#include&lt;iomanip&gt;
+#define LIM -100000000
+using namespace std;
+double *luReult;
+void printmat(double *mat,int n,string s)&#123;
+    std::cout&lt;&lt;endl&lt;&lt;endl&lt;&lt;s&lt;&lt;endl;
+    for(int i=0;i&lt;n;i++)&#123;
+        for(int j=0;j&lt;n;j++)&#123;
+            printf(&quot;%.5f\t&quot;,mat[i*n+j]);
+        &#125;
+        std::cout&lt;&lt;endl;
+    &#125;
+&#125;
+void printarr(int *mat,int n,string s)&#123;
+    std::cout&lt;&lt;endl&lt;&lt;endl&lt;&lt;s&lt;&lt;endl;
+    for(int i=0;i&lt;n;i++)&#123;
+        std::cout&lt;&lt;mat[i]&lt;&lt;&quot;\t&quot;;
+        //printf(&quot;%s\t&quot;,mat[i]);
+    &#125;
+&#125;
+int findMainNumber(double *a,int n,int r)&#123;
+    float maxa=-99999;
+    int maxaIdx=-1;
+    //printmat(a,n,&quot;a is now :&quot;);
+    for(int i=r;i&lt;n;i++)&#123;
+        if(a[i*n+r]&gt;maxa)&#123;
+            maxa=a[i*n+r];
+            maxaIdx=i;
+        &#125;
+    &#125;
+    return maxaIdx;
+&#125;
+void exchange(double *a,int n,int e,int r)&#123;
+    float temp=0;
+    for(int i=0;i&lt;n;i++)&#123;
+        temp = a[r*n+i];
+        a[r*n+i]=a[e*n+i];
+        a[e*n+i]=temp;
+    &#125;
+&#125;
+bool lu(double* a, int* pivot, int n)//矩阵LU分解
+&#123;
+      for(int k=0;k&lt;n;k++)&#123;
+        //寻找第k列的主元
+        int p = findMainNumber(a,n,k);
+        exchange(a,n,p,k);//交换k行和p行
+        pivot[k]=p;//记录置换矩阵p
+        if(a[k*n+k]!=0)&#123;
+                for(int i=k+1;i&lt;n;i++)&#123;//部分下三角L
+                    a[i*n+k]=a[i*n+k]/a[k*n+k];
+                &#125;
+                for(int i=k+1;i&lt;n;i++)&#123;//计算上三角U
+                    for(int j=k+1;j&lt;n;j++)&#123;
+                        a[i*n+j]=a[i*n+j]-a[i*n+k]*a[k*n+j];
+                    &#125;
+                &#125;
+        &#125;else&#123;
+            return true;//矩阵奇异
+        &#125;
+      &#125;
+      /*
+      //计算下三角L
+      double temp=0;
+       for(int i=0; i&lt;n-2; i++)//i行k列
+            for(int k=i+1; k&lt;n-1;k++)
+            &#123;
+                    temp=a[n*pivot[k] + i];
+                    a[n*pivot[k] + i]=a[k*n + i];
+                    a[k*n + i]=temp;
+            &#125;
+        */
+      luReult=a;
+      printmat(a,n,&quot;lu&quot;);
+      return false ;
+&#125;
+double radio(int a,int b)&#123;
+    return (double)(a)/(double)(b);
+&#125;
+void buildHilbert(double *a,double *b,int n)&#123;
+    for(int r=0;r&lt;n;r++)&#123;
+        for(int j=0;j&lt;n;j++)&#123;
+            a[r*n+j]=radio(1,j+r+1);
+            b[r]=b[r]+a[r*n+j];
+        &#125;
+    &#125;
+&#125;
+void exchangeb(double *b,int n,int r,int e)&#123;
+    double temp=0;
+    temp=b[e];
+    b[e]=b[r];
+    b[r]=temp;
+    /*r(int i=0;i&lt;n;i++)&#123;
+        temp=b[r*n+i];
+        b[r*n+i]=b[e*n+i];
+        b[e*n+i]=temp;
+    &#125;*/
+&#125;
+
+int main()
+&#123;
+    int n=6;//矩阵是n*n的
+    double *b=new double[n];
+    double *a=new double[n*n];
+    /*double input[n*n]=&#123;0.001,1.00,1.00,2.00&#125;;
+    a=input;
+    double inputb[n]=&#123;1.00,3.00&#125;;
+    b=inputb;*/
+    buildHilbert(a,b,n);
+    printmat(a,n,&quot;a:&quot;);
+    int *pivot=new int[n*n];
+    luReult=new double[n*n];
+    lu(a,pivot,n);
+    printarr(pivot,n,&quot;p:&quot;);
+    //cout &lt;&lt; &quot;Hello world!&quot; &lt;&lt; endl;
+    return 0;
+&#125;
+</code></pre>
+<p>输出：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-03-31-11-02-01.png"> </p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://ccjou.wordpress.com/2010/09/01/lu-%E5%88%86%E8%A7%A3/">LU 分解</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/u010945683/article/details/45803141">矩阵分析——LU分解</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%9F%A9%E9%98%B5%E5%88%86%E8%A7%A3/" rel="tag"># 矩阵分解</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/28/%E7%AE%97%E6%B3%95-%E6%9C%80%E5%A4%A7%E6%B5%81/" rel="next" title="最大流">
+                <i class="fa fa-chevron-left"></i> 最大流
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/%E6%95%B0%E5%AD%A6-%E6%B1%82%E7%BA%BF%E4%BB%A3%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3/" rel="prev" title="求线代方程的解">
+                求线代方程的解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LU%E5%88%86%E8%A7%A3%E6%9D%A1%E4%BB%B6"><span class="nav-text">LU分解条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LU%E5%88%86%E8%A7%A3%E6%96%B9%E6%B3%95"><span class="nav-text">LU分解方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B4%E6%8E%A5%E6%B6%88%E5%8E%BB%E6%B3%95%E7%9A%84%E7%9F%A9%E9%98%B5%E8%A7%A3%E9%87%8A"><span class="nav-text">直接消去法的矩阵解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%97%E4%B8%BB%E5%85%83%E9%AB%98%E6%96%AF%E6%B6%88%E5%8E%BB%E6%B3%95"><span class="nav-text">列主元高斯消去法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

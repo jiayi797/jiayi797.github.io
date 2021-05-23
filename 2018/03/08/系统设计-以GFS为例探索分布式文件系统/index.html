@@ -1,0 +1,1482 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是分布式系统用多台机器解决一台机器不能解决的问题。比如存储不够？QPS太大？ 谷歌三剑客  分布式文件系统 怎么有效存储数据？ NoSQL底层需要一个文件系统   Map Reduce 怎么快速处理系统？   Big table &#x3D; No-SQL Database 怎么连接底层存储和上层数据    本节课内容：  Master Slave Pattern How to check and ha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统设计-以GFS为例探索分布式文件系统">
+<meta property="og:url" content="http://jiayi797.github.io/about/2018/03/08/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%A5GFS%E4%B8%BA%E4%BE%8B%E6%8E%A2%E7%B4%A2%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="什么是分布式系统用多台机器解决一台机器不能解决的问题。比如存储不够？QPS太大？ 谷歌三剑客  分布式文件系统 怎么有效存储数据？ NoSQL底层需要一个文件系统   Map Reduce 怎么快速处理系统？   Big table &#x3D; No-SQL Database 怎么连接底层存储和上层数据    本节课内容：  Master Slave Pattern How to check and ha">
+<meta property="og:locale">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-14-10.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-25-15.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-26-37.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-27-53.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-48-47.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-53-30.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-59-23.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-00-33.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-03-04.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-06-18.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-34-55.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-37-21.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-43-48.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-44-38.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-51-05.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-58-35.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-23-00-18.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-23-00-59.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-23-01-56.png">
+<meta property="article:published_time" content="2018-03-08T12:33:37.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:07.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-14-10.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2018/03/08/系统设计-以GFS为例探索分布式文件系统/"/>
+
+
+
+
+
+  <title>系统设计-以GFS为例探索分布式文件系统 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/03/08/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%A5GFS%E4%B8%BA%E4%BE%8B%E6%8E%A2%E7%B4%A2%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">系统设计-以GFS为例探索分布式文件系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T12:33:37+00:00">
+                2018-03-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:07+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">系统设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/03/08/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%A5GFS%E4%B8%BA%E4%BE%8B%E6%8E%A2%E7%B4%A2%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/03/08/系统设计-以GFS为例探索分布式文件系统/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是分布式系统"><a href="#什么是分布式系统" class="headerlink" title="什么是分布式系统"></a>什么是分布式系统</h1><p>用多台机器解决一台机器不能解决的问题。比如存储不够？QPS太大？</p>
+<p>谷歌三剑客</p>
+<ul>
+<li>分布式文件系统<ul>
+<li>怎么有效存储数据？</li>
+<li>NoSQL底层需要一个文件系统</li>
+</ul>
+</li>
+<li>Map Reduce<ul>
+<li>怎么快速处理系统？</li>
+</ul>
+</li>
+<li>Big table = No-SQL Database<ul>
+<li>怎么连接底层存储和上层数据</li>
+</ul>
+</li>
+</ul>
+<p>本节课内容：</p>
+<ul>
+<li>Master Slave Pattern</li>
+<li>How to check and handle system failure and error</li>
+<li>How to design Distributed File System</li>
+</ul>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>分布式文件系统</th>
+<th>公司</th>
+<th>开源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GFS</td>
+<td>Google</td>
+<td>No</td>
+</tr>
+<tr>
+<td>HDFS</td>
+<td>Yahoo Open Source of GFS</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<ul>
+<li>HDFS : Hadoop Distributed File System</li>
+<li>GFS: Google File System</li>
+</ul>
+<h1 id="4S分析法"><a href="#4S分析法" class="headerlink" title="4S分析法"></a>4S分析法</h1><ul>
+<li>Scenario 场景分析</li>
+<li>Service 服务</li>
+<li>Storage 存储</li>
+<li>Scale 升级优化</li>
+</ul>
+<h2 id="场景分析"><a href="#场景分析" class="headerlink" title="场景分析"></a>场景分析</h2><p>GFS大概的位置在哪里？</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-14-10.png"> </p>
+<p>chrome后面有一个webserver, webserver后面有一个db，db下面有一个gfs</p>
+<p>需要设计哪些功能呢？</p>
+<ul>
+<li>需求1：读写<ul>
+<li>用户读写文件</li>
+<li>支持多大的文件？比如 &gt; 1000T</li>
+</ul>
+</li>
+<li>需求2：存储<ul>
+<li>多台机器存储这些文件 —— 2007年google大概10w台</li>
+</ul>
+</li>
+</ul>
+<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><p>Client + Server</p>
+<p>Client是什么？—— 一般是db或者webserver</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-25-15.png"> </p>
+<p>这样够吗？并不够。Server其实是多台机器！</p>
+<p><strong>多台机器怎么沟通？</strong></p>
+<p>有两种方式：</p>
+<p><strong>Peer to peer</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-26-37.png"> </p>
+<ul>
+<li>优点：如果一个挂了，其它的没事</li>
+<li>缺点：数据同步问题很麻烦！他是通过一致哈希算法实现的。要不停地相互同步，很麻烦的。</li>
+</ul>
+<p>不是课程重点，考察较少（例BitComet, Cassandra）</p>
+<p><strong>master - slave</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-27-53.png"> </p>
+<ul>
+<li>优点：同步问题全部交给master，数据容易保持一致；比较好设计</li>
+<li>缺点：万一一个挂了，就gg</li>
+</ul>
+<p>两种master-slave比较：</p>
+<table>
+<thead>
+<tr>
+<th>比较</th>
+<th>DB中的master-slave</th>
+<th>GFS中的master-slave</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Master</td>
+<td>存储数据</td>
+<td>管理者（不存储数据）</td>
+</tr>
+<tr>
+<td>Slave</td>
+<td>BackUp</td>
+<td>被管理者（存储实际文件）</td>
+</tr>
+</tbody></table>
+<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><p>大文件存在哪里？  —— 文件系统</p>
+<p>操作系统是怎么存文件的？</p>
+<p>一个文件里有什么东西？ </p>
+<p>文件名、写入修改时间、一些Tag、格式、大小、文件内容等</p>
+<p>也就是Metadata + 文件内容</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-48-47.png"> </p>
+<p><strong>问题来了，那么metadata和文件内容应该存在一起还是分开存？</strong></p>
+<p>其实应该分开存。这样在看目录的时候，就不用每次都把硬盘里的东西读出来了。只需要把metadata的内容放到内存里面以供显示。</p>
+<p><strong>问题来了，文件是分成小块存储还是存成一大片？</strong></p>
+<p>Windows连续，Linux分开存</p>
+<p>连续存储带来的问题在于，存储空间会非常分散。这样的话就需要定期进行磁盘碎片整理。</p>
+<p>分开存储就不会带来这么多碎片。但是还需要维护每一小块存在哪里。</p>
+<p><strong>分开存储</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-53-30.png"> </p>
+<p>将存储区域分为各个block(1024Byte) ，然后一个Block对应一个硬盘地址</p>
+<p>那么大文件有多少个block呢？</p>
+<p>100T(多文件)<br>=100x1000G<br>=100x1000x1000M<br>=100x1000x1000x1000K<br>=100x1000x1000x1000 block  ！！ block太多了哇</p>
+<p>Google采用的方式——1个chunk = 64M = 64*1024K，这样的优点对大文件友好，对小文件来说优点浪费空间。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-21-59-23.png"> </p>
+<p>以HDFS为例：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-00-33.png"> </p>
+<h3 id="存储-1"><a href="#存储-1" class="headerlink" title="存储"></a>存储</h3><p><strong>问题又来了，一台机器存不下？</strong></p>
+<p>Master-slave模式</p>
+<p>Master管理metaDta，Slave管理数据</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-03-04.png"> </p>
+<p>注意：cs代表chunkserver</p>
+<p><strong>每个chunk的Offset偏移量可不可以不存在master上面？</strong> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-06-18.png"> </p>
+<p>只需要知道哪个chunk在哪个机器上面即可，然后每个机器根据索引再去查询</p>
+<p>这样做的好处：master存储量减少；master想修改的时候方便得很</p>
+<p><strong>问题：master的内存存的下10P文件的metadata吗？</strong></p>
+<p>1chunk = 64b </p>
+<p>10P = 10X10^6 = 10G  ， 完全可以</p>
+<h3 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h3><p><strong>写文件时，是一次写入还是分成多份写入？</strong></p>
+<p> 分析：</p>
+<ul>
+<li>写入过程出错了？<ul>
+<li>如果是一次写入，就要重新写一次 </li>
+<li>如果是多份多次写入，就只用重传一份</li>
+</ul>
+</li>
+<li>如果多份多次写入，那么每一份的大小？<ul>
+<li>既然文件按照chunk，那就按照chunk</li>
+</ul>
+</li>
+<li>如果多份多次写入，是由master切分呢，还是client切分？<ul>
+<li>其实是client按照自己的文件大小切分</li>
+<li>比如 /gfs/home/dengchao.mp4 size = 576M. 那么可以切分问 576M/64M = 9个chunk</li>
+<li><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-34-55.png"> </li>
+</ul>
+</li>
+</ul>
+<p><strong>每个chunk怎么写入server?</strong></p>
+<p>是直接写入chunk server ? 还是需要master沟通，再写入chunk server?——是直接写入的</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-37-21.png"> </p>
+<ol>
+<li>client先告诉master要写入的chunk 和idx</li>
+<li>master告诉client应该写入几号机器</li>
+<li>master去写入chunkserver</li>
+<li>chunkserver告诉master写好了</li>
+</ol>
+<p><strong>要修改Dengchao.mp4怎么办？</strong><br>对于/gfs/home/dengchao.mp4，需要解决以下问题：</p>
+<ul>
+<li>要修改的部分在哪个chunk？</li>
+<li>修改了过后chunk变大了要怎么处理？</li>
+<li>修改了过后chunk变小了要怎么处理？  </li>
+</ul>
+<p>修改假设有以下几种方式：</p>
+<ul>
+<li>方式1 ： 直接修改</li>
+<li>方式2：先把这一快读入内存，再写回去</li>
+<li>方式3：先把这一块读入内存，再写到其它地方</li>
+</ul>
+<p>分析：</p>
+<ul>
+<li>方式1：不行的</li>
+<li>方式2：修改了过后chunk变大了就放不下了</li>
+<li>方式3：可以的</li>
+</ul>
+<h3 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h3><p>如何读取文件？</p>
+<p><strong>一次读整个文件？还是拆分成多份多次读入？</strong> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-43-48.png"> </p>
+<p>那么另一个client想读的时候，他怎么知道，dengchao.mp4被切成了多少块？ —— master告诉他呀！！！</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-44-38.png"> </p>
+<ol>
+<li>client告诉master他要读谁</li>
+<li>master告诉client一个chunk list</li>
+<li>master去chunk server读</li>
+</ol>
+<p><strong>Master主要都干了什么？</strong></p>
+<ul>
+<li>存储各个文件数据的metadata<ul>
+<li>存储Map(file name + chunk index -&gt; chunk server)</li>
+<li>读取时找到对应的chunkserver</li>
+</ul>
+</li>
+<li>写入时分配空闲的chunkserver</li>
+</ul>
+<p><strong>为什么不把数据直接给master 让master 去写？</strong></p>
+<p>Master bottleneck ，这样对于master来说太累了</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>存储<ul>
+<li>普通文件系统 Meta Data，Block</li>
+<li>大文件存储： Block-&gt; Chunk</li>
+<li>多台机器超大文件: Chunk Server + Master</li>
+</ul>
+</li>
+<li>写入<ul>
+<li>Master+Client+ChunkServer 沟通流程</li>
+<li>Master 维护metadata 和 chunkserver 表</li>
+</ul>
+</li>
+<li>读出<ul>
+<li>Master+Client+ChunkServer 沟通流程 </li>
+</ul>
+</li>
+</ul>
+<h2 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h2><p><strong>单Master够不够？</strong></p>
+<p>工业界90%的系统都采用单master<br>Simple is perfect </p>
+<p><strong>单Master挂了怎么办</strong> </p>
+<ul>
+<li>Double Master 双龙戏珠<br>Paper: Apache Hadoop Goes Realtime at Facebook</li>
+<li>Multi Master<br>Paper: Paxos Algorithm </li>
+</ul>
+<p><strong>挂了和恢复方法</strong></p>
+<p> <strong>如何验证一个chunk是坏了的呢？</strong></p>
+<p>先介绍CheckSum方法</p>
+<p>CheckSum是由每个二进制异或得到的。这种方式只能检测一位错误</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-51-05.png"> </p>
+<ul>
+<li>CheckSum Method (MD5, SHA1, SHA256 and SHA512)</li>
+<li>Read More: <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Checksum">https://en.wikipedia.org/wiki/Checksum</a> </li>
+</ul>
+<p>一个CheckSum大小为4byte = 32bit</p>
+<p>而一个chunk = 64MB, 每一个chunk有一个CheckSum。1P的文件的CheckSum大小大约为1P/64MB*32bit = 62.5M</p>
+<p><strong>什么时候写入CheckSum？</strong></p>
+<p>写入一块chunk的时候就顺便写入哇</p>
+<p><strong>什么时候检查checksum?</strong> </p>
+<p>读入这一块数据的时候检查</p>
+<ol>
+<li>重新读数据并且计算现在的checksum</li>
+<li>比较现在的checksum和之前存的checksum是否一样 </li>
+</ol>
+<p><strong>那么如何避免万一坏了之后，数据丢失呢？</strong></p>
+<p>Replica ! 就是备份。一般都备份3份。如果某个坏了，就去询问master</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-22-58-35.png"> </p>
+<p>备份有几种方式：</p>
+<ol>
+<li>三个备份都放在一个地方(加州)。 —— 不好。太危险</li>
+<li>三个备份放在三个相隔较远的地方（加州，滨州，纽约州）—— 太分散，不好通信</li>
+<li>两个备份相对比较近，另一个放在较远的地方（2个加州，1个滨州） —— 挺好 </li>
+</ol>
+<p><strong>如何发现一个chunkServer坏了呢？</strong></p>
+<p>HeartBeat</p>
+<p><strong>如何写多份？</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-23-00-18.png"></p>
+<p>但这种方式对于client来说太慢了，因此优化一下：</p>
+<p> <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-23-00-59.png"> </p>
+<p>怎么样选队长?</p>
+<ol>
+<li>找距离最近的（快）</li>
+<li>找现在不干活的（平衡traffic） </li>
+</ol>
+<p><strong>如果一个chunk server挂了怎么办</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-08-23-01-56.png"> </p>
+<p><strong>选chunk server的时候有什么策略？</strong> </p>
+<ol>
+<li>最近写入比较少的。(LRU)</li>
+<li>硬盘存储比较低的。 </li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-XGboost%E4%B8%8ELightGBM%E5%AF%B9%E6%AF%94/" rel="next" title="机器学习实践-XGboost与LightGBM对比">
+                <i class="fa fa-chevron-left"></i> 机器学习实践-XGboost与LightGBM对比
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/09/%E7%AE%97%E6%B3%95-%E7%BA%A2%E9%BB%91%E6%A0%91/" rel="prev" title="算法-红黑树">
+                算法-红黑树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F"><span class="nav-text">什么是分布式系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4S%E5%88%86%E6%9E%90%E6%B3%95"><span class="nav-text">4S分析法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%88%86%E6%9E%90"><span class="nav-text">场景分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1"><span class="nav-text">服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8"><span class="nav-text">存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8-1"><span class="nav-text">存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%99%E5%85%A5"><span class="nav-text">写入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96"><span class="nav-text">读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95"><span class="nav-text">扩展</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1304 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Trie," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Trie树，即字典树&#x2F;前缀树，又称单词查找树或键树，是一种树形结构。典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是最大限度地减少无谓的字符串比较，查询效率比较高。 Trie的核心思想是空间换时间，利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。 例如有abc,abcd,abd,b,bcd,efg,hii这7个单词，我们构建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法-Trie树">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/11/13/%E7%AE%97%E6%B3%95-Trie%E6%A0%91/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="Trie树，即字典树&#x2F;前缀树，又称单词查找树或键树，是一种树形结构。典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是最大限度地减少无谓的字符串比较，查询效率比较高。 Trie的核心思想是空间换时间，利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。 例如有abc,abcd,abd,b,bcd,efg,hii这7个单词，我们构建">
+<meta property="og:locale">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-11-13-09-44-44.png">
+<meta property="article:published_time" content="2017-11-13T01:40:05.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:04.000Z">
+<meta property="article:author" content="jiayi797">
+<meta property="article:tag" content="Trie">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-11-13-09-44-44.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/11/13/算法-Trie树/"/>
+
+
+
+
+
+  <title>算法-Trie树 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/11/13/%E7%AE%97%E6%B3%95-Trie%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法-Trie树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-13T01:40:05+00:00">
+                2017-11-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:04+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/11/13/%E7%AE%97%E6%B3%95-Trie%E6%A0%91/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/11/13/算法-Trie树/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Trie树，即字典树/前缀树，又称单词查找树或键树，是一种树形结构。典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是最大限度地减少无谓的字符串比较，查询效率比较高。</p>
+<p>Trie的核心思想是空间换时间，利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。</p>
+<p>例如有abc,abcd,abd,b,bcd,efg,hii这7个单词，我们构建的树如下所示：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-11-13-09-44-44.png">  </p>
+<p>如上图所示，对于每一个节点，从根遍历到他的过程就是一个单词，如果这个节点被标记为红色，就表示这个单词存在，否则不存在。</p>
+<span id="more"></span>
+
+<p>​    那么，对于一个单词，我只要顺着他从根走到对应的节点，再看这个节点是否被标记为红色就可以知道它是否出现过了。把这个节点标记为红色，就相当于插入了这个单词。</p>
+<p>​    这样一来我们<strong>查询和插入可以一起完成</strong>（重点体会这个查询和插入是如何一起完成的，稍后，下文具体解释），所用时间仅仅为单词长度，在这一个样例，便是10。<br>​    我们可以看到，trie树每一层的节点数是26^i级别的。所以为了节省空间。我们用动态链表，或者用数组来模拟动态。空间的花费，不会超过单词数×单词长度。</p>
+<p>它有3个基本性质：</p>
+<ol>
+<li>根节点不包含字符，除根节点外每一个节点都只包含一个字符。</li>
+<li>从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串。</li>
+<li>每个节点的所有子节点包含的字符都不相同。</li>
+</ol>
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><h2 id="HashMap方式"><a href="#HashMap方式" class="headerlink" title="HashMap方式"></a>HashMap方式</h2><p>这是总容易想到的方式。每个TrieNode节点的形状如表所示：</p>
+<table>
+<thead>
+<tr>
+<th>boolean</th>
+<th>HashMap&lt;char,TrieNode&gt;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hasWord</td>
+<td>children</td>
+</tr>
+</tbody></table>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;Character,Trie&gt; children ;</span><br><span class="line"><span class="keyword">boolean</span> hasWord;</span><br><span class="line"><span class="comment">/*初始化*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span></span>&#123;</span><br><span class="line">  children = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">  hasWord = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*插入一个词*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> length = word.length();</span><br><span class="line">  Trie root = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">char</span> c;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; length ; i += <span class="number">1</span>)&#123;</span><br><span class="line">    c = word.charAt(i);</span><br><span class="line">    <span class="keyword">if</span>(!root.children.containsKey(c))&#123;</span><br><span class="line">      root.children.put(c,<span class="keyword">new</span> Trie());</span><br><span class="line">    &#125;</span><br><span class="line">    root = root.children.get(c);</span><br><span class="line">  &#125;</span><br><span class="line">  root.hasWord = <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*查找*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> length = word.length();</span><br><span class="line">  Trie root = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">char</span> c;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; length ; i += <span class="number">1</span>)&#123;</span><br><span class="line">    c = word.charAt(i);</span><br><span class="line">    <span class="keyword">if</span>(root.children.containsKey(c))&#123;</span><br><span class="line">      root = root.children.get(c);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(root.hasWord)<span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*返回prefix是否是树中某个单词的前缀*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> length = prefix.length();</span><br><span class="line">  Trie root = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">char</span> c;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; length ; i += <span class="number">1</span>)&#123;</span><br><span class="line">    c = prefix.charAt(i);</span><br><span class="line">    <span class="keyword">if</span>(root.children.containsKey(c))&#123;</span><br><span class="line">      root = root.children.get(c);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="数组方式"><a href="#数组方式" class="headerlink" title="数组方式"></a>数组方式</h2><p>由于字母一共就26个。所以可以映射的方式将字母映射到长度为26的数组上，而下标就是字母。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</span><br><span class="line">        TrieNode[] next;</span><br><span class="line">        <span class="keyword">boolean</span> isWord;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">TrieNode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.next = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">            <span class="keyword">this</span>.isWord = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    TrieNode root;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Inserts a word into the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        TrieNode cur = <span class="keyword">this</span>.root;</span><br><span class="line">        <span class="keyword">char</span>[] w = word.toCharArray(); <span class="comment">// 这是个骚操作，将str转化为char[]</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; word.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(cur.next[w[i]-<span class="string">&#x27;a&#x27;</span>]==<span class="keyword">null</span>) &#123;</span><br><span class="line">                cur.next[w[i]-<span class="string">&#x27;a&#x27;</span>] = <span class="keyword">new</span> TrieNode();</span><br><span class="line">            &#125;</span><br><span class="line">            cur = cur.next[w[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        cur.isWord = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if the word is in the trie. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// return startsWith(word) &amp;&amp; </span></span><br><span class="line">        <span class="keyword">char</span>[] w = word.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; word.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(cur.next[w[i]-<span class="string">&#x27;a&#x27;</span>]==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            cur = cur.next[w[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> cur.isWord;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/** Returns if there is any word in the trie that starts with the given prefix. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">startsWith</span><span class="params">(String prefix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(prefix.length()==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">char</span>[] word = prefix.toCharArray();</span><br><span class="line">        TrieNode cur = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt; prefix.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(cur.next[word[i]-<span class="string">&#x27;a&#x27;</span>]==<span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            cur = cur.next[word[i]-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="问题实例"><a href="#问题实例" class="headerlink" title="问题实例"></a>问题实例</h1><p><strong>1、一个文本文件，大约有一万行，每行一个词，要求统计出其中最频繁出现的前10个词，请给出思想，给出时间复杂度分析</strong></p>
+<p><strong>提示</strong>：用trie树统计每个词出现的次数，时间复杂度是O(n<em>le)（le表示单词的平均长度），然后是找出出现最频繁的前10个词。当然，也可以用堆来实现，时间复杂度是O(n</em>lg10)。所以总的时间复杂度，是O(n<em>le)与O(n</em>lg10)中较大的哪一个。</p>
+<p><strong>2、寻找热门查询</strong></p>
+<p><strong>原题</strong>：搜索引擎会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节。假设目前有一千万个记录，这些查询串的重复读比较高，虽然总数是1千万，但是如果去除重复和，不超过3百万个。一个查询串的重复度越高，说明查询它的用户越多，也就越热门。请你统计最热门的10个查询串，要求使用的内存不能超过1G。</p>
+<p><strong>提示</strong>：利用trie树，关键字域存该查询串出现的次数，没有出现为0。最后用10个元素的最小推来对出现频率进行排序。</p>
+<h1 id="相关leetcode题"><a href="#相关leetcode题" class="headerlink" title="相关leetcode题"></a>相关leetcode题</h1><h2 id="Implement-Trie-Prefix-Tree"><a href="#Implement-Trie-Prefix-Tree" class="headerlink" title="Implement Trie (Prefix Tree)"></a>Implement Trie (Prefix Tree)</h2><p>实现Trie树即可。如上代码所示。不做过多介绍。</p>
+<h2 id="Add-and-Search-Word-Data-structure-design"><a href="#Add-and-Search-Word-Data-structure-design" class="headerlink" title="Add and Search Word - Data structure design"></a>Add and Search Word - Data structure design</h2><p>实现如下接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addWord</span><span class="params">(word)</span></span></span><br><span class="line"><span class="function">bool <span class="title">search</span><span class="params">(word)</span></span></span><br><span class="line"><span class="function">例如：</span></span><br><span class="line"><span class="function"><span class="title">addWord</span><span class="params">(<span class="string">&quot;bad&quot;</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">addWord</span><span class="params">(<span class="string">&quot;dad&quot;</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">addWord</span><span class="params">(<span class="string">&quot;mad&quot;</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(<span class="string">&quot;pad&quot;</span>)</span> -&gt; <span class="keyword">false</span></span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(<span class="string">&quot;bad&quot;</span>)</span> -&gt; <span class="keyword">true</span></span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(<span class="string">&quot;.ad&quot;</span>)</span> -&gt; <span class="keyword">true</span></span></span><br><span class="line"><span class="function"><span class="title">search</span><span class="params">(<span class="string">&quot;b..&quot;</span>)</span> -&gt; <span class="keyword">true</span></span></span><br></pre></td></tr></table></figure>
+
+<p>即，添加字符串。当查找时，’.’可作为通配符。</p>
+<p>思路：用Trie树即可。需要注意通配符的使用，需要进行依次遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by jiayi on 2017/11/13.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordDictionary</span> </span>&#123;</span><br><span class="line">    WordDictionary[] children;</span><br><span class="line">    <span class="keyword">boolean</span> hasWord;</span><br><span class="line">    <span class="comment">/*初始化*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WordDictionary</span><span class="params">()</span></span>&#123;</span><br><span class="line">        children = <span class="keyword">new</span> WordDictionary[<span class="number">27</span>];</span><br><span class="line">        hasWord = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*插入一个词*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addWord</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = word.length();</span><br><span class="line">        WordDictionary root = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">int</span> pos;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; length ; i += <span class="number">1</span>)&#123;</span><br><span class="line">            pos = word.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">null</span> == root.children[pos])&#123;</span><br><span class="line">                root.children[pos] = <span class="keyword">new</span> WordDictionary();</span><br><span class="line">            &#125;</span><br><span class="line">            root = root.children[pos];</span><br><span class="line">        &#125;</span><br><span class="line">        root.hasWord = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*查找*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(String word, <span class="keyword">int</span> index,WordDictionary root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = word.length();</span><br><span class="line">        <span class="keyword">int</span> pos;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = index ; i &lt; length ; i += <span class="number">1</span>)&#123;</span><br><span class="line">            pos = word.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>( pos == -<span class="number">51</span> )&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; <span class="number">26</span> ; j += <span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="keyword">null</span> != root.children &amp;&amp; dfs(word,i+<span class="number">1</span>,root.children[j]))&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">null</span> != root.children[pos])&#123;</span><br><span class="line">                root = root.children[pos];</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> root.hasWord;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">search</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dfs(word,<span class="number">0</span>,<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        WordDictionary obj = <span class="keyword">new</span> WordDictionary();</span><br><span class="line">        obj.addWord(<span class="string">&quot;at&quot;</span>);</span><br><span class="line">        obj.addWord(<span class="string">&quot;and&quot;</span>);</span><br><span class="line">        obj.addWord(<span class="string">&quot;add&quot;</span>);</span><br><span class="line">        obj.addWord(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">        obj.addWord(<span class="string">&quot;bat&quot;</span>);</span><br><span class="line">        System.out.println(obj.search(<span class="string">&quot;a.d.&quot;</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Top-K-Frequent-Words"><a href="#Top-K-Frequent-Words" class="headerlink" title="Top K Frequent Words"></a>Top K Frequent Words</h2><p>给一组str[]，统计频率最高的k个str，并输出</p>
+<p>如果两个str频率一样，则字典顺序低的str优先输出</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;i&quot;, &quot;love&quot;, &quot;leetcode&quot;, &quot;i&quot;, &quot;love&quot;, &quot;coding&quot;], k = 2</span><br><span class="line">Output: [&quot;i&quot;, &quot;love&quot;]</span><br><span class="line">i和love是频率最高的两个str，且频率都是2。i在love前面，因为i的字典顺序靠前</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: [&quot;the&quot;, &quot;day&quot;, &quot;is&quot;, &quot;sunny&quot;, &quot;the&quot;, &quot;the&quot;, &quot;the&quot;, &quot;sunny&quot;, &quot;is&quot;, &quot;is&quot;], k = 4</span><br><span class="line">Output: [&quot;the&quot;, &quot;is&quot;, &quot;sunny&quot;, &quot;day&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>思路：这道题先用trie树进行统计，然后用一个最大堆来维护当前每个str的次数。当统计结束时，从堆顶输出k次即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Node</span>&gt;</span>&#123;</span><br><span class="line">            String s;</span><br><span class="line">            <span class="keyword">int</span> count;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Node o)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>.count &gt; o.count)&#123;</span><br><span class="line">                    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">this</span>.count == o.count)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(<span class="keyword">this</span>.s.compareTo(o.s)&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">                    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            Node(String s,<span class="keyword">int</span> count)&#123;</span><br><span class="line">                <span class="keyword">this</span>.s = s;</span><br><span class="line">                <span class="keyword">this</span>.count = count;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">HashHeap</span></span>&#123;</span><br><span class="line">        Node[] E;</span><br><span class="line">        HashMap&lt;String,Integer&gt; map;</span><br><span class="line">        <span class="keyword">int</span> heapSize;</span><br><span class="line">        <span class="keyword">int</span> k;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">HashHeap</span><span class="params">(<span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">            E = <span class="keyword">new</span> Node[k+<span class="number">1</span>];</span><br><span class="line">            heapSize = <span class="number">0</span>;</span><br><span class="line">            map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">            <span class="keyword">this</span>.k = k ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">left</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span> * i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">right</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">2</span> * i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">father</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> i/<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">brother</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">1</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">2</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i%<span class="number">2</span>==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> i+<span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> i-<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> p,<span class="keyword">int</span> q)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> indexq = map.get(E[q].s);</span><br><span class="line">            map.replace(E[q].s,map.get(E[p].s));</span><br><span class="line">            map.replace(E[p].s,indexq);</span><br><span class="line">            Node temp = E[p];</span><br><span class="line">            E[p] = E[q];</span><br><span class="line">            E[q] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Push</span><span class="params">(Node e)</span></span>&#123;</span><br><span class="line">    <span class="comment">//        while(heapSize &gt;= k)&#123;</span></span><br><span class="line">    <span class="comment">//            this.Pop();</span></span><br><span class="line">    <span class="comment">//        &#125;</span></span><br><span class="line">            E[heapSize] = e;</span><br><span class="line">            heapSize+=<span class="number">1</span>;</span><br><span class="line">            map.put(e.s,heapSize-<span class="number">1</span>);</span><br><span class="line">            FixUP(heapSize-<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixUP</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(i==<span class="number">0</span>)<span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">int</span> father = father(i);</span><br><span class="line">            <span class="keyword">if</span>(E[father].compareTo(E[i])&gt;<span class="number">0</span>) &#123;</span><br><span class="line">                swap(i, father);</span><br><span class="line">            &#125;</span><br><span class="line">            FixUP(father);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> Node <span class="title">Pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(heapSize==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            swap(<span class="number">0</span>,heapSize-<span class="number">1</span>);</span><br><span class="line">            heapSize-=<span class="number">1</span>;</span><br><span class="line">            FixDown(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span> E[heapSize];</span><br><span class="line">    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixDown</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> l = left(i);</span><br><span class="line">            <span class="keyword">int</span> r = right(i);</span><br><span class="line">            <span class="keyword">int</span> min = -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span> (l &lt; <span class="keyword">this</span>.heapSize &amp;&amp; E[l].compareTo(E[i])&lt;<span class="number">0</span>)&#123;</span><br><span class="line">                min = l;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                min = i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>( r &lt; <span class="keyword">this</span>.heapSize &amp;&amp; E[r].compareTo(E[min])&lt;<span class="number">0</span> )&#123;</span><br><span class="line">                min = r;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>( min != i )&#123;</span><br><span class="line">                swap(i,min);</span><br><span class="line">                FixDown(min);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">count_add1</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> index = map.get(s);</span><br><span class="line">            E[index].count+=<span class="number">1</span>;</span><br><span class="line">            FixUP(index);</span><br><span class="line">        &#125;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</span><br><span class="line">        Trie[] children;</span><br><span class="line">        <span class="keyword">int</span> wordCount;</span><br><span class="line">        <span class="comment">/*初始化*/</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span></span>&#123;</span><br><span class="line">            children = <span class="keyword">new</span> Trie[<span class="number">26</span>];</span><br><span class="line">            wordCount = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/*插入一个词*/</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addWord</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> length = word.length();</span><br><span class="line">            Trie root = <span class="keyword">this</span>;</span><br><span class="line">            <span class="keyword">int</span> pos;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; length ; i += <span class="number">1</span>)&#123;</span><br><span class="line">                pos = word.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">null</span> == root.children[pos])&#123;</span><br><span class="line">                    root.children[pos] = <span class="keyword">new</span> Trie();</span><br><span class="line">                &#125;</span><br><span class="line">                root = root.children[pos];</span><br><span class="line">            &#125;</span><br><span class="line">            root.wordCount += <span class="number">1</span>;</span><br><span class="line">          <span class="comment">// 这里维护一个hashheap</span></span><br><span class="line">            <span class="keyword">if</span>(root.wordCount==<span class="number">1</span>)&#123;</span><br><span class="line">                heap.Push(<span class="keyword">new</span> Node(word,<span class="number">1</span>));</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                heap.count_add1(word);</span><br><span class="line">            &#125;</span><br><span class="line">         </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    HashHeap heap ;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">topKFrequent</span><span class="params">(String[] words, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        List&lt;String&gt; ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        Trie trie = <span class="keyword">new</span> Trie();</span><br><span class="line">        heap = <span class="keyword">new</span> HashHeap(words.length);</span><br><span class="line">        <span class="keyword">for</span>(String w : words)&#123;</span><br><span class="line">            trie.addWord(w);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; k ; i +=<span class="number">1</span> )&#123;</span><br><span class="line">            ans.add(heap.Pop().s);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Map-Sum-Pairs"><a href="#Map-Sum-Pairs" class="headerlink" title="Map Sum Pairs"></a>Map Sum Pairs</h2><p>实现如下接口：</p>
+<p>insert(String s,int val)   — s是关键字，val是价值</p>
+<p>sum(String prefix)  — 输出以prefix为前缀的所有单词的价值和。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: insert(&quot;apple&quot;, 3), Output: Null</span><br><span class="line">Input: sum(&quot;ap&quot;), Output: 3</span><br><span class="line">Input: insert(&quot;app&quot;, 2), Output: Null</span><br><span class="line">Input: sum(&quot;ap&quot;), Output: 5</span><br></pre></td></tr></table></figure>
+
+<p>思路：用Trie树保存insert之后的str，并给每一个节点保存一个val值。如果这个节点不是单词，val就为0。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by jiayi on 2017/11/14.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapSum</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        Node[] children;</span><br><span class="line">        <span class="keyword">int</span> Val;</span><br><span class="line">        Node()&#123;</span><br><span class="line">            children = <span class="keyword">new</span> Node[<span class="number">26</span>];</span><br><span class="line">            Val = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">SetVal</span><span class="params">(<span class="keyword">int</span> Val)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.Val = Val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*初始化*/</span></span><br><span class="line">    Node root;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MapSum</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        root = <span class="keyword">new</span> Node();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*插入*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String key, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index;</span><br><span class="line">        Node e = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; key.length() ; i += <span class="number">1</span>)&#123;</span><br><span class="line">            index = key.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">null</span> == e.children[index])&#123;</span><br><span class="line">                e.children[index] = <span class="keyword">new</span> Node();</span><br><span class="line">            &#125;</span><br><span class="line">            e = e.children[index];</span><br><span class="line">        &#125;</span><br><span class="line">        e.SetVal(val);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*前缀尾prefix的单词的权重和*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(String prefix)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index;</span><br><span class="line">        Node e = <span class="keyword">this</span>.root;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; prefix.length() ; i += <span class="number">1</span> )&#123;</span><br><span class="line">            index = prefix.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>( <span class="keyword">null</span> != e.children[index] )&#123;</span><br><span class="line">                e = e.children[index];</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// e停留在前缀末尾</span></span><br><span class="line">        <span class="keyword">return</span> dfs(e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">dfs</span><span class="params">(Node root)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> val = root.Val;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">26</span>; i += <span class="number">1</span> )&#123;</span><br><span class="line">            <span class="keyword">if</span>( <span class="keyword">null</span> == root.children[i] )&#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            val += dfs(root.children[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> val;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        MapSum t = <span class="keyword">new</span> MapSum();</span><br><span class="line">        t.insert(<span class="string">&quot;a&quot;</span>,<span class="number">3</span>);</span><br><span class="line">        System.out.println(t.sum(<span class="string">&quot;ap&quot;</span>));</span><br><span class="line">        t.insert(<span class="string">&quot;b&quot;</span>,<span class="number">2</span>);</span><br><span class="line">        System.out.println(t.sum(<span class="string">&quot;a&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Word-Search-II"><a href="#Word-Search-II" class="headerlink" title="Word Search II"></a>Word Search II</h2><p>给一个<code>char[][] board</code>，和一个String[] words。从words中找到被包含在board中的单词。</p>
+<p><strong>words</strong> = <code>[&quot;oath&quot;,&quot;pea&quot;,&quot;eat&quot;,&quot;rain&quot;]</code> and <strong>board</strong> =</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [&#x27;o&#x27;,&#x27;a&#x27;,&#x27;a&#x27;,&#x27;n&#x27;],</span><br><span class="line">  [&#x27;e&#x27;,&#x27;t&#x27;,&#x27;a&#x27;,&#x27;e&#x27;],</span><br><span class="line">  [&#x27;i&#x27;,&#x27;h&#x27;,&#x27;k&#x27;,&#x27;r&#x27;],</span><br><span class="line">  [&#x27;i&#x27;,&#x27;f&#x27;,&#x27;l&#x27;,&#x27;v&#x27;]</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Return </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&quot;eat&quot;,&quot;oath&quot;]</span><br></pre></td></tr></table></figure>
+
+<p>.思路：给words建立一个trie树。然后依次对board中每个点进行dfs，查看组成的单词在不在trie树中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        Node[] children;</span><br><span class="line">        <span class="keyword">boolean</span> hasword;</span><br><span class="line">        Node()&#123;</span><br><span class="line">            children = <span class="keyword">new</span> Node[<span class="number">26</span>];</span><br><span class="line">            hasword = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Node root;</span><br><span class="line">    <span class="keyword">boolean</span>[][] flag;</span><br><span class="line">    List&lt;String&gt; ans;</span><br><span class="line">    <span class="comment">/*插入*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> index;</span><br><span class="line">        Node e = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; key.length() ; i += <span class="number">1</span>)&#123;</span><br><span class="line">            index = key.charAt(i) - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">null</span> == e.children[index])&#123;</span><br><span class="line">                e.children[index] = <span class="keyword">new</span> Node();</span><br><span class="line">            &#125;</span><br><span class="line">            e = e.children[index];</span><br><span class="line">        &#125;</span><br><span class="line">        e.hasword = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*对board进行dfs遍历*/</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">char</span>[][] board,<span class="keyword">int</span> i, <span class="keyword">int</span> j , Node e,String w)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(flag[i][j])<span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> index = board[i][j] - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">        <span class="keyword">if</span>( <span class="keyword">null</span> == e.children[index] )&#123;<span class="keyword">return</span>;&#125;</span><br><span class="line">        w = w+board[i][j];</span><br><span class="line">        <span class="keyword">if</span>( e.children[index].hasword )&#123;</span><br><span class="line">            ans.add(w);</span><br><span class="line">            e.children[index].hasword = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        flag[i][j] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">int</span>[] dx = &#123;-<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] dy = &#123;<span class="number">0</span>,-<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> x,y;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> q = <span class="number">0</span> ; q &lt; dx.length ;  q+=<span class="number">1</span>)&#123;</span><br><span class="line">            x = i + dx[q];</span><br><span class="line">            y = j + dy[q];</span><br><span class="line">            <span class="keyword">if</span>(  x &lt; <span class="number">0</span> ||  x &gt;= board.length)<span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">if</span>(  y &lt; <span class="number">0</span> ||  y &gt;= board[i].length )<span class="keyword">continue</span>;</span><br><span class="line">            dfs(board,x,y,e.children[index],w);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        flag[i][j] = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">findWords</span><span class="params">(<span class="keyword">char</span>[][] board, String[] words)</span> </span>&#123;</span><br><span class="line">        ans = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>(board.length == <span class="number">0</span> || board[<span class="number">0</span>].length == <span class="number">0</span> || words.length==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> ans;</span><br><span class="line">        &#125;</span><br><span class="line">        root = <span class="keyword">new</span> Node();</span><br><span class="line">        flag = <span class="keyword">new</span> <span class="keyword">boolean</span>[board.length][board[<span class="number">0</span>].length];</span><br><span class="line">        <span class="keyword">for</span>(String s : words)&#123;</span><br><span class="line">            insert(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; board.length ; i += <span class="number">1</span> )&#123;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span> ; j &lt; board[i].length ; j += <span class="number">1</span> )&#123;</span><br><span class="line">                dfs(board,i,j,<span class="keyword">this</span>.root,<span class="string">&quot;&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Replace-Words"><a href="#Replace-Words" class="headerlink" title="Replace Words"></a>Replace Words</h2><p>给一个词根表<code>str[] dict = [&quot;cat&quot;, &quot;bat&quot;, &quot;rat&quot;]</code> ，和一个句子<code>sentence = &quot;the cattle was rattled by the battery&quot;</code>。用词根替换句子为<code>&quot;the cat was rat by the bat&quot;</code></p>
+<p>思路：这道题我一开始是用dfs来做的。但是测试样例太变态了，好长的字符串，导致超时了。这道题只能用循环来做！</p>
+<p>这道题有String的两个骚操作：</p>
+<ol>
+<li><p>对String s 的循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">char</span> s : s.toCharArray() )&#123;</span><br><span class="line">  System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>对多个str的concat：<code>StringBuilder</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"><span class="keyword">for</span>( String e : strs )&#123;</span><br><span class="line">  stringBuilder.append(e);</span><br><span class="line">&#125;</span><br><span class="line">String concatResult = stringBuilder.toString();</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p> 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by jiayi on 2017/11/13.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrieTree</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Trie</span></span>&#123;</span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span></span>&#123;</span><br><span class="line">            TrieNode[] children;</span><br><span class="line">            <span class="keyword">boolean</span> hasWord;</span><br><span class="line">            TrieNode()&#123;</span><br><span class="line">                children = <span class="keyword">new</span> TrieNode[<span class="number">26</span>];</span><br><span class="line">                hasWord = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        TrieNode root;</span><br><span class="line">        Trie()&#123;</span><br><span class="line">            root = <span class="keyword">new</span> TrieNode();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">            TrieNode r = <span class="keyword">this</span>.root;</span><br><span class="line">            <span class="keyword">int</span> index;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">char</span> c: word.toCharArray() )&#123;</span><br><span class="line">                index = c-<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>( <span class="keyword">null</span> == r.children[index] )&#123;</span><br><span class="line">                    r.children[index] = <span class="keyword">new</span> TrieNode();</span><br><span class="line">                &#125;</span><br><span class="line">                r = r.children[index];</span><br><span class="line">            &#125;</span><br><span class="line">            r.hasWord = <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 判断树中有没有word的前缀</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">prefix</span><span class="params">(String word)</span></span>&#123;</span><br><span class="line">            StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">            TrieNode r = <span class="keyword">this</span>.root;</span><br><span class="line">            <span class="keyword">int</span> idx;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">char</span> c : word.toCharArray() )&#123;</span><br><span class="line">                idx = c - <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">                <span class="keyword">if</span>( <span class="keyword">null</span> != r.children[idx] )&#123;</span><br><span class="line">                    stringBuilder.append(c);</span><br><span class="line">                    <span class="keyword">if</span>(r.children[idx].hasWord)&#123;</span><br><span class="line">                        <span class="keyword">return</span> stringBuilder.toString();</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span>&#123;</span><br><span class="line">                        r = r.children[idx];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> word;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> word;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">replaceWords</span><span class="params">(List&lt;String&gt; dict, String sentence)</span> </span>&#123;</span><br><span class="line">        Trie trie = <span class="keyword">new</span> Trie();</span><br><span class="line">        <span class="keyword">for</span>(String word : dict)&#123;</span><br><span class="line">            trie.insert(word);</span><br><span class="line">        &#125;</span><br><span class="line">        String[] words = sentence.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>( String word : words )&#123;</span><br><span class="line">            stringBuilder.append(trie.prefix(word));</span><br><span class="line">            stringBuilder.append(<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> stringBuilder.toString().substring(<span class="number">0</span>,stringBuilder.length()-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        String sentence = <span class="string">&quot;a aa a aaaa aaa aaa aaa aaaaaa bbb baba ababa&quot;</span>;</span><br><span class="line">        String[] d = &#123;<span class="string">&quot;a&quot;</span>, <span class="string">&quot;aa&quot;</span>, <span class="string">&quot;aaa&quot;</span>, <span class="string">&quot;aaaa&quot;</span>&#125;;</span><br><span class="line">        ArrayList&lt;String&gt; dict = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(String e : d)&#123;</span><br><span class="line">            dict.add(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="keyword">new</span> TrieTree().replaceWords(dict,sentence));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Concatenated-Words"><a href="#Concatenated-Words" class="headerlink" title="Concatenated Words"></a>Concatenated Words</h2><p>给一个str数组。找到其中某些能被其它字符concat而成的单词</p>
+<p>用了trie树，beats 93%.简直美滋滋</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span></span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> hasWord = <span class="keyword">false</span>;</span><br><span class="line">        Node[] children = <span class="keyword">new</span> Node[<span class="number">26</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    Node root = <span class="keyword">new</span> Node();</span><br><span class="line">    <span class="function"><span class="keyword">private</span> Node <span class="title">newNode</span><span class="params">(Node root, <span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root.children[c - <span class="string">&#x27;a&#x27;</span>] == <span class="keyword">null</span>)</span><br><span class="line">            root.children[c - <span class="string">&#x27;a&#x27;</span>] = <span class="keyword">new</span> Node();</span><br><span class="line">        <span class="keyword">return</span> root.children[c - <span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">        Node e = newNode(root, s.charAt(<span class="number">0</span>));</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; s.length(); ++i)&#123;</span><br><span class="line">            e = newNode(e, s.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        e.hasWord = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">canBeConcat</span><span class="params">(String s, <span class="keyword">int</span> idx)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx &gt;= s.length())<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        Node e = root;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = idx; i &lt; s.length(); ++i)&#123;</span><br><span class="line">            <span class="keyword">char</span> c = s.charAt(i);</span><br><span class="line">            <span class="keyword">if</span>(e.children[c - <span class="string">&#x27;a&#x27;</span>] == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(e.children[c -<span class="string">&#x27;a&#x27;</span>].hasWord) &#123;</span><br><span class="line">                <span class="keyword">if</span>(i == s.length() - <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">int</span> next = canBeConcat(s, i + <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span> (next &gt; <span class="number">0</span>) <span class="keyword">return</span> next + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            e = e.children[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">findAllConcatenatedWordsInADict</span><span class="params">(String[] words)</span> </span>&#123;</span><br><span class="line">    Trie trie = <span class="keyword">new</span> Trie();</span><br><span class="line">    <span class="keyword">for</span>(String str : words)&#123;</span><br><span class="line">        <span class="keyword">if</span>(str.length() == <span class="number">0</span>)<span class="keyword">continue</span>;</span><br><span class="line">        trie.add(str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 查看每个单词是否能被组合</span></span><br><span class="line">    List&lt;String&gt; result = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(String str : words)&#123;</span><br><span class="line">        <span class="keyword">if</span>(str.length() == <span class="number">0</span>)<span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(trie.canBeConcat(str, <span class="number">0</span>) &gt;= <span class="number">2</span>)result.add(str);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Longest-Word-in-Dictionary"><a href="#Longest-Word-in-Dictionary" class="headerlink" title="Longest Word in Dictionary"></a>Longest Word in Dictionary</h2><p>给一个单词表，<code> [&quot;w&quot;,&quot;wo&quot;,&quot;wor&quot;,&quot;worl&quot;, &quot;world&quot;]</code> 。如果一个单词能被其它单词加一个字符组成，那么这个单词就可以作为候选单词。求所有候选单词中长度的最长的那一个，如果两个候选单词长度相同，那么返回字典顺序比较小的那个。</p>
+<p>思路：trie树</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    Node[] children;</span><br><span class="line">    <span class="keyword">boolean</span> hasWord;</span><br><span class="line">    Node()&#123;</span><br><span class="line">        children = <span class="keyword">new</span> Node[<span class="number">26</span>];</span><br><span class="line">        hasWord = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHasWord</span><span class="params">(<span class="keyword">boolean</span> hasWord)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.hasWord = hasWord;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">Node dummy = <span class="keyword">new</span> Node();</span><br><span class="line">&#123;</span><br><span class="line">    dummy.setHasWord(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">    Node curr = dummy;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c : s.toCharArray())&#123;</span><br><span class="line">        <span class="keyword">if</span>(curr.children[c-<span class="string">&#x27;a&#x27;</span>] == <span class="keyword">null</span>)&#123;</span><br><span class="line">            curr.children[c-<span class="string">&#x27;a&#x27;</span>] = <span class="keyword">new</span> Node();</span><br><span class="line">        &#125;</span><br><span class="line">        curr = curr.children[c-<span class="string">&#x27;a&#x27;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    curr.setHasWord(<span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestWord</span><span class="params">(String[] words)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(String s : words)&#123;</span><br><span class="line">        add(s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 对trie树进行dfs</span></span><br><span class="line">    dfs(dummy, <span class="keyword">new</span> StringBuilder());</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">String result = <span class="string">&quot;&quot;</span>;</span><br><span class="line"><span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(Node curr, StringBuilder sb)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(curr == <span class="keyword">null</span> || !curr.hasWord) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//System.out.println(sb.toString());</span></span><br><span class="line">    <span class="keyword">if</span>(sb.length() &gt; max)&#123;</span><br><span class="line">        max = sb.length();</span><br><span class="line">        result = sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i)&#123;</span><br><span class="line">        sb.append((<span class="keyword">char</span>)(i+<span class="string">&#x27;a&#x27;</span>));</span><br><span class="line">        dfs(curr.children[i], sb);</span><br><span class="line">        sb.delete(sb.length() - <span class="number">1</span>, sb.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/the-art-of-programming-by-july/content/06.09.html">编程之法</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/6897097">July, 从Trie树（字典树）谈到后缀树</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.jiuzhang.com/solutions/implement-trie/">九章算法模板</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Trie/" rel="tag"># Trie</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/05/%E7%AE%97%E6%B3%95-%E5%B9%B6%E6%9F%A5%E9%9B%86/" rel="next" title="算法-并查集">
+                <i class="fa fa-chevron-left"></i> 算法-并查集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/13/Java-Compareable%E6%8E%A5%E5%8F%A3/" rel="prev" title="Java-Comparable接口">
+                Java-Comparable接口 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E6%96%B9%E5%BC%8F"><span class="nav-text">HashMap方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E6%96%B9%E5%BC%8F"><span class="nav-text">数组方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%AE%9E%E4%BE%8B"><span class="nav-text">问题实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3leetcode%E9%A2%98"><span class="nav-text">相关leetcode题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Implement-Trie-Prefix-Tree"><span class="nav-text">Implement Trie (Prefix Tree)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-and-Search-Word-Data-structure-design"><span class="nav-text">Add and Search Word - Data structure design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Top-K-Frequent-Words"><span class="nav-text">Top K Frequent Words</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map-Sum-Pairs"><span class="nav-text">Map Sum Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-Search-II"><span class="nav-text">Word Search II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Replace-Words"><span class="nav-text">Replace Words</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Concatenated-Words"><span class="nav-text">Concatenated Words</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Longest-Word-in-Dictionary"><span class="nav-text">Longest Word in Dictionary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

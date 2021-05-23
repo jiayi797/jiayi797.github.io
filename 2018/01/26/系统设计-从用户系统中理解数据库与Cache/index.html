@@ -1,0 +1,1639 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="大纲  Memcached 用户认证 - Authentication - 保持登录状态 SQL vs NoSQL Friendship 如何扩展？ Sharding Consistent Hashing Replica">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统设计-从用户系统中理解数据库与Cache">
+<meta property="og:url" content="http://jiayi797.github.io/about/2018/01/26/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%8E%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ECache/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="大纲  Memcached 用户认证 - Authentication - 保持登录状态 SQL vs NoSQL Friendship 如何扩展？ Sharding Consistent Hashing Replica">
+<meta property="og:locale">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-21-59-38.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-36-05.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-03-37.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-21-13.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-38-03.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-40-35.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-42-37.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-23-13-29.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-23-12-22.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-54-01.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-56-58.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-57-53.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-14-50-11.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-03-16.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-05-55.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-30-21.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-31-25.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-32-36.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-34-35.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-39-02.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-40-32.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-42-51.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-44-31.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-51-51.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-52-19.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-24-44.png">
+<meta property="article:published_time" content="2018-01-26T13:15:45.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:06.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-21-59-38.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2018/01/26/系统设计-从用户系统中理解数据库与Cache/"/>
+
+
+
+
+
+  <title>系统设计-从用户系统中理解数据库与Cache | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/01/26/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%8E%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ECache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">系统设计-从用户系统中理解数据库与Cache</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-26T13:15:45+00:00">
+                2018-01-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:06+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">系统设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/01/26/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%8E%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ECache/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/01/26/系统设计-从用户系统中理解数据库与Cache/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>大纲</p>
+<ul>
+<li>Memcached</li>
+<li>用户认证 - Authentication - 保持登录状态</li>
+<li>SQL vs NoSQL</li>
+<li>Friendship</li>
+<li>如何扩展？<ul>
+<li>Sharding</li>
+<li>Consistent Hashing</li>
+<li>Replica</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li><p>Scenario 场景</p>
+<ul>
+<li>注册、登录、查询、用户信息修改</li>
+<li>哪个需求量最大？——查询</li>
+</ul>
+</li>
+<li><p>支持 100M DAU</p>
+</li>
+<li><p>注册，登录，信息修改 QPS 约</p>
+<ul>
+<li>100M用户 * 0.1次每天 / 86400秒 ~ 100</li>
+<li>0.1 = 平均每个用户每天登录+注册+信息修改</li>
+<li>峰值Peak = 100 * 3 = 300</li>
+</ul>
+</li>
+<li><p>查询的QPS 约</p>
+<ul>
+<li>100 M用户 * 100次每天 / 86400秒 ~ 100k次</li>
+<li>100 = 平均每个用户每天与查询用户信息相关的操作次数（查看好友，发信息，更新消息主页）</li>
+<li>峰值Peak = 100k * 3 = 300 k</li>
+</ul>
+</li>
+<li><p>Service 服务 —— 拆分子系统</p>
+<ul>
+<li>一个 AuthService 负责登录注册</li>
+<li>一个 UserService 负责用户信息存储与查询</li>
+<li>一个 FriendshipService 负责好友关系存储 </li>
+</ul>
+</li>
+<li><p>存储<br>QPS与数据库的关系</p>
+<ul>
+<li><p>MySQL / PosgreSQL 等 SQL 数据库的性能<br>约 1k QPS 这个级别</p>
+</li>
+<li><p>MongoDB / Cassandra 等 硬盘型NoSQL 数据库的性能<br>约 10k QPS 这个级别 </p>
+</li>
+<li><p>Redis / Memcached 等 内存型NoSQL 数据库的性能<br>100k ~ 1m QPS 这个级别</p>
+</li>
+<li><p>以上数据根据机器性能和硬盘数量及硬盘读写㏿度会有区别</p>
+</li>
+<li><p>思考：</p>
+<ul>
+<li><p>注册，登录，信息修改，300 QPS，适合什么数据存储系统？</p>
+<p>如果是MySQL / PosgreSQL —— 300台<br>如果是MongoDB / Cassandra —— 30台<br>如果是Redis / Memcached —— 3台<br>！但还是要根据数据库的基本信息选择</p>
+</li>
+<li><p>用户信息查询适合什么数据存储系统 ？</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="UserService-服务"><a href="#UserService-服务" class="headerlink" title="UserService  服务"></a>UserService  服务</h1><p><strong>用户信息存储与查询</strong></p>
+<p>用户系统特点：读非常多，写非常少。<strong>对于读多写少的系统，一定要使用Cache优化</strong>。</p>
+<p>问题：爬虫系统是读多写少还是写多读少？——写多读少。给人用的，一般是读多写少。给机器用的，一般是读少写多。</p>
+<p><strong>Cache</strong></p>
+<ul>
+<li>Cache 是什么？<ul>
+<li>缓存，把之后可能要查询的东西先存一下<br>下次要的时候，直接从这里拿，无需重新计算和存取数据库等</li>
+<li>可以理解为一个 Java 中的 HashMap</li>
+<li>key-value 的结构</li>
+</ul>
+</li>
+<li>有哪些常用的 Cache 系统/软件？<ul>
+<li>Memcached（不支持数据持久化）</li>
+<li>Redis（支持数据持久化）</li>
+</ul>
+</li>
+<li>Cache 一定是存在内存中么？<ul>
+<li>不是</li>
+<li>Cache 这个概念，并没有指定存在什么样的存储介质中</li>
+<li>File System 也可以做Cache —— 相对于网络而言，比如访问本地硬盘比访问网络快。可以在本地做Cache</li>
+<li>CPU 也有 Cache</li>
+</ul>
+</li>
+<li>Cache 一定指 Server Cache 么？<br>不是，Frontend / Client / Browser 也可能有客户端的 Cache </li>
+</ul>
+<p><strong>Memcached</strong> </p>
+<p>Memcached是一款软件，但是内存型的，不在硬盘持久化。</p>
+<p>使用例子：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-21-59-38.png"> </p>
+<p>ttl —— 这个key在这个cache中存储多少秒</p>
+<p>如果不设置ttl，可能随时被删掉</p>
+<p>常见缓存淘汰算法：LFU Cache, LRU Cache ,这两个算法很常见，要看看</p>
+<p>见本站链接<a href="/2018/01/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95/" title="系统设计-缓存算法">系统设计-缓存算法</a></p>
+<p><strong>Cache Aside模型</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-36-05.png"> </p>
+<p><strong>Memcached如何优化DB查询？</strong></p>
+<p>看下面两个代码！</p>
+<ol>
+<li>getUser<br>如果存在，就返回</li>
+<li>setUser<br>先要把cache里删掉！然后再写入db！</li>
+</ol>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-03-37.png"> </p>
+<p>为什么要先删掉cache,然后写入DB呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span> 先setDB --&gt; 后setCache</span><br><span class="line">万一写入DB失败了呢？—— 系统返回用户重试，不会导致db与cache之间的数据不一致</span><br><span class="line">万一写入cache失败了？ —— db里是新数据，cache是就数据 --&gt; 数据不一致哇</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 先setCache --&gt; 后 setDB</span><br><span class="line">万一哪个挂了，会导致数据不一致！</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 先DeleteCache --&gt; 后setDB</span><br><span class="line">万一setDB挂了，还是会数据一致，挺好挺好</span><br><span class="line">但是不能保持数据同步，可能有延迟（获取的同时刚好被改了，gg。但概率小的很，没啥）</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 先setDB --&gt; 后DelteCache</span><br><span class="line">万一DelteCache失败了，会留下脏数据</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="AuthService-服务"><a href="#AuthService-服务" class="headerlink" title="AuthService 服务"></a>AuthService 服务</h1><ul>
+<li>用户是如何实现登陆与保持登陆的？<ul>
+<li>会话表 Session</li>
+</ul>
+</li>
+<li>用户 Login 以后<ol>
+<li>创建一个 session 对象</li>
+<li>并把 session_key（全局唯一的） 作为 cookie 值返回给浏览器</li>
+<li>浏览器将该值记录在浏览器的 cookie 中</li>
+<li>用户每次向服务器发送的访问，都会自动带上该网站所有的 cookie</li>
+<li>此时服务器检测到cookie中的session_key是有效的，就认为用户登陆了</li>
+</ol>
+</li>
+<li>用户 Logout 之后<ul>
+<li>从 session table 里删除对应数据</li>
+</ul>
+</li>
+<li>问题：Session Table 存在哪儿？<ul>
+<li>A: 数据库</li>
+<li>B: 缓存 —— 方便些，但如果是大网站，一旦有个机器挂了，会有好多人同时登录。会gg，简直噩梦</li>
+<li>正确打开方式：存在数据库里，如果访问过多，可以用Cache优化</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-21-13.png"> </p>
+<p><strong>小结</strong></p>
+<ul>
+<li>对于 User System 而言<ul>
+<li>写很少</li>
+<li>读很多</li>
+</ul>
+</li>
+<li>写操作很少，意味着：从QPS的角度来说，一台 MySQL 就可以搞定了</li>
+<li>读操作很多，意味着：可以使用 Memcached 进行读操作优化</li>
+<li>进一步的问题，如果读写操作都很多，怎么办？<ul>
+<li>方法一：使用更多的数据库服务器分摊流量</li>
+<li>方法二：使用像 Redis 这样的读写操作都很快的 Cache-through 型 Database<br> Memcached 是一个 Cache-aside 型的 Database，Client 需要自己负责管理 Cache-miss 时数据的 loading </li>
+</ul>
+</li>
+</ul>
+<p><strong>Redis介绍</strong></p>
+<p>是一种Cache-through型，就是把cache和db进行了打包。不像Memcached那样，cache与db是分开的（Cache Aside），需要自己实现查询的逻辑。</p>
+<p>而Redis是一种打包了的，DB与Cache是一起的。也就是Cache-through，如下图；</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-38-03.png"> </p>
+<h1 id="FriendshipService服务"><a href="#FriendshipService服务" class="headerlink" title="FriendshipService服务"></a>FriendshipService服务</h1><ul>
+<li>单向好友关系：微博<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-40-35.png"> </li>
+<li>双向好友关系：微信<ul>
+<li>方案1：存为两条信息，A关注了B，B关注了A</li>
+<li>方案2：存为一条信息（单向边认为是双向边，但查询前需要排序），但查询的时候需要查两次 </li>
+</ul>
+</li>
+</ul>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-42-37.png"> </p>
+<ul>
+<li>好友关系所涉及的操作非常简单，基本都是 key-value：<ul>
+<li>求某个 user 的所有关注对象</li>
+<li>求某个 user 的所有粉丝</li>
+<li>A 关注 B → 插入一条数据</li>
+<li>A 取关 B → 删除一条数据 </li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库的比较和选择"><a href="#数据库的比较和选择" class="headerlink" title="数据库的比较和选择"></a>数据库的比较和选择</h2><p><strong>问题：好友关系如何选择数据库？</strong></p>
+<ol>
+<li>大部分情况，用SQL或者NoSQL都行。</li>
+<li>需要支持Transaction（交易）的话不能选NoSQL<br>交易双方必须同时成功、同时失败！</li>
+<li>一般SQL更成熟，而NoSQL很多事情都要亲自写（value需要自己序列化、多级索引也要自己写）</li>
+<li>如果想省服务器获得更高性能，NoSQL更好。硬盘型的NoSQL要比SQL快很多很多。</li>
+</ol>
+<p><strong>SQL与NoSQL存储方式</strong></p>
+<p><strong>SQL</strong></p>
+<p>SQL的列一般是指定好的，不可以随意添加。</p>
+<p>一条数据一般以row为单位（取出整个row作为一条数据）</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-23-13-29.png"> </p>
+<p><strong>NoSQL</strong></p>
+<p>NoSQL的列是动态的，无限大，可以随意添加。</p>
+<p>一条数据一般以“格子”为单位，<code>row_key + column_key1-value1 + column_key2-value2 + ...</code></p>
+<p>比如row_key是user_id，其它的都是一些属性。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-23-12-22.png"> </p>
+<p>只需要提前定义好column_key本身的形式（是一个int还是一个int+str)</p>
+<p><strong>如果存在SQL里</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-54-01.png"> </p>
+<p>查询好友关系时，对于指定user_id,只需要</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select bigger_user_id from friendship where smaller_user_id = $user_id</span><br><span class="line">select smaller_user_id from friendship where bigger_user_id = $user_id</span><br></pre></td></tr></table></figure>
+
+<p>具体地说，例如（1和2是好友，2和3是好友，3和1是好友） </p>
+<ol>
+<li>好友关系存一份</li>
+</ol>
+<p>查询2的好友：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-56-58.png"> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from friendship</span><br><span class="line">WHERE bigger_user_id = 2 OR</span><br><span class="line">smaller_user_id = 2;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>好友关系存两份</li>
+</ol>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-26-22-57-53.png"> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * from friendship</span><br><span class="line">WHERE from_user_id=2</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果存在NoSQL</strong></p>
+<p>而如果存在nosql，所以需要拆分为两条数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A的好友有B: key=A, value=B</span><br><span class="line">B的好友有A: key=B, value=A</span><br></pre></td></tr></table></figure>
+
+<p>以Cassandra为例（这是一道题，回去做做）</p>
+<ul>
+<li>Cassandra 是一个三层结构的 NoSQL 数据库 <a target="_blank" rel="noopener" href="http://www.lintcode.com/problem/mini-cassandra/">http://www.lintcode.com/problem/mini-cassandra/</a><ul>
+<li>第一层：row_key<ul>
+<li>又称为 hash_key</li>
+<li>也就是我们传统所说的 key-value 中的 那个key</li>
+<li>任何的查询都需要带上这个key，无法进行range query</li>
+<li>最常用的row_key: user_id</li>
+</ul>
+</li>
+<li>第二层：column_key<ul>
+<li>是排序的，可以进行range query</li>
+<li>可以是复合值，比如是一个 timestamp + user_id 的组合</li>
+</ul>
+</li>
+<li>第三层：value</li>
+<li>一般来说是 String</li>
+<li>如果你需要存很多的信息的话，你可以自己做 Serialization<br>什么是 Serialization: 把一个 object / hash 序列化为一个 string，比如把一棵二叉树序列化</li>
+<li><a target="_blank" rel="noopener" href="http://www.lintcode.com/problem/binary-tree-serialization/">http://www.lintcode.com/problem/binary-tree-serialization/</a> </li>
+</ul>
+</li>
+</ul>
+<p>如果把friendShip放在Cassandra里，怎么放？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">row_key ------ user id</span><br><span class="line"></span><br><span class="line">col_key ----- other user id</span><br><span class="line"></span><br><span class="line">value ----- 其它东西</span><br></pre></td></tr></table></figure>
+
+<p>如下图所示：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-14-50-11.png"> </p>
+<h1 id="系统如何扩展？"><a href="#系统如何扩展？" class="headerlink" title="系统如何扩展？"></a>系统如何扩展？</h1><p>100M 的用户存在一台 MySQL 数据库里也存得下，Storage没问题。通过 Cache 优化读操作后，只有 300QPS 的写，QPS也没问题。</p>
+<p>除了QPS，还需要考虑什么？</p>
+<h2 id="单点失效问题"><a href="#单点失效问题" class="headerlink" title="单点失效问题"></a>单点失效问题</h2><ol>
+<li>数据拆分 Sharding / Hashkey <ol>
+<li>按照一定的规则，将数据拆分成不同的部分，保存在不同的机器上</li>
+<li>这样就算挂也不会导致网站 100% 不可用</li>
+</ol>
+</li>
+<li>数据备份 Replica<ol>
+<li>通常的做法是一式三份（重要的事情“写”三遍）</li>
+<li>Replica 同时还能分摊读请 </li>
+</ol>
+</li>
+</ol>
+<p>Cassandra为例的NoSQL自带Sharding！</p>
+<p>SQL不带Sharding，要程序员自己写</p>
+<h3 id="数据拆分"><a href="#数据拆分" class="headerlink" title="数据拆分"></a>数据拆分</h3><p><strong>纵向切分：</strong></p>
+<p>不同的表放在不同的数据库，或者按照使用频率将不同列放在不同的数据库。比如UserName这些不怎么访问，可以放在一个数据库。而推送什么的可以放在另一个数据库。</p>
+<p>缺点：万一某张表特别大，比如有70亿用户？还是有单点失效问题。</p>
+<p><strong>横向切分</strong></p>
+<p>一个表放在多个机器里。各放一份。比如有10台机器，数据按照n%10存储。</p>
+<p>问题：加入现在新加了一台，那么每条数据都要按照n%11进行重新存放。过多数据迁移会造成很多问题：</p>
+<ol>
+<li>慢，牵一发动全身</li>
+<li>迁移期间，服务器压力增大，容易挂</li>
+<li>响应慢</li>
+<li>容易造成数据的不一致性 </li>
+</ol>
+<p>以下图为例，左图对每个数据%3，那么0369就在一个db里，14610在一个db，25811在一个db</p>
+<p>右图对每个数据%4，那么048在一个db，159在一个db，2610在一个db，3711在一个db</p>
+<p>橘黄色表示已经挪动的数据，我们发现75%的数据有了移动。简直灾难。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-03-16.png"> </p>
+<p>解决——<strong>一致性哈希算法</strong>：</p>
+<ul>
+<li>取模的时候不要模机器数目，可以模一个很大的数字，比如360。每个机器负责一段区间</li>
+<li>区间分配信息记录为一张表存在 Web Server 上。如下左图，如果模出来的在180<del>359，就放在DB1，如果模出来在0</del>179，就放在DB0。</li>
+<li>新加一台机器的时候，在表中选择一个位置插入，匀走相邻两台机器的一部分数据。</li>
+<li>比如 n 从 2 变化到 3，只有 1/3 的数据移动 </li>
+</ul>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-05-55.png"> </p>
+<p>继续思考，假如我们现在已经是这样了：</p>
+<p>其中ABC各用了120</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-30-21.png"> </p>
+<p>如果我们又来了个新机器D，那么可以有以下几种方案：</p>
+<p>那么我们可以找两台相邻的机器，然后把中间的一块分给D:</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-31-25.png"> </p>
+<p>那么迁移量 = 80/360 = 2/9</p>
+<p>整理一下就是：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-32-36.png"> </p>
+<p>以上说的是D一定是连续区间。但是有问题：</p>
+<ol>
+<li>数据分布不均匀</li>
+<li>迁移压力大。例如有100台机器，这次添加一台机器，只能分摊两台</li>
+</ol>
+<h3 id="一致性Hash"><a href="#一致性Hash" class="headerlink" title="一致性Hash"></a>一致性Hash</h3><p><strong>改进</strong></p>
+<p>那么如果D搞成离散区间呢？就是ABC各拿出一些给D：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-34-35.png"> </p>
+<p>巧妙的方法：</p>
+<p>将机器（IP或者名字）与数据，都看做环上的一个点！！</p>
+<ol>
+<li>将机器映射到环上，如下图所示的ABCD是四个机器<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-39-02.png"> </li>
+<li>比如有个数据，蓝色的点，散在了蓝色点出。那么就顺时针去找一个机器，把这个数据放在这个机器上，即B<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-40-32.png"> </li>
+<li>那么如何让点更均匀呢？<br>四个点可能不会均匀，但是4000个点相对来说一定会更均匀。那就引入Micro shards / Virtual nodes 的概念——一台机器对应了1000个代表。例如将A机器撒在环上（下图红色），将B机器撒在环上（下图蓝色）<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-42-51.png"><br>来了一个数据时， 例如图中的黑色点Data，那么就找到了机器B<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-44-31.png"> </li>
+<li>也就是意味着，每个机器负责了很多个离散的区间。</li>
+<li>当需要加入一台新机器时？加入我们现在机器分布是这样：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-51-51.png"><br>新来了一个E的机器，丢到环里之后<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-01-22-52-19.png"><br>[D,E]之间的数据必须从A迁移到E上！！！！[A,E]之间的数据必须从B迁移到E上</li>
+</ol>
+<p>总结：</p>
+<ul>
+<li>将整个 Hash 区间看做环。 这个环的大小从 0~359 变为 $0 到 2^{64}-1$ （这个数字可以承载所有的数据）</li>
+<li>将机器和数据都看做环上的点（例如对机器名字进行hash等等）<ul>
+<li>引入 Micro shards / Virtual nodes 的概念</li>
+</ul>
+</li>
+<li>一台实体机器对应 1000 个 Micro shards / Virtual nodes，每个 virtual node 对应 Hash 环上的一个点。每新加入一台机器，就在环上随机撒 1000 个点作为 virtual nodes</li>
+<li>需要计算某个 key 所在服务器时，计算该key的hash值——得到0~264-1的一个数，对应环上一个点</li>
+<li>顺时针找到第一个virtual node，该virtual node 所在机器就是该key所在的数据库服务器</li>
+<li>新加入一台机器做数据迁移时<ul>
+<li>1000 个 virtual nodes 各自向顺时针的一个 virtual node 要数据</li>
+<li>例子：<a target="_blank" rel="noopener" href="http://www.jiuzhang.com/qa/2067/">http://www.jiuzhang.com/qa/2067/</a> </li>
+</ul>
+</li>
+</ul>
+<p>问题1：需要存储数据在环的哪里吗？<br>不需要。因为这个数据在哪里与其它数据在哪里没有关系。只需要在环上计算数据所在的点的下一个位置的机器是哪个即可。</p>
+<p>问题：那这个1000能变成100万吗？<br>太多也不行。查询效率会变低。就是在比较均匀的情况下选一个比较快的就行。</p>
+<p>思考：哪种数据结构能够支持这种“顺时针”寻找下一个机器的功能呢？——链表是不行的，因为链表长度太大。用TreeMap!! 就是一个红黑树，能在LogN的时间内寻找比n大的最小值。</p>
+<p>回头看一下Consistent Hashing这道题</p>
+<h3 id="Consistent-Hashing"><a href="#Consistent-Hashing" class="headerlink" title="Consistent Hashing"></a>Consistent Hashing</h3><p>参考文献<a target="_blank" rel="noopener" href="http://blog.csdn.net/jmspan/article/details/51740066">LintCode Consistent Hashing（一致性哈希算法）</a></p>
+<p>一般的数据库进行horizontal shard的方法是指，把 id 对 数据库服务器总数 n 取模，然后来得到他在哪台机器上。这种方法的缺点是，当数据继续增加，我们需要增加数据库服务器，将 n 变为 n+1 时，几乎所有的数据都要移动，这就造成了不 consistent。为了减少这种 naive 的 hash方法(%n) 带来的缺陷，出现了一种新的hash算法：一致性哈希的算法——Consistent Hashing。这种算法有很多种实现方式，这里我们来实现一种简单的 Consistent Hashing。</p>
+<ol>
+<li>将 id 对 360 取模，假如一开始有3台机器，那么让3台机器分别负责0<del>119, 120</del>239, 240~359 的三个部分。那么模出来是多少，查一下在哪个区间，就去哪台机器。</li>
+<li>当机器从 n 台变为 n+1 台了以后，我们从n个区间中，找到最大的一个区间，然后一分为二，把一半给第n+1台机器。</li>
+<li>比如从3台变4台的时候，我们找到了第3个区间0<del>119是当前最大的一个区间，那么我们把0</del>119分为0<del>59和60</del>119两个部分。0<del>59仍然给第1台机器，60</del>119给第4台机器。</li>
+<li>然后接着从4台变5台，我们找到最大的区间是第3个区间120<del>239，一分为二之后，变为 120</del>179, 180~239。</li>
+</ol>
+<p>假设一开始所有的数据都在一台机器上，请问加到第 n 台机器的时候，区间的分布情况和对应的机器编号分别是多少？</p>
+<p><strong>Notice</strong></p>
+<p>你可以假设 n &lt;= 360. 同时我们约定，当最大区间出现多个时，我们拆分编号较小的那台机器。<br>比如0<del>119， 120</del>239区间的大小都是120，但是前一台机器的编号是1，后一台机器的编号是2, 所以我们拆分0~119这个区间。</p>
+<p><strong>Clarification</strong></p>
+<p>If the maximal interval is [x, y], and it belongs to machine id z, when you add a new machine with id n, you should divide [x, y, z] into two intervals:</p>
+<p><code>[x, (x + y) / 2, z]</code> and <code>[(x + y) / 2 + 1, y, n]</code></p>
+<p><strong>Example</strong></p>
+<p>for n = <code>1</code>, return</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [0,359,1]</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>represent 0~359 belongs to machine 1.</p>
+<p>for n = <code>2</code>, return</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [0,179,1],</span><br><span class="line">  [180,359,2]</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>for n = <code>3</code>, return</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [0,89,1]</span><br><span class="line">  [90,179,3],</span><br><span class="line">  [180,359,2]</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>for n = <code>4</code>, return</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [0,89,1],</span><br><span class="line">  [90,179,3],</span><br><span class="line">  [180,269,2],</span><br><span class="line">  [270,359,4]</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>for n = <code>5</code>, return</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [0,44,1],</span><br><span class="line">  [45,89,5],</span><br><span class="line">  [90,179,3],</span><br><span class="line">  [180,269,2],</span><br><span class="line">  [270,359,4]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>方法：使用堆来维护当前最大的区间，然后分割它。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;  </span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> n a positive integer </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> n x 3 matrix </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;Integer&gt;&gt; consistentHashing(<span class="keyword">int</span> n) &#123;  </span><br><span class="line">        <span class="comment">// Write your code here  </span></span><br><span class="line">        PriorityQueue&lt;Range&gt; heap = <span class="keyword">new</span> PriorityQueue&lt;&gt;(<span class="number">16</span>,   </span><br><span class="line">            <span class="keyword">new</span> Comparator&lt;Range&gt;() &#123;  </span><br><span class="line">                <span class="meta">@Override</span>  </span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Range r1, Range r2)</span> </span>&#123;  </span><br><span class="line">                    <span class="keyword">if</span> (r1.to - r1.from &gt; r2.to - r2.from) <span class="keyword">return</span> -<span class="number">1</span>;  </span><br><span class="line">                    <span class="keyword">if</span> (r1.to - r1.from &lt; r2.to - r2.from) <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">                    <span class="keyword">return</span> r1.id - r2.id;  </span><br><span class="line">                &#125;  </span><br><span class="line">            &#125;  </span><br><span class="line">        );  </span><br><span class="line">        heap.offer(<span class="keyword">new</span> Range(<span class="number">1</span>, <span class="number">0</span>, <span class="number">359</span>));  </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;  </span><br><span class="line">            Range range = heap.poll();  </span><br><span class="line">            Range range1 = <span class="keyword">new</span> Range(range.id, range.from, (range.from+range.to)/<span class="number">2</span>);  </span><br><span class="line">            Range range2 = <span class="keyword">new</span> Range(i, (range.from+range.to)/<span class="number">2</span>+<span class="number">1</span>, range.to);  </span><br><span class="line">            heap.offer(range1);  </span><br><span class="line">            heap.offer(range2);  </span><br><span class="line">        &#125;  </span><br><span class="line">        Range[] ranges = heap.toArray(<span class="keyword">new</span> Range[<span class="number">0</span>]);  </span><br><span class="line">        List&lt;List&lt;Integer&gt;&gt; results = <span class="keyword">new</span> ArrayList&lt;&gt;(ranges.length);  </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ranges.length; i++) &#123;  </span><br><span class="line">            List&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;(<span class="number">3</span>);  </span><br><span class="line">            result.add(ranges[i].from);  </span><br><span class="line">            result.add(ranges[i].to);  </span><br><span class="line">            result.add(ranges[i].id);  </span><br><span class="line">            results.add(result);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> results;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Range</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> id;  </span><br><span class="line">    <span class="keyword">int</span> from, to;  </span><br><span class="line">    Range(<span class="keyword">int</span> id, <span class="keyword">int</span> from, <span class="keyword">int</span> to) &#123;  </span><br><span class="line">        <span class="keyword">this</span>.id = id;  </span><br><span class="line">        <span class="keyword">this</span>.from = from;  </span><br><span class="line">        <span class="keyword">this</span>.to = to;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<h3 id="Consistent-Hashing-II"><a href="#Consistent-Hashing-II" class="headerlink" title="Consistent Hashing II"></a>Consistent Hashing II</h3><p>在 Consistent Hashing I 中我们介绍了一个比较简单的一致性哈希算法，这个简单的版本有两个缺陷：</p>
+<ol>
+<li>增加一台机器之后，数据全部从其中一台机器过来，这一台机器的读负载过大，对正常的服务会造成影响。</li>
+<li>当增加到3台机器的时候，每台服务器的负载量不均衡，为1:1:2。</li>
+</ol>
+<p>为了解决这个问题，引入了 micro-shards 的概念，一个更好的算法是这样：</p>
+<ol>
+<li>将 360° 的区间分得更细。从 0~359 变为一个 0 ~ n-1 的区间，将这个区间首尾相接，连成一个圆。</li>
+<li>当加入一台新的机器的时候，随机选择在圆周中撒 k 个点，代表这台机器的 k 个 micro-shards。</li>
+<li>每个数据在圆周上也对应一个点，这个点通过一个 hash function 来计算。</li>
+<li>一个数据该属于那台机器负责管理，是按照该数据对应的圆周上的点在圆上顺时针碰到的第一个 micro-shard 点所属的机器来决定。</li>
+</ol>
+<p>n 和 k在真实的 NoSQL 数据库中一般是 2^64 和 1000。</p>
+<p>请实现这种引入了 micro-shard 的 consistent hashing 的方法。主要实现如下的三个函数：</p>
+<ol>
+<li>create(int n, int k)</li>
+<li>addMachine(int machine_id) // add a new machine, return a list of shard ids.</li>
+<li>getMachineIdByHashCode(int hashcode) // return machine id</li>
+</ol>
+<p><strong>Notice</strong></p>
+<p>当 n 为 2^64 时，在这个区间内随机基本不会出现重复。<br>但是为了方便测试您程序的正确性，n 在数据中可能会比较小，所以你必须保证你生成的 k 个随机数不会出现重复。<br>LintCode并不会判断你addMachine的返回结果的正确性（因为是随机数），只会根据您返回的addMachine的结果判断你getMachineIdByHashCode结果的正确性。</p>
+<p><strong>Example</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">create(100, 3)</span><br><span class="line">addMachine(1)</span><br><span class="line">&gt;&gt; [3, 41, 90]  =&gt; 三个随机数</span><br><span class="line">getMachineIdByHashCode(4)</span><br><span class="line">&gt;&gt; 1</span><br><span class="line">addMachine(2)</span><br><span class="line">&gt;&gt; [11, 55, 83]</span><br><span class="line">getMachineIdByHashCode(61)</span><br><span class="line">&gt;&gt; 2</span><br><span class="line">getMachineIdByHashCode(91)</span><br><span class="line">&gt;&gt; 1</span><br></pre></td></tr></table></figure>
+
+<p>思路：使用TreeMap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">private</span> TreeMap&lt;Integer, Integer&gt; tm = <span class="keyword">new</span> TreeMap&lt;&gt;();  </span><br><span class="line">      </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] nums;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> k;  </span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Solution</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// 将nums[] 设置成一个[0,n)的随机数组</span></span><br><span class="line">        <span class="keyword">this</span>.nums = <span class="keyword">new</span> <span class="keyword">int</span>[n];  </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) <span class="keyword">this</span>.nums[i] = i;  </span><br><span class="line">          </span><br><span class="line">        Random random = <span class="keyword">new</span> Random();  </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;  </span><br><span class="line">            <span class="keyword">int</span> j = random.nextInt(i + <span class="number">1</span>);</span><br><span class="line">            <span class="comment">// 随机交换nums[i]和nums[j]</span></span><br><span class="line">            <span class="keyword">int</span> t = nums[i];  </span><br><span class="line">            nums[i] = nums[j];  </span><br><span class="line">            nums[j] = t;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">this</span>.k = k;  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">    <span class="comment">// @param n a positive integer  </span></span><br><span class="line">    <span class="comment">// @param k a positive integer  </span></span><br><span class="line">    <span class="comment">// @return a Solution object  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Solution <span class="title">create</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// Write your code here  </span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Solution(n, k);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// @param machine_id an integer  </span></span><br><span class="line">    <span class="comment">// @return a list of shard ids  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">addMachine</span><span class="params">(<span class="keyword">int</span> machine_id)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// Write your code here  </span></span><br><span class="line">        List&lt;Integer&gt; ids = <span class="keyword">new</span> ArrayList&lt;&gt;();  </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.k; i++) &#123;  </span><br><span class="line">            <span class="keyword">int</span> id = <span class="keyword">this</span>.nums[size++ % <span class="keyword">this</span>.nums.length];  </span><br><span class="line">            ids.add(id);  </span><br><span class="line">            <span class="keyword">this</span>.tm.put(id, machine_id);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> ids;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">// @param hashcode an integer  </span></span><br><span class="line">    <span class="comment">// @return a machine id  </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMachineIdByHashCode</span><span class="params">(<span class="keyword">int</span> hashcode)</span> </span>&#123;  </span><br><span class="line">        <span class="comment">// Write your code here  </span></span><br><span class="line">        <span class="keyword">if</span> (tm.isEmpty()) <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">        Integer ceiling = tm.ceilingKey(hashcode);  </span><br><span class="line">        <span class="keyword">if</span> (ceiling != <span class="keyword">null</span>) <span class="keyword">return</span> tm.get(ceiling);  </span><br><span class="line">        <span class="keyword">return</span> tm.get(tm.firstKey());  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Replica-数据备份"><a href="#Replica-数据备份" class="headerlink" title="Replica 数据备份"></a>Replica 数据备份</h2><p>问题：Backup和Replica有什么区别？</p>
+<p>Backup</p>
+<ul>
+<li>一般是周期性的，比如每天晚上进行一次备份</li>
+<li>当数据丢失的时候，通常只能恢复到之前的某个时间点</li>
+<li>Backup 的数据是死数据，是离线的。不用作在线的数据服务，不分摊读</li>
+</ul>
+<p>Replica</p>
+<ul>
+<li>是实时的， 在数据写入的时候，就会以复制品的形式存为多份</li>
+<li>当数据丢失的时候，可以马上通过其他的复制品恢复</li>
+<li>Replica是实时的。 用作在线的数据服务，分摊读</li>
+</ul>
+<p>思考：既然 Replica 更牛，那么还需要 Backup么？ </p>
+<h3 id="MySQL-Replica"><a href="#MySQL-Replica" class="headerlink" title="MySQL Replica"></a>MySQL Replica</h3><p>以MySQL为代表的的SQL型数据库，通常自带Master Slave的Replica方法。Master负责写，Slave负责读。Slave从Master中同步数据。</p>
+<p><strong>Master - slave原理</strong></p>
+<p>SQL数据库的任何操作，都会以Log的形式做一份记录。</p>
+<p>比如Master上的数据A在B时刻从C改成了D，那么Master会通知Slave来读Log（不是同步值，而是同步操作！）。Slave被激活后，告诉master我可以更新了。</p>
+<p>因此Slave上的数据是有延迟的。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-24-44.png"> </p>
+<p>问题：万一Master挂了怎么办？</p>
+<ul>
+<li>将一台slave升级为master, 接受读 + 写</li>
+<li>可能会造成一定程度的数据丢失和不一致</li>
+</ul>
+<h3 id="NoSQL-Replica"><a href="#NoSQL-Replica" class="headerlink" title="NoSQL Replica"></a>NoSQL Replica</h3><p>以Cassandra为代表的的NoSQL数据库，通常将数据“顺时针”存储在Consistent hashing环上的三个vitual nodes中。</p>
+<p><strong>比较</strong></p>
+<p><strong>SQL</strong></p>
+<ul>
+<li>“自带” 的 Replica 方式是 Master Slave</li>
+<li>“手动” 的 Replica 方式也可以在 Consistent Hashing 环上顺时针存三份</li>
+</ul>
+<p><strong>NoSQL</strong></p>
+<ul>
+<li>“自带” 的 Replica 方式就是 Consistent Hashing 环上顺时针存三份</li>
+<li>“手动” 的 Replica 方式：就不需要手动了，NoSQL就是在 Sharding 和 Replica 上帮你偷懒用的！ </li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/23/%E7%AE%97%E6%B3%95-%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="next" title="算法-线段树">
+                <i class="fa fa-chevron-left"></i> 算法-线段树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95/" rel="prev" title="系统设计-缓存算法">
+                系统设计-缓存算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UserService-%E6%9C%8D%E5%8A%A1"><span class="nav-text">UserService  服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AuthService-%E6%9C%8D%E5%8A%A1"><span class="nav-text">AuthService 服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FriendshipService%E6%9C%8D%E5%8A%A1"><span class="nav-text">FriendshipService服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%AF%94%E8%BE%83%E5%92%8C%E9%80%89%E6%8B%A9"><span class="nav-text">数据库的比较和选择</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%A6%82%E4%BD%95%E6%89%A9%E5%B1%95%EF%BC%9F"><span class="nav-text">系统如何扩展？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E7%82%B9%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98"><span class="nav-text">单点失效问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8B%86%E5%88%86"><span class="nav-text">数据拆分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7Hash"><span class="nav-text">一致性Hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consistent-Hashing"><span class="nav-text">Consistent Hashing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Consistent-Hashing-II"><span class="nav-text">Consistent Hashing II</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Replica-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD"><span class="nav-text">Replica 数据备份</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MySQL-Replica"><span class="nav-text">MySQL Replica</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NoSQL-Replica"><span class="nav-text">NoSQL Replica</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

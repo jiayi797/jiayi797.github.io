@@ -1,0 +1,1319 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="之前的博客中简单介绍了Learning to Rank的基本原理，也讲到了Learning to Rank的几类常用的方法：pointwise，pairwise，listwise。这篇博客就pairwise中的RankSVM、GBRank和LambdaRank做简要介绍。 RankSVM是2000年提出的；GBRank是2007年提出的；LambdaMART是2008年提出的。因此我们按照提出顺序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法-L2R进一步了解">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/09/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-L2R%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="之前的博客中简单介绍了Learning to Rank的基本原理，也讲到了Learning to Rank的几类常用的方法：pointwise，pairwise，listwise。这篇博客就pairwise中的RankSVM、GBRank和LambdaRank做简要介绍。 RankSVM是2000年提出的；GBRank是2007年提出的；LambdaMART是2008年提出的。因此我们按照提出顺序">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b1ffea865.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b2152e915.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b41b9bba0.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b4335d7e6.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b8e74b0df.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b458a2a54.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b472b130b.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/09/25/59c8b9563cab6.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8b9d26d47d.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8ba28f012e.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8ba5bd7a2e.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8ba71a4abd.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8baf10df1f.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8bb529920a.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8bb6276a5c.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/09/25/59c8d9a57ef9f.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8db05e3ddb.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8db19cd5b2.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8db276ebc2.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/09/25/59c8db4cb37ec.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8db76c9652.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8db85eb3f3.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8db9255992.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8dbaf0603f.png">
+<meta property="og:image" content="https://i.loli.net/2017/09/25/59c8dbc928934.png">
+<meta property="article:published_time" content="2017-09-25T07:30:16.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:01.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2017/09/25/59c8b1ffea865.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/09/25/机器学习算法-L2R进一步了解/"/>
+
+
+
+
+
+  <title>机器学习算法-L2R进一步了解 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/09/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-L2R%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习算法-L2R进一步了解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T07:30:16+00:00">
+                2017-09-25
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:01+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/09/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-L2R%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/09/25/机器学习算法-L2R进一步了解/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前的博客中简单介绍了Learning to Rank的基本原理，也讲到了Learning to Rank的几类常用的方法：pointwise，pairwise，listwise。这篇博客就pairwise中的RankSVM、GBRank和LambdaRank做简要介绍。</p>
+<p>RankSVM是2000年提出的；GBRank是2007年提出的；LambdaMART是2008年提出的。因此我们按照提出顺序来讲解这三种算法。</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>机器学习一般都是解决分类问题。而在Rank中我们遇到的是排序问题。那么如何将排序问题转化为分类问题成了当下的关键。</p>
+<h2 id="如何将排序问题转化为分类问题？"><a href="#如何将排序问题转化为分类问题？" class="headerlink" title="如何将排序问题转化为分类问题？"></a>如何将排序问题转化为分类问题？</h2><p>对于一个query-doc pair（检索-文档结果对），我们可以将其用一个feature vector表示：x。而排序函数为f(x)，我们根据f(x)的大小来决定哪个doc排在前面，哪个doc排在后面。即如果f(xi) &gt; f(xj)，则xi应该排在xj的前面，反之亦然。可以用下面的公式表示：</p>
+<p><img src="https://i.loli.net/2017/09/25/59c8b1ffea865.png"> </p>
+<p>理论上，f(x)可以是任意函数，为了简单起见，我们假设其为线性函数：<br><img src="https://i.loli.net/2017/09/25/59c8b2152e915.png"><br>如果这个排序函数f(x)是一个线性函数，那么我们便可以将一个排序问题转化为一个二元分类问题。理由如下：<br>首先，对于任意两个feature vector xi和 xj，在f(x)是线性函数的前提下，下面的关系都是存在的：<br><img src="https://i.loli.net/2017/09/25/59c8b41b9bba0.png"><br>然后，便可以对xi和 xj的差值向量考虑二元分类问题。特别地，我们可以对其赋值一个label：<br><img src="https://i.loli.net/2017/09/25/59c8b4335d7e6.png"> </p>
+<p>有一个很好的例子说明了如何将排序问题转化为分类问题，在L2R的笔记中已提到过，此处不再多加阐述。</p>
+<p>将排序问题转化为分类问题之后, 我们就可以使用常用的机器学习方法解决该问题。</p>
+<h1 id="RankSVM"><a href="#RankSVM" class="headerlink" title="RankSVM"></a>RankSVM</h1><p>RankSVM的<strong>基本思想</strong>是，将排序问题转化为pairwise的分类问题，然后使用SVM分类模型进行学习并求解。Ranking SVM使用SVM来进行分类:<br><img src="https://i.loli.net/2017/09/25/59c8b8e74b0df.png"> </p>
+<p>其中w为参数向量, x为文档的特征,y为文档对之间的相对相关性, ξ为松弛变量。</p>
+<p>对这个公式，<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/23764120">知乎</a>上有一个很好的解释：<br>之前svm为实现软间隔最大化，约束条件里有<img src="https://i.loli.net/2017/09/25/59c8b458a2a54.png"> 。而rank-svm是典型的pairwise方法，考虑两个有偏序关系的文档对，训练样本是xi^(1)-xi^(2)，所以要把约束条件改成<img src="https://i.loli.net/2017/09/25/59c8b472b130b.png"> ，由于相减不再需要偏置b。而优化问题中的目标函数和其他约束项不变。</p>
+<h2 id="使用Clikthrough数据作为训练数据"><a href="#使用Clikthrough数据作为训练数据" class="headerlink" title="使用Clikthrough数据作为训练数据"></a>使用Clikthrough数据作为训练数据</h2><p>T. Joachims提出了一种非常巧妙的方法, 来使用Clickthrough数据作为Ranking SVM的训练数据。</p>
+<p>假设给定一个查询”Support Vector Machine”, 搜索引擎的返回结果为<br><img src="https://ooo.0o0.ooo/2017/09/25/59c8b9563cab6.png"><br>其中1, 3, 7三个结果被用户点击过, 其他的则没有。因为返回的结果本身是有序的, 用户更倾向于点击排在前面的结果, 所以用户的点击行为本身是有偏(Bias)的。为了从有偏的点击数据中获得文档的相关信息, 我们认为: 如果一个用户点击了a而没有点击b, 但是b在排序结果中的位置高于a, 则a&gt;b。<br>所以上面的用户点击行为意味着: 3&gt;2, 7&gt;2, 7&gt;4, 7&gt;5, 7&gt;6。</p>
+<h2 id="Ranking-SVM的开源实现"><a href="#Ranking-SVM的开源实现" class="headerlink" title="Ranking SVM的开源实现"></a>Ranking SVM的开源实现</h2><p><a target="_blank" rel="noopener" href="http://www.cs.cornell.edu/people/tj/svm_light/svm_rank.html">Joachims的主页</a>上有Ranking SVM的开源实现。</p>
+<p>数据的格式与LIBSVM的输入格式比较相似, 第一列代表文档的相关性, 值越大代表越相关, 第二列代表查询, 后面的代表特征:<br>qid:1 1:1 2:1 3:0 4:0.2 5:0 # 1A<br>qid:1 1:0 2:0 3:1 4:0.1 5:1 # 1B<br>qid:1 1:0 2:1 3:0 4:0.4 5:0 # 1C<br>qid:1 1:0 2:0 3:1 4:0.3 5:0 # 1D<br>qid:2 1:0 2:0 3:1 4:0.2 5:0 # 2A<br>qid:2 1:1 2:0 3:1 4:0.4 5:0 # 2B<br>qid:2 1:0 2:0 3:1 4:0.1 5:0 # 2C<br>qid:2 1:0 2:0 3:1 4:0.2 5:0 # 2D<br>qid:3 1:0 2:0 3:1 4:0.1 5:1 # 3A<br>qid:3 1:1 2:1 3:0 4:0.3 5:0 # 3B<br>qid:3 1:1 2:0 3:0 4:0.4 5:1 # 3C<br>qid:3 1:0 2:1 3:1 4:0.5 5:0 # 3D</p>
+<h1 id="GBRank"><a href="#GBRank" class="headerlink" title="GBRank"></a>GBRank</h1><p>参考文献<a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yAfiQ3r">GBRank:一种基于回归的学习排序算法</a><br>对GBRank做出了较好的解释。原论文是[A Regression Framework for Learning Ranking Functions Using Relative Relevance Judgments]。下面对这个博客和论文进行摘录和整理。</p>
+<h2 id="算法原理"><a href="#算法原理" class="headerlink" title="算法原理"></a>算法原理</h2><p>一般来说在搜索引擎里面，相关性越高的越应该排在前面。现在 query-doc 的特征使用向量x或者y表示，假设现在有一个文档对&lt;xi,yi&gt;，当xi排在yi前面时，我们使用xi&gt;yi来表示。我们含顺序的 pair 对用如下集合表示(也就是真的xi真的排在yi前面):<br><img src="https://i.loli.net/2017/09/25/59c8b9d26d47d.png"><br>现假设学习的排序函数为h，我们希望当h(xi)&gt;h(yi)时，满足xi&gt;yi的数量越多越好。那么如何来评价这个h到底好不好呢，那么我们可以定义h的风险函数为:<br><img src="https://i.loli.net/2017/09/25/59c8ba28f012e.png"><br>对于这个风险函数，我们可以做如下解释。我们的目标是：对于集合S中的某个文档对&lt;xi,yi&gt;来说，h要符合我们之前的设定，也就是：</p>
+<p>当h(xi)&gt;h(yi)时，h是正确的，不造成损失；<br>当h(xi)&lt;h(yi)时，h是不符合预期的，会造成损失，并且损失的大小成残差的平方级别；</p>
+<p>将R(h)与每个 pair 对&lt;xi,yi&gt;的cost画成图可表示为：<br><img src="https://i.loli.net/2017/09/25/59c8ba5bd7a2e.png"> </p>
+<p>上述风险函数直接优化比较困难，这里一个巧妙的解决方案：也就是首先固定h(xi)或者h(yi)当中其中的一个，然后再通过回归的方式来解决问题。<br>为了避免优化函数h是一个常量，我们对风险函数加入一个平滑项τ(0&lt;τ≤10)：<br><img src="https://i.loli.net/2017/09/25/59c8ba71a4abd.png"><br>其实加上了这个平滑项之后，一来可以防止h变为常数，二来还对损失函数给了更严格的条件：如果希望xi&gt;yi，就得有h(xi)&gt;h(yi)+τ，也就是更为严格了。</p>
+<p>接下来我们用Functional Gradient Descent法来求解h.</p>
+<p>参考文献<a target="_blank" rel="noopener" href="http://www.cnblogs.com/bentuwuying/p/6684585.html">Learning to Rank算法介绍：GBRank</a>对这个求解方法做了扼要的介绍：</p>
+<p>在GBDT中，Functional Gradient Descent的使用为：将需要求解的F(x)表示成一个additive model，即将一个函数分解为若干个小函数的加和形式，而这每个小函数的产生过程是串行生成的，即每个小函数都是在拟合 loss function在已有的F(x)上的梯度方向（由于训练数据是有限个数的，所以F(x)是离散值的向量，而此梯度方向也表示成一个离散值的向量），然后将拟合的结果函数进一步更新到F(x)中，形成一个新的F(x)。</p>
+<ol>
+<li> 将h(xi)和h(xi)作为未知数。梯度下降使得R最小，来求得这些未知数。</li>
+<li> 对R计算h的负梯度：<br><img src="https://i.loli.net/2017/09/25/59c8baf10df1f.png"> </li>
+<li> 当pair对&lt;xi,yi&gt;符合条件时，上述梯度为0；反之，他们对应的梯度为：<br><img src="https://i.loli.net/2017/09/25/59c8bb529920a.png"> </li>
+<li> 接下来，还需要知道如何将梯度作用到h的更新上。通过设定xi的目标值为h(yi)+τ。yi的目标值为h(xi)−τ（这一步我的理解就是首先固定x/y中的某一个，然后去计算另一个）。因此在每轮迭代中，当h不满足&lt;xi,yi&gt;会产生一组数据：<img src="https://i.loli.net/2017/09/25/59c8bb6276a5c.png"> </li>
+</ol>
+<p>我们需要拟合本轮产生的所有负例。</p>
+<p>下面形式化本算法：<br><img src="https://ooo.0o0.ooo/2017/09/25/59c8d9a57ef9f.png"><br>可以看到step3里面每轮都拟合误判的结果，在迭代中这个集合会越来越小。还有一种做法是将曾经误判的集合维持在训练集中，那么训练集就会始终增长。在这个步骤中使用GBDT模型进行回归预测，当然其他的回归方法也可以使用。</p>
+<h1 id="LambdaMART"><a href="#LambdaMART" class="headerlink" title="LambdaMART"></a>LambdaMART</h1><p>在learn to rank的成长过程中，2000提出了SVMRank，2006年提出GBrank，2008年提出lambdaMART。看了几个比较大的框架，我发现现在市面上最常见的learn to rank算法就是LambdaMART了。接下来先介绍一下LambdaMART的原理，然后再介绍xgboost中是怎么写的LambdaMart。</p>
+<h2 id="LambdaMart的原理"><a href="#LambdaMart的原理" class="headerlink" title="LambdaMart的原理"></a>LambdaMart的原理</h2><p>这一小节主要参考资料<a target="_blank" rel="noopener" href="https://liam0205.me/2016/07/10/a-not-so-simple-introduction-to-lambdamart/">LambdaMART 不太简短之介绍</a></p>
+<p>Pointwise和Pairwise类型的LTR算法，将排序问题转化为回归、分类或者有序分类问题。Listwise 类型的 LTR 算法则另辟蹊径，将用户查询（Query）所得的结果作为整体，作为训练用的实例（Instance）。</p>
+<p>LambdaMART 是一种 Listwise 类型的 LTR 算法，它基于 LambdaRank 算法和 MART(Multiple Additive Regression Tree)算法，<strong>将搜索引擎结果排序问题转化为回归决策树问题</strong>。MART实际就是梯度提升决策树（GBDT, Gradient Boosting Decision Tree）算法。GBDT 的核心思想是在不断的迭代中，新一轮迭代产生的回归决策树模型拟合损失函数的梯度，最终将所有的回归决策树叠加得到最终的模型。LambdaMART使用一个特殊的 Lambda 值来代替上述梯度，也就是将LambdaRank算法与MART算法加和起来。考虑到LambdaRank是基于RankNet算法的，所以在搞清楚LambdaMART算法之前，我们首先需要了解 MART、RankNet 和 LambdaRank 是怎么回事。</p>
+<p>MART其实也是GBDT。此处对GBDT不再做过多的介绍。值得一提的是，MART并不对损失函数的形式做具体规定。实际上，损失函数几乎只需要满足可导这一条件就可以了。这一点非常重要，意味着我们可以把任何合理的可导函数安插在 MART 模型中。LambdaMART 就是用一个 λ 值代替了损失函数的梯度，将 λ和 MART 结合起来罢了。</p>
+<h2 id="LambdaMART是怎么来的"><a href="#LambdaMART是怎么来的" class="headerlink" title="LambdaMART是怎么来的"></a>LambdaMART是怎么来的</h2><p>Lambda 的设计，最早是由 LambdaRank 从 RankNet 继承而来。因此，我们先要从 RankNet 讲起。<br>后记：其实这些文章都是到处整理得来，远不及直接看论文的好。如果有兴趣的话，可以读一读微软整理的这篇论文<a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf">https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/MSR-TR-2010-82.pdf</a></p>
+<p><strong>RankNet的创新</strong></p>
+<p>Ranking常见的评价指标都无法求梯度，因此没法直接对评价指标做梯度下降。</p>
+<p>RankNet 的创新之处在于，它将不适宜用梯度下降求解的Ranking问题，转化为对概率的交叉熵损失函数的优化问题，从而适用梯度下降方法。</p>
+<p>RankNet的终极目标是得到一个带参的算分函数s = f(x;w)</p>
+<p>参考文献机器学习—RankNet.md](<a target="_blank" rel="noopener" href="https://github.com/MangoLiu/mangoliu.github.io/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0---RankNet.md)%E7%BB%99%E4%BA%86%E4%B8%80%E4%B8%AA%E9%9D%9E%E5%B8%B8%E5%A5%BD%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%9A%E9%82%A3%E4%B9%88%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87pair%E6%9D%A5%E8%AE%AD%E7%BB%83%EF%BC%8C%E5%B9%B6%E6%9C%80%E7%BB%88%E4%BD%9C%E7%94%A8%E5%88%B0%E9%92%88%E5%AF%B9point%E7%9A%84%E7%AE%97%E5%88%86%E5%87%BD%E6%95%B0%E4%B8%8A%EF%BC%8C%E8%AF%B7%E7%9C%8B%E4%B8%8B%E9%9D%A2%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E3%80%82%E5%81%87%E8%AE%BE%E6%9C%89%E4%BB%A5%E4%B8%8B%E5%90%8C%E4%B8%80%E4%B8%AAquery%E4%B8%8B%E7%9A%844%E4%B8%AA%E6%96%87%E6%A1%A3%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%9C%893%E4%B8%AA%E7%89%B9%E5%BE%81%E7%BB%B4%E5%BA%A6%EF%BC%8C%E5%B9%B6%E5%AF%B9%E5%AE%83%E4%BB%AC%E8%BF%9B%E8%A1%8C%E4%BA%86%E4%BA%BA%E5%B7%A5%E6%89%93%E5%88%86%EF%BC%8C%E6%88%91%E4%BB%AC%E5%B0%B1%E5%88%A9%E7%94%A8%E5%AE%83%E4%BB%AC%E6%9D%A5%E8%AE%AD%E7%BB%83model%E3%80%82">https://github.com/MangoLiu/mangoliu.github.io/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0---RankNet.md)给了一个非常好的例子：那么如何通过pair来训练，并最终作用到针对point的算分函数上，请看下面的简单例子。假设有以下同一个query下的4个文档，并且有3个特征维度，并对它们进行了人工打分，我们就利用它们来训练model。</a></p>
+<pre><code>point       特征f1  特征f2  特征f3  label     
+文档doc1      3       2        1      3(很好) 
+文档doc2      1       2        1      2（好） 
+文档doc3      1       1        2      1（一般） 
+文档doc4      1       0        3      0（不好） 
+</code></pre>
+<p>于是，根据这个算分函数，我们可以根据特征来计算文档xi和xj的得分si和sj：<br>                        Si = f(xi;w),sj = f(xj,w)</p>
+<p>我们并不知道每个特征维度的具体权值w[i]。但我们感觉到要训练出这样的结果，就是使label得分比较高的样本得分尽量大，让label低的样本得分尽量小。<br>即本例中，我们应该让f(doc1)得分尽量大，f(doc4)得分尽量小。其实也就是f(doc1)-f(doc4)的结果尽量大，因为这个分差实际就包含了前者尽量大后者尽量小的含义。并且之前那个常量b通过作差后，不见了。<br>这样两两文档即可组成一个文档对，我们把前者好于后者的成为正向文档对；反之称之为负向文档对。正向对表示前者好于后者，负向对表示后者劣于前者。其实表述的是同样的意义。因此，我们只需要正向的对就好了。因为负向对不能再额外提供有意义的信息了。那么我们提取出上面的正向对：</p>
+<pre><code>Pair  作差       特征f1 特征f2  特征f3
+P12 (doc1-doc2)    2      0       0
+P13 (doc1-doc3)    2      1      -1
+P14 (doc1-doc4)    2      2      -2
+P23 (doc2-doc3)    0      1      -1
+P24 (doc2-doc4)    0      2      -2
+P34 (doc3-doc4)    0      1      -1
+</code></pre>
+<p>需要注意的是，这里的特征也进行了相减！</p>
+<p>我们再引入一个文档对概率，表示文档i好于文档j的概率。我们将它称为两者的偏序概率：(这个东西我理解为是将偏序关系转化为概率的函数，类似于lr里面的sigmod函数)<br><img src="https://i.loli.net/2017/09/25/59c8db05e3ddb.png"> </p>
+<p>那么，现在这个问题就转化成了使所有正向对的概率和最大。我们现在已经知道了目标函数，那么接下来就需要一个损失函数来将这个目标函数最优化。<br>再将以上的交叉熵定义为损失函数：<br><img src="https://i.loli.net/2017/09/25/59c8db19cd5b2.png"><br>然后对这个损失函数进行梯度下降：<br><img src="https://i.loli.net/2017/09/25/59c8db276ebc2.png"><br>在以上的方法中，我们将偏序关系转化为目标函数，然后再定义目标函数的损失函数，再通过梯度下降法求参数使得损失函数最小，得到目标函数。那么我们能不能直接定义梯度呢？</p>
+<p><strong>LambdaRank</strong></p>
+<p>参考文献<a target="_blank" rel="noopener" href="http://blog.csdn.net/huagong_adu/article/details/40710305">Learning To Rank之LambdaMART的前世今生</a>对下面这个图有非常详细的解释。此处对一些重点内容进行摘录。<br><img src="https://ooo.0o0.ooo/2017/09/25/59c8db4cb37ec.png"><br>如图所示，每个线条表示文档，蓝色表示相关文档，灰色表示不相关文档。<br>RankNet以pairwise error的方式计算cost，左图的cost为13，右图通过把第一个相关文档下调3个位置，第二个文档上条5个位置，将cost降为11，但是像NDCG或者ERR等评价指标只关注top k个结果的排序，在优化过程中下调前面相关文档的位置不是我们想要得到的结果。图 1右图左边黑色的箭头表示RankNet下一轮的调序方向和强度，但我们真正需要的是右边红色箭头代表的方向和强度，即更关注靠前位置的相关文档的排序位置的提升。</p>
+<p>LambdaRank正是基于这个思想演化而来，其中Lambda指的就是红色箭头，代表下一次迭代优化的方向和强度，也就是梯度。<br>受LambdaNet的启发，LambdaRank对RankNet的梯度做因式分解：<br><img src="https://i.loli.net/2017/09/25/59c8db76c9652.png"><br>注意有下面对称性<br><img src="https://i.loli.net/2017/09/25/59c8db85eb3f3.png"><br><img src="https://i.loli.net/2017/09/25/59c8db9255992.png"><br>也就是说：<strong>每条文档移动的方向和趋势取决于其他所有与之 label 不同的文档</strong>。<br>现在回过头来看，看看我们做了些什么？</p>
+<ul>
+<li>  分析了梯度的物理意义；</li>
+<li>  绕开损失函数，直接定义梯度。<br>当然，我们可以反推一下 LambdaRank 的损失函数：<br><img src="https://i.loli.net/2017/09/25/59c8dbaf0603f.png"> </li>
+</ul>
+<p><strong>LambdaMART</strong><br>现在的情况变成了这样：</p>
+<ul>
+<li>  MART 是一个框架，缺一个「梯度」；</li>
+<li>  LambdaRank 定义了一个「梯度」。<br>于是，就有了 LambdaMART：<br><img src="https://i.loli.net/2017/09/25/59c8dbc928934.png"> </li>
+</ul>
+<h1 id="Xgboost中的Learning-to-rank"><a href="#Xgboost中的Learning-to-rank" class="headerlink" title="Xgboost中的Learning to rank"></a>Xgboost中的Learning to rank</h1><p>为了后续方便后续小伙伴们的使用，我将官方文档<a target="_blank" rel="noopener" href="https://github.com/dmlc/xgboost/tree/master/demo/rank">xgboost的learning to rank文档</a>进行扼要的翻译，并在此贴出。<br>Xgboost的rank模型是基于lambdaRank的。<br>XGBoost支持以ranking为目标的学习。在ranking的情况下，数据集一般都需要被格式化为group input：<br>在ranking中，数据是根据不同的真实场景被分为groups的。例如，在学习web pages的rank场景下，rank page数据是根据不同的queries分到各groups的。</p>
+<p><strong>数据形式</strong><br><strong>基本数据形式train.txt</strong><br>Xgboost接受像libSVM格式数据，例如：</p>
+<pre><code>1 101:1.2 102:0.03
+0 1:2.1 10001:300 10002:400
+0 0:1.3 1:0.3
+1 0:0.01 1:0.3
+0 0:0.2 1:0.3
+</code></pre>
+<p>每行表示：</p>
+<pre><code>label   特征1索引:值 特征2索引:值
+</code></pre>
+<p><strong>groups索引文件train.txt.group</strong><br>除了group input format,XGboost需要一个索引group信息的文件，索引文件train.txt.group格式如下：</p>
+<pre><code>2
+3
+</code></pre>
+<p>这意味着，数据集包含5个实例，前两个是一个group，后三个是一个group。</p>
+<p><strong>实例权重文件train.txt.weight</strong></p>
+<p>XGboost还支持每个实例的权重调整，数据格式如下：</p>
+<pre><code>1
+0.5
+0.5
+1
+0.5
+</code></pre>
+<p><strong>初始margin文件train.txt.base_margin</strong></p>
+<p>XGBoost还可以支持每个实例的初始化margin prediction.例如我们对train.txt可以有一个initial margin file:</p>
+<pre><code>-0.4
+1.0
+3.4
+</code></pre>
+<p>XGBoost will take these values as initial margin prediction and boost from that. An important note about base_margin is that it should be margin prediction before transformation, so if you are doing logistic loss, you will need to put in value before logistic transformation. If you are using XGBoost predictor, use pred_margin=1 to output margin values.</p>
+<p><strong>使用Demo:</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/stegben/kaggle_outbrain/blob/990f5e1cc18ff0f6156a56b9d919ac0d52222268/train_xgb.py">https://github.com/stegben/kaggle_outbrain/blob/990f5e1cc18ff0f6156a56b9d919ac0d52222268/train_xgb.py</a></p>
+<p><strong>xgboost的pairwiseRank实现</strong></p>
+<p>**<strong>如何构造pair对？</strong><br>xgboost/src/objective/rank_obj.cc,75行开始构造pair对。如上理论所说，每条文档移动的方向和趋势取决于其他所有与之 label 不同的文档。因此我们只需要构造不同label的“正向文档对”。其方法主要为:遍历所有的样本，从与本样本label不同的其他label桶中，任意取一个样本，构造成正样本；<br>**<strong>如何定义梯度？</strong><br>xgboost/src/objective/rank_obj.cc中，写到了它是使用lambdaWeight.<br>然后将梯度和文档对输入GBDT训练即可。<br>**<strong>输出是什么？</strong><br>根据labdaMart原理，输出是模型对每个文档的打分。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p><a target="_blank" rel="noopener" href="http://www.cnblogs.com/kemaswill/p/3241963.html">Learning to Rank之Ranking SVM 简介</a><br><a target="_blank" rel="noopener" href="http://www.tuicool.com/articles/yAfiQ3r">GBRank:一种基于回归的学习排序算法</a><br><a target="_blank" rel="noopener" href="http://mlnote.com/2016/09/18/gbRank-logsitRank-from-up-to-bottom/">gbRank &amp; logsitcRank自顶向下</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="next" title="深度学习算法-神经网络">
+                <i class="fa fa-chevron-left"></i> 深度学习算法-神经网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E8%AF%AF%E5%B7%AE%E5%87%BD%E6%95%B0%E6%8E%A2%E7%A9%B6/" rel="prev" title="深度学习算法-误差函数探究">
+                深度学习算法-误差函数探究 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86%E6%8E%92%E5%BA%8F%E9%97%AE%E9%A2%98%E8%BD%AC%E5%8C%96%E4%B8%BA%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-text">如何将排序问题转化为分类问题？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RankSVM"><span class="nav-text">RankSVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Clikthrough%E6%95%B0%E6%8D%AE%E4%BD%9C%E4%B8%BA%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE"><span class="nav-text">使用Clikthrough数据作为训练数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ranking-SVM%E7%9A%84%E5%BC%80%E6%BA%90%E5%AE%9E%E7%8E%B0"><span class="nav-text">Ranking SVM的开源实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GBRank"><span class="nav-text">GBRank</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86"><span class="nav-text">算法原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LambdaMART"><span class="nav-text">LambdaMART</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LambdaMart%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-text">LambdaMart的原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LambdaMART%E6%98%AF%E6%80%8E%E4%B9%88%E6%9D%A5%E7%9A%84"><span class="nav-text">LambdaMART是怎么来的</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Xgboost%E4%B8%AD%E7%9A%84Learning-to-rank"><span class="nav-text">Xgboost中的Learning to rank</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

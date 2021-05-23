@@ -1,0 +1,1451 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一般来说，图片是非常大的。至少有$n\times n\times 3$的像素，即有这么多特征。 对于小尺寸的图片问题，也许我们用深度神经网络的结构可以较为简单的解决一定的问题。但是当应用在大尺寸的图片上，输入规模将变得十分庞大，使用神经网络将会有非常多的参数需要去学习，这个时候神经网络就不再适用。 卷积神经网络在计算机视觉问题上是一个非常好的网络结构。 概述图像识别过程 当我们给定一个”X”的图案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习算法-卷积网络">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/10/31/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="一般来说，图片是非常大的。至少有$n\times n\times 3$的像素，即有这么多特征。 对于小尺寸的图片问题，也许我们用深度神经网络的结构可以较为简单的解决一定的问题。但是当应用在大尺寸的图片上，输入规模将变得十分庞大，使用神经网络将会有非常多的参数需要去学习，这个时候神经网络就不再适用。 卷积神经网络在计算机视觉问题上是一个非常好的网络结构。 概述图像识别过程 当我们给定一个”X”的图案">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2017/11/02/59fa7bbb36b29.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-38-35.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-40-48.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-41-29.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-05-41.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-05-55.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-06-48.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20160702205047459">
+<meta property="og:image" content="https://i.loli.net/2017/10/31/59f881a6783fa.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-07-46.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/02/59fa7db46ec71.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/02/59fa7dcd89f03.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/02/59fa7de2c136e.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/02/59fa7df2b7759.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/02/59fa82a30ef95.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-11-15.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/11/02/59fa7f3498ba3.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-19-44.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-20-50.png">
+<meta property="og:image" content="http://img.blog.csdn.net/20160707204048899">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-28-06.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-30-34.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-16-43.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-33-58.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/01/59f939076125c.png">
+<meta property="og:image" content="https://ooo.0o0.ooo/2017/11/01/59f95b688c95b.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-51-25.png">
+<meta property="og:image" content="https://i.loli.net/2017/10/31/59f865cb07946.png">
+<meta property="og:image" content="https://i.loli.net/2017/10/31/59f86ae962147.png">
+<meta property="og:image" content="https://i.loli.net/2017/10/31/59f86aff4a4b1.png">
+<meta property="og:image" content="https://i.loli.net/2017/10/31/59f86f09c700e.png">
+<meta property="og:image" content="https://i.loli.net/2017/10/31/59f879f482dd9.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-16-04-01.png">
+<meta property="article:published_time" content="2017-10-31T07:58:36.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:03.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/02/59fa7bbb36b29.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/10/31/深度学习算法-卷积网络/"/>
+
+
+
+
+
+  <title>深度学习算法-卷积网络 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/10/31/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深度学习算法-卷积网络</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T07:58:36+00:00">
+                2017-10-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:03+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">卷积网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/10/31/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/10/31/深度学习算法-卷积网络/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一般来说，图片是非常大的。至少有$n\times n\times 3$的像素，即有这么多特征。 对于小尺寸的图片问题，也许我们用深度神经网络的结构可以较为简单的解决一定的问题。但是当应用在大尺寸的图片上，输入规模将变得十分庞大，使用神经网络将会有非常多的参数需要去学习，这个时候神经网络就不再适用。</p>
+<p>卷积神经网络在计算机视觉问题上是一个非常好的网络结构。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><h2 id="图像识别过程"><a href="#图像识别过程" class="headerlink" title="图像识别过程"></a>图像识别过程</h2><p> 当我们给定一个”X”的图案，计算机怎么识别这个图案就是“X”呢？一个可能的办法就是计算机存储一张标准的“X”图案，然后把需要识别的未知图案跟标准”X”图案进行比对，如果二者一致，则判定未知图案即是一个”X”图案。</p>
+<p>而且即便未知图案可能有一些平移或稍稍变形，依然能辨别出它是一个X图案。如此，CNN是把未知图案和标准X图案一个局部一个局部的对比，如下图所示：</p>
+<p><img src="https://i.loli.net/2017/11/02/59fa7bbb36b29.png"> </p>
+<p><strong>而未知图案的局部和标准X图案的局部一个一个比对时的计算过程，便是卷积操作</strong>。卷积计算结果为1表示匹配，否则不匹配。</p>
+<h2 id="图像边缘检测"><a href="#图像边缘检测" class="headerlink" title="图像边缘检测"></a>图像边缘检测</h2><p>卷积运算是卷积神经网络的基本组成部分。下面以边缘检测的例子来介绍卷积运算。</p>
+<p>所谓边缘检测，在下面的图中，分别通过垂直边缘检测和水平边缘检测得到不同的结果：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-38-35.png"> </p>
+<p><strong>垂直边缘检测：</strong></p>
+<p>假设对于一个 6×6 大小的图片（以数字表示），以及一个 3×3 大小的 <strong>filter</strong>（卷积核） 进行卷积运算，以“∗”符号表示。图片和垂直边缘检测器分别如左和中矩阵所示：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-40-48.png"> </p>
+<p><strong>filter</strong> 不断地和其大小相同的部分做【对应元素的乘法运算并求和】，最终得到的数字相当于新图片的一个像素值，如右矩阵所示，最终得到一个 4×4 大小的图片。</p>
+<p><strong>边缘检测的原理：</strong></p>
+<p>以一个有一条垂直边缘线的简单图片来说明。通过垂直边缘 <strong>filter</strong> 我们得到的最终结果图片可以明显地将边缘和非边缘区分出来：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-41-29.png"> </p>
+<p>卷积运算提供了一个方便的方法来检测图像中的边缘，成为卷积神经网络中重要的一部分。</p>
+<p><strong>多种边缘检测：</strong></p>
+<p>垂直和水平边缘检测</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-05-41.png"> </p>
+<p>更复杂的<strong>filter</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-05-55.png"> </p>
+<p>对于复杂的图片，我们可以直接将<strong>filter</strong>中的数字直接看作是需要学习的参数，其可以学习到对于图片检测相比上面filter更好的更复杂的<strong>filter</strong>，如相对于水平和垂直检测器，我们训练的 filter 参数也许可以知道不同角度的边缘。</p>
+<p>通过卷积运算，在卷积神经网络中通过反向传播算法，可以学习到相应于目标结果的<strong>filter</strong>，将其应用于整个图片，输出其提取到的所有有用的特征。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-06-48.png"> </p>
+<h2 id="卷积网络结构"><a href="#卷积网络结构" class="headerlink" title="卷积网络结构"></a>卷积网络结构</h2><p>本节主要来自参考文献<a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/51812459">CNN笔记：通俗理解卷积神经网络</a></p>
+<p><a target="_blank" rel="noopener" href="http://cs231n.github.io/convolutional-networks/#overview">cs231n</a>课程里给出了卷积神经网络各个层级结构，如下图：</p>
+<p><img src="http://img.blog.csdn.net/20160702205047459" alt="img"></p>
+<p>图中CNN要做的事情是：给定一张图片，是车还是马未知，是什么车也未知，现在需要模型判断这张图片里具体是一个什么东西，总之输出一个结果：如果是车，那是什么车。</p>
+<p>上图的网络结构为：</p>
+<ul>
+<li>最左边是数据输入层，对数据做一些处理，比如去均值（把输入数据各个维度都中心化为0，避免数据过多偏差，影响训练效果）、归一化（把所有的数据都归一到同样的范围）、PCA/白化等等。CNN只对训练集做“去均值”这一步。</li>
+<li>中间是<ul>
+<li>CONV：卷积计算层，线性乘积求和。</li>
+<li>ReLU：激励层，上文2.2节中有提到：ReLU是激活函数的一种。</li>
+<li>POOL：池化层，简言之，即取区域平均或最大。</li>
+</ul>
+</li>
+<li>最右边是<ul>
+<li>FC：全连接层</li>
+</ul>
+</li>
+</ul>
+<p>这几个部分中，卷积计算层是CNN的核心，下文将重点阐述。</p>
+<p>接下来，我们详细介绍一下这几个部分。</p>
+<h1 id="卷积网络结构-1"><a href="#卷积网络结构-1" class="headerlink" title="卷积网络结构"></a>卷积网络结构</h1><p>卷积网络结构如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">输入层  --&gt;  卷积计算层  --&gt; 激励层 --&gt; 池化层  </span><br><span class="line">       --&gt;  卷积计算层  --&gt; 激励层 --&gt; 池化层  </span><br><span class="line">       --&gt; ...</span><br><span class="line">--&gt;全连接层</span><br></pre></td></tr></table></figure>
+
+<p>卷积网络中一个典型层包括三级：卷积计算层、激励层（探测层）和池化层。</p>
+<p>通过上一步的卷积运算，然后经过了激活函数，我们将此时的输入会输入池化层。</p>
+<p><img src="https://i.loli.net/2017/10/31/59f881a6783fa.png"> </p>
+<p><strong>卷积层</strong>：并行计算多个卷积，产生一组线性激活响应；</p>
+<p><strong>激励层(探测层)</strong>(detector stage)：每个线性激活响应会通过一个非线性激活函数；</p>
+<p><strong>池化层</strong>：我们使用池化(pooling)函数来进一步调整这一层的输出。</p>
+<h2 id="卷积计算层"><a href="#卷积计算层" class="headerlink" title="卷积计算层"></a>卷积计算层</h2><p>卷积计算层最重要的就是卷积运算。接下来我们介绍卷积运算。</p>
+<h3 id="卷积运算"><a href="#卷积运算" class="headerlink" title="卷积运算"></a>卷积运算</h3><p>假设我们在用激光传感器追踪宇宙飞船的位置，$t$时刻位置在$x(t)$。</p>
+<p>为了更好地估计，我们将时间越近的测量给予更高的权重$w(a)$，其中$a$表示测量结果距当前的时间间隔，那么：</p>
+<p>$$s(t)=\int x(a)w(t-a)da = (x*w)(t)$$</p>
+<p>tips:<br>$a$：距离当前时间的间隔；<br>$x(a)$：$a$时刻，飞船位置，$x$也叫输入<br>$w(t-a)$：$t-a$时刻，也就是a秒前，飞船的权重，也是一种概率密度，叫做核函数</p>
+<p>离散形式的卷积是：<br>$$s(t)=(x*w)(t)=\sum_{\alpha=-\infty}^{\infty}x(a)w(t-a)$$</p>
+<p>二维形式的卷积（我们定义核为K）：</p>
+<p>$$S(i,j)=(I*K)(i,j)=\sum_m \sum_n I(m,n)K(i-m,j-n)$$</p>
+<p>卷积是可交换的，也可写作：</p>
+<p>$$S(i,j)=(K*I)(i,j)=\sum_m \sum_n I(i-m,j-n)K(m,n)$$</p>
+<p>出现上面可交换的原因是：我们将核的相对输入进行了翻转，也相当于一种变量替换；</p>
+<p>然而，在许多神经网络中采用的是**互相关函数(cross-correlation)**：</p>
+<p>$$S(i,j)=(I*K)(i,j)=\sum_m \sum_n I(i+m,j+n)K(m,n)$$</p>
+<p>这个是不可交换的。</p>
+<p>在数学定义上，矩阵的<strong>卷积</strong>（convolution）操作为首先将卷积核同时在水平和垂直方向上进行翻转，构成一个卷积核的镜像，然后使用该镜像再和前面的矩阵进行移动相乘求和操作。如下面例子所示：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-07-46.png"> </p>
+<p>在深度学习中，我们称为的卷积运算实则没有卷积核变换为镜像的这一步操作，因为在权重学习的角度，变换是没有必要的。深度学习的卷积操作在数学上准确度来说称为<strong>互相关</strong>（cross-correlation）。</p>
+<p>一般来说，图像领域的卷积用的就是互相关函数。参考文献<a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/51812459">CNN笔记：通俗理解卷积神经网络</a>对卷积的定义是：对图像（不同的数据窗口数据）和滤波矩阵（一组固定的权重：因为每个神经元的多个权重固定，所以又可以看做一个恒定的滤波器filter）做内积（逐个元素相乘再求和）的操作就是所谓的『卷积』操作，也是卷积神经网络的名字来源。</p>
+<hr>
+<h3 id="卷积计算层-1"><a href="#卷积计算层-1" class="headerlink" title="卷积计算层"></a>卷积计算层</h3><p>举个具体的例子。比如下图中，图中左边部分是原始输入数据，图中中间部分是滤波器filter(有个高大上的名字叫<strong>卷积核</strong>)，图中右边是输出的新的二维数据。</p>
+<p><img src="https://i.loli.net/2017/11/02/59fa7db46ec71.png"> </p>
+<p>即将下面 两个矩阵对应位置先相乘，后相加：</p>
+<p><img src="https://i.loli.net/2017/11/02/59fa7dcd89f03.png"> $$*$$<img src="https://i.loli.net/2017/11/02/59fa7de2c136e.png"> $$=$$<img src="https://i.loli.net/2017/11/02/59fa7df2b7759.png"> </p>
+<p><img src="https://i.loli.net/2017/11/02/59fa82a30ef95.png"> </p>
+<p>在CNN中，滤波器filter（带着一组固定权重的神经元）对局部输入数据进行卷积计算。每计算完一个数据窗口内的局部数据后，数据窗口不断平移滑动，直到计算完所有数据。这个过程中，有这么几个参数： </p>
+<h4 id="Depth-深度"><a href="#Depth-深度" class="headerlink" title="Depth-深度"></a>Depth-深度</h4><p>神经元个数，决定输出的depth厚度。同时代表滤波器个数。</p>
+<h4 id="Stride-步长"><a href="#Stride-步长" class="headerlink" title="Stride-步长"></a>Stride-步长</h4><p>决定滑动多少步可以到边缘。</p>
+<p>以s表示stride的大小，那么在进行卷积运算后，图片的变化为：$n×n –&gt; ⌊\frac{n+2p−f}{s}+1⌋×⌊\frac{n+2p−f}{s}+1⌋$。</p>
+<p>注意，在当padding≠1时，若移动的窗口落在图片外面时，则不要再进行相乘的操作，丢弃边缘的数值信息，所以输出图片的最终维度为<strong>向下取整</strong>。</p>
+<h4 id="Padding-填充值"><a href="#Padding-填充值" class="headerlink" title="Padding-填充值"></a>Padding-填充值</h4><p>在外围边缘补充若干圈0，方便从初始位置以步长为单位可以刚好滑到末尾位置，通俗地讲就是为了总长能被步长整除。</p>
+<p>没有Padding的缺点 ： </p>
+<ol>
+<li>每次卷积操作，图片会缩小； 就前面的例子来说，6×6 大小的图片，经过 3×3 大小的 filter，缩小成了 4×4 大小 。图片：n×n –&gt; (n−f+1)×(n−f+1)</li>
+<li>角落和边缘位置的像素进行卷积运算的次数少，可能会丢失有用信息。<br>其中，n表示图片的长或宽的大小，f表示filter的长或宽的大小。</li>
+</ol>
+<p>有Padding ： </p>
+<ol>
+<li>为了解决上面的两个缺点，我们在进行卷积运算前为图片加padding，包围角落和边缘的像素，使得通过filter的卷积运算后，图片大小不变，也不会丢失角落和边沿的信息。</li>
+</ol>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-11-15.png"> </p>
+<p>以p表示 Padding 的值，则输入n×n大小的图片，最终得到的图片大小为 (n+2p−f+1)×(n+2p−f+1)，为使图片大小保持不变，需根据filter的大小调整p的值。</p>
+<p><img src="https://ooo.0o0.ooo/2017/11/02/59fa7f3498ba3.png"> </p>
+<h3 id="卷积计算的过程"><a href="#卷积计算的过程" class="headerlink" title="卷积计算的过程"></a>卷积计算的过程</h3><p>对于灰色图像中，卷积核和图像均是二维的。而应用于彩色图像中，因为图片有R、G、B三个颜色通道，所以此时的卷积核应为<strong>三维卷积核</strong>。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-19-44.png"> </p>
+<p>单个卷积核应用于图片时，提取图片特定的特征，不同的卷积核提取不同的特征。如两个大小均为3×3×3 的卷积核分别提取图片的垂直边缘和水平边缘。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-20-50.png"> </p>
+<p>由图可知，最终提取到彩色图片的垂直特征图和水平特征图，得到有2个通道的4×4大小的特征图片。</p>
+<p>这张gif诠释了三维、两个卷积核的卷积过程：</p>
+<p>输入图像：三维</p>
+<p>卷积核W0和W1：分别都是三维</p>
+<p><img src="http://img.blog.csdn.net/20160707204048899"></p>
+<p>  可以看到：</p>
+<ul>
+<li>两个神经元，即depth=2，意味着有两个滤波器。</li>
+<li>数据窗口每次移动两个步长取3*3的局部数据，即stride=2。</li>
+<li>zero-padding=1。</li>
+</ul>
+<p>然后分别以两个滤波器filter为轴滑动数组进行卷积计算，得到两组不同的结果。</p>
+<p>​    如果初看上图，可能不一定能立马理解啥意思，但结合上文的内容后，理解这个动图已经不是很困难的事情：</p>
+<ul>
+<li>蓝色输入（<strong>7*7*3</strong>中，7*7代表图像的像素/长宽，3代表R、G、B 三个颜色通道）</li>
+<li>红色是两个不同的滤波器Filter w0、Filter w1</li>
+<li>绿色则是两个不同的输出，每一个格子都等于一次滤波窗口内的内积和（RGB三通道相加）</li>
+</ul>
+<p>​    随着左边数据窗口的平移滑动，滤波器Filter w0 / Filter w1对不同的局部数据进行卷积计算。如果这一部分看不明白，可以继续看<a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/51812459">CNN笔记：通俗理解卷积神经网络</a>，这里讲的非常详细。</p>
+<h4 id="单层卷积网络"><a href="#单层卷积网络" class="headerlink" title="单层卷积网络"></a>单层卷积网络</h4><p>和普通的神经网络单层前向传播的过程类似，卷积神经网络也是一个先由输入和权重及偏置做线性运算，然后得到的结果输入一个激活函数中，得到最终的输出：</p>
+<p>$$z^{[1]}=w^{[1]}a^{[0]}+b^{[1]}$$</p>
+<p>$$a^{[1]}=g(z^{[1]})$$</p>
+<p>不同点是在卷积神经网络中，权重和输入进行的是卷积运算。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-28-06.png"> </p>
+<p><strong>单层卷积的参数个数：</strong></p>
+<p>在一个卷积层中，如果我们有10个 3×3×3 大小的卷积核，那么加上每个卷积核对应的偏置，则对于一个卷积层，我们共有的参数个数为：</p>
+<p>$$(3×3×3+1)×10=280$$</p>
+<p>无论图片大小是多少，该例子中的卷积层参数个数一直都是280个，相对于普通的神经网络，卷积神经网络的参数个数要少很多。</p>
+<h4 id="多层卷积网络"><a href="#多层卷积网络" class="headerlink" title="多层卷积网络"></a>多层卷积网络</h4><p>多层卷积构成卷积神经网络，下面是一个卷积神经网络的例子：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-30-34.png"></p>
+<h2 id="激励层"><a href="#激励层" class="headerlink" title="激励层"></a>激励层</h2><p>几种不同的激活函数$g(x)$：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-14-16-43.png"> </p>
+<ul>
+<li><p>sigmoid：</p>
+<p>$$a = \frac{1}{1+e^{-z}}$$</p>
+<p>导数：$a′=a(1−a)$</p>
+</li>
+<li><p>tanh：</p>
+<p>$$a = \frac{e^z - e^{-z}}{e^z + e{-z}}$$</p>
+<p>导数：$a′=1−a2$</p>
+</li>
+<li><p>ReLU（修正线性单元）：<br>$$a=max(0,z)$$</p>
+</li>
+<li><p>Leaky ReLU：<br>$$a=max(0.01z,z)$$</p>
+</li>
+</ul>
+<p><strong>激活函数的选择</strong></p>
+<p>sigmoid函数和tanh函数比较：</p>
+<ul>
+<li>隐藏层：tanh函数的表现要好于sigmoid函数，因为tanh取值范围为[−1,+1]，输出分布在0值的附近，均值为0，从隐藏层到输出层数据起到了归一化（均值为0）的效果。</li>
+<li>输出层：对于二分类任务的输出取值为{0,1}，故一般会选择sigmoid函数。</li>
+</ul>
+<p>然而sigmoid和tanh函数在当|z|很大的时候，梯度会很小，在依据梯度的算法中，更新在后期会变得很慢。在实际应用中，要使|z|尽可能的落在0值附近。</p>
+<p>ReLU弥补了前两者的缺陷，当z&gt;0时，梯度始终为1，从而提高神经网络基于梯度算法的运算速度。然而当z&lt;0时，梯度一直为0，但是实际的运用中，该缺陷的影响不是很大。</p>
+<p>Leaky ReLU保证在z&lt;0的时候，梯度仍然不为0。</p>
+<p>在选择激活函数的时候，如果在不知道该选什么的时候就选择ReLU，当然也没有固定答案，要依据实际问题在交叉验证集合中进行验证分析。</p>
+<h2 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h2><p><strong>池化函数</strong></p>
+<p>使用某一位置的相邻输出的总体统计特征来代替网络再该位置的输出。</p>
+<p>最大池化函数：给出相邻矩形区域内的最大值。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-33-58.png"> </p>
+<p>在最大池化中，有一组超参数需要进行调整，其中，$f $表示池化的大小，$s$表示步长。</p>
+<ul>
+<li>池化前：$n×n$</li>
+<li>池化后：$⌊\frac{n+2p−f}{s}+1⌋×⌊\frac{n+2p−f}{s}+1⌋$</li>
+</ul>
+<p>此外还有平均池化、最小池化等等。注意，池化层没有需要学习的参数。</p>
+<p><strong>池化的用途</strong></p>
+<p>池化函数帮助输入近似不变：即当我们对输入进行少量平移时，经过池化函数后的大多数输出并不会发生改变。通俗地说就是——为了让我们的网络具有平移不变形（我的理解是无论输入轻微旋转或平移，输出都不变），我们引入池化这个骚操作来达到这个目的。</p>
+<p>例如下图所示的例子。上图是一个网络，下图是一个网络，每个网络的下层是非线性输出，上层是最大池化输出。下图的非线性输出是通过向右平移一个像素得到的。我们可以发现，池化层的输出只有一半发生了改变，这是因为最大池化单元只对周围的最大值较敏感，而不是精确的位置。</p>
+<p><img src="https://i.loli.net/2017/11/01/59f939076125c.png"> </p>
+<p>当我们只关心某个特征是否出现（比如是否有眼睛），而不关心它的具体位置时，局部平移不变性是一个非常有用的性质。</p>
+<p>对空间区域进行池化产生了平移不变性。下图是一种学习不变性的实例：反映的是池化的旋转不变性，对于输入手写5，有三个滤波器分别检测选择不同角度的手写5。当滤波器和对应的手写5匹配时，滤波器会得到一个较大的激活值，然后池化会选择得到最大的激活值，无论手写5是怎样的旋转的。</p>
+<p><img src="https://ooo.0o0.ooo/2017/11/01/59f95b688c95b.png"> </p>
+<p>总的来说就是：通过卷积后，为了引入不变性，同时防止过拟合问题或欠拟合问题、降低计算量，我们常进行池化处理。</p>
+<h1 id="卷积网络的优势"><a href="#卷积网络的优势" class="headerlink" title="卷积网络的优势"></a>卷积网络的优势</h1><p>我们先说一下卷积网络的概念：卷积神经网络（Convolutional Neural Networks）的卷积操作是通过可训练的滤波器对上一层的输出进行卷积求和，然后添加上偏移量经过激活函数，得到了特征映射图作为下一层的输入。卷积操作相对于传统神经网络主要有稀疏链接、权值共享和等变表达的特性。</p>
+<p>卷积通过三个重要思想来帮助改进机器学习系统：稀疏交互、参数共享、等变表示。</p>
+<p>与普通的全连接神经网络相比，卷积神经网络的参数更少。如图中的例子，卷积神经网络仅有6×(5×5+1)=156个参数，而普通的全连接网络有3072×4704≈14M个参数。</p>
+<p><strong>稀疏交互</strong></p>
+<p>对于一张图像来说，输入图像可能包含上千万像素点。但我们可以通过只占用几十或几百的核来检测一些小的但有意义的特征，例如图像边缘。即——在每一层中，每个输出值只取决于少量的输入，也就是稀疏交互。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-15-51-25.png"> </p>
+<p>下图是一种稀疏连接的例子，从下往上看，我们强调了一个输入单元$x_3$以及$s$中受该单元影响的输出单元。这个是当$s$由核宽度为3的卷积产生的，只有3个输出受到了$x$的影响：</p>
+<p><img src="https://i.loli.net/2017/10/31/59f865cb07946.png"> </p>
+<p>从另一个角度，从上往下看，这次我们抢到了一个输出单元$s_3$以及$x$中影响该单元的输入单元。这些单元被称为$s_3$的<strong>接受域</strong>。</p>
+<p><img src="https://i.loli.net/2017/10/31/59f86ae962147.png"> </p>
+<p>从深层的网络来看，我们可以看到尽管连接稀疏，但处在更深层的单元可以间接地连接到全部或大部分输入图像中。</p>
+<p><img src="https://i.loli.net/2017/10/31/59f86aff4a4b1.png">  </p>
+<p><strong>参数共享</strong></p>
+<p>一个特征检测器（filter）对图片的一部分有用的同时也有可能对图片的另外一部分有用。</p>
+<p>因为核的每一个元素都作用在输入的每一个位置上，因此卷积运算会导致用于一个输入的权重也会被绑定在其它权重上。这样的参数共享保证了我们只需要学习一个参数集合，而不是对每一个位置都需要学习一个单独的参数集合。如下图所示，黑色箭头表示两个不同模型中使用了特殊的参数连接。灰色箭头表示它用了黑色箭头的参数。其实就是一个$x$只有一个参数，但这个参数被用于了多个下一层。</p>
+<p><img src="https://i.loli.net/2017/10/31/59f86f09c700e.png">  </p>
+<p>对于卷积，参数共享的特殊形式使得神经网络层具有对<strong>平移等变的性质</strong>：先平移后卷积=先卷积后平移。</p>
+<p><strong>边缘检测的例子</strong></p>
+<p>如图所示，我们使用每个像素减去左边相邻像素形成的。这其实就是一种最简单的卷积。</p>
+<p><img src="https://i.loli.net/2017/10/31/59f879f482dd9.png"></p>
+<h1 id="训练卷积神经网络"><a href="#训练卷积神经网络" class="headerlink" title="训练卷积神经网络"></a>训练卷积神经网络</h1><p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-06-16-04-01.png"> </p>
+<p>我们将训练集输入到卷积神经网络中，对网络进行训练。利用梯度下降（Adam、momentum等优化算法）最小化代价函数来寻找网络最优的参数。</p>
+<h1 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h1><h2 id="卷积网络的时间复杂度"><a href="#卷积网络的时间复杂度" class="headerlink" title="卷积网络的时间复杂度"></a>卷积网络的时间复杂度</h2><h3 id="单个卷积层的时间复杂度"><a href="#单个卷积层的时间复杂度" class="headerlink" title="单个卷积层的时间复杂度"></a>单个卷积层的时间复杂度</h3><p>$$O(M^2 K^2 C_{in}C_{out})$$</p>
+<ul>
+<li>M : 每个卷积核输出特征图（feature map）的边长<ul>
+<li><strong>输出</strong>特征图尺寸本身又由<strong>输入</strong>矩阵尺寸 X 、卷积核尺寸K、填充大小Padding、步长Stride 这四个参数所决定，表示如下：<br>$$M = (X - K + 2 * Padding) / Stride + 1$$</li>
+</ul>
+</li>
+<li>K : 每个卷积核的边长</li>
+<li>Cin :  每个卷积核的通道数，也即输入通道数，也即上一层的输出通道数</li>
+<li>Cout : 本卷积层具有的卷积核个数，也即输出通道数</li>
+</ul>
+<h3 id="卷积神经网络整体的时间复杂度"><a href="#卷积神经网络整体的时间复杂度" class="headerlink" title="卷积神经网络整体的时间复杂度"></a>卷积神经网络整体的时间复杂度</h3><p>$$O\sum_{l = 1}^D(M^2_l K_l ^2 C_{l-1}C_{l})$$</p>
+<ul>
+<li>D : 网络深度</li>
+</ul>
+<h2 id="卷积网络的空间复杂度"><a href="#卷积网络的空间复杂度" class="headerlink" title="卷积网络的空间复杂度"></a>卷积网络的空间复杂度</h2><p>$$O(\sum_{l = 1}^D K_l^2 C_{l - 1}C_l)$$</p>
+<ul>
+<li>与输入数据大小无关</li>
+<li>当我们需要裁剪模型时，由于卷积核的尺寸通常已经很小，而网络的深度又与模型的能力紧密相关，不宜过多削减，因此模型裁剪通常最先下手的地方就是通道数</li>
+</ul>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a href="">深度学习</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.datagrand.com/blog/neural.html">达观数据深度学习</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.dlworld.cn/ZiLiaoXiaZai/1757.html">深度学习笔记（一）卷积神经网络(Convolutional Neural Networks)</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/v_july_v/article/details/51812459">CNN笔记：通俗理解卷积神经网络</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31575074">卷积神经网络的复杂度分析</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/26/%E6%95%B0%E5%AD%A6-%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" rel="next" title="数学-最大似然估计">
+                <i class="fa fa-chevron-left"></i> 数学-最大似然估计
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/02/%E7%AE%97%E6%B3%95-DP-%E9%92%A2%E6%9D%A1%E5%88%87%E5%89%B2%E9%97%AE%E9%A2%98/" rel="prev" title="算法-DP-钢条切割问题">
+                算法-DP-钢条切割问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E8%BF%87%E7%A8%8B"><span class="nav-text">图像识别过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%BE%B9%E7%BC%98%E6%A3%80%E6%B5%8B"><span class="nav-text">图像边缘检测</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-text">卷积网络结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84-1"><span class="nav-text">卷积网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E8%AE%A1%E7%AE%97%E5%B1%82"><span class="nav-text">卷积计算层</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E8%BF%90%E7%AE%97"><span class="nav-text">卷积运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E8%AE%A1%E7%AE%97%E5%B1%82-1"><span class="nav-text">卷积计算层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Depth-%E6%B7%B1%E5%BA%A6"><span class="nav-text">Depth-深度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stride-%E6%AD%A5%E9%95%BF"><span class="nav-text">Stride-步长</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Padding-%E5%A1%AB%E5%85%85%E5%80%BC"><span class="nav-text">Padding-填充值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E8%AE%A1%E7%AE%97%E7%9A%84%E8%BF%87%E7%A8%8B"><span class="nav-text">卷积计算的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E5%B1%82%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C"><span class="nav-text">单层卷积网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%B1%82%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C"><span class="nav-text">多层卷积网络</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BF%80%E5%8A%B1%E5%B1%82"><span class="nav-text">激励层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%A0%E5%8C%96%E5%B1%82"><span class="nav-text">池化层</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="nav-text">卷积网络的优势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">训练卷积神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text">复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text">卷积网络的时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%AA%E5%8D%B7%E7%A7%AF%E5%B1%82%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text">单个卷积层的时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text">卷积神经网络整体的时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-text">卷积网络的空间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

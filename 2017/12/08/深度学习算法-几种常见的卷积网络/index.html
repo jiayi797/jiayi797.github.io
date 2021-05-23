@@ -1,0 +1,1337 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="我们先回顾一些经典的卷积网络，然后看看当下比较流行的几种网络 经典的卷积网络介绍几种经典的卷积神经网络结构，分别是LeNet、AlexNet、VGGNet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习算法-几种常见的卷积网络">
+<meta property="og:url" content="http://jiayi797.github.io/about/2017/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="我们先回顾一些经典的卷积网络，然后看看当下比较流行的几种网络 经典的卷积网络介绍几种经典的卷积神经网络结构，分别是LeNet、AlexNet、VGGNet">
+<meta property="og:locale">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-08-10-44-59.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-05-21.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-06-16.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-08-33.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-13-16.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-14-05.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-14-35.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-17-55.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-27-35.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-28-07.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-30-39.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-42-14.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-52-38.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-53-50.png">
+<meta property="og:image" content="https://images2018.cnblogs.com/blog/1160281/201711/1160281-20171124151010078-1933005968.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-56-19.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-58-22.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-58-39.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-59-09.png">
+<meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-59-38.png">
+<meta property="article:published_time" content="2017-12-08T02:34:50.000Z">
+<meta property="article:modified_time" content="2018-12-17T07:42:03.000Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-08-10-44-59.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2017/12/08/深度学习算法-几种常见的卷积网络/"/>
+
+
+
+
+
+  <title>深度学习算法-几种常见的卷积网络 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深度学习算法-几种常见的卷积网络</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T02:34:50+00:00">
+                2017-12-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:03+00:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">卷积网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/08/深度学习算法-几种常见的卷积网络/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们先回顾一些经典的卷积网络，然后看看当下比较流行的几种网络</p>
+<h1 id="经典的卷积网络"><a href="#经典的卷积网络" class="headerlink" title="经典的卷积网络"></a>经典的卷积网络</h1><p>介绍几种经典的卷积神经网络结构，分别是LeNet、AlexNet、VGGNet</p>
+<span id="more"></span>
+
+<h2 id="LeNet-5"><a href="#LeNet-5" class="headerlink" title="LeNet-5"></a>LeNet-5</h2><p>LeNet-5主要是针对灰度设计的，所以输入较小，为$32\times 32 \times 1$，其结构如下：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-08-10-44-59.png"> </p>
+<p>在LetNet中，存在的经典模式：</p>
+<ul>
+<li>随着网络的深度增加，图像的大小在缩小，与此同时，通道的数量却在增加；</li>
+<li>每个卷积层后面接一个池化层。</li>
+</ul>
+<p>LeNet-5是1998年写的，大约有6万个参数，基本的网络结构跟今天差不多，只是有几点不同：</p>
+<p>激活函数用sigmoid或tanh，没有用relu；当时比较流行使用平均池化；池化后使用了sigmoid激活函数；没有使用pdding；</p>
+<p>当时的每个卷积核是跟原图像的通道数是一样的，是因为当时计算能力弱，为了减少计算量用了很复杂的运算进行，现在一般都不这么用了；</p>
+<h2 id="AlexNext"><a href="#AlexNext" class="headerlink" title="AlexNext"></a>AlexNext</h2><p>AlextNet和LeNet类似，但是网络大了很多，参数大约有6000万个；相比于LeNet-5它使用了relu激活函数；当时的GPU运行还比较慢，用了多GPU的方式训练。</p>
+<p>从这篇论文开始，计算机视觉研究者开始关注深度学习，并相信深度学习可以应用于计算机视觉领域，此后，深度学习在计算机视觉及其它领域的影响力与日俱增。</p>
+<p>AlexNet直接对彩色的大图片进行处理，其结构如下：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-05-21.png"> </p>
+<h2 id="VGG-16"><a href="#VGG-16" class="headerlink" title="VGG-16"></a>VGG-16</h2><p>VGG-16总共包含约1.38亿个参数，但是它的结构并不复杂，很整齐，卷积核大小和池化参数恒定，几个卷积后面跟着一个池化，卷积核的数量以加倍的方式变化，每次池化后图片高度宽度减半，这种相对一致的网络结构对研究者很有吸引力。而主要缺点在于需要训练的参数特点多。VGG-19比VGG-16更大，只是它们的效果差不多，所以很多人还是用VGG-16。</p>
+<p>如果想研读论文的话，ng的建议顺序是AlexNet（比较好懂），VGG，LeNet-5（比较晦涩）。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-06-16.png"> </p>
+<h1 id="残差网络-ResNets"><a href="#残差网络-ResNets" class="headerlink" title="残差网络 (ResNets)"></a>残差网络 (ResNets)</h1><p>Residual Networks</p>
+<p>因为存在梯度消失和梯度爆炸的问题，深度很深的网络是很难训练的。我们可以通过跳过连接( skip connections ) ，来构建能训练深度网络的ResNets。</p>
+<p>先回顾一下正常网络的前向传播计算步骤：</p>
+<ul>
+<li>Linear：$z^{[l+1]} = W^{[l+1]}a^{[l]} + b^{[l+1]}$</li>
+<li>Relu：$a^{[l+1]} = g(z^{[l+1]})$</li>
+<li>Linear：$z^{[l+2]} = W^{[l+2]}a^{[l+1]} + b^{[l+2]}$</li>
+<li>Relu：$a^{[l+2]} = g(z^{[l+2]})$</li>
+</ul>
+<p>残差网络是由残差块构成的。正常的网络按照一个主路径传递，如果我们在某层的输出后跳过了一层（或者好几层），直接达到后层的激活函数之前（例如下图的从$a^{[l]}到z^{[l+2]}$ 的连接），这条路就是捷径（称之为short cut 或 skip connection），含有捷径的这一块（包含主路径）就叫残差块。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-08-33.png"> </p>
+<p>也就是前向传播公式的最后一个步骤变为：$a^{[l+2]} = g(z^{[l+2]}+a^{[l]})$</p>
+<p>那么残差块的网络结构就是：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-13-16.png"> </p>
+<p>所谓构建残差网络（ResNets）就是通过很多这样的残差块堆积在一起，形成一个深度神经网络。其结构如下：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-14-05.png"> </p>
+<p>如下图所示，在普通网络（plain network）中，理论上随着深度的加深，错误率不断下降。然而实际上因为太深的原因难以训练，到了后面训练错误率会上升。</p>
+<p>在残差网络中，随着深度的不断增加，错误率不断下降。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-14-35.png"> </p>
+<p>ResNet对于中间的激活函数来说，有助于能够达到更深的网络，解决梯度消失和梯度爆炸的问题。</p>
+<p>为什么残差会有用呢？看个例子。假设有个比较大的神经网络，输入为$x$，输出为$a^{[l]}$。如果我们想增加网络的深度，这里再给网络增加一个残差块：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-17-55.png"> </p>
+<p>假定使用relu激活函数，现在$a^{[l]}$跳过了$a^{[l+1]}$层，那么有</p>
+<p>$$a^{[l+2]} = g(z^{[l+2]}+a^{[l]})=g(W^{[l+2]}a^{[l+1]}+b^{[l+2]}+a^{[l]})$$</p>
+<p>如果我们做了2正则化或者权重衰减，会压缩W和b的值，那么假设$W^{[l+2]}=0$ 且$b^{[l+2]}=0$，那么上式子就变为：</p>
+<p>$$a^{[l+2]} = g(z^{[l+2]}+a^{[l]})=g(a^{[l]})=relu(a^{[l]})= a^{[l]}$$</p>
+<p>因为使用的是relu，而且a[l]是已经被激活过的，结果表明残差块学习这个恒等式函数并不难，即使中间隔着两层我们还是能得到a[l+2] = a[l]。</p>
+<p>值得注意的是这里$a^{[l+2]} =g(z^{[l+2]}+a^{[l]})$ ， 想相加那就必须维度一致。所以残差网络中使用了很多相同的卷积来保留维度。如果维度不一致的话，z[i+2] + a[l]的时候，在a[l]前面乘上一个权重，来保持维度一致，这个维度是网络自己学习得到的参数，它用0填充a[l]或者其它手段使得维度一致。</p>
+<h1 id="Inception-Net"><a href="#Inception-Net" class="headerlink" title="Inception Net"></a>Inception Net</h1><h2 id="1-times-1-卷积"><a href="#1-times-1-卷积" class="headerlink" title="$1 \times 1$ 卷积"></a>$1 \times 1$ 卷积</h2><p>在二维上，$1\times 1$ 卷积就相当于每个元素与一个数字相乘。如下图所示：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-27-35.png"> </p>
+<p>但假如是多通道的三维上，如果一个三维的东西与一个$1\times1\times n_C$ 的东西相乘，如下图所示，就相当于三维图形上的$1\times1\times n_C$ 切片，也就是$n_c$ 个点乘以权重，通过Relu函数后，输出对应的结果。而不同的卷积核则相当于不同的隐层神经元结点与切片上的点进行一一连接。</p>
+<p>最终三维的图形应用1×1的卷积核得到一个相同长宽但第三维度变为卷积核个数的图片。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-28-07.png"> </p>
+<p>所以根本上1×1卷积核相当于对一个切片上的$n_c$个单元都应用了一个全连接的神经网络。</p>
+<p><strong>1x1卷积应用：</strong></p>
+<ul>
+<li>维度压缩：使用目标维度的1×1的卷积核个数。</li>
+<li>增加非线性：保持与原维度相同的1×1的卷积核个数。</li>
+</ul>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-30-39.png"> </p>
+<h2 id="Inception-Network"><a href="#Inception-Network" class="headerlink" title="Inception Network"></a>Inception Network</h2><p>Inception Network 的作用就是使我们无需去考虑在构建深度卷积神经网络时，使用多大的卷积核以及是否添加池化层等问题。</p>
+<p>用机器代替人工来确定卷积层中的卷积核类型，或者确定是否需要创建卷积层或池化层。</p>
+<p>对于一个输入的图像，是用1<em>1，还是3</em>3，还是5*5的卷积，还是做一种特殊的池化，Inception会把他们都计算出来叠在一起，由网络自己学习应该采用什么运算。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-42-14.png"> </p>
+<p>在上面的Inception结构中，应用了不同的卷积核，以及带padding的池化层。在保持输入图片大小不变的情况下，通过不同运算结果的叠加，增加了通道的数量。</p>
+<p><strong>计算成本问题</strong></p>
+<p>对于上面的5×5大小卷积核的计算成本：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-52-38.png"> </p>
+<ul>
+<li>1 filters：5×5×192；</li>
+<li>32 个 filters；</li>
+<li>总的计算成本：28×28×32×5×5×192=120M</li>
+</ul>
+<p>现在考虑先用1<em>1的卷积，构造一个瓶颈层，</em>用作过渡的计算成本，也将下面的中间的层叫做“bottleneck layer”：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-53-50.png"> </p>
+<ul>
+<li>1×1卷积层计算成本：28×28×16×1×1×192=2.4M</li>
+<li>5×5卷积层计算成本：28×28×32×5×5×16=10.0M</li>
+<li>总的计算成本：2.4M+10.0M=12.4M</li>
+</ul>
+<p>这样需要计算的乘法运算次数约等于1200千万次，比之前缩小了10倍，如上图所示。</p>
+<p>事实证明，只要合理地设置“bottleneck layer”，既可以显著减小上层的规模，同时又能降低计算成本，从而不会影响网络的性能。</p>
+<p><strong>结合</strong></p>
+<p>利用1*1卷积可以减小计算量，把这个和上面说的Inception结合起来，可以得到下图所示模块。</p>
+<p><img src="https://images2018.cnblogs.com/blog/1160281/201711/1160281-20171124151010078-1933005968.png" alt="img"></p>
+<p>这些一个个Inception模块堆叠起来，就是一个大的Inception网络，如下图所示。可以注意到除了最后的输出外，还有几个分支输出，这些分支输出是根据中间隐藏层进行预测的输出，它确保了中间隐藏层也参与了特征计算，它们也能预测图片的分类，它起到一种调整的作用，并且能防止网络过拟合。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-56-19.png"> </p>
+<h1 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h1><p><strong>小数据集：</strong></p>
+<p>如今在深度学习领域，许多研究者都会将他们的工作共享到网络上。在我们实施自己的工作的时候，比如说做某种物体的识别分类，但是只有少量的数据集，对于从头开始训练一个深度网络结构是远远不够的。</p>
+<p>但是我们可以应用迁移学习，应用其他研究者建立的模型和参数，用少量的数据仅训练最后自定义的softmax网络。从而能够在小数据集上达到很好的效果。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-58-22.png"> </p>
+<p><strong>大数据集：</strong></p>
+<p>如果我们在自己的问题上也拥有大量的数据集，我们可以多训练后面的几层。总之随着数据集的增加，我们需要“ freeze”的层数越来越少。最后如果我们有十分庞大的数据集，那么我们可以训练网络模型的所有参数，将其他研究者训练的模型参数作为参数的初始化来替代随机初始化，来加速我们模型的训练。</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-58-39.png"> </p>
+<h1 id="数据扩充"><a href="#数据扩充" class="headerlink" title="数据扩充"></a>数据扩充</h1><p>与其他机器学习问题相比，在计算机视觉领域当下最主要的问题是没有办法得到充足的数据。所以在我们训练计算机数据模型的时候，数据的扩充就是会非常有用。</p>
+<p><strong>数据扩充的方法：</strong></p>
+<ul>
+<li>镜像翻转（Mirroring）；</li>
+<li>随机剪裁（Random Cropping）；</li>
+<li>色彩转换（Color shifting）：<br>为图片的RGB三个色彩通道进行增减值，如（R：+20，G：-20，B：+20）；PCA颜色增强：对图片的主色的变化较大，图片的次色变化较小，使总体的颜色保持一致。</li>
+</ul>
+<p><strong>训练过程中的数据扩充：</strong></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-59-09.png"> </p>
+<p>为了节省时间，数据扩充的过程和训练过程可以多CPU多线程来并行的实现。</p>
+<h1 id="计算机视觉现状"><a href="#计算机视觉现状" class="headerlink" title="计算机视觉现状"></a>计算机视觉现状</h1><p><strong>数据和手工工程：</strong></p>
+<p>不同问题当前的数据集大小：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-02-22-59-38.png"> </p>
+<p>在有大量数据的时候，我们更倾向于使用简单的算法和更少的手工工程。因为此时有大量的数据，我们不需要为这个问题来精心设计特征，我们使用一个大的网络结果或者更简单的模型就能够解决。</p>
+<p>相反，在有少量数据的时候，我们从事更多的是手工工程。因为数据量太少，较大的网络结构或者模型很难从这些少量的数据中获取足够的特征，而手工工程实际上是获得良好表现的最佳方式。</p>
+<p>对于机器学习应用：</p>
+<ul>
+<li>标记数据，（x,y）；</li>
+<li>手工特征工程/网络结构/其他构建。</li>
+</ul>
+<p><strong>Tips for doing well：</strong></p>
+<p>在基准研究和比赛中，下面的tips可能会有较好的表现：</p>
+<ul>
+<li>Ensembling：独立地训练多个网络模型，输出平均结果或加权平均结果；</li>
+<li>测试时的 Multi-crop：在测试图片的多种版本上运行分类器，输出平均结果。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-3-%E6%9E%84%E5%BB%BA%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="next" title="深度学习实践-1-3-构建浅层神经网络">
+                <i class="fa fa-chevron-left"></i> 深度学习实践-1-3-构建浅层神经网络
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-1-%E6%9E%84%E5%BB%BA%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="prev" title="深度学习实践-1-4-1-构建深层神经网络">
+                深度学习实践-1-4-1-构建深层神经网络 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E5%85%B8%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C"><span class="nav-text">经典的卷积网络</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LeNet-5"><span class="nav-text">LeNet-5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AlexNext"><span class="nav-text">AlexNext</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VGG-16"><span class="nav-text">VGG-16</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AE%8B%E5%B7%AE%E7%BD%91%E7%BB%9C-ResNets"><span class="nav-text">残差网络 (ResNets)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Inception-Net"><span class="nav-text">Inception Net</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-times-1-%E5%8D%B7%E7%A7%AF"><span class="nav-text">$1 \times 1$ 卷积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Inception-Network"><span class="nav-text">Inception Network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="nav-text">迁移学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%89%A9%E5%85%85"><span class="nav-text">数据扩充</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E7%8E%B0%E7%8A%B6"><span class="nav-text">计算机视觉现状</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytmgt7V8';
+      var conf = 'f20a47bca89136fdb1ce79762c886a35';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
