@@ -319,6 +319,200 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/03/05/%E7%AE%97%E6%B3%95-%E5%8D%A1%E5%85%B0%E7%89%B9%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/05/%E7%AE%97%E6%B3%95-%E5%8D%A1%E5%85%B0%E7%89%B9%E6%95%B0/" itemprop="url">算法-卡兰特数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-05T12:53:38+08:00">
+                2018-03-05
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/03/05/%E7%AE%97%E6%B3%95-%E5%8D%A1%E5%85%B0%E7%89%B9%E6%95%B0/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://jiayi797.github.io/about/2018/03/05/%E7%AE%97%E6%B3%95-%E5%8D%A1%E5%85%B0%E7%89%B9%E6%95%B0/" class="cy_cmt_count" data-xid="2018/03/05/算法-卡兰特数/" itemprop="commentsCount" ></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="出栈顺序问题"><a href="#出栈顺序问题" class="headerlink" title="出栈顺序问题"></a>出栈顺序问题</h1><p>今天看到一道出栈顺序的面试题，很心的思路。特来注意一下。</p>
+<p><strong>问题定义</strong></p>
+<p>一个栈(无穷大)的进栈序列为1，2，3，…，n，有多少个不同的出栈序列?</p>
+<p><strong>解题思路</strong></p>
+<ol>
+<li>假设进栈序列为$[a,b,c,d]$ . 设$f(k)$ 表示还剩k个元素时的出栈序列数目（元素内容并不影响数目，例如abc与abd的出栈序列数目是一样的）</li>
+<li>如果a第1个出栈，那么只有可能就是a进栈后马上出栈。还剩bcd等待操作。那么就是子问题$f(3)$</li>
+<li>如果a第2个出栈，那么一定有一个元素先比a进栈，这个元素只可能是b。那么就是子问题$f(1)$。 而还剩下cd等待操作，那么cd就是子问题$f(2)$</li>
+<li>如果a第3个出栈，那么一定有2个元素比a先出栈，这2个元素只可能是bc，就是子问题$f(2)$ 。而剩下的d就是$f(1)$</li>
+<li>如果a第4个出栈，那么一定是a进栈后，等到bcd都出栈后再出栈。那么bcd就是$f(3)$</li>
+</ol>
+<p>结合以上所有情况，即$f(4) = f(3) + f(2)\times f(1) + f(1) \times f(2) + f(3)$</p>
+<p>为了好看，我们定义$f(0) = 1$ ，然后推广到n，那么可以得到：</p>
+<p>$$f(n) =f(0)\times f(n) + f（1)\times f(n-1) +…+f(k)(n-k)+…+ f(n-1) \times f(1) + f(n) \times f(0)$$</p>
+<p>$$ = \sum_{i=0}^{n-1} f(i)f(n-i)$$</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/05/%E7%AE%97%E6%B3%95-%E5%8D%A1%E5%85%B0%E7%89%B9%E6%95%B0/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/03/04/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2061,226 +2255,6 @@ UrlService.decode(short_
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/" itemprop="url">算法-数学相关习题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-29T18:10:15+08:00">
-                2018-01-29
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-comment-o"></i>
-              </span>
-              
-                <a href="/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/#SOHUCS" itemprop="discussionUrl">
-                  <span id="url::http://jiayi797.github.io/about/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/" class="cy_cmt_count" data-xid="2018/01/29/算法-数学相关习题/" itemprop="commentsCount" ></span>
-                </a>
-              
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          素数判断n是素数解法一，暴解
-如果n是素数，那么n不能被任何数（1和n除外）的数字整除。暴力的方法就是从2~n-1进行探测，探测$\frac{n}{k}, k = 2,3,…,n-1$ 是否是整数 
-1234567private boolean ifPrime(int n)&#123;  if(n &lt; 2) return false;  for(int k = 2; k &lt; n; ++k)&#123;    if(n % k == 0) return false;  &#125;  return true;&#125;
-
-解法二，优化
-事实上，如果n不是素数，那么一定存在$n = a \times b$ ，而a和b的可能性有：
-
-
-
-a
-b
-
-
-
-2
-n/2
-
-
-3
-n/3
-
-
-…
-…
-
-
-n/3
-3
-
-
-n/2
-2
-
-
-我们发现，a和b有重复计算的部分，即如果a &lt; sqrt(n) , 那么b &gt; sqrt(n) 。因此a只用探测到sqrt(n)即可。
-12345678private boolean ifPrime(int n)&#123;  if(n &lt; 2) return false;  int sqrt = (int)Math.sqrt(n);  for(int k = 2; k &lt; sqrt; ++k)&#123;    if(n % k == 0) return false;  &#125;  return true;&#125;
-
-解法三，素数筛——生成素数序列：埃拉托斯特尼筛法
-素数筛能非常高效地生成素数序列。原理是剔除所有可
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2330,7 +2304,7 @@ n/2
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">141</span>
+                <span class="site-state-item-count">142</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2341,7 +2315,7 @@ n/2
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
