@@ -319,6 +319,203 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/12/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/12/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url">多线程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-12T13:51:34+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:41:59+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  694
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          **线程(thread)**：每个任务称为一个线程线程和进程区别：
+
+每个进程有自己独立的变量，而线程则共享数据。
+线程是进程的执行单元
+线程是进程的组成部分。一个进程可以有多个线程，一个线程必须有一个父进程。
+线程可以拥有自己的堆栈、自己的程序计数器和自己的局部变量，但不拥有系统资源（与父进程其它线程共享该进程则资源）
+
+线程的创建有以下两种方法：
+
+通过继承Thread来创建线程
+通过实现Runnable接口创建线程
+
+通过继承Thread来创建线程要点：通过继承Thread类创建并启动多线程步骤：
+
+定义Thread类的子类，并重写run()方法（线程执行体）
+
+创建Thread子类的实例(创建线程对象)
+
+调用start()（启用该线程）
+ 12345678public class FirstThread extends Thread &#123;    public void run()&#123;        System.out.println(&quot;run\t&quot;+getName()+&quot;\t&quot;);//getName()返回thread name    &#125;    public static void main(String[] args)&#123;        new FirstThread().start();    &#125;&#125;
+
+以上代码输出：
+run  Thread-0
+
+一个有意思的现象
+运行如下代码时：
+12345678910111213public class FirstThread ex
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/12/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/11/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1996,204 +2193,6 @@ HTTP 是一种无状态的协议,协议本身不保留之前的一切请求信�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/04/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-%E3%80%8AImproving-Regressors-Using-Boosting-Techniques%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-%E3%80%8AImproving-Regressors-Using-Boosting-Techniques%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" itemprop="url">《Improving Regressors Using Boosting Techniques》论文笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-04T20:12:45+08:00">
-                2017-04-04
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:00+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习进阶</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  440
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          introduction部分Bagging和boosting用途
-Bagging和boosting主要是用多重预测来解决以下两个问题：
-
-在回归问题中获取最小误差；
-在分类问题中获取最小错误率。
-
-Bagging和Boosting共性都是通过训练不同的数据集来得到回归模型。
-不同点
-bagging
-
-从$N_1$个原始样本中，有放回地抽样(可能overlap)得到$N_1$个样本
-独立训练模型
-得到不同的预测
-求所有预测的平均得到最终结果
-
-由于模型之间独立，因此可以对训练过程采取分布式或并行的方式。
-boosting
-模型是依次训练出来的。
-
-从训练集中挑出$N_1$个样本，训练出第一个模型
-挑出误差最大的样本
-增大这些样本在下次被抽到的概率
-再次进行训练，最终得到多个模型
-最终对模型进行不同权重的加权，权重公式如下定义：
-
-设已知训练集$(y_i,x_i),i=1,…,N_1$。其中，$x$是$M$维的向量，且$(y_i,x_i)$唯一但未知(fixed but unknown)我们将预测函数表示为$y^{(p)}(x)$，则：
-sample modeling error: $$PE=\frac{1}{N_2}\sum_{i=1}^{N_2}[y_i-y_i^{(p)}(x_i)]^2$$prediction error: $$ME=\frac{1}{N_2}\sum_{i=1}^{N_2}[y_i^{(t)}-y_i^{(p)}(x_i)]^2$$
-其中，$y_i^{(p)}(x_i)$表示第$i$个测试集的预测值$y_i$表示第$i$个测试集的观测值$y^{(t)}_i
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%BF%9B%E9%98%B6-%E3%80%8AImproving-Regressors-Using-Boosting-Techniques%E3%80%8B%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2243,7 +2242,7 @@ sample modeling error: $$PE=\frac{1}{N_2}\sum_{i=1}^{N_2}[y_i-y_i^{(p)}(x_i)]^2$
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">143</span>
+                <span class="site-state-item-count">144</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2254,7 +2253,7 @@ sample modeling error: $$PE=\frac{1}{N_2}\sum_{i=1}^{N_2}[y_i-y_i^{(p)}(x_i)]^2$
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2318,7 +2317,7 @@ sample modeling error: $$PE=\frac{1}{N_2}\sum_{i=1}^{N_2}[y_i-y_i^{(p)}(x_i)]^2$
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共325.1k字</span>
+  <span class="post-count">博客全站共326.8k字</span>
 </div>
 
 
