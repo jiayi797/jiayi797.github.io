@@ -319,6 +319,181 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/02/%E4%BB%8E%E5%87%BA%E7%A7%9F%E8%BD%A6%E8%A1%8C%E9%A9%B6%E6%95%B0%E6%8D%AE%E7%AD%9B%E9%80%89%E5%87%BAOD%E7%82%B9%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/02/%E4%BB%8E%E5%87%BA%E7%A7%9F%E8%BD%A6%E8%A1%8C%E9%A9%B6%E6%95%B0%E6%8D%AE%E7%AD%9B%E9%80%89%E5%87%BAOD%E7%82%B9%E6%95%B0%E6%8D%AE/" itemprop="url">从出租车行驶数据筛选出OD点数据</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-02T14:12:00+08:00">
+                2017-03-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:00+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  708
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          动手前先动脑，这句话献给自己。
+目标从出租车行驶数据中，筛选出OD点。
+数据集123456789101112131415161718名称：2012年11月1日 北京市出租车GPS数据格式：txt文本文件数据项及顺序：车辆标识,触发事件,运营状态,GPS时间,GPS经度,GPS纬度,GPS速度,GPS方向,GPS状态车辆标识：6个字符触发事件：0=变空车，1=变载客，2=设防，3=撤防，4=其它运营状态：0=空车，1=载客，2=驻车，3=停运，4=其它GPS时间GPS经度GPS纬度GPS速度：取值000-255内整数，以公里/小时为单位GPS方位：取值000-360内整数，以度为单位GPS状态：0=无效，1=有效结束串：回车符+换行符数据示例:123456,0,0,20110414160613,116.4078674,40.2220650,21,274,1
+思路
+将数据点按照“车牌号、运营时间、运营状态”依次从小到大排序
+筛出同一车牌号的运营状态变化的时刻的数据
+
+方法
+方法一：导入数据库，再写脚本操作数据。可能是我对数据库实在没缘分，这个方法没有成功。
+
+方法二：将车牌号分段后，在每段上进行如上思路所示的操作。
+
+
+为了更好地分段，我们先对车牌号段进行分析。
+车牌号段分析查询车的数目：12409个
+1SELECT COUNT(DISTINCT id) FROM SET1
+
+
+
+
+脚本名：data1IDcount.py
+地址：81服务器上，D:\jiayi\wxt
+听说数据集有三千多万，所以我决定每一千个数据取一条进行粗略分析。
+车牌号分布： 
+结果：
+
+车牌号分布在1-8000
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/02/%E4%BB%8E%E5%87%BA%E7%A7%9F%E8%BD%A6%E8%A1%8C%E9%A9%B6%E6%95%B0%E6%8D%AE%E7%AD%9B%E9%80%89%E5%87%BAOD%E7%82%B9%E6%95%B0%E6%8D%AE/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/01/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-ROC%E5%92%8CAUC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1110,7 +1285,7 @@ $$E_{out}(h)=\mathcal{E}_{(x,y)\text~P}(w^Tx-y)^2$$
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">144</span>
+                <span class="site-state-item-count">145</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1121,7 +1296,7 @@ $$E_{out}(h)=\mathcal{E}_{(x,y)\text~P}(w^Tx-y)^2$$
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1185,7 +1360,7 @@ $$E_{out}(h)=\mathcal{E}_{(x,y)\text~P}(w^Tx-y)^2$$
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共326.8k字</span>
+  <span class="post-count">博客全站共327.6k字</span>
 </div>
 
 

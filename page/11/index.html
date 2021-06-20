@@ -319,6 +319,195 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/13/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/13/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/" itemprop="url">OpenMessaging源码阅读1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-13T15:29:31+08:00">
+                2017-05-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">中间件比赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          考虑到自己记性实在太差，还是好好记笔记吧。本节主要看以下几个接口：
+
+Meaasage
+Producer
+PullConsumer
+
+Message.javaMessage接口是所有OMS消息中的根接口。最常用的消息就是BytesMessage。
+标准Message大多消息导向（message-oriented）的中间件（MOM）产品更趋向于将消息认做轻实体，这个轻实体包含一个header和一个body：
+
+header:包含用来路由和识别的信息域；
+body:包含将会被发送的应用信息；
+
+本Message本消息是一个仅包含与具体消息对象相关的property(财产)的轻量级实体。主要包含以下几个方面：
+
+Header:所有消息都有同样的header域。header域的值用来给客户端(clients)和提供商（providers）唯一标示消息，以及路由消息。
+Properties(财产，特性)：每个消息都有一个消息自有的部分，这部分用来提供“应用定义(application-defined)”的property(财产)值。这一部分为支持“应用定义”消息的过滤提供了很有效的机制。
+
+源码解读
+123456789101112131415161718192021222324public interface Message &#123;     /*headers()返回Message对象的header域，返回值类型是keyValue。*/    KeyValue headers();    /*properties()返回消息自有的property域。返回值类型是keyValue。*
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/13/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/12/Java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2005,194 +2194,6 @@ linux互传
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/04/05/Python-python%E5%AE%9E%E7%8E%B0%E6%9F%90%E7%BD%91%E7%AB%99%E8%87%AA%E5%8A%A8%E6%89%93%E5%8D%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/05/Python-python%E5%AE%9E%E7%8E%B0%E6%9F%90%E7%BD%91%E7%AB%99%E8%87%AA%E5%8A%A8%E6%89%93%E5%8D%A1/" itemprop="url">python实现某网站自动打卡</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-05T15:16:14+08:00">
-                2017-04-05
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:00+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          最近学校出了个科学上网的小网站，但流量有限，可以通过每天打卡来获取几十兆流量。奈何自己记性很差，总忘记打卡。因此决定写一个自动打卡的小程序。
-思路总结
-用抓包工具仔细分析下登陆以及回帖时post了哪些数据，这些数据从何而来（chrome）
-python requests库，用requests.Session().post来登陆和回帖，用get来读取页面内容；
-登陆之后，正则找到“签到”或”不能签到”，来进行下一步
-若能签到，就发出签到URL的请求（因为链接从原来上来说是一种URL）
-记录每次签到的log
-最后的最后，使用写个.sh脚本，里面运行这个python程序，配置个相应的plist，每天自动执行（MAC OS）
-
-模拟登陆原理浏览器访问服务器的过程一次完整的HTTP请求过程从TCP三次握手建立连接成功后开始。
-
-用户发起请求（点击等）
-浏览器向WEB服务器发出一个请求Http Request（请求）
-Web服务器发相应Http Response
-浏览器解析
-
-HTTP消息更多关于HTTP请求过程，见参考资料一次完整的HTTP请求过程
-HTTP 是一种无状态的协议,协议本身不保留之前的一切请求信息和响应信息，也就是说，对于一个刚刚发送了 HTTP 请求的客户端再次发起请求时，服务端并不知道之前访问过。这样设计的理由是为了更快地处理大量事务，确保协议的可伸缩性，而特意把 HTTP 协议设计如此简单。但是，无状态导致业务处理就变得棘手了，一个简单的例子就是网上购物的时候，当我在一个页面把商品加入购物车的时候，正当我要跳转到支付页面时，如果没有一种机制来保持我的登录状态，那么之前
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/05/Python-python%E5%AE%9E%E7%8E%B0%E6%9F%90%E7%BD%91%E7%AB%99%E8%87%AA%E5%8A%A8%E6%89%93%E5%8D%A1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2242,7 +2243,7 @@ HTTP 是一种无状态的协议,协议本身不保留之前的一切请求信�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">144</span>
+                <span class="site-state-item-count">145</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2253,7 +2254,7 @@ HTTP 是一种无状态的协议,协议本身不保留之前的一切请求信�
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2317,7 +2318,7 @@ HTTP 是一种无状态的协议,协议本身不保留之前的一切请求信�
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共326.8k字</span>
+  <span class="post-count">博客全站共327.6k字</span>
 </div>
 
 

@@ -100,7 +100,7 @@
 <meta property="og:description" content="总结了cpp const关键字。常见的就不列举了，这里只记录我不会的。 一些我不会的">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-06-03T05:36:21.000Z">
-<meta property="article:modified_time" content="2021-06-03T11:43:32.040Z">
+<meta property="article:modified_time" content="2021-06-20T08:04:44.416Z">
 <meta property="article:author" content="jiayi797">
 <meta name="twitter:card" content="summary">
 
@@ -364,8 +364,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-06-03T11:43:32+00:00">
-                2021-06-03
+              <time title="更新于" itemprop="dateModified" datetime="2021-06-20T08:04:44+00:00">
+                2021-06-20
               </time>
             
           </span>
@@ -419,7 +419,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  520
+                  407
                 </span>
               
 
@@ -458,15 +458,13 @@
 <li>静态全局变量在该文件内可见，从变量定义处开始直到文件结束(普通全局变量在同一程序的其他文件中可见，默认是 external 属性，而静态全局变量是 internal 属性)， 而在其他文件中不可见</li>
 </ol>
 <p><strong>static局部变量</strong></p>
-<h1 id="TCP-IP概述"><a href="#TCP-IP概述" class="headerlink" title="TCP/IP概述"></a>TCP/IP概述</h1><p>首先看一下HTTP协议的位置。它在应用层。</p>
-<ol>
-<li>在局部变量前加上 static 关键字，即为静态局部变量</li>
-<li>静态局部变量也存储在数据区(不在栈区)，程序执行之前就已分配内存，程序执行结束后才销毁</li>
-<li>静态局部变量只在首次执行到声明处初始化一次，之后再执行该语句时不在初始化，若没有初始化则编译器会将其初始化为0</li>
-<li>其作用域与局部变量的作用域一样，从定义处到所处语句块结束</li>
-</ol>
 <h4 id="constexpr"><a href="#constexpr" class="headerlink" title="constexpr"></a>constexpr</h4><p>const并不能代表“常量”，它仅仅是对变量的一个修饰，告诉编译器这个变量只能被初始化，且不能被直接修改（实际上可以通过堆栈溢出等方式修改）。而这个变量的值，可以在运行时也可以在编译时指定。</p>
 <p>constexpr可以用来修饰变量、函数、构造函数。一旦以上任何元素被constexpr修饰，那么等于说是告诉编译器 “请大胆地将我看成编译时就能得出常量值的表达式去优化我”。</p>
+<h4 id="template-function-LNK2019-error"><a href="#template-function-LNK2019-error" class="headerlink" title="template function LNK2019 error"></a>template function LNK2019 error</h4><p>总之，不要把template function分别写在.h和.cpp里</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/115703/storing-c-template-function-definitions-in-a-cpp-file"><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/115703/storing-c-template-function-definitions-in-a-cpp-file">Storing C++ template function definitions in a .CPP file</a></a></li>
+<li><a target="_blank" rel="noopener" href="https://www.huaweicloud.com/articles/e137371264df4350a9f34e321bc2e53d.html">c++模板函数声明定义分离编译错误详解</a></li>
+</ol>
 
       
     </div>
@@ -513,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2048/10/23/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/" rel="prev" title="本站简介">
-                本站简介 <i class="fa fa-chevron-right"></i>
+              <a href="/2021/06/14/%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8-Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" rel="prev" title="分布式存储-Redis分布式锁">
+                分布式存储-Redis分布式锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -589,7 +587,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">144</span>
+                <span class="site-state-item-count">145</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -600,7 +598,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -646,7 +644,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-text">const修饰成员函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static"><span class="nav-text">static</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP-IP%E6%A6%82%E8%BF%B0"><span class="nav-text">TCP&#x2F;IP概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#constexpr"><span class="nav-text">constexpr</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#const%E4%BF%AE%E9%A5%B0%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0"><span class="nav-text">const修饰成员函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static"><span class="nav-text">static</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constexpr"><span class="nav-text">constexpr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#template-function-LNK2019-error"><span class="nav-text">template function LNK2019 error</span></a></li></ol></div>
             
 
           </div>
@@ -680,7 +678,7 @@
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共326.8k字</span>
+  <span class="post-count">博客全站共327.6k字</span>
 </div>
 
 
