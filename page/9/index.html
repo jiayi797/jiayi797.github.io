@@ -319,6 +319,562 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/23/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/23/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" itemprop="url">归并排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T23:50:46+08:00">
+                2017-07-23
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">排序算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  575
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          思路分治法将数组分成A、B两组，如果这二组组内的数据都是有序的，那么就可以很方便的将这二组数据进行排序。如何让这二组组内数据有序了？
+可以将A，B组各自再分成二组。依次类推，当分出来的小组只有一个数据时，可以认为这个小组组内已经达到了有序，然后再合并相邻的二个小组就可以了。这样通过先递归的分解数列，再合并数列就完成了归并排序。
+代码12345678910111213141516171819202122232425262728293031323334353637383940//将两个有序数组合并成一个有序数组void merge(int a[], int begin,int mid,int end,int b[]) &#123;    int i = begin;    int j = mid + 1;    int k = 0;    while ((i &lt;= mid) &amp;&amp; (j &lt;= end)) &#123;        if (a[i] &lt; a[j]) &#123;            b[k] = a[i];            k++;            i++;        &#125;        else&#123;            b[k] = a[j];            k++;            j++;        &#125;    &#125;    while (i&lt;=mid)&#123;        b[k] = a[i];        k++;        i++; 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/23/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/22/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" itemprop="url">选择排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T22:17:57+08:00">
+                2017-07-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:06+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">排序算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  204
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          思路每次从无序区选择一个最小的放大有序区的最后
+设数组为a[0…n-1]。
+
+ 初始时，数组全为无序区为a[0..n-1]。令i=0
+
+ 在无序区a[i…n-1]中选取一个最小的元素，将其与a[i]交换。交换之后a[0…i]就形成了一个有序区。
+
+ i++并重复第二步直到i==n-1。排序完成。
+
+
+代码123456789101112131415161718//选择排序void SekectSort(int a[], int len) &#123;    for (int i = 0; i &lt; len; i++) &#123;        int min = a[i];        int loc = i;        //寻找最小的元素        for (int j = i + 1; j &lt; len; j++) &#123;            if (a[j] &lt; min) &#123;                min = a[j];                loc = j;            &#125;        &#125;        //把最小的元素放在有序区后面        int temp = a[loc];        a[loc] = a[i];        a[i] = temp;    &#125;&#125;
+
+
+参考MoreWindows Blog 白话经典算法系列
+
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/22/%E7%AE%97%E6%B3%95-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" itemprop="url">希尔排序</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T17:09:32+08:00">
+                2017-07-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:06+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">排序算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          思想希尔排序的实质是分组插入排序，又称缩小增量排序。
+该方法的基本思想是：
+
+先将整个待排元素序列分割成若干个子序列（由相隔某个“增量”的元素组成的），对这些子序列分别进行直接插入排序
+依次缩减增量再进行排序
+待整个序列中的元素基本有序（增量足够小）时，再对全体元素进行一次直接插入排序。
+
+因为直接插入排序在元素基本有序的情况下（接近最好情况），效率是很高的，因此希尔排序在时间效率上比前两种方法有较大提高。
+例子现在我们要将这样一个数组排序，一共有10个元素
+ 
+
+第一次 增量 gap = 10/2 = 5
+
+ 
+整个数组被分成了5个子数组，分别是[49,13]，[38,27]，[65,49]，[97,55]，[26,4]然后对这五个子数组进行插入排序，得到下面结果
+ 
+
+第二次 增量 gap = 5/2 = 2
+
+ 
+这次我们把整个数组分成了两个子数组，分别是[13,49,4,38,97],[27,55,49,65,26]对这个两个子数组排序，结果如下： 
+
+第三次 增量 gap = 2/2 = 1此时整个数组已经接近有序，对整个数组进行全排列
+
+ 
+最终得到数组有序
+ 
+代码1234567891011121314151617181920//希尔排序void HillSort(int a[], int len) &#123;    int delta = len/2;    while (delta &gt; 0) &#123;        for (int i = 0; i &lt; delta; i++) &#123;//分成了delta个子序列            
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/20/%E7%AE%97%E6%B3%95-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1621,557 +2177,6 @@ $Σ$是一个对角阵，每个对角线上的元素就是一个特征值
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/10/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/10/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0/" itemprop="url">矩阵相关知识复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-10T10:33:46+08:00">
-                2017-07-10
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.3k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          特征值与奇异值特征值与特征向量
-如果一个向量$v$是方阵$A$的特征向量，那么：$$Av=\lambda v$$
-
-$\lambda$:特征值
-$v$:特征向量把$A$乘到$v$上，得到一个$\lambda v$，也就是意味着我们得到了一个方向未变但在长度上有伸缩改变的向量（方向未变不准确，有可能变反向）。这是让$A$乘以他的特征向量表现出来的性质。也就是说，$v$ 在 $A$ 的作用下，保持方向不变，进行比例为$\lambda$ 的伸缩
-
-因此：
-
-特征向量所在直线上的向量都是特征向量；
-特征向量所在的直线（包含了所有特征向量），叫特征空间；
-
-特征值分解
-假设矩阵$A$ 有n个线性无关的特征向量$[v^{1}, v^{2}, …, v^{n}]$ ，对应着特征值$[\lambda_1, \lambda_2,…,\lambda_n]$ 。我们将特征向量连成一个矩阵，使得每一列是一个特征向量：$V = [v^{1}, v^{2}, …, v^{n}]$ ，类似地将特征值连成一个向量$\lambda = [[\lambda_1, \lambda_2,…,\lambda_n]]^T$
-特征值分解是把一个n阶实对称矩阵分解为下面的形式：$$A=Vdiag(\lambda)V^{-1}$$
-其中：
-
-$V$是这个矩阵$A$的特征向量组成的矩阵，是一个正交矩阵
-$diag(\lambda)$是一个对角阵，每个对角线上的元素就是一个特征值
-
-特征值分解有利于我们分析矩阵的性质，就像质因数分解一样有助于我们理解整数。
-特征向量可能不唯一，而特征值一定唯一。
-正交变换与正交军阵正交变换什么是正
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/10/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/09/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/09/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E5%AE%9E%E7%8E%B0/" itemprop="url">简单搜索引擎的实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-09T22:04:23+08:00">
-                2017-07-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" itemprop="url" rel="index">
-                    <span itemprop="name">搜索引擎</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2.8k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          这是很久以前的IRIE的期末大作业。现在贴在自己的博客上。
-实验要求：
-
- 用爬虫采集特定网站的信息；
- 设计实现信息检索与提取系统，对采集的信息进行检索提取；
- 结合webpy与html实现界面展示。
-
-相关知识爬虫网络爬虫是捜索引擎抓取系统中重要的组成部分，其主要目的是将互联网上的网页下载到本地形成一个文件或互联网内容的镜像备份。流程如下：a.  从给定的入口网址把第一个网页下载下来b.  从第一个网页中提取出所有新的网页地址，放入下载列表中c.  按下载列表中的地址，下载所有新的网页d.  从所有新的网页中找出没有下载过的网页地址，更新下载列表e.  重复3、4两步，直到更新后的下载列表为空表时停止其实就是简化成下面的步骤：a.  按下载列表进行下载b.  更新下载列表c.  循环操作a，b，直到列表为空结束在本次作业中我们使用python编码实现爬虫的功能，其中用到的python组件有：urllib2：用于获取URLs（Uniform Resource Locators）的组件，以urlopen函数的形式提供一个非常简单的接口，具有利用不同协议获取URLs的能力，同时提供了一个比较复杂的接口来处理一般情况，如：基础验证，cookies代理和其他。通过handlers和openers的对象提供。urllib2支持获取不同格式的URLs并利用它们相关网络协议（例如FTP，HTTP）进行获取。BeautifulSoup：是python的一个库，最主要的功能是从网页抓取数据。它提供简单的、python式的函数用来处理导航、搜索、修改分析树等功能。可以通过解析文档为用户提供需要抓
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/09/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E-%E7%AE%80%E5%8D%95%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E5%AE%9E%E7%8E%B0/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/" itemprop="url">机器学习实践-转化率预估之贝叶斯平滑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-09T20:11:32+08:00">
-                2017-07-09
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:01+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%85%BE%E8%AE%AF%E7%AE%97%E6%B3%95%E5%A4%A7%E8%B5%9B-CVR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">腾讯算法大赛-CVR预估</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3.9k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          问题描述在做比赛的过程中，我们发现了有转化率这个指标在大量数据下是有效的。理想情况下，例如某个广告点击量是10000次，转化量是100次，那转化率就是1%。但有时，例如某个广告点击量是2次，转化量是1次，这样算来转化率为50%。但此时这个指标在数学上是无效的。因为大数定律告诉我们，在试验不变的条件下，重复试验多次，随机事件的频率近似于它的概率。后者点击量只有2次，不满足“重复试验多次”的条件。
-那么如何解决这个问题呢？
-整体思路：用估计值来模拟实际CVR。
-解决方案实际上，广告妆化率是随着时间迁移和用户喜好变化而变化的。因此我们可以利用先验知识来持续性地调整CVR。计算广告训练与平滑思想给出了一个很好的解决方案：贝叶斯平滑。
-考虑到时序序列模型，我们把从第一天到第n天的所有先验知识汇总到第n天的结果，并以此来对第n+1天的CTR进行平滑。在广告平滑上，没有什么方法比贝叶斯平滑能够更好的利用先验知识了，而帮助贝叶斯平滑方法实现目标的就是Beta分布。Beta分布的强大之处在于，通过改变其中的两个参数α和β，你可以让Beta分布的图形变成任意形状，而且在加入先验知识前后，通过贝叶斯变换，对CTR的预估都可以表示为Beta分布。
-Beta分布中参数α和β的本质含义，即：α表示点击数，β表示曝光数。因为贝叶斯平滑的具体公式（后面再讲这个公式的原理）就是：
-$$SmoothCTR = \frac{(α + CurrentC - 1)}{( α + β + CurrentI -2)}$$
-公式由来：
-
-一般来说，点击还是不点击，这是服从伯努利二项分布的。
-而二项分布的共轭分布就是Beta分
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/09/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2221,7 +2226,7 @@ $$SmoothCTR = \frac{(α + CurrentC - 1)}{( α + β + CurrentI -2)}$$
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">145</span>
+                <span class="site-state-item-count">148</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2232,7 +2237,7 @@ $$SmoothCTR = \frac{(α + CurrentC - 1)}{( α + β + CurrentI -2)}$$
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2285,7 +2290,7 @@ $$SmoothCTR = \frac{(α + CurrentC - 1)}{( α + β + CurrentI -2)}$$
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2296,7 +2301,7 @@ $$SmoothCTR = \frac{(α + CurrentC - 1)}{( α + β + CurrentI -2)}$$
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共327.6k字</span>
+  <span class="post-count">博客全站共331k字</span>
 </div>
 
 

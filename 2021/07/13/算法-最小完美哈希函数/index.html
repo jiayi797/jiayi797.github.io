@@ -1,0 +1,1242 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="true" />
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="从定义说起，这个名字很长，一步步解释。  哈希函数 任意函数h(x)都可以说哈希函数，一般来说，一个良好的哈希函数可以尽量避免重复。x的集合是参数域，h(x)的集合是值域。 完美哈希函数  完美哈希函数，就是完全不会冲突的哈希函数，这要求函数的值域至少比参数域要大 最小完美哈希函数 最小完美哈希函数，就是指函数的值域和参数域的大小完全相等，一个也不多 保序最小完美哈希函数 保序的意思就是指这个哈希">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法-最小完美哈希函数">
+<meta property="og:url" content="http://jiayi797.github.io/about/2021/07/13/%E7%AE%97%E6%B3%95-%E6%9C%80%E5%B0%8F%E5%AE%8C%E7%BE%8E%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="从定义说起，这个名字很长，一步步解释。  哈希函数 任意函数h(x)都可以说哈希函数，一般来说，一个良好的哈希函数可以尽量避免重复。x的集合是参数域，h(x)的集合是值域。 完美哈希函数  完美哈希函数，就是完全不会冲突的哈希函数，这要求函数的值域至少比参数域要大 最小完美哈希函数 最小完美哈希函数，就是指函数的值域和参数域的大小完全相等，一个也不多 保序最小完美哈希函数 保序的意思就是指这个哈希">
+<meta property="og:locale">
+<meta property="og:image" content="c:/Users/jiayi797/AppData/Roaming/Typora/typora-user-images/image-20210714090430528.png">
+<meta property="article:published_time" content="2021-07-13T11:18:27.000Z">
+<meta property="article:modified_time" content="2021-07-14T09:21:11.093Z">
+<meta property="article:author" content="jiayi797">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/jiayi797/AppData/Roaming/Typora/typora-user-images/image-20210714090430528.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jiayi797.github.io/about/2021/07/13/算法-最小完美哈希函数/"/>
+
+
+
+
+
+  <title>算法-最小完美哈希函数 | 甲乙小朋友的房子</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-110169171-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">甲乙小朋友的房子</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时光机
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            琐碎
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2021/07/13/%E7%AE%97%E6%B3%95-%E6%9C%80%E5%B0%8F%E5%AE%8C%E7%BE%8E%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法-最小完美哈希函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-13T11:18:27+00:00">
+                2021-07-13
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-07-14T09:21:11+00:00">
+                2021-07-14
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>从定义说起，这个名字很长，一步步解释。</p>
+<ol>
+<li><strong>哈希函数</strong> 任意函数h(x)都可以说哈希函数，一般来说，一个良好的哈希函数可以尽量避免重复。x的集合是参数域，h(x)的集合是值域。</li>
+<li><strong>完美哈希函数</strong>  完美哈希函数，就是完全不会冲突的哈希函数，这要求函数的值域至少比参数域要大</li>
+<li><strong>最小完美哈希函数</strong> 最小完美哈希函数，就是指函数的值域和参数域的大小完全相等，一个也不多</li>
+<li><strong>保序最小完美哈希函数</strong> 保序的意思就是指这个哈希之后顺序是不变的，同时还能满足其他两个条件。</li>
+</ol>
+<p>这个函数的优点就是形式上很完美，就像给一个排好序的文档编上的序号一般紧凑可靠。但是这个函数有两个缺点，一是必须事前必须知道原数据集，二是需要花一定的CPU来生成这个函数。我认为，对于数据仓库类的线下搜索应用，这个算法是有用武之地的。但对于强调实时的数据业务，这个算法是不适合的。</p>
+<span id="more"></span>
+
+<h1 id="最小完美哈希函数"><a href="#最小完美哈希函数" class="headerlink" title="最小完美哈希函数"></a>最小完美哈希函数</h1><p>step1，假定存在两个一般的哈希函数h1和h2,它们都是将字符串映射到范围0——n-1的一个整数，允许重复。比如我利用GetHashCode方法（maxValue=n，n是字符串个数）：</p>
+<p>$$<br>h1[k] = GetHashCode(stringList[k],maxValue, seed1)<br>$$</p>
+<p>$$<br>h2[k] = GetHashCode(stringList[k],maxValue, seed2)<br>$$</p>
+<p>step2， 设计一个特别的映射g，使得它满足最小完美哈希函数。</p>
+<p>$$<br>（g[h1[k]] + g[h2[k]]） % n == k<br>$$<br>总的来说，就是凑出一组w1和w2，再凑一个 <code>g</code> ，就好了。听起来是不是特别简单？首先看一下生成h1和h2的代码。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Study_Csharp</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MinimalPerfectHash</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">static</span> Random rnd = <span class="keyword">new</span> Random(<span class="number">2557176</span>);</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MinimalPerfectHash</span>(<span class="params"></span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> target = <span class="keyword">new</span> <span class="built_in">string</span>[] &#123; <span class="string">&quot;Alias&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;John&quot;</span>, <span class="string">&quot;Still&quot;</span>, <span class="string">&quot;Young&quot;</span>&#125;;</span><br><span class="line">            <span class="built_in">int</span>[] h1 = <span class="literal">null</span>;</span><br><span class="line">            <span class="built_in">int</span>[] h2 = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">int</span> seed1 = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">int</span> seed2 = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (calculator(target, <span class="keyword">out</span> h1, <span class="keyword">out</span> h2, <span class="keyword">out</span> seed1, <span class="keyword">out</span> seed2))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    System.Console.WriteLine(<span class="string">$&quot;retry <span class="subst">&#123;i&#125;</span>&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="built_in">bool</span> <span class="title">calculator</span>(<span class="params"><span class="built_in">string</span>[] input, <span class="keyword">out</span> <span class="built_in">int</span>[] h1, <span class="keyword">out</span> <span class="built_in">int</span>[] h2, <span class="keyword">out</span> <span class="built_in">int</span> seed1, <span class="keyword">out</span> <span class="built_in">int</span> seed2</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            h1 = <span class="keyword">new</span> <span class="built_in">int</span>[input.Length];</span><br><span class="line">            h2 = <span class="keyword">new</span> <span class="built_in">int</span>[input.Length];</span><br><span class="line"></span><br><span class="line">            <span class="built_in">int</span> n = input.Length;</span><br><span class="line"></span><br><span class="line">            seed1 = rnd.Next();</span><br><span class="line">            seed2 = rnd.Next();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">            &#123;</span><br><span class="line">                h1[i] = GetHashCodeWithSeed(input[i], n, seed1);</span><br><span class="line">                h2[i] = GetHashCodeWithSeed(input[i], n, seed2);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="built_in">string</span> s1 = <span class="built_in">string</span>.Join(<span class="string">&quot;,&quot;</span>, h1);</span><br><span class="line">            System.Console.WriteLine(<span class="string">$&quot;h1 = <span class="subst">&#123;s1&#125;</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">string</span> s2 = <span class="built_in">string</span>.Join(<span class="string">&quot;,&quot;</span>, h2);</span><br><span class="line">            System.Console.WriteLine(<span class="string">$&quot;h2 = <span class="subst">&#123;s2&#125;</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">            System.IO.File.WriteAllLines(<span class="string">&quot;../../h.txt&quot;</span>, <span class="keyword">new</span> <span class="built_in">string</span>[] &#123; s1, s2 &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> graph = <span class="keyword">new</span> Graph(h1, h2);</span><br><span class="line">            <span class="keyword">return</span> !graph.HasCycle();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="built_in">int</span> <span class="title">GetHashCodeWithSeed</span>(<span class="params"><span class="built_in">string</span> values, <span class="built_in">int</span> n, <span class="built_in">int</span> seed</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">int</span> hashCode = <span class="number">17</span>;</span><br><span class="line">            <span class="built_in">int</span> prime = <span class="number">65599</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (values != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">foreach</span> (<span class="keyword">var</span> <span class="keyword">value</span> <span class="keyword">in</span> values)</span><br><span class="line">                &#123;</span><br><span class="line">                    hashCode = hashCode * prime + <span class="keyword">value</span> + seed;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (hashCode &lt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                hashCode += n;</span><br><span class="line">                hashCode %= n;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> hashCode % n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>此时h1和h2分别是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">h1 = 4, 1, 4, 3, 0</span><br><span class="line">h2 = 2, 0, 4, 2, 3</span><br><span class="line"></span><br><span class="line">需要注意的是，此时seed1=1968008906, seed2=1523385053</span><br><span class="line"></span><br><span class="line">我还想要凑出一个g，使得</span><br><span class="line">k == (g[h[k]] + g[h[k]]) % n // 神奇关系</span><br><span class="line"></span><br><span class="line">n = 7</span><br></pre></td></tr></table></figure>
+
+<p>我们用附件1的python画一下。顶点是n个点，点i代表映射完的第i个h。边是凑出来的“神奇关系”的g的下标k。</p>
+<p><img src="C:\Users\jiayi797\AppData\Roaming\Typora\typora-user-images\image-20210714090430528.png" alt="image-20210714090430528"></p>
+<p>根据这个关系图，我们可以得知，我们要凑一个数组g，使得<code>g[h1[k]] + g[h2[k]] == k</code></p>
+<table>
+<thead>
+<tr>
+<th>h1</th>
+<th>h2</th>
+<th>(g[h1[k]] + g[h2[k]]) % n</th>
+<th>k</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>2</td>
+<td>(g[4] + g[2])%5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>(g[1] + g[0])%5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>(g[4] + g[4])%5</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>(g[3] + g[2])%5</td>
+<td>3</td>
+</tr>
+<tr>
+<td>0</td>
+<td>3</td>
+<td>(g[0] + g[3])%5</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>显而易见，n个未知数，n个条件。</p>
+<p>当然，它很有可能是无解的，也就是说，当上图存在环时，就变成了无解。因此我们可以不断重试（有理论支撑不会重试很多次），来暴搜一个无环的状态。</p>
+<p>如果是无环的，那它就有解啦。需要注意的是，它不是线性方程，因为有取模运算。所以它是有无数种解的。</p>
+<p>接下来就是如何解了。我们可以非常暴力地给g[0]随机赋值，然后根据推理，例如a+b=c，已知b 和c，求a。很简单哇。我通过暴力搜索得到了一组解<code>g = [0,1,4,4,1]</code>。暴搜代码实在是太难看了，这就不贴了。</p>
+<p>接下来我们实现这个哈希函数。 </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="built_in">int</span> <span class="title">GetIndex</span>(<span class="params"><span class="built_in">string</span> s, <span class="built_in">int</span>?[] g, <span class="built_in">int</span> seed1, <span class="built_in">int</span> seed2</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> h1 = GetHashCodeWithSeed(s, g.Length, seed1);</span><br><span class="line">    <span class="keyword">var</span> h2 = GetHashCodeWithSeed(s, g.Length, seed2);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (g[h1].Value + g[h2].Value) % g.Length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这个哈希函数，我们得到了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Alias   =0</span><br><span class="line">Bob     =1</span><br><span class="line">John    =2</span><br><span class="line">Still   =3</span><br><span class="line">Young   =4</span><br></pre></td></tr></table></figure>
+
+<p>这样就得到了这组数据的最小完美哈希啦！而且是保序的！太完美了吧。</p>
+<h1 id="附件"><a href="#附件" class="headerlink" title="附件"></a>附件</h1><h2 id="附件1-h画图"><a href="#附件1-h画图" class="headerlink" title="附件1 h画图"></a>附件1 h画图</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">h = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;h.txt&quot;</span>) <span class="keyword">as</span> file:</span><br><span class="line">	<span class="keyword">for</span> line <span class="keyword">in</span> file:</span><br><span class="line">		line = line.strip().split(<span class="string">&quot;,&quot;</span>)</span><br><span class="line">		line = [<span class="built_in">int</span>(e) <span class="keyword">for</span> e <span class="keyword">in</span> line]</span><br><span class="line">		h.append(line)</span><br><span class="line">		<span class="built_in">print</span>(line)</span><br><span class="line">h1 = h[<span class="number">0</span>]</span><br><span class="line">h2 = h[<span class="number">1</span>]</span><br><span class="line">n = <span class="built_in">len</span>(h[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot points</span></span><br><span class="line">theta = np.linspace(<span class="number">0</span>, <span class="number">2</span> * np.pi, n + <span class="number">1</span>)</span><br><span class="line">x = np.cos(theta)</span><br><span class="line">y = np.sin(theta)</span><br><span class="line">fig, ax = plt.subplots(figsize=(<span class="number">4</span>, <span class="number">4</span>))</span><br><span class="line">ax.scatter(x, y, color=<span class="string">&quot;r&quot;</span>, s = <span class="number">20</span>)</span><br><span class="line">ax.xaxis.set_major_locator(plt.NullLocator()) <span class="comment"># 删除x轴刻度</span></span><br><span class="line">ax.yaxis.set_major_locator(plt.NullLocator()) <span class="comment"># 删除y轴刻度</span></span><br><span class="line">ax.axis(<span class="string">&quot;equal&quot;</span>)</span><br><span class="line"></span><br><span class="line">nrange = np.arange(n)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i,txt <span class="keyword">in</span> <span class="built_in">enumerate</span>(nrange):</span><br><span class="line">    ax.text(x = x[i],y = y[i], s = <span class="built_in">str</span>(i), color = <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot lines</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> nrange:</span><br><span class="line">	x_i = [x[h1[i]],x[h2[i]]]</span><br><span class="line">	y_i = [y[h1[i]],y[h2[i]]]</span><br><span class="line">	ax.plot(x_i, y_i)</span><br><span class="line">	ax.text(x = <span class="built_in">sum</span>(x_i)/<span class="number">2</span>,y = <span class="built_in">sum</span>(y_i)/<span class="number">2</span>, s = <span class="built_in">str</span>(i))</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/sunmenggmail/article/details/46817365">最小完美哈希函数简介</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-14789604-id-84624.html">最小完美哈希函数</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/06/20/%E5%88%86%E5%B8%83%E5%BC%8F%E5%AD%98%E5%82%A8-ObjectStore/" rel="next" title="分布式存储-ObjectStore">
+                <i class="fa fa-chevron-left"></i> 分布式存储-ObjectStore
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/06/07/%E6%9C%89%E7%94%A8%E7%9A%84%E8%B5%84%E6%96%99/" rel="prev" title="有用的资料">
+                有用的资料 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/20210523.jpg"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">148</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%AE%8C%E7%BE%8E%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="nav-text">最小完美哈希函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E4%BB%B6"><span class="nav-text">附件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E4%BB%B61-h%E7%94%BB%E5%9B%BE"><span class="nav-text">附件1 h画图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by">感谢hexo.Next</div>
+  <span class="post-count">博客全站共331k字</span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人次
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (search_path.endsWith("json")) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

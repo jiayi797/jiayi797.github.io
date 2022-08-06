@@ -319,6 +319,561 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/17/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-RocketMQ%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/17/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-RocketMQ%E7%AE%80%E4%BB%8B/" itemprop="url">RocketMQ简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-17T10:49:03+08:00">
+                2017-05-17
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">中间件比赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  911
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          RocketMQ:分布式开放消息系统
+消息中间件需要解决哪些问题？发布订阅（Publish/Subscribe）发布订阅是消息中间件的最基本功能，也是相对于传统RPC通信而言。在此不再详述。
+消息优先级（Message Priority）两种方式：
+
+严格优先级，例如0-65535。开销大，精准，但可能没有必要。
+档位优先级。高、中、低，或其他。每个优先级可以用不同的topic表示，发消息时，指定不同的topic来表示优先级。精确性低。
+
+消息有序性（Message Order）
+一个订单的发出的消息顺序不能变
+订单之间是可以并行消费
+
+消息过滤（Message Filter）消息协商器（Broker端）消息过滤在Broker中，按照Consumer的要求做过滤
+
+优点是减少了对于Consumer无用消息的网络传输。
+缺点是增加了Broker的负担，实现相对复杂。
+
+淘宝Notify支持多种过滤方式：包含直接按照消息类型过滤，灵活的语法表达式过滤，几乎可以满足最苛刻的过滤需求。
+淘宝RocketMQ支持按照简单的Message Tag过滤，也支持按照Message Header、body进行过滤。
+CORBA Notification规范中也支持灵活的语法表达式过滤。
+Consumer端消息过滤这种过滤方式可由应用完全自定义实现，但是缺点是很多无用的消息要传输到Consumer端。
+消息持久化（Message Persistence）持久化（Persistence）：即把数据（如内存中的对象）保存到可永久保存的存储设备中（如磁盘）。持久化的主要应用是将内存中的对象存储在数据库中
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/17/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-RocketMQ%E7%AE%80%E4%BB%8B/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E8%B5%84%E6%96%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E8%B5%84%E6%96%99/" itemprop="url">转化率预估资料</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T13:36:42+08:00">
+                2017-05-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:00+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%85%BE%E8%AE%AF%E7%AE%97%E6%B3%95%E5%A4%A7%E8%B5%9B-CVR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">腾讯算法大赛-CVR预估</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  12
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+火光摇曳
+美团点评技术团队
+
+
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E8%B5%84%E6%96%99/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/14/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-%E6%9D%8E%E5%81%A5%E8%83%9C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/14/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-%E6%9D%8E%E5%81%A5%E8%83%9C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" itemprop="url">阿里中间件初赛-李健胜解决方案</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-14T14:19:14+08:00">
+                2017-05-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">中间件比赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  941
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          参考资料
+李健胜，阿里中间件大赛初赛解题思路
+1对应的代码
+
+题目要求主角：消息中间件目的：实现消息中间件的推拉模式。即生产者制造消息，使用消息队列储存消息，消费者从消息队列拉取消息。要点：持久化的消息队列
+Producer需要实现
+创建一个消息，给消息指定Topic（可以由多个Consumer消费）BytesMessage createBytesMessageToTopic(String topic, byte[] body);
+
+创建一个消息，给消息指定Queue（只能由一个Consumer消费）BytesMessage createBytesMessageToQueue(String queue, byte[] body);
+
+发送消息，message中应当包含目的地（Queue，Topic只能选其一），对于发往同一个Topic和Queue的message顺序要保持一致。void send(Message message);
+
+
+PullConsumer需要实现
+绑定到一个Queue，并订阅topics，即从这些topic和Queue读取消息。void attachQueue(String queueName, Collection topics);
+规范要求实现阻塞的接口，由properties来设置阻塞时间，但本赛题不需要用到该特性， 请实现一个非阻塞(也即阻塞时间为0)调用, 也即没有消息则返回nullMessage poll();
+
+测试流程
+创建Topic，创建Queue 创建Producer，多个Producer创建指定Topic和指定Queue的Messag
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/14/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-%E6%9D%8E%E5%81%A5%E8%83%9C%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/13/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1603,597 +2158,6 @@ equals的重写在实际coding中，一般我们都会对equals方法进行重�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/04/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6-xgboost%E5%8F%82%E6%95%B0%E8%B0%83%E8%8A%82%E6%8C%87%E5%8D%97%EF%BC%88Python%E7%89%88%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6-xgboost%E5%8F%82%E6%95%B0%E8%B0%83%E8%8A%82%E6%8C%87%E5%8D%97%EF%BC%88Python%E7%89%88%EF%BC%89/" itemprop="url">机器学习框架-xgboost参数调节指南（Python版）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-28T17:16:11+08:00">
-                2017-04-28
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:00+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.7k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          本文大多来自于参考文献2.的翻译。
-Xgboost参数XGBoost作者将参数分为3类：
-
-基本(General)参数：指导整体函数
-提升(Booster)参数：在每一步指导每个提升（树或回归）
-学习任务(Learning Task Parameters)参数：指导优化模型表现
-
-基本参数booster
-默认值：gbtree
-含义：在每次迭代中的模型类型，有两种选择：
-
-
-gbtree:树模型
-gblinear:线性模型
-
-silent
-默认值：0
-含义
-
-
-0=运行时打印running messages
-1=不打running messages
-
-nthread
-运行时的最大线程数
-默认值：占当前计算机的最大线程
-
-提升参数这里仅仅介绍树模型（gbtree）的相关参数。
-eta
-学习步长
-default=0.3
-一般调整下限为0.01-0.2
-
-min_child_weight
-表示所有孩子节点(all observations required in a child)的最小权重和
-一般都用来控制过拟合。
-但如果调得太高就会导致欠拟合。
-default=1
-
-max_depth
-default=6
-用来控制过拟合
-一般在3-10之间
-
-gamma
-default=0
-range: [0,∞]
-模型在默认情况下，对于一个节点的划分只有在其损失函数得到结果大于0的情况下才进行，而gamma给定了所需的最低损失函数的值
-gamma值使得算法更conservation，且其值依赖于损失函数，在模型中应该进行调参。
-
-max_delta_step
-default=0
-在最大化步长的时候
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/28/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6-xgboost%E5%8F%82%E6%95%B0%E8%B0%83%E8%8A%82%E6%8C%87%E5%8D%97%EF%BC%88Python%E7%89%88%EF%BC%89/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/04/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/" itemprop="url">机器学习实践-O2O优惠券预测-特征工程 机器学习实践-O2O优惠券预测-特征工程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-25T14:32:40+08:00">
-                2017-04-25
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:01+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/o2o%E4%BC%98%E6%83%A0%E5%88%B8%E4%BD%BF%E7%94%A8%E9%A2%84%E6%B5%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">o2o优惠券使用预测</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  481
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          特征工程别人的例子 
-特征选择特征选择，就是从多个特征中，挑选出一些对结果预测最有用的特征。因为原始的特征中可能会有冗余和噪声。特征选择和降维有什么区别呢？前者只踢掉原本特征里和结果预测关系不大的， 后者做特征的计算组合构成新特征。
-过滤型
-方法：  评估单个特征和结果值之间的相关程度， 排序留下Top相关的特征部分。 
-评价方式：Pearson相关系数， 互信息， 距离相关度。 
-缺点：只评估了单个特征对结果的影响，没有考虑到特征之间的关联作用， 可能把有用的关联特征误踢掉。因此工业界使用比较少。 
-python包：SelectKBest指定过滤个数、SelectPercentile指定过滤百分比。
-
-包裹型
-方法：把特征选择看做一个特征子集搜索问题， 筛选各种特征子集， 用模型评估效果。 
-典型算法：“递归特征删除算法”。 
-应用在逻辑回归的过程：用全量特征跑一个模型；根据线性模型的系数(体现相关性)，删掉5-10%的弱特征，观察准确率/auc的变化；逐步进行， 直至准确率/auc出现大的下滑停止。 
-python包：RFE 
-
-嵌入型
-方法：根据模型来分析特征的重要性，最常见的方式为用正则化方式来做特征选择。 
-举例：最早在电商用LR做CTR预估， 在3-5亿维的系数特征上用L1正则化的LR模型。上一篇介绍了L1正则化有截断作用，剩余2-3千万的feature， 意味着其他的feature重要度不够。 
-python包：feature_selection.SelectFromModel选出权重不为0的特征。
-
-参考文献
-四月机器学习算法班—特征工程笔记
-
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/25/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/04/14/linux%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/14/linux%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/" itemprop="url">linux常见命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-14T16:07:04+08:00">
-                2017-04-14
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:41:59+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  636
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          IOlinux/windows互传需要安装：yum install -y lrzsz
-从Windows上传文件[root@localhost src]# rz从Linux下载文件sz nginx-1.6.2.tar.gz
-linux互传
-从服务器下载文件 scp username@servername:/path/filename /tmp/local_destination 例如scp &#x63;&#111;&#100;&#x69;&#x6e;&#x67;&#108;&#x6f;&#103;&#64;&#49;&#x39;&#50;&#x2e;&#49;&#x36;&#x38;&#46;&#48;&#46;&#49;&#x30;&#x31;:/home/kimi/test.txt  把192.168.0.101上的/home/kimi/test.txt的文件下载到 /tmp/local_destination
-上传本地文件到服务器 scp /path/local_filename username@servername:/path 例如scp /var/www/test.php  &#x63;&#111;&#x64;&#105;&#x6e;&#x67;&#108;&#111;&#103;&#64;&#49;&#x39;&#50;&#x2e;&#49;&#54;&#x38;&#x2e;&#48;&#46;&#x31;&#x30;&#x31;:/var/www/  把本机/var/www/目录下的test.php文件上传到192.168.0.101这台服务器上的/var/www
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/04/14/linux%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2243,7 +2207,7 @@ linux互传
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">145</span>
+                <span class="site-state-item-count">148</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2254,7 +2218,7 @@ linux互传
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2307,7 +2271,7 @@ linux互传
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2318,7 +2282,7 @@ linux互传
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共327.6k字</span>
+  <span class="post-count">博客全站共331k字</span>
 </div>
 
 

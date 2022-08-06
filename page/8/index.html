@@ -319,6 +319,575 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/11/02/%E7%AE%97%E6%B3%95-DP-%E9%92%A2%E6%9D%A1%E5%88%87%E5%89%B2%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/02/%E7%AE%97%E6%B3%95-DP-%E9%92%A2%E6%9D%A1%E5%88%87%E5%89%B2%E9%97%AE%E9%A2%98/" itemprop="url">算法-DP-钢条切割问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-02T14:55:10+08:00">
+                2017-11-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:04+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  803
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          在说钢条切割问题之前，我们先说说动态规划。
+动态规划——Dynamic programming(这个词指表格)：通过组合子问题的解求解原问题。
+与分治法对比：
+
+相同点：都是通过子问题组合求解原问题
+不同点：分治法将问题划分为不相交的子问题，求解再合并。动态规划应用于子问题重叠的情况，即不同的子问题具有公共的子子问题，此时如果用分治法就会出现重复计算求解。为了避免重复动态规划对子问题只求解一次，将其保存在表格中，从而无需每求解一个子子问题时重复计算。
+
+求解步骤
+
+刻画最优解的结构特征
+递归定义最优解的值
+计算最优解的值，通常采用自底向上的方法（可能需要同时维护一些额外信息）
+利用计算出的信息构造最优解（不是必须）
+
+钢条切割Serling公司购买一根长钢管，将其切割成短钢管出售，给定钢管长度和对应的价钱如下表：
+
+问题要求根据上面的价格，给出最佳的切割方案，使得收益最大。
+以n=4为例，可以将钢条切割成如下图所示的8种情况，其中收益最大的是(c)：
+
+这个题的切入点非常重要，也就是——当知道长度为1到i的钢条的切割方案时，可以推导出长度为i+1的钢条如何切割最优。
+我们定义长度=i，且长度为i时最优切割方案的收益是$r_i$
+
+i=1时， 当然不切割，即$r_1=p_1$
+i=2时，有两种方案，要么切一刀，要么不切，即$r_2=max[p_2,r_1+r_1]$
+i=3时，我们从下图可以看到，假设我们从它上面随便切一刀，我们会发现无论是左边还是右边都是已知的。即$r_3=max[p_3,r_1+r_2,r_2+r_1]$
+i=4时，还是可以看到，无论我们从哪里切一刀，会发现无
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/02/%E7%AE%97%E6%B3%95-DP-%E9%92%A2%E6%9D%A1%E5%88%87%E5%89%B2%E9%97%AE%E9%A2%98/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/10/31/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/31/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/" itemprop="url">深度学习算法-卷积网络</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-31T15:58:36+08:00">
+                2017-10-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">卷积网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  5.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          一般来说，图片是非常大的。至少有$n\times n\times 3$的像素，即有这么多特征。 对于小尺寸的图片问题，也许我们用深度神经网络的结构可以较为简单的解决一定的问题。但是当应用在大尺寸的图片上，输入规模将变得十分庞大，使用神经网络将会有非常多的参数需要去学习，这个时候神经网络就不再适用。
+卷积神经网络在计算机视觉问题上是一个非常好的网络结构。
+概述图像识别过程 当我们给定一个”X”的图案，计算机怎么识别这个图案就是“X”呢？一个可能的办法就是计算机存储一张标准的“X”图案，然后把需要识别的未知图案跟标准”X”图案进行比对，如果二者一致，则判定未知图案即是一个”X”图案。
+而且即便未知图案可能有一些平移或稍稍变形，依然能辨别出它是一个X图案。如此，CNN是把未知图案和标准X图案一个局部一个局部的对比，如下图所示：
+ 
+而未知图案的局部和标准X图案的局部一个一个比对时的计算过程，便是卷积操作。卷积计算结果为1表示匹配，否则不匹配。
+图像边缘检测卷积运算是卷积神经网络的基本组成部分。下面以边缘检测的例子来介绍卷积运算。
+所谓边缘检测，在下面的图中，分别通过垂直边缘检测和水平边缘检测得到不同的结果：
+ 
+垂直边缘检测：
+假设对于一个 6×6 大小的图片（以数字表示），以及一个 3×3 大小的 filter（卷积核） 进行卷积运算，以“∗”符号表示。图片和垂直边缘检测器分别如左和中矩阵所示：
+ 
+filter 不断地和其大小相同的部分做【对应元素的乘法运算并求和】，最终得到的数字相当于新图片的一个像素值，如右矩阵所示，最终得到一个 4×4 大小的图片。
+边缘检测的原理：
+以一个
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/31/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/10/26/%E6%95%B0%E5%AD%A6-%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/26/%E6%95%B0%E5%AD%A6-%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/" itemprop="url">数学-最大似然估计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-26T21:03:27+08:00">
+                2017-10-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  435
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          其实在之前的博客朴素贝叶斯的理解一文中曾经提到过最大似然估计。
+极大似然估计的核心思想是：我们已知$x$已发生，我们再根据实际情况写出$x$发生的概率$p(x;θ)$。目标函数是使得这个概率$p(x;θ)$最大，然后求得$θ$：
+$$\theta_{ML}=arg max_\theta p(X;\theta)=arg max_\theta ∏_{i=1}^mp(x^{i};\theta)$$上公式中：$p(X;\theta)$是样本集$X$出现的概率；$p(x^{i};\theta)$是某个样本出现的概率；左式等于右式原因是每个样本出现的概率独立；
+多个数的连乘容易溢出，我们可以将它转化为log运算：$$\theta_{ML}=arg max_\theta \sum{i=1}^mlog p(x^{i};\theta)$$将上式除以$m$，得到一种期望：$$\theta_{ML}=arg max_\theta E_{x\text{}p’_{data}}log p(x^{i};\theta) \tag{公式1}$$这个式子的含义是：在经验分布$x\text{}p^`$上，求得一个$\theta$，使得模型分布的期望最大化。
+此时我们暂时先不看上面这个公式。我们从另一个角度——误差来衡量。训练集上的经验分布$p’_{data}​$和模型之间的分布差异可以用KL散度衡量：
+$$D_{KL}(p’{data}||p{model}) = E_{x\text{~}p’{data}}[logp’{data}(x)-logp_{model}(x)]$$
+我们的目标是使上式最小化。减号左边是在训练
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/10/26/%E6%95%B0%E5%AD%A6-%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/10/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E8%AF%AF%E5%B7%AE%E5%87%BD%E6%95%B0%E6%8E%A2%E7%A9%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1635,562 +2204,6 @@ Combine Two TablesPerson表有PersonId, FirstName, LastName. Adress表有AdressI
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/23/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/23/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" itemprop="url">归并排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-23T23:50:46+08:00">
-                2017-07-23
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">排序算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  575
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          思路分治法将数组分成A、B两组，如果这二组组内的数据都是有序的，那么就可以很方便的将这二组数据进行排序。如何让这二组组内数据有序了？
-可以将A，B组各自再分成二组。依次类推，当分出来的小组只有一个数据时，可以认为这个小组组内已经达到了有序，然后再合并相邻的二个小组就可以了。这样通过先递归的分解数列，再合并数列就完成了归并排序。
-代码12345678910111213141516171819202122232425262728293031323334353637383940//将两个有序数组合并成一个有序数组void merge(int a[], int begin,int mid,int end,int b[]) &#123;    int i = begin;    int j = mid + 1;    int k = 0;    while ((i &lt;= mid) &amp;&amp; (j &lt;= end)) &#123;        if (a[i] &lt; a[j]) &#123;            b[k] = a[i];            k++;            i++;        &#125;        else&#123;            b[k] = a[j];            k++;            j++;        &#125;    &#125;    while (i&lt;=mid)&#123;        b[k] = a[i];        k++;        i++; 
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/23/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/22/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" itemprop="url">选择排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T22:17:57+08:00">
-                2017-07-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:06+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">排序算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  204
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          思路每次从无序区选择一个最小的放大有序区的最后
-设数组为a[0…n-1]。
-
- 初始时，数组全为无序区为a[0..n-1]。令i=0
-
- 在无序区a[i…n-1]中选取一个最小的元素，将其与a[i]交换。交换之后a[0…i]就形成了一个有序区。
-
- i++并重复第二步直到i==n-1。排序完成。
-
-
-代码123456789101112131415161718//选择排序void SekectSort(int a[], int len) &#123;    for (int i = 0; i &lt; len; i++) &#123;        int min = a[i];        int loc = i;        //寻找最小的元素        for (int j = i + 1; j &lt; len; j++) &#123;            if (a[j] &lt; min) &#123;                min = a[j];                loc = j;            &#125;        &#125;        //把最小的元素放在有序区后面        int temp = a[loc];        a[loc] = a[i];        a[i] = temp;    &#125;&#125;
-
-
-参考MoreWindows Blog 白话经典算法系列
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/22/%E7%AE%97%E6%B3%95-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" itemprop="url">希尔排序</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-22T17:09:32+08:00">
-                2017-07-22
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:06+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">排序算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          思想希尔排序的实质是分组插入排序，又称缩小增量排序。
-该方法的基本思想是：
-
-先将整个待排元素序列分割成若干个子序列（由相隔某个“增量”的元素组成的），对这些子序列分别进行直接插入排序
-依次缩减增量再进行排序
-待整个序列中的元素基本有序（增量足够小）时，再对全体元素进行一次直接插入排序。
-
-因为直接插入排序在元素基本有序的情况下（接近最好情况），效率是很高的，因此希尔排序在时间效率上比前两种方法有较大提高。
-例子现在我们要将这样一个数组排序，一共有10个元素
- 
-
-第一次 增量 gap = 10/2 = 5
-
- 
-整个数组被分成了5个子数组，分别是[49,13]，[38,27]，[65,49]，[97,55]，[26,4]然后对这五个子数组进行插入排序，得到下面结果
- 
-
-第二次 增量 gap = 5/2 = 2
-
- 
-这次我们把整个数组分成了两个子数组，分别是[13,49,4,38,97],[27,55,49,65,26]对这个两个子数组排序，结果如下： 
-
-第三次 增量 gap = 2/2 = 1此时整个数组已经接近有序，对整个数组进行全排列
-
- 
-最终得到数组有序
- 
-代码1234567891011121314151617181920//希尔排序void HillSort(int a[], int len) &#123;    int delta = len/2;    while (delta &gt; 0) &#123;        for (int i = 0; i &lt; delta; i++) &#123;//分成了delta个子序列            
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/22/%E7%AE%97%E6%B3%95-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2240,7 +2253,7 @@ Combine Two TablesPerson表有PersonId, FirstName, LastName. Adress表有AdressI
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">145</span>
+                <span class="site-state-item-count">148</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2251,7 +2264,7 @@ Combine Two TablesPerson表有PersonId, FirstName, LastName. Adress表有AdressI
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2304,7 +2317,7 @@ Combine Two TablesPerson表有PersonId, FirstName, LastName. Adress表有AdressI
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2315,7 +2328,7 @@ Combine Two TablesPerson表有PersonId, FirstName, LastName. Adress表有AdressI
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共327.6k字</span>
+  <span class="post-count">博客全站共331k字</span>
 </div>
 
 

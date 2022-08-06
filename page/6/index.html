@@ -319,6 +319,572 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-2-%E7%94%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%86%E5%88%AB%E7%8C%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-2-%E7%94%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%86%E5%88%AB%E7%8C%AB/" itemprop="url">深度学习实践-1-4-2-用神经网络识别猫</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T18:08:04+08:00">
+                2017-12-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:02+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">神经网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  4.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文主要参考自<a target="_blank" rel="noopener" href="http://blog.csdn.net/koala_tree/article/details/78092337">吴恩达Coursera深度学习课程 DeepLearning.ai 编程作业（1-4）</a></p>
+<p>吴恩达Coursera课程 DeepLearning.ai 编程作业系列，本文为《神经网络与深度学习》部分的第四周“深层神经网络”的课程作业。</p>
+<p>本节的主要内容是：利用之前实现的神经网络，来识别图片中的猫</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-2-%E7%94%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%86%E5%88%AB%E7%8C%AB/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-1-%E6%9E%84%E5%BB%BA%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-1-%E6%9E%84%E5%BB%BA%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url">深度学习实践-1-4-1-构建深层神经网络</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T15:06:06+08:00">
+                2017-12-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:02+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">神经网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  4.8k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文主要参考自<a target="_blank" rel="noopener" href="http://blog.csdn.net/koala_tree/article/details/78092337">吴恩达Coursera深度学习课程 DeepLearning.ai 编程作业（1-4）</a></p>
+<p>吴恩达Coursera课程 DeepLearning.ai 编程作业系列，本文为《神经网络与深度学习》部分的第四周“深层神经网络”的课程作业。</p>
+<p>本节的主要内容是：实现L层的神经网络</p>
+<h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><p>首先完成一些helper function。然后再建立两层、多层神经网络：</p>
+<ul>
+<li>两层和多层神经网络的初始化</li>
+<li>实现前向传播模型<ul>
+<li>实现某一层的前向传播 - 输出$Z^{[l]}$</li>
+<li>激活层已给出</li>
+<li>将前两步结合</li>
+<li>将前向传播迭代L-1次，然后将激活层加到最后，就完成了L层的前向传播</li>
+</ul>
+</li>
+<li>计算误差</li>
+<li>实现后向传播模型<ul>
+<li>实现某一层的后向传播</li>
+<li>激活层的后向传播已给出</li>
+<li>将前两步结合</li>
+<li>将后向传播迭代L-1次，然后将激活层加到最后，完成了L层的后向传播</li>
+</ul>
+</li>
+<li>更新参数</li>
+</ul>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-08-15-15-25.png"> </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-1-%E6%9E%84%E5%BB%BA%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/" itemprop="url">深度学习算法-几种常见的卷积网络</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T10:34:50+08:00">
+                2017-12-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">深度学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">卷积网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>我们先回顾一些经典的卷积网络，然后看看当下比较流行的几种网络</p>
+<h1 id="经典的卷积网络"><a href="#经典的卷积网络" class="headerlink" title="经典的卷积网络"></a>经典的卷积网络</h1><p>介绍几种经典的卷积神经网络结构，分别是LeNet、AlexNet、VGGNet</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/12/08/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-3-%E6%9E%84%E5%BB%BA%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -734,8 +1300,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">
-                2018-12-17
+              <time title="更新于" itemprop="dateModified" datetime="2022-08-06T20:16:13+08:00">
+                2022-08-06
               </time>
             
           </span>
@@ -784,7 +1350,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  11.8k
+                  12k
                 </span>
               
 
@@ -890,7 +1456,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/24/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" itemprop="url">算法-二分查找</a></h1>
+                <a class="post-title-link" href="/2017/11/24/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" itemprop="url">算法-1-二分查找</a></h1>
         
 
         <div class="post-meta">
@@ -918,8 +1484,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">
-                2018-12-17
+              <time title="更新于" itemprop="dateModified" datetime="2022-07-30T14:49:47+08:00">
+                2022-07-30
               </time>
             
           </span>
@@ -968,7 +1534,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  5.5k
+                  5.8k
                 </span>
               
 
@@ -1545,548 +2111,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/11/16/Java-String/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/16/Java-String/" itemprop="url">Java-String</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T14:08:56+08:00">
-                2017-11-16
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:41:59+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  8.3k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p> 首先我们来看一些String的特性。</p>
-<ul>
-<li>String对象不可变！</li>
-<li>在函数的参数传递中，String传进去时是一种拷贝</li>
-<li>String之间用+号非常不好！（+号内部用的是StringBuilder）</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/16/Java-String/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/11/15/Java-LinkedList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/15/Java-LinkedList/" itemprop="url">Java-LinkedList</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T17:14:33+08:00">
-                2017-11-15
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:41:59+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  850
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="LinkedList简介"><a href="#LinkedList简介" class="headerlink" title="LinkedList简介"></a>LinkedList简介</h1><p><strong>LinkedList简介</strong></p>
-<p>LinkedList 是一个继承于AbstractSequentialList的双向链表。它也可以被当作堆栈、队列或双端队列进行操作。</p>
-<ul>
-<li><p>LinkedList 实现 Queue  接口，能对它进行队列操作。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Queue&lt;Integer&gt; queue = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">queue.offer(<span class="number">1</span>);</span><br><span class="line">queue.poll();</span><br></pre></td></tr></table></figure></li>
-<li><p>LinkedList 实现 Deque 接口，即能将LinkedList当作双端队列使用。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">Deque&lt;Integer&gt; deque = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">Deque接口的方法：</span><br><span class="line"><span class="comment">// 从头增</span></span><br><span class="line">addFirst(element);</span><br><span class="line">offerFirst(element):如果增加成功，返回<span class="function"><span class="keyword">true</span></span></span><br><span class="line"><span class="function"><span class="title">push</span><span class="params">(element)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从尾增</span></span><br><span class="line">add(element);</span><br><span class="line">addLast(element);</span><br><span class="line">offer(element) ;  如果增加成功，返回<span class="function"><span class="keyword">true</span></span></span><br><span class="line"><span class="function"><span class="title">offerLast</span><span class="params">(element)</span></span>; 如果增加成功，返回<span class="keyword">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 迭代</span></span><br><span class="line">iterator();</span><br><span class="line">descendingIterator();: 逆序迭代</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从头删</span></span><br><span class="line">pop(element) ; 返回删除的元素</span><br><span class="line">removeFirst();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从尾删</span></span><br><span class="line">removeLast();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 需要注意的是</span></span><br><span class="line">Collection--&gt;Queue--&gt;Deque--实现--&gt;LinkedList(实现类)</span><br><span class="line">  </span><br><span class="line">- Deque接口继承了Queue接口,而Queue接口继承了Collection接口,</span><br><span class="line">- LinkedList实现了Deque接口</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个值得注意的现象：</span></span><br><span class="line"></span><br><span class="line">LinkedList&lt;Integer&gt; test = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">test.addFirst(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">List&lt;Integer&gt; ret = test;</span><br><span class="line">ret.addFirst(<span class="number">1</span>);<span class="comment">// 非法操作！</span></span><br></pre></td></tr></table></figure></li>
-<li><p>LinkedList 实现了Cloneable接口，即覆盖了函数clone()，能克隆。</p>
-</li>
-<li><p>LinkedList 实现java.io.Serializable接口，这意味着LinkedList支持序列化，能通过序列化去传输。</p>
-</li>
-<li><p>LinkedList 是非同步的。</p>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/15/Java-LinkedList/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/11/15/%E7%AE%97%E6%B3%95-leetcode%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/15/%E7%AE%97%E6%B3%95-leetcode%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" itemprop="url">leetcode刷题总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-15T15:23:37+08:00">
-                2017-11-15
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:04+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>主要总结自己做过的题的知识点。</p>
-<p>解释：</p>
-<p>★：需要再次看</p>
-<p>❤：做了很久</p>
-<p>▲：没做出来</p>
-<p><strong>相关文章</strong>：</p>
-<ol>
-<li><a href="/2017/11/16/Java-String/" title="Java-String">Java-String</a></li>
-<li><a href="/2017/11/13/%E7%AE%97%E6%B3%95-Trie%E6%A0%91/" title="算法-Trie树">算法-Trie树</a></li>
-<li><a href="/2017/11/05/%E7%AE%97%E6%B3%95-%E5%B9%B6%E6%9F%A5%E9%9B%86/" title="算法-并查集">算法-并查集</a></li>
-<li><a href="/2017/11/03/%E7%AE%97%E6%B3%95-%E5%A0%86/" title="算法-堆">算法-堆</a></li>
-<li><a href="/2017/11/17/%E7%AE%97%E6%B3%95-DP/" title="算法-DP">算法-DP</a></li>
-<li><a href="#">Post not found: Java-Map Java-Map</a></li>
-<li><a href="/2017/11/21/%E7%AE%97%E6%B3%95-DFS/" title="算法-DFS">算法-DFS</a></li>
-<li><a href="/2017/11/24/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" title="算法-二分查找">算法-二分查找</a></li>
-<li><a href="/2017/11/28/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%88%86%E6%B2%BB/" title="算法-二叉树与分治">算法-二叉树与分治</a></li>
-<li><a href="/2017/12/04/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8/" title="算法-链表">算法-链表</a></li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/15/%E7%AE%97%E6%B3%95-leetcode%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2136,7 +2160,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">145</span>
+                <span class="site-state-item-count">148</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2147,7 +2171,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2200,7 +2224,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2211,7 +2235,7 @@
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共327.6k字</span>
+  <span class="post-count">博客全站共331k字</span>
 </div>
 
 
