@@ -100,7 +100,7 @@
 <meta property="og:description" content="本文总结做过的题，和关键思路。 二分查找   题号 题目 描述 关键思路    数组      34 Search for a range 给int[] {5,7,7,8,8,10]，找到target&#x3D;8出现的范围[3,4]。没找到返回[-1,-1] 二分   35 Search Insert Position 有序无重数组[1,3,5,6],把target&#x3D;5插入，问插入的位置&#x3D;2 二分   7">
 <meta property="og:locale">
 <meta property="article:published_time" content="2022-07-19T05:48:33.000Z">
-<meta property="article:modified_time" content="2022-08-06T11:33:07.444Z">
+<meta property="article:modified_time" content="2022-08-08T13:04:28.071Z">
 <meta property="article:author" content="jiayi797">
 <meta name="twitter:card" content="summary">
 
@@ -364,8 +364,8 @@
               
                 <span class="post-meta-item-text">更新于</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2022-08-06T11:33:07+00:00">
-                2022-08-06
+              <time title="更新于" itemprop="dateModified" datetime="2022-08-08T13:04:28+00:00">
+                2022-08-08
               </time>
             
           </span>
@@ -419,7 +419,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.5k
                 </span>
               
 
@@ -718,6 +718,64 @@
 <td>分治</td>
 </tr>
 </tbody></table>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>题目</th>
+<th>描述</th>
+<th>关键思路</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>64</td>
+<td>Minimum Path Sum</td>
+<td>从左上走到右下。只能向右向下走。求最小路径</td>
+<td>dp</td>
+</tr>
+<tr>
+<td>62</td>
+<td>Unique Paths</td>
+<td>从左上走到右下。只能向右向下走。求方案个数</td>
+<td>dp</td>
+</tr>
+<tr>
+<td>63</td>
+<td>Unique Paths II</td>
+<td>路上有障碍的上一题</td>
+<td>dp</td>
+</tr>
+<tr>
+<td>688</td>
+<td>Knight Probability in Chessboard</td>
+<td>给一个n*n的棋盘，每次可以走八个方向，如图所示。求从[r,c] 出发走K步之后它还停留在棋盘上的概率</td>
+<td>dp</td>
+</tr>
+<tr>
+<td>576</td>
+<td>Out of Boundary paths</td>
+<td>给一个m*n 的棋盘，每次可以走向上下左右四个方向。可以走回头路。求问在N步限制下，有多少种走出棋盘的方法</td>
+<td>dp</td>
+</tr>
+<tr>
+<td>70</td>
+<td>Climbing Stairs</td>
+<td>有一个楼梯，一步只能跨1/2步。问从0走到n层有多少层方案</td>
+<td>dp</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Jump Game</td>
+<td>给一个数组A,A[i]表示在这里时最多可以跳A[i]步。只能向前跳。从数组A的第0位置出发，能不能跳到末尾。</td>
+<td>dp/贪心</td>
+</tr>
+<tr>
+<td>45</td>
+<td>Jump Game II</td>
+<td>给一个数组A,A[i]表示在这里时最多可以跳A[i]步。只能向前跳。从数组A的第0位置出发跳槽最后一个位置（假设一定能跳到），问最少的跳的次数</td>
+<td>dp/贪心</td>
+</tr>
+</tbody></table>
 <h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><table>
 <thead>
 <tr>
@@ -919,7 +977,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-text">二分查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E6%95%B0"><span class="nav-text">数组与数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%88%86%E6%B2%BB%E6%B3%95"><span class="nav-text">二叉树与分治法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86"><span class="nav-text">堆</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE"><span class="nav-text">二分查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E4%B8%8E%E6%95%B0"><span class="nav-text">数组与数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%88%86%E6%B2%BB%E6%B3%95"><span class="nav-text">二叉树与分治法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="nav-text">动态规划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86"><span class="nav-text">堆</span></a></li></ol></div>
             
 
           </div>
@@ -953,7 +1011,7 @@
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331k字</span>
+  <span class="post-count">博客全站共331.3k字</span>
 </div>
 
 
