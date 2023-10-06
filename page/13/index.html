@@ -319,6 +319,204 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/30/%E6%95%B0%E5%AD%A6-%E6%B1%82%E7%BA%BF%E4%BB%A3%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/30/%E6%95%B0%E5%AD%A6-%E6%B1%82%E7%BA%BF%E4%BB%A3%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3/" itemprop="url">求线代方程的解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-30T14:48:21+08:00">
+                2017-03-30
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          LU分解条件如果n阶方阵A的各阶顺序主子式 ，即A的各阶顺序主子矩阵Ak都可逆，则存在唯一的单位下三角矩阵L与唯一的非奇异上三角矩阵U，使得A=LU
+其中k阶顺序主子式指 
+LU分解方法由于L存在可逆矩阵L’，即LL’=E则L’A=LL’U=U因此得出一般的分解方法：通过对(A,E)做初等行变换得到(U,L’),再由L’得到L.
+其中：
+
+L是单位下三角矩阵（对角线上的系数都为1的下三角矩阵）；L’也是单位上三角矩阵；
+U是非奇异上三角矩阵；
+
+求解方法对于一般的线性方程组：$$Ax=b$$如果我们能将A分解成$A=LU$,即一个下三角阵和一个上三角阵U的乘积，那原方程组的解x便可由下面两步得到：
+
+用前代法解$Ly=b$的y； 
+用回代法解$Ux=y$的x. 
+
+对于列主元消去法，求线性方程组$Ax=b$的计算过程可以按照以下步骤进行：
+
+求A的列主元LU分解$PA=LU$
+解下三角形方程组$Ly=Pb$
+解上三角形方程组$Ux=y$
+
+实现前代法：需要注意的是，回代法在计算的过程中需要考虑到主元位置序列，并同时对b进行调整。
+double * forwardSub(double *lu,int n,double *b,int *p)&#123;
+    //double *y=new double[n];
+    double temp;
+      //按qivot对b行变换，与LU匹配
+      for(int i=0; i&lt;n-1; i++)  
+      &#123;
+            temp = b[p[i]];
+            b[p[
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/30/%E6%95%B0%E5%AD%A6-%E6%B1%82%E7%BA%BF%E4%BB%A3%E6%96%B9%E7%A8%8B%E7%9A%84%E8%A7%A3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/29/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5LU%E5%88%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1948,211 +2146,6 @@ super在构造器中的应用1234public Manager(String n, double s, int year, in
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-GBDT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-GBDT/" itemprop="url">机器学习算法-GBDT</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T13:31:46+08:00">
-                2017-03-15
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:01+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  549
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          之前的AdaBoostDTree的误差函数是指数型的。GBDT的误差函数是任意指定的。GBDT的核心就在于，每一棵树学的是之前所有树结论和的残差，这个残差就是一个加预测值后能得真实值的累加量。
-GBDT的误差函数 
-
-紫色部分：之前学过的所有树的结果叠加
-红色和蓝色部分：本轮学习的模型
-将之前学习的树与本轮学习的模型叠加，就得到了本次的预测值
-
-目标
-求函数h(x)的形式
-求h(x)的步长η
-
-回归问题求解目标对于回归（regression）问题，误差函数一般采用平方误差。即：
- 
-为了进一步求解，我们对上式进行taylor展开，即：
- 
-其中：
-
-左边一项$err(S_n,y_n)$是常量（因为$S_n$、$y_n$都已知）
-右边一项应该对s求导，并在sn这点取导数值（$error=(s-y)^2$求导之后得到$2(s-y)$）
-
-那么，上式等于：
- 
-求h(x)为了让上式最小化，那么貌似$|h(x)|$无穷大即可实现，这不科学！于是我们要对$h(x)$的大小进行限制（类似归一化）————加入惩罚项$(h(x_n))^2$，即将上式变为：
- 
-而上式可变为：
- 
-其中的$(s_n-y_n)^2$是常数，记为constant
-那么新的目标就变为：用$x_n$和$y_n-s_n$做一个regression即可。即：
- 
-经过penalize一番折腾之后，h终于有个像模像样的形式了：即regression with residuals（残差）。
-求步长η需要求得一个η，使得下式最小化：
- 
-为了方便计算，我们将平方内的项取负：
- 
-上式的$y_n-s_n$即residuals（残差
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-GBDT/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2202,7 +2195,7 @@ GBDT的误差函数
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">148</span>
+                <span class="site-state-item-count">149</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2266,7 +2259,7 @@ GBDT的误差函数
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2277,7 +2270,7 @@ GBDT的误差函数
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.3k字</span>
+  <span class="post-count">博客全站共331.9k字</span>
 </div>
 
 

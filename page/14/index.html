@@ -319,6 +319,211 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-GBDT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-GBDT/" itemprop="url">机器学习算法-GBDT</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T13:31:46+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:01+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  549
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          之前的AdaBoostDTree的误差函数是指数型的。GBDT的误差函数是任意指定的。GBDT的核心就在于，每一棵树学的是之前所有树结论和的残差，这个残差就是一个加预测值后能得真实值的累加量。
+GBDT的误差函数 
+
+紫色部分：之前学过的所有树的结果叠加
+红色和蓝色部分：本轮学习的模型
+将之前学习的树与本轮学习的模型叠加，就得到了本次的预测值
+
+目标
+求函数h(x)的形式
+求h(x)的步长η
+
+回归问题求解目标对于回归（regression）问题，误差函数一般采用平方误差。即：
+ 
+为了进一步求解，我们对上式进行taylor展开，即：
+ 
+其中：
+
+左边一项$err(S_n,y_n)$是常量（因为$S_n$、$y_n$都已知）
+右边一项应该对s求导，并在sn这点取导数值（$error=(s-y)^2$求导之后得到$2(s-y)$）
+
+那么，上式等于：
+ 
+求h(x)为了让上式最小化，那么貌似$|h(x)|$无穷大即可实现，这不科学！于是我们要对$h(x)$的大小进行限制（类似归一化）————加入惩罚项$(h(x_n))^2$，即将上式变为：
+ 
+而上式可变为：
+ 
+其中的$(s_n-y_n)^2$是常数，记为constant
+那么新的目标就变为：用$x_n$和$y_n-s_n$做一个regression即可。即：
+ 
+经过penalize一番折腾之后，h终于有个像模像样的形式了：即regression with residuals（残差）。
+求步长η需要求得一个η，使得下式最小化：
+ 
+为了方便计算，我们将平方内的项取负：
+ 
+上式的$y_n-s_n$即residuals（残差
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-GBDT/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/14/blog-jacman-hexo%E7%9B%AE%E5%BD%95%E6%94%B9%E6%88%90%E6%B5%AE%E5%8A%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2057,204 +2262,6 @@ Bias/Varian
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" itemprop="url">机器学习实践-O2O优惠券预测-思路总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T16:25:05+08:00">
-                2017-03-03
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:01+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/o2o%E4%BC%98%E6%83%A0%E5%88%B8%E4%BD%BF%E7%94%A8%E9%A2%84%E6%B5%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">o2o优惠券使用预测</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          最近看各种机器学习算法，感觉没有实战，总是空空的。刚好这个月没什么事情，趁此机会拿赛题练习一下。
-资料整理
-阿里天池O2O优惠券消费行为预测竞赛优胜方案。第一名。北大。解题思路。
-O2O优惠券使用预测思路总结。16名。解题思路。
-O2O优惠券使用预测复赛第三名思路。3名。PPT.
-各竞赛QQ群
-竞赛官网
-论坛专区
-天池新人实战赛[o2o优惠券使用预测]
-也可以去天池官网上，点学习入口，下面的视频，这边也有对这次020比赛的一些视频解说 
-数加平台指南＋文档、视频、FAQ及精华帖干货集锦
-数据科学完整学习路径
-
-赛题背景
-O2O（Online to Offline）消费
-O2O：是指将线下的商务机会与互联网结合，让互联网成为线下交易的平台
-以优惠券盘活老用户或吸引新客户进店消费是O2O的一种重要营销方式
-
-赛题目标
-个性化投放优惠券，提高核销率
-通过分析建模，精准预测用户是否会在规定时间内使用相应优惠券
-已知：用户在2016年1月1日至2016年6月30日之间真实线上线下消费行为
-预测：用户在2016年7月领取优惠券后15天以内的使用情况
-评价标准：优惠券核销预测的平均AUC（ROC曲线下面积）。即对每个优惠券coupon_id单独计算核销预测的AUC值，再对所有优惠券的AUC值求平均作为最终的评价标准。 关于AUC的含义与具体计算方法，可参考维基百科
-
-数据描述及分析数据描述
-Table 1: 用户线下消费和优惠券领取行为，ccf_offline_stage1_train.csv
-Table 2: 用户线上点击/消费和优惠券领取行为，ccf_online_stage1_trai
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2304,7 +2311,7 @@ Table 2: 用户线上点击/消费和优惠券领取行为，ccf_online_stage1_t
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">148</span>
+                <span class="site-state-item-count">149</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2368,7 +2375,7 @@ Table 2: 用户线上点击/消费和优惠券领取行为，ccf_online_stage1_t
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2379,7 +2386,7 @@ Table 2: 用户线上点击/消费和优惠券领取行为，ccf_online_stage1_t
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.3k字</span>
+  <span class="post-count">博客全站共331.9k字</span>
 </div>
 
 

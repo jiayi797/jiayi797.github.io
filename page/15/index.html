@@ -319,6 +319,204 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" itemprop="url">机器学习实践-O2O优惠券预测-思路总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-03T16:25:05+08:00">
+                2017-03-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:01+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/o2o%E4%BC%98%E6%83%A0%E5%88%B8%E4%BD%BF%E7%94%A8%E9%A2%84%E6%B5%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">o2o优惠券使用预测</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近看各种机器学习算法，感觉没有实战，总是空空的。刚好这个月没什么事情，趁此机会拿赛题练习一下。
+资料整理
+阿里天池O2O优惠券消费行为预测竞赛优胜方案。第一名。北大。解题思路。
+O2O优惠券使用预测思路总结。16名。解题思路。
+O2O优惠券使用预测复赛第三名思路。3名。PPT.
+各竞赛QQ群
+竞赛官网
+论坛专区
+天池新人实战赛[o2o优惠券使用预测]
+也可以去天池官网上，点学习入口，下面的视频，这边也有对这次020比赛的一些视频解说 
+数加平台指南＋文档、视频、FAQ及精华帖干货集锦
+数据科学完整学习路径
+
+赛题背景
+O2O（Online to Offline）消费
+O2O：是指将线下的商务机会与互联网结合，让互联网成为线下交易的平台
+以优惠券盘活老用户或吸引新客户进店消费是O2O的一种重要营销方式
+
+赛题目标
+个性化投放优惠券，提高核销率
+通过分析建模，精准预测用户是否会在规定时间内使用相应优惠券
+已知：用户在2016年1月1日至2016年6月30日之间真实线上线下消费行为
+预测：用户在2016年7月领取优惠券后15天以内的使用情况
+评价标准：优惠券核销预测的平均AUC（ROC曲线下面积）。即对每个优惠券coupon_id单独计算核销预测的AUC值，再对所有优惠券的AUC值求平均作为最终的评价标准。 关于AUC的含义与具体计算方法，可参考维基百科
+
+数据描述及分析数据描述
+Table 1: 用户线下消费和优惠券领取行为，ccf_offline_stage1_train.csv
+Table 2: 用户线上点击/消费和优惠券领取行为，ccf_online_stage1_trai
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-O2O%E4%BC%98%E6%83%A0%E5%88%B8%E9%A2%84%E6%B5%8B-%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/03/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-SVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1857,7 +2055,7 @@ $$E_{out}(h)=\mathcal{E}_{(x,y)\text~P}(w^Tx-y)^2$$
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">148</span>
+                <span class="site-state-item-count">149</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1921,7 +2119,7 @@ $$E_{out}(h)=\mathcal{E}_{(x,y)\text~P}(w^Tx-y)^2$$
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -1932,7 +2130,7 @@ $$E_{out}(h)=\mathcal{E}_{(x,y)\text~P}(w^Tx-y)^2$$
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.3k字</span>
+  <span class="post-count">博客全站共331.9k字</span>
 </div>
 
 

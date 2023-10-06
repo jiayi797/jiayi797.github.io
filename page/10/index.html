@@ -319,6 +319,198 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/10/%E6%95%B0%E5%AD%A6-SVD%E5%88%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/10/%E6%95%B0%E5%AD%A6-SVD%E5%88%86%E8%A7%A3/" itemprop="url">SVD分解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-10T13:08:20+08:00">
+                2017-07-10
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2.7k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          简介
+
+SVD(Singular Value Decomposition，奇异值分解)是对实数矩阵(甚至复数矩阵)的一种因式分解。
+任意的一个矩阵都可以做SVD分解。相比SVD分解，和SVD相近的特征值分解只能应用于方阵。
+SVD分解可用来解决非方阵不能计算逆矩阵的问题。
+
+SVD定义设一个$m\times n$的矩阵$M$,它的SVD分解是：$$M=UΣV^*$$其中：
+
+$U$是一个$m\times m$的酉矩阵。(我的理解：酉矩阵是在复数空间上，类似正交矩阵的矩阵。它有很多不错的性质。可以在我上一篇博客里看到)
+$Σ$是$m\times n$的矩形对角矩阵，并且在对角线上的元素都是非负实数$σ_i$，称为$M$的奇异值
+$V^*$是一个$n\times n$的酉矩阵，也是$V$的共轭转置矩阵。
+
+SVD的原理首先，我们对正交矩阵进行一些回顾。
+正交矩阵回顾
+从上一节我们知道，正交矩阵对应的变换是不会改变向量长度的。即，对于向量$(a,b)$，正交矩阵$U$，变换后的向量$U(a,b)$的长度与$(a,b)$是相等的。这个正交变换只是对$(a,b)$做了旋转或者镜射等操作。
+特征值分解——EVD在讨论SVD之前，我们先讨论矩阵的特征值分解（EVD）。
+回顾特征值分解，特征值分解是把一个n阶实对称矩阵分解为下面的形式：$$A=QΣQ^{-1}$$其中：
+
+$Q$是这个矩阵$A$的特征向量组成的矩阵，是一个正交矩阵
+$Σ$是一个对角阵，每个对角线上的元素就是一个特征值
+
+此时假设有一个$x$向量，用$A$将这个向量$x$变换到$A$的列空间中，即：$$Ax=QΣQ^{-1}x=
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/07/10/%E6%95%B0%E5%AD%A6-SVD%E5%88%86%E8%A7%A3/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/10/%E6%95%B0%E5%AD%A6-%E7%9F%A9%E9%98%B5%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2025,190 +2217,6 @@ FileChannel.MapMode.PRIVATE：缓冲区可写，
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/19/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-demo/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/19/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-demo/" itemprop="url">OpenMessaging源码阅读2-demo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T16:32:48+08:00">
-                2017-05-19
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index">
-                    <span itemprop="name">中间件比赛</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  803
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          producer操作tips:以下涉及到的代码是关键步骤代码。
-
-====================构造n个Topic和n个Queue====================
- 1234String topic1 = &quot;TOPIC1&quot;; //实际测试时大概会有100个Topic左右String queue2 = &quot;QUEUE2&quot;; //实际测试时，queue数目与消费线程数目相同List&lt;Message&gt; messagesForTopic1 = new ArrayList&lt;&gt;(1024);List&lt;Message&gt; messagesForQueue1 = new ArrayList&lt;&gt;(1024);
-====================向Topic和Queue中create数据====================
- 1messagesForTopic1.add(producer.createBytesMessageToTopic(topic1,  (topic1 + i).getBytes()));
-
-
-调用producer的producer.createBytesMessageToTopic()方法来创建BytesMessage
-将上一步产生的标准消息扔进messagesForTopic1中，即调用了每个messagesForTopic1.add()来向这个Topic中添加消息
-
-需要注意的是：
-
-messageFactory,而createBytesMessageToTop
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/19/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-demo/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2258,7 +2266,7 @@ messageFactory,而createBytesMessageToTop
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">148</span>
+                <span class="site-state-item-count">149</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2322,7 +2330,7 @@ messageFactory,而createBytesMessageToTop
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2333,7 +2341,7 @@ messageFactory,而createBytesMessageToTop
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.3k字</span>
+  <span class="post-count">博客全站共331.9k字</span>
 </div>
 
 

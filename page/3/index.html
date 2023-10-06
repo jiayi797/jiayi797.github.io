@@ -319,6 +319,242 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/03/29/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/29/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6%E7%B3%BB%E7%BB%9F/" itemprop="url">系统设计-聊天系统与访问限制系统</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T16:22:27+08:00">
+                2018-03-29
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">系统设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  998
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          大纲
+
+Design WhatsApp ： 聊天系统
+Work Solution
+Real-time Service
+Online Status: Pull vs Push
+
+
+Design Rate Limiter
+Design Datadog ：一种网站的数据统计，类似于google anaysis
+
+这节课之后您可以学会
+
+设计聊天系统的核心：Realtime Service
+Pull 与 Push 的进一步比较分析
+
+相关设计题
+
+Design Facebook Messenger
+Design WeChat 
+
+聊天系统Scenario 场景设计功能
+
+基本功能
+登录注册
+通讯录
+两个用户互相发消息
+群聊
+用户在线状态
+
+
+其它功能
+历史消息
+多机登录 multi devices
+
+
+
+系统限制
+
+活跃
+1B 月活跃用户
+75% 日活跃 / 月活跃
+约750M日活跃用户——数据来自 Facebook 官方，截止2016年3月
+
+
+
+为了计算方便起见，我们来设计一个100M日活跃的WhatsApp
+
+QPS：
+假设平均一个用户每天发20条信息
+Average QPS = 100M * 20 / 86400 ~ 20k
+Peak QPS = 20k * 5 = 100k
+
+
+存储：
+假设平均一个用户每天发10条信息
+一天需要发 1B，每条记录约30bytes的话，大概需要30G的存储 
+
+
+
+Service 服务
+Message Service : 负责管理信息
+Real-time Service ：负责实时推送信息给接受者
+
+Storage 存储最简单方法
+既然是聊天软
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/29/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%81%8A%E5%A4%A9%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%AE%BF%E9%97%AE%E9%99%90%E5%88%B6%E7%B3%BB%E7%BB%9F/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/03/25/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%A5Big-Table%E4%B8%BA%E4%BE%8B%E6%8E%A2%E7%B4%A2%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1966,182 +2202,6 @@ Java内存泄漏 但是在Java中，我们不用（
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/03/03/%E7%AE%97%E6%B3%95-B%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/03/%E7%AE%97%E6%B3%95-B%E6%A0%91/" itemprop="url">算法-B树</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-03T14:35:53+08:00">
-                2018-03-03
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:03+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3.7k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>B树是为实现高效的磁盘存取而设计的多叉平衡搜索树。这个概念在文件系统，数据库系统中非常重要。</p>
-<p>B树是一种查找树，我们知道，这一类树（比如二叉查找树，红黑树等等）最初生成的目的都是为了解决某种系统中，查找效率低的问题。B树也是如此，它最初启发于二叉查找树，二叉查找树的特点是每个非叶节点都只有两个孩子节点。然而这种做法会导致当数据量非常大时，二叉查找树的深度过深，搜索算法自根节点向下搜索时，需要访问的节点也就变的相当多。如果这些节点存储在外存储器中，每访问一个节点，相当于就是进行了一次I/O操作，随着树高度的增加，频繁的I/O操作一定会降低查询的效率。</p>
-<p>这里有一个基本的概念，就是说我们从外存储器中读取信息的步骤，简单来分，大致有两步：</p>
-<ol>
-<li>找到存储这个数据所对应的磁盘页面，这个过程是机械化的过程，需要依靠磁臂的转动，找到对应磁道，所以耗时长。</li>
-<li>读取数据进内存，并实施运算，这是电子化的过程，相当快。</li>
-</ol>
-<p>综上，对于外存储器的信息读取最大的时间消耗在于寻找磁盘页面。那么一个基本的想法就是能不能减少这种读取的次数，在一个磁盘页面上，多存储一些索引信息。B树的基本逻辑就是这个思路，它要改二叉为多叉，每个节点存储更多的指针信息，以降低I/O操作数。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/03/%E7%AE%97%E6%B3%95-B%E6%A0%91/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2191,7 +2251,7 @@ Java内存泄漏 但是在Java中，我们不用（
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">148</span>
+                <span class="site-state-item-count">149</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2255,7 +2315,7 @@ Java内存泄漏 但是在Java中，我们不用（
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2266,7 +2326,7 @@ Java内存泄漏 但是在Java中，我们不用（
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.3k字</span>
+  <span class="post-count">博客全站共331.9k字</span>
 </div>
 
 

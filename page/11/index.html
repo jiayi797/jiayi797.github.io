@@ -319,6 +319,190 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/19/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-demo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20210523.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/19/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-demo/" itemprop="url">OpenMessaging源码阅读2-demo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-19T16:32:48+08:00">
+                2017-05-19
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">
+                2018-12-17
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B/" itemprop="url" rel="index">
+                    <span itemprop="name">中间件比赛</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  803
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          producer操作tips:以下涉及到的代码是关键步骤代码。
+
+====================构造n个Topic和n个Queue====================
+ 1234String topic1 = &quot;TOPIC1&quot;; //实际测试时大概会有100个Topic左右String queue2 = &quot;QUEUE2&quot;; //实际测试时，queue数目与消费线程数目相同List&lt;Message&gt; messagesForTopic1 = new ArrayList&lt;&gt;(1024);List&lt;Message&gt; messagesForQueue1 = new ArrayList&lt;&gt;(1024);
+====================向Topic和Queue中create数据====================
+ 1messagesForTopic1.add(producer.createBytesMessageToTopic(topic1,  (topic1 + i).getBytes()));
+
+
+调用producer的producer.createBytesMessageToTopic()方法来创建BytesMessage
+将上一步产生的标准消息扔进messagesForTopic1中，即调用了每个messagesForTopic1.add()来向这个Topic中添加消息
+
+需要注意的是：
+
+messageFactory,而createBytesMessageToTop
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/19/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-OpenMessaging%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2-demo/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/17/%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%AF%94%E8%B5%9B-RocketMQ%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1979,185 +2163,6 @@ xiaoming=pd.DataFrame([1,2,3],in
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/05/04/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3-Object/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="甲乙小朋友的房子">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/04/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3-Object/" itemprop="url">java学习笔记3-Object（equal/hashCode/toString）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-04T11:47:33+08:00">
-                2017-05-04
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T15:41:59+08:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.3k
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Object特性
-所有类的超类
-可以引用任何对象
-
-equals方法Object类中的equals方法判断两对象是否有相同的引用
-equals的重写在实际coding中，一般我们都会对equals方法进行重写，例:
-
-对于超类Employee：
- 12345678910111213141516171819202122class Employee&#123;    ...    public boolean equals(Object otherObject)&#123;        //如果otherObject与this是同一个引用        if(this == therObject) return true;        //如果therObject为空        if(therObject == null) return false;        //如果类型不同        if(getClass() != otherObject.getClass()) return false;        //现在我们已经确认了otherObject是一个非空的Employee对象        //为了比较实例域，我们将otherObject转换为Employee类型        Employee other = (Employee) otherObject        //检测实例域是否相等        return name.equals(other.name)            &amp;&amp; salary == other.salary
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/05/04/java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-3-Object/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2207,7 +2212,7 @@ equals的重写在实际coding中，一般我们都会对equals方法进行重�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">148</span>
+                <span class="site-state-item-count">149</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2271,7 +2276,7 @@ equals的重写在实际coding中，一般我们都会对equals方法进行重�
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2023</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -2282,7 +2287,7 @@ equals的重写在实际coding中，一般我们都会对equals方法进行重�
 
 <div class="theme-info">
   <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.3k字</span>
+  <span class="post-count">博客全站共331.9k字</span>
 </div>
 
 
