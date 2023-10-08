@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="“这一段奔波太过匆忙，有时来不及回头张望。” 腾讯“人工寻找trick”大赛初赛今天结束了。最终初赛线上logloss为0.099104，排名为64名：  复赛成绩0.101941，排名26名：  虽然与前排大神的分相差甚远，虽结果不那么如人意，也是对这个领域入了个门。 赛题详细赛题见官方网站 已知：17-30天移动APP的广告、用户的转化情况，及相关上下文。预测：第31天指定用户和对应广告的转化">
+  <meta name="description" content="“这一段奔波太过匆忙，有时来不及回头张望。” 腾讯“人工寻找trick”大赛初赛今天结束了。最终初赛线上logloss为0.099104，排名为64名： 复赛成绩0.101941，排名26名： 虽然与前排大神的分相差甚远，虽结果不那么如人意，也是对这个领域入了个门。 赛题 详细赛题见官方网站 已知：17-30天移动APP的广告、用户的转化情况，及相关上下文。 预测：第31天指定用户和对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习实践-CVR-Tencent_CVR预估初赛&amp;复赛思路总结">
 <meta property="og:url" content="http://jiayi797.github.io/about/2017/06/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-Tencent_CVR%E9%A2%84%E4%BC%B0%E5%88%9D%E8%B5%9B&%E5%A4%8D%E8%B5%9B%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="“这一段奔波太过匆忙，有时来不及回头张望。” 腾讯“人工寻找trick”大赛初赛今天结束了。最终初赛线上logloss为0.099104，排名为64名：  复赛成绩0.101941，排名26名：  虽然与前排大神的分相差甚远，虽结果不那么如人意，也是对这个领域入了个门。 赛题详细赛题见官方网站 已知：17-30天移动APP的广告、用户的转化情况，及相关上下文。预测：第31天指定用户和对应广告的转化">
-<meta property="og:locale">
+<meta property="og:description" content="“这一段奔波太过匆忙，有时来不及回头张望。” 腾讯“人工寻找trick”大赛初赛今天结束了。最终初赛线上logloss为0.099104，排名为64名： 复赛成绩0.101941，排名26名： 虽然与前排大神的分相差甚远，虽结果不那么如人意，也是对这个领域入了个门。 赛题 详细赛题见官方网站 已知：17-30天移动APP的广告、用户的转化情况，及相关上下文。 预测：第31天指定用户和对">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-15-22-48.png">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/07/11/59646ce45d3e0.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-15-44-01.png">
@@ -111,413 +41,254 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-15-22-48.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2017/06/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-Tencent_CVR%E9%A2%84%E4%BC%B0%E5%88%9D%E8%B5%9B&%E5%A4%8D%E8%B5%9B%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2017/06/07/机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结/"/>
-
-
-
-
-
   <title>机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/06/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-Tencent_CVR%E9%A2%84%E4%BC%B0%E5%88%9D%E8%B5%9B&%E5%A4%8D%E8%B5%9B%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-07T07:17:49+00:00">
-                2017-06-07
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2017-07-11T06:17:49+00:00">
-                2017-07-11
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%85%BE%E8%AE%AF%E7%AE%97%E6%B3%95%E5%A4%A7%E8%B5%9B-CVR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">腾讯算法大赛-CVR预估</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-06-07 15:17:49" itemprop="dateCreated datePublished" datetime="2017-06-07T15:17:49+08:00">2017-06-07</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  4.8k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2017-07-11 14:17:49" itemprop="dateModified" datetime="2017-07-11T14:17:49+08:00">2017-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%85%BE%E8%AE%AF%E7%AE%97%E6%B3%95%E5%A4%A7%E8%B5%9B-CVR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">腾讯算法大赛-CVR预估</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <p>“这一段奔波太过匆忙，有时来不及回头张望。”</p>
-<p>腾讯“人工寻找trick”大赛初赛今天结束了。最终初赛线上logloss为0.099104，排名为64名：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-15-22-48.png"> </p>
-<p>复赛成绩0.101941，排名26名：<img src="https://ooo.0o0.ooo/2017/07/11/59646ce45d3e0.png"> </p>
+<p>腾讯“人工寻找trick”大赛初赛今天结束了。最终初赛线上logloss为0.099104，排名为64名：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-15-22-48.png" /></p>
+<p>复赛成绩0.101941，排名26名：<img src="https://ooo.0o0.ooo/2017/07/11/59646ce45d3e0.png" /></p>
 <p>虽然与前排大神的分相差甚远，虽结果不那么如人意，也是对这个领域入了个门。</p>
-<h1 id="赛题"><a href="#赛题" class="headerlink" title="赛题"></a>赛题</h1><p>详细赛题见<a target="_blank" rel="noopener" href="http://algo.tpai.qq.com/home/information/index.html">官方网站</a></p>
-<p><strong>已知</strong>：17-30天移动APP的广告、用户的转化情况，及相关上下文。<br><strong>预测</strong>：第31天指定用户和对应广告的转化率。</p>
-<p><strong>评估方式</strong>：<br>$$logloss=-\frac{1}{N}\sum_{i=1}^N(y_ilog(p_i)+(1-y_i)log(1-p_i))$$</p>
-<p>其中，</p>
-<ul>
-<li>N是测试样本总数</li>
-<li>$y_i$是二值变量，取值为0或1，表示第i个样本的label</li>
-<li>$p_i$是模型预测第i个样本label为1的概率</li>
-</ul>
+<h1 id="赛题">赛题</h1>
+<p>详细赛题见<a target="_blank" rel="noopener" href="http://algo.tpai.qq.com/home/information/index.html">官方网站</a></p>
+<p><strong>已知</strong>：17-30天移动APP的广告、用户的转化情况，及相关上下文。 <strong>预测</strong>：第31天指定用户和对应广告的转化率。</p>
+<p><strong>评估方式</strong>： <span class="math display">\[logloss=-\frac{1}{N}\sum_{i=1}^N(y_ilog(p_i)+(1-y_i)log(1-p_i))\]</span></p>
+<p>其中， - N是测试样本总数 - <span class="math inline">\(y_i\)</span>是二值变量，取值为0或1，表示第i个样本的label - <span class="math inline">\(p_i\)</span>是模型预测第i个样本label为1的概率</p>
 <p>总之，就是预测的越准越好（这不废话么2333）</p>
-<h1 id="主要流程"><a href="#主要流程" class="headerlink" title="主要流程"></a>主要流程</h1><p>这是Kaggle上数据挖掘比赛的黄金流程图：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-15-44-01.png"> </p>
+<h1 id="主要流程">主要流程</h1>
+<p>这是Kaggle上数据挖掘比赛的黄金流程图： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-15-44-01.png" /></p>
 <p>其实对于这个比赛的初赛而言，线上是容易过拟合的。因为线上只有一个集，可反复提交多次来使得线上得分很高，但实际上模型是有些过拟合的。不过这不是重点。</p>
 <p>接下来一步步做说明</p>
-<h1 id="数据分析与清洗"><a href="#数据分析与清洗" class="headerlink" title="数据分析与清洗"></a>数据分析与清洗</h1><p>训练集train.csv没有大问题，我注意的只是后几天的一些数据没有回流的问题。</p>
+<h1 id="数据分析与清洗">数据分析与清洗</h1>
+<p>训练集train.csv没有大问题，我注意的只是后几天的一些数据没有回流的问题。</p>
 <p>值得注意的是，本次竞赛的训练数据提供的截止第31天0点的广告日志，因此，对于最后几天的训练数据，也就是说后五天部分用户实际上是转化了，但广告主还没有来得及将这条转化汇报给广告系统，导致数据集中的label被误标记为了0（实际上是1）。（如果我还没有描述清楚，这里具体可以看官网赛题FAQ.1）</p>
 <p>这里我采取了一种很暴力的方法，即去掉每个广告主最后一次回流之后的数据。</p>
 <p>通过分析我们发现，其实有近一半的广告主还是尽职尽责的，直到30号23点还在反馈回流。只有有一部分广告主在30号下班后，或29号下班后就不回流了。所以我们将这些广告主最后一次回流之后的数据都删除（其实这些都是负样本），这样就在一定程度上减少了不准的负样本。</p>
 <p>这样筛去了大概有3万条，也不算多。</p>
-<h1 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h1><p>一开始的时候我们采用了很多基本特征，即各种ID（AppID,UserID,creativeID,pisitionID等）的onehot编码，又对单特征进行了一定的统计。后来看了大神“为情所困的少年”的分享，才反应过来其实无论是onehot还是对ID单维度的统计特征，其实都是对于一个特征的一种表达，从一定意义上是重复的。我个人感觉onehot之后的稀疏特征更适合于线性模型，如LR；而统计量的连续特征更适合于树模型，如GBDT。</p>
+<h1 id="特征工程">特征工程</h1>
+<p>一开始的时候我们采用了很多基本特征，即各种ID（AppID,UserID,creativeID,pisitionID等）的onehot编码，又对单特征进行了一定的统计。后来看了大神“为情所困的少年”的分享，才反应过来其实无论是onehot还是对ID单维度的统计特征，其实都是对于一个特征的一种表达，从一定意义上是重复的。我个人感觉onehot之后的稀疏特征更适合于线性模型，如LR；而统计量的连续特征更适合于树模型，如GBDT。</p>
 <p>回头来看，其实特征工程需要根据模型预先选择方向。李沐说过，模型是使用离散特征还是连续特征，其实是一个“海量离散特征+简单模型” 同 “少量连续特征+复杂模型”的权衡。既可以离散化用线性模型，也可以用连续特征加深度学习。就看是喜欢折腾特征还是折腾模型了。通常来说，前者容易，而且可以n个人一起并行做，有成功经验；后者目前看很赞，能走多远还须拭目以待。</p>
 <p>就此题来说，有两个方向：</p>
-<h2 id="海量离散特征-简单模型"><a href="#海量离散特征-简单模型" class="headerlink" title="海量离散特征+简单模型"></a>海量离散特征+简单模型</h2><p>如果我们懒得分析数据（初期我们就是这样），并且有还不错的设备（自以为64G内存很有优势），我们可以直接选择这个方向。</p>
-<p>初期的时候，我们是选择的这条路。<br>当时只有简单的ID类特征，以及ID类特征的交叉组合，将这些特征onehot之后输入了LR模型。</p>
+<h2 id="海量离散特征简单模型">海量离散特征+简单模型</h2>
+<p>如果我们懒得分析数据（初期我们就是这样），并且有还不错的设备（自以为64G内存很有优势），我们可以直接选择这个方向。</p>
+<p>初期的时候，我们是选择的这条路。 当时只有简单的ID类特征，以及ID类特征的交叉组合，将这些特征onehot之后输入了LR模型。</p>
 <p>关于特征组合，我在后面会介绍到。</p>
 <p>做完特征和特征组合，将它onehot之后输入模型就可以了。</p>
 <p>对于LR这种线性模型来说，它更适合于onehot类型的特征，首先它对于稀疏高维特征处理是无压力的，其次离散化后的特征对异常数据有很强的鲁棒性，这些在参考文献2<a target="_blank" rel="noopener" href="http://blog.csdn.net/yang090510118/article/details/39478033">逻辑回归LR的特征为什么要先离散化</a>中可以看到。</p>
 <p>但由于ID类特征非常多，例如本题的UserID有好几百万个。这时就会带来维度灾难问题，见参考文献4<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26945814">机器学习中的维度灾难</a>。不仅如此，这时基本上也就被设备问题限制死了。这很烦。于是我们就换模型了。</p>
-<h2 id="少量连续特征-复杂模型"><a href="#少量连续特征-复杂模型" class="headerlink" title="少量连续特征+复杂模型"></a>少量连续特征+复杂模型</h2><p>这是我们暂定的一个方案，就是采用少量、但表现很不错的组合特征统计量，以及一些手工提取的特征（如用户历史安装次数、APP历史被安装次数），这些特征主要来源于群内“为情所困”大神分享的一张表。</p>
+<h2 id="少量连续特征复杂模型">少量连续特征+复杂模型</h2>
+<p>这是我们暂定的一个方案，就是采用少量、但表现很不错的组合特征统计量，以及一些手工提取的特征（如用户历史安装次数、APP历史被安装次数），这些特征主要来源于群内“为情所困”大神分享的一张表。</p>
 <p>模型我们采用的是GBDT，直接使用了陈天奇大牛的xgboost框架。模型我暂时还没有很认真地研究，只是熟悉了一些参数，为决赛做了一些准备。</p>
-<h1 id="特征组合"><a href="#特征组合" class="headerlink" title="特征组合"></a>特征组合</h1><p>特征组合真是我遇到的一个大难题。</p>
-<h2 id="怎么表达组合特征？"><a href="#怎么表达组合特征？" class="headerlink" title="怎么表达组合特征？"></a>怎么表达组合特征？</h2><p>说到特征组合，从统计的角度解释，基本特征仅仅是真实特征分布在低维空间的映射，不足以描述真实分布，加入组合特征是为了在更高维空间拟合真实分布，使得预测更准确。<br>组合特征我现在用过的有以下两种方式：</p>
+<h1 id="特征组合">特征组合</h1>
+<p>特征组合真是我遇到的一个大难题。</p>
+<h2 id="怎么表达组合特征">怎么表达组合特征？</h2>
+<p>说到特征组合，从统计的角度解释，基本特征仅仅是真实特征分布在低维空间的映射，不足以描述真实分布，加入组合特征是为了在更高维空间拟合真实分布，使得预测更准确。 组合特征我现在用过的有以下两种方式：</p>
 <p><strong>对离散ID进行hash生成新特征</strong></p>
 <p>在初期用LR的时候，我们采用的方式是hash。即对两个ID做hash运算，得到一个新特征。这是一个很巧妙的方法。例如下面这个表，我们做哈希：</p>
-<p>$$age\times 10 + gendar$$</p>
+<p><span class="math display">\[age\times 10 + gendar\]</span></p>
 <p>得到第三列：</p>
 <table>
 <thead>
-<tr>
-<th align="center">age</th>
-<th align="center">gendar</th>
-<th align="center">hash</th>
+<tr class="header">
+<th style="text-align: center;">age</th>
+<th style="text-align: center;">gendar</th>
+<th style="text-align: center;">hash</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">10</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">10</td>
 </tr>
-<tr>
-<td align="center">2</td>
-<td align="center">1</td>
-<td align="center">21</td>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">21</td>
 </tr>
-<tr>
-<td align="center">3</td>
-<td align="center">2</td>
-<td align="center">32</td>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">32</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>第三列的的特征的取值有两位，十位是age,个位是gendar。新特征是一种新的交叉特征的体现。</p>
 <p><strong>对组合进行统计生成新特征</strong></p>
 <p>像之前“为情所困”大神说过的那样，其实无论onehot还是统计特征，其实都是对于一个特征的一种表达。因为后期我们采用了GBDT，因此我们弃用了之前的hash组合方式，而选用统计量（即点击量、转化量和转化率）。这样就在一个维度上表达了这两个特征的组合，而且非常便于计算。</p>
-<h2 id="选谁做特征组合？"><a href="#选谁做特征组合？" class="headerlink" title="选谁做特征组合？"></a>选谁做特征组合？</h2><p>需要注意的是，特征组合也不是随便从原来的特征里摘出来两列就做组合。这种随意地对特征堆叠其实会增加模型的负担，而且这些其实就像是“随机数一般的，毫无作用的特征”，可能会使得效果变差。</p>
+<h2 id="选谁做特征组合">选谁做特征组合？</h2>
+<p>需要注意的是，特征组合也不是随便从原来的特征里摘出来两列就做组合。这种随意地对特征堆叠其实会增加模型的负担，而且这些其实就像是“随机数一般的，毫无作用的特征”，可能会使得效果变差。</p>
 <p>究竟对谁做组合，这也是一直困扰我们的问题。以下是我搜集到的几种方案：</p>
 <p><strong>迭代选取方式</strong></p>
-<p>Jerrylin大神曾经说过，可以先对一个组合做groupby分析，看看转化率的分布。可是我遇到了一个瓶颈——大多数特征的转化率分布都是不均匀的，组合起来就更不均匀了。不知道大神是怎么解决的，也许是计算这个分布的方差？【这是个问题，等来日解决，我再回来填坑】<br>大神刚才回我了，他说他是按照gbdt给的一个评分，选取评分较高的几个进行组合，然后再次输入模型进行迭代筛选。<br>在此我要再次偷偷感谢一下这位大神。要是没有他，我可能还会在二百名外挣扎。</p>
+<p>Jerrylin大神曾经说过，可以先对一个组合做groupby分析，看看转化率的分布。可是我遇到了一个瓶颈——大多数特征的转化率分布都是不均匀的，组合起来就更不均匀了。不知道大神是怎么解决的，也许是计算这个分布的方差？【这是个问题，等来日解决，我再回来填坑】 大神刚才回我了，他说他是按照gbdt给的一个评分，选取评分较高的几个进行组合，然后再次输入模型进行迭代筛选。 在此我要再次偷偷感谢一下这位大神。要是没有他，我可能还会在二百名外挣扎。</p>
 <p>刚才风，飞扬。。大神告诉我，其实xgb给的评分也是只能作为一个参考，因为不一定组合之后给会更高。</p>
 <p>忆『凌』殇大神说，构造的特征很可能相关性很高，然后这两个特征的重要性肯定都不低。但是因为相关性高反而会影响性能。这个相关性可以计算这两个特征的相关系数corrcoef来得到。</p>
 <p><strong>穷举后用卡方检验筛特征</strong></p>
@@ -530,57 +301,51 @@
 <li>特征重要性评级：“组合决策树算法”（例如Random Forest or Extra Trees）可以计算每一个属性的重要性。重要性的值可以帮助我们选择出重要的特征。</li>
 </ul>
 <p><strong>用GBDT筛特征</strong></p>
-<p><em>主要思想</em>：<br>GBDT每棵树的路径直接作为LR输入特征使用。</p>
-<p><em>原理</em>：<br>用已有特征训练GBDT模型，然后利用GBDT模型学习到的树来构造新特征，最后把这些新特征加入原有特征一起训练模型。构造的新特征向量是取值0/1的，向量的每个元素对应于GBDT模型中树的叶子结点。当一个样本点通过某棵树最终落在这棵树的一个叶子结点上，那么在新特征向量中这个叶子结点对应的元素值为1，而这棵树的其他叶子结点对应的元素值为0。新特征向量的长度等于GBDT模型里所有树包含的叶子结点数之和。</p>
+<p><em>主要思想</em>： GBDT每棵树的路径直接作为LR输入特征使用。</p>
+<p><em>原理</em>： 用已有特征训练GBDT模型，然后利用GBDT模型学习到的树来构造新特征，最后把这些新特征加入原有特征一起训练模型。构造的新特征向量是取值0/1的，向量的每个元素对应于GBDT模型中树的叶子结点。当一个样本点通过某棵树最终落在这棵树的一个叶子结点上，那么在新特征向量中这个叶子结点对应的元素值为1，而这棵树的其他叶子结点对应的元素值为0。新特征向量的长度等于GBDT模型里所有树包含的叶子结点数之和。</p>
 <p>【这里其实不太懂，一会问问张思遥】</p>
-<p><em>步骤</em>：</p>
-<ol>
-<li>首先要切分数据集，一部分用于训练GBDT，另一部分使用训练好的GBDT模型</li>
-<li>GBDT模型的apply方法生成x在GBDT每个树中的index，然后通过onehot编码做成特征。</li>
-<li>新的特征输入到分类（如LR）模型中训练分类器。</li>
-</ol>
-<p><em>实现</em>：<br>参考文献<a target="_blank" rel="noopener" href="http://blog.csdn.net/shine19930820/article/details/71713680">GBDT原理及利用GBDT构造新的特征-Python实现</a>的末尾有一个调用GBDT训练模型构建树，调用<a target="_blank" rel="noopener" href="http://blog.csdn.net/shine19930820/article/details/71713680">apply()</a>方法得到特征，然后将特征通过one-hot编码后作为新的模型输入LR进行训练。<a target="_blank" rel="noopener" href="http://scikit-learn.org/stable/auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py">feature trainsformation with ensembles of tree官方文档</a></p>
-<h2 id="本赛题特征构造"><a href="#本赛题特征构造" class="headerlink" title="本赛题特征构造"></a>本赛题特征构造</h2><p><a target="_blank" rel="noopener" href="https://github.com/z564808896/Tencent_Social_Ads">竟然有这种操作队分享</a>总结得非常好，主要特征是分为以下几类：</p>
+<p><em>步骤</em>： 1. 首先要切分数据集，一部分用于训练GBDT，另一部分使用训练好的GBDT模型 2. GBDT模型的apply方法生成x在GBDT每个树中的index，然后通过onehot编码做成特征。 3. 新的特征输入到分类（如LR）模型中训练分类器。</p>
+<p><em>实现</em>： 参考文献<a target="_blank" rel="noopener" href="http://blog.csdn.net/shine19930820/article/details/71713680">GBDT原理及利用GBDT构造新的特征-Python实现</a>的末尾有一个调用GBDT训练模型构建树，调用<a target="_blank" rel="noopener" href="http://blog.csdn.net/shine19930820/article/details/71713680">apply()</a>方法得到特征，然后将特征通过one-hot编码后作为新的模型输入LR进行训练。<a target="_blank" rel="noopener" href="http://scikit-learn.org/stable/auto_examples/ensemble/plot_feature_transformation.html#example-ensemble-plot-feature-transformation-py">feature trainsformation with ensembles of tree官方文档</a></p>
+<h2 id="本赛题特征构造">本赛题特征构造</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/z564808896/Tencent_Social_Ads">竟然有这种操作队分享</a>总结得非常好，主要特征是分为以下几类：</p>
 <ul>
-<li><p>Trick特征：<br>通过观察原始数据是不难发现的,有很多只有clickTime和label不一样的重复数据，按时间排序发现重复数据如果转化，label一般标在头或尾，少部分在中间，在训练集上出现的情况在测试集上也会出现，所以标记这些位置后onehot，让模型去学习，再就是时间差特征，关于trick我比赛分享的这篇文章有较详细的说明。比赛后期发现了几个和这个trick相类似的文章1和文章2，可以参考。</p>
-</li>
-<li><p>统计特征：<br>原始特征主要三大类：广告特征、用户特征、位置特征，通过交叉组合算统计构造特征，由于机器限制，统计特征主要使用了转化率，丢掉了点击次数和转化次数。初赛利用了7天滑窗构造，决赛采用了周冠军分享的clickTime之前所有天算统计。三组合特征也来自周冠军分享的下载行为和网络条件限制，以及用户属性对app需求挖掘出。贝叶斯平滑user相关的特征特别废时间，初赛做过根据点击次数阈值来操作转化率，效果和平滑差不多但是阈值选择不太准。</p>
-</li>
-<li><p>活跃数特征：</p>
-</li>
-<li><p>特征构造灵感来自这里,比如某个广告位的app种数。</p>
-</li>
-<li><p>均值特征：</p>
-</li>
-<li><p>比如点击某广告的用户平均年龄</p>
-</li>
-<li><p>平均回流时间特征：<br>利用回流时间方式不对的话很容易造成leackage，这里参考了官方群里的分享，计算了每个appID的平均回流时间，没有回流的app用其所在类的平均回流时间代替</p>
-</li>
-<li><p>用户流水和历史特征：<br>利用installed文件关联user和app获得历史统计特征，利用actions进行7天滑动窗口获得用户和app流水特征。</p>
-</li>
+<li><p>Trick特征： 通过观察原始数据是不难发现的,有很多只有clickTime和label不一样的重复数据，按时间排序发现重复数据如果转化，label一般标在头或尾，少部分在中间，在训练集上出现的情况在测试集上也会出现，所以标记这些位置后onehot，让模型去学习，再就是时间差特征，关于trick我比赛分享的这篇文章有较详细的说明。比赛后期发现了几个和这个trick相类似的文章1和文章2，可以参考。</p></li>
+<li><p>统计特征： 原始特征主要三大类：广告特征、用户特征、位置特征，通过交叉组合算统计构造特征，由于机器限制，统计特征主要使用了转化率，丢掉了点击次数和转化次数。初赛利用了7天滑窗构造，决赛采用了周冠军分享的clickTime之前所有天算统计。三组合特征也来自周冠军分享的下载行为和网络条件限制，以及用户属性对app需求挖掘出。贝叶斯平滑user相关的特征特别废时间，初赛做过根据点击次数阈值来操作转化率，效果和平滑差不多但是阈值选择不太准。</p></li>
+<li><p>活跃数特征：</p></li>
+<li><p>特征构造灵感来自这里,比如某个广告位的app种数。</p></li>
+<li><p>均值特征：</p></li>
+<li><p>比如点击某广告的用户平均年龄</p></li>
+<li><p>平均回流时间特征： 利用回流时间方式不对的话很容易造成leackage，这里参考了官方群里的分享，计算了每个appID的平均回流时间，没有回流的app用其所在类的平均回流时间代替</p></li>
+<li><p>用户流水和历史特征： 利用installed文件关联user和app获得历史统计特征，利用actions进行7天滑动窗口获得用户和app流水特征。</p></li>
 </ul>
-<h2 id="一些特殊的东西"><a href="#一些特殊的东西" class="headerlink" title="一些特殊的东西"></a>一些特殊的东西</h2><p><strong>多线程抽特征</strong></p>
-<p>决赛数据集太大，而我们组合特征非常多。因此我们采用了多线程抽特征的方式。<br>代码见<a target="_blank" rel="noopener" href="https://github.com/zsyandjyhouse/TencentAD_contest">TencentAD_contest</a>，extra_rate_thread_0623.py<br><strong>贝叶斯平滑</strong><br>在决赛时，我们还使用了贝叶斯平滑。针对Pandas，我们对网上已有的代码进行了改进。<br><a href="https://jiayi797.github.io/2017/07/09/%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/">贝叶斯平滑笔记</a><br><strong>word embedding</strong><br>这个我没有做过多研究，这里是<a href="https://jiayi797.github.io/2017/06/21/word-embedding/">word embedding笔记</a><br><strong>SVD分解</strong><br>思路和代码主要看我这篇博客<a href="https://jiayi797.github.io/2017/07/10/SVD%E5%88%86%E8%A7%A3/">SVD分解</a></p>
-<h1 id="训练集构造"><a href="#训练集构造" class="headerlink" title="训练集构造"></a>训练集构造</h1><p>训练集特征做不好，就很容易造成泄露。这是我试过的两种方式：</p>
-<ol>
-<li>用滑动窗口，即每天的前七天的统计（统计指统计转化量、点击量、转化率，下同）来作为第本天的特征。并拿30号来做线下测试集。<br>如下图所示：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-21-49-53.png"><br>经测试我们发现，即使我们去掉了30号的部分负样本，还是有一些问题的。因此我们将时间区间改了一下：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-21-53-21.png"><br>这样做出于两种目的：一是尽量做到了线上线下统一，二是不让模型学习30号的样本数据，防止一些错误样本被模型学到。</li>
-<li>用第一周统计，第二周做交叉验证并训练模型。如下图所示：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-21-59-59.png"> </li>
+<h2 id="一些特殊的东西">一些特殊的东西</h2>
+<p><strong>多线程抽特征</strong></p>
+<p>决赛数据集太大，而我们组合特征非常多。因此我们采用了多线程抽特征的方式。 代码见<a target="_blank" rel="noopener" href="https://github.com/zsyandjyhouse/TencentAD_contest">TencentAD_contest</a>，extra_rate_thread_0623.py <strong>贝叶斯平滑</strong> 在决赛时，我们还使用了贝叶斯平滑。针对Pandas，我们对网上已有的代码进行了改进。 <a href="https://jiayi797.github.io/2017/07/09/%E8%BD%AC%E5%8C%96%E7%8E%87%E9%A2%84%E4%BC%B0%E4%B9%8B%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%B9%B3%E6%BB%91/">贝叶斯平滑笔记</a> <strong>word embedding</strong> 这个我没有做过多研究，这里是<a href="https://jiayi797.github.io/2017/06/21/word-embedding/">word embedding笔记</a> <strong>SVD分解</strong> 思路和代码主要看我这篇博客<a href="https://jiayi797.github.io/2017/07/10/SVD%E5%88%86%E8%A7%A3/">SVD分解</a> # 训练集构造</p>
+<p>训练集特征做不好，就很容易造成泄露。这是我试过的两种方式：</p>
+<ol type="1">
+<li>用滑动窗口，即每天的前七天的统计（统计指统计转化量、点击量、转化率，下同）来作为第本天的特征。并拿30号来做线下测试集。 如下图所示： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-21-49-53.png" /> 经测试我们发现，即使我们去掉了30号的部分负样本，还是有一些问题的。因此我们将时间区间改了一下： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-21-53-21.png" /> 这样做出于两种目的：一是尽量做到了线上线下统一，二是不让模型学习30号的样本数据，防止一些错误样本被模型学到。</li>
+<li>用第一周统计，第二周做交叉验证并训练模型。如下图所示： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-06-07-21-59-59.png" /></li>
 </ol>
 <p>相信很多人都用的是这两种其中的一种。我是一个对自己极度不自信的人，来来回回换了好几次。最终觉得第2种方式很稳定，线上线下较统一。第1种方式特征更新较快，模型更准确，但带来的问题就是线上线下不太统一。</p>
-<h1 id="模型训练和验证"><a href="#模型训练和验证" class="headerlink" title="模型训练和验证"></a>模型训练和验证</h1><p>至此特征工程已经完毕，开始训练。</p>
+<h1 id="模型训练和验证">模型训练和验证</h1>
+<p>至此特征工程已经完毕，开始训练。</p>
 <p>训练其实没什么好说的，只要注意一下别过拟合就可以。</p>
 <p>初赛我们采用的xgboost，决赛用的lightgbm。其实都是对GBDT的实现，两者都很好，但lightGBM更快一些，因为它只对部分节点进行生长。</p>
-<h2 id="stacking"><a href="#stacking" class="headerlink" title="stacking"></a>stacking</h2><p>在初赛的时候听到最多的就是stacking魔法了。文章<a target="_blank" rel="noopener" href="https://www.qcloud.com/community/article/895055">【SPA大赛】腾讯广告点击大赛：对stacking的一些基本介绍</a>非常详细地介绍了stacking大法。我觉得这句话很好：“在我看来stacking严格来说不能称为一种算法，我理解的是一种非常精美而复杂的对模型的集成策略。”</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>平时在学习的过程中，过于注重理论的推导，只是在一遍遍地看那些公式。但没有切身实践过，感受不到模型真正的威力和缺憾。通过这次比赛，还是收获比较多的。注意到了平时学习过程中自以为不重要的、很容易被忽略的细节。</p>
+<h2 id="stacking">stacking</h2>
+<p>在初赛的时候听到最多的就是stacking魔法了。文章<a target="_blank" rel="noopener" href="https://www.qcloud.com/community/article/895055">【SPA大赛】腾讯广告点击大赛：对stacking的一些基本介绍</a>非常详细地介绍了stacking大法。我觉得这句话很好：“在我看来stacking严格来说不能称为一种算法，我理解的是一种非常精美而复杂的对模型的集成策略。”</p>
+<h1 id="总结">总结</h1>
+<p>平时在学习的过程中，过于注重理论的推导，只是在一遍遍地看那些公式。但没有切身实践过，感受不到模型真正的威力和缺憾。通过这次比赛，还是收获比较多的。注意到了平时学习过程中自以为不重要的、很容易被忽略的细节。</p>
 <p>在初赛中，我们其实并没有注重模型的调参等，而是一直在做特征工程。其实我初期也不知道究竟该怎么办。但JerryLin大神用他的言行教会我，特征决定了结果的上限，而模型只是在不断地逼近这个上限而已。只有得到了好的特征，才会拿到好的模型。</p>
 <p>做了这么久的特征工程，最大的感想就是，只有认认真真、踏踏实实分析数据，才能得到好的特征。过度依赖算法在工业上是不可靠的。</p>
-<p>越来越发现务实基础的必要性。比如LR中为什么要采用正则化项，为什么GBDT能有筛特征的功效，为什么树模型容易过拟合，为什么为什么……这些为什么直接决定了在遇到问题的时候能不能独立解决。而不能像我现在一样，分分钟心态爆炸，宛如一只无头的苍蝇。</p>
+<p>越来越发现务实基础的必要性。比如LR中为什么要采用正则化项，为什么GBDT能有筛特征的功效，为什么树模型容易过拟合，为什么为什么......这些为什么直接决定了在遇到问题的时候能不能独立解决。而不能像我现在一样，分分钟心态爆炸，宛如一只无头的苍蝇。</p>
 <p>还有就是，写代码一定要认认真真地写。不能直接把别人的直接粘过来用，这样是极其不负责的，也非常容易出错。在比赛的过程中，我的xgboost预测的代码是直接粘贴的O2O优惠券使用预测的冠军的代码，但他那个的目标是auc，因此他将结果映射到了（0,1）区间上。这句话让我白白浪费了很久很久的时间去试特征，结果发现线上线下不统一，整个人直接崩溃。</p>
 <p>希望自己在未来的日子里，能将周志华老师的《机器学习》和李航老师的《统计学习方法》这两本书吃透，而不是像现在这样，狗熊掰棒子。</p>
 <p>失败乃成功之母。</p>
 <p>天行健，君子以自强不息。</p>
-<h1 id="项目代码"><a href="#项目代码" class="headerlink" title="项目代码"></a>项目代码</h1><p><a target="_blank" rel="noopener" href="https://github.com/zsyandjyhouse/TencentAD_contest">TencentAD_contest</a></p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<h1 id="项目代码">项目代码</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/zsyandjyhouse/TencentAD_contest">TencentAD_contest</a></p>
+<h1 id="参考文献">参考文献</h1>
+<ol type="1">
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26820998">Kaggle 数据挖掘比赛经验分享</a></li>
 <li><a target="_blank" rel="noopener" href="http://blog.csdn.net/yang090510118/article/details/39478033">逻辑回归LR的特征为什么要先离散化</a></li>
 <li><a target="_blank" rel="noopener" href="http://breezedeus.github.io/2014/11/20/breezedeus-feature-hashing.html">特征哈希（Feature Hashing）</a></li>
@@ -595,205 +360,134 @@
 <li><a target="_blank" rel="noopener" href="http://blog.csdn.net/ben3ben/article/details/74838338">第七名</a></li>
 </ol>
 
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/05/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E4%B8%8E%E6%AD%A3%E5%88%99%E5%8C%96/" rel="prev" title="特征选择与正则化">
+      <i class="fa fa-chevron-left"></i> 特征选择与正则化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E4%B8%8D%E5%B9%B3%E8%A1%A1%E7%B1%BB%E7%9A%84%E5%A4%84%E7%90%86/" rel="next" title="机器学习实践-不平衡类的处理">
+      机器学习实践-不平衡类的处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/05/24/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9%E4%B8%8E%E6%AD%A3%E5%88%99%E5%8C%96/" rel="next" title="特征选择与正则化">
-                <i class="fa fa-chevron-left"></i> 特征选择与正则化
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E4%B8%8D%E5%B9%B3%E8%A1%A1%E7%B1%BB%E7%9A%84%E5%A4%84%E7%90%86/" rel="prev" title="机器学习实践-不平衡类的处理">
-                机器学习实践-不平衡类的处理 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%9B%E9%A2%98"><span class="nav-text">赛题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%B5%81%E7%A8%8B"><span class="nav-text">主要流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E6%B8%85%E6%B4%97"><span class="nav-text">数据分析与清洗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%B7%E9%87%8F%E7%A6%BB%E6%95%A3%E7%89%B9%E5%BE%81-%E7%AE%80%E5%8D%95%E6%A8%A1%E5%9E%8B"><span class="nav-text">海量离散特征+简单模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%91%E9%87%8F%E8%BF%9E%E7%BB%AD%E7%89%B9%E5%BE%81-%E5%A4%8D%E6%9D%82%E6%A8%A1%E5%9E%8B"><span class="nav-text">少量连续特征+复杂模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E7%BB%84%E5%90%88"><span class="nav-text">特征组合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E8%A1%A8%E8%BE%BE%E7%BB%84%E5%90%88%E7%89%B9%E5%BE%81%EF%BC%9F"><span class="nav-text">怎么表达组合特征？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E8%B0%81%E5%81%9A%E7%89%B9%E5%BE%81%E7%BB%84%E5%90%88%EF%BC%9F"><span class="nav-text">选谁做特征组合？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E8%B5%9B%E9%A2%98%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0"><span class="nav-text">本赛题特征构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%9A%84%E4%B8%9C%E8%A5%BF"><span class="nav-text">一些特殊的东西</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E9%9B%86%E6%9E%84%E9%80%A0"><span class="nav-text">训练集构造</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%92%8C%E9%AA%8C%E8%AF%81"><span class="nav-text">模型训练和验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stacking"><span class="nav-text">stacking</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81"><span class="nav-text">项目代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%9B%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">赛题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">主要流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%8E%E6%B8%85%E6%B4%97"><span class="nav-number">3.</span> <span class="nav-text">数据分析与清洗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%B7%E9%87%8F%E7%A6%BB%E6%95%A3%E7%89%B9%E5%BE%81%E7%AE%80%E5%8D%95%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.1.</span> <span class="nav-text">海量离散特征+简单模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%91%E9%87%8F%E8%BF%9E%E7%BB%AD%E7%89%B9%E5%BE%81%E5%A4%8D%E6%9D%82%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text">少量连续特征+复杂模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E7%BB%84%E5%90%88"><span class="nav-number">5.</span> <span class="nav-text">特征组合</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E8%A1%A8%E8%BE%BE%E7%BB%84%E5%90%88%E7%89%B9%E5%BE%81"><span class="nav-number">5.1.</span> <span class="nav-text">怎么表达组合特征？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E8%B0%81%E5%81%9A%E7%89%B9%E5%BE%81%E7%BB%84%E5%90%88"><span class="nav-number">5.2.</span> <span class="nav-text">选谁做特征组合？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E8%B5%9B%E9%A2%98%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0"><span class="nav-number">5.3.</span> <span class="nav-text">本赛题特征构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%89%B9%E6%AE%8A%E7%9A%84%E4%B8%9C%E8%A5%BF"><span class="nav-number">5.4.</span> <span class="nav-text">一些特殊的东西</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%92%8C%E9%AA%8C%E8%AF%81"><span class="nav-number">6.</span> <span class="nav-text">模型训练和验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stacking"><span class="nav-number">6.1.</span> <span class="nav-text">stacking</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81"><span class="nav-number">8.</span> <span class="nav-text">项目代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">9.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -802,140 +496,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -946,362 +537,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

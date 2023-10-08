@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="是视频马士兵 多线程与高并发的学习笔记。 计算机架构 从CPU到： - 寄存器，&lt;1ns - L1 Cache, 1ns - L2 Cache, 3ns - L3 Cache, 15ns - main memory, 80ns flowchart TB   subgraph CPU     subgraph CPU1         Register寄存器         Ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程与高并发">
+<meta property="og:url" content="http://jiayi797.github.io/about/2023/10/06/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91/index.html">
+<meta property="og:site_name" content="甲乙小朋友的房子">
+<meta property="og:description" content="是视频马士兵 多线程与高并发的学习笔记。 计算机架构 从CPU到： - 寄存器，&lt;1ns - L1 Cache, 1ns - L2 Cache, 3ns - L3 Cache, 15ns - main memory, 80ns flowchart TB   subgraph CPU     subgraph CPU1         Register寄存器         Ar">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/10758484-fd71238d1974283e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta property="article:published_time" content="2023-10-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-10-08T03:59:28.037Z">
+<meta property="article:author" content="jiayi797">
+<meta property="article:tag" content="面试">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/10758484-fd71238d1974283e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+
+<link rel="canonical" href="http://jiayi797.github.io/about/2023/10/06/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>多线程与高并发 | 甲乙小朋友的房子</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2023/10/06/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="甲乙小朋友的房子">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多线程与高并发
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-07 00:00:00" itemprop="dateCreated datePublished" datetime="2023-10-07T00:00:00+08:00">2023-10-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-08 11:59:28" itemprop="dateModified" datetime="2023-10-08T11:59:28+08:00">2023-10-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>是视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Xi4y1C7ed/">马士兵 多线程与高并发</a>的学习笔记。</p>
+<h1 id="计算机架构">计算机架构</h1>
+<p>从CPU到： - 寄存器，&lt;1ns - L1 Cache, 1ns - L2 Cache, 3ns - L3 Cache, 15ns - main memory, 80ns</p>
+<pre class="mermaid">flowchart TB
+  subgraph CPU
+    subgraph CPU1
+        Register寄存器
+        ArithmeticLogicUnit运算逻辑单元
+        L1Cache
+        L2Cache
+    end
+    subgraph CPU2
+    end
+ end
+
+
+  subgraph 内存
+    subgraph ProgramA
+        subgraph Thread1
+        Data
+        指令集
+        end
+        subgraph Thread2
+        Data2
+        指令集2
+        end
+    end
+  end
+
+  指令集 --> Register寄存器
+  Data --> ArithmeticLogicUnit运算逻辑单元</pre>
+<h1 id="多线程相关基础知识">多线程相关基础知识</h1>
+<ul>
+<li>别人的笔记<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/44ea833dca76">多线程高并发</a></li>
+</ul>
+<h2 id="cas-compare-and-swap-compare-and-exchange">CAS Compare And Swap (Compare And Exchange)</h2>
+<ul>
+<li>AtomicInteger的incrementAndGet(), 使用的是CAS-unsafe的方法-lock cmpxchg</li>
+<li>linux底层实现：lock cmpxchg</li>
+<li>lock: 操作系统&amp;硬件层面 lock 当前内存 - 保证原子性</li>
+<li>cmpxchg : compare and exchange - 非原子性</li>
+</ul>
+<h2 id="java对象布局">Java对象布局</h2>
+<ul>
+<li>Object o = new Object()</li>
+<li>24字节： markword（8个字节）、class pointer（4个字节，用了UseCompressedClassPointers）、padding（4个字节，为了保证是8字节的倍数）</li>
+<li>可以使用JOL(Java Object Layout)来显示打印对象的信息</li>
+<li>markword包括 (UseCompressedOops enabled by default)</li>
+<li><ul>
+<li>GC信息【分代年龄：4个bit表示，普通的15，CMS是6】</li>
+</ul></li>
+<li><ul>
+<li>hashCode（调用后才会有）</li>
+</ul></li>
+<li><ul>
+<li>markword里包含this object的锁状态！当用<code>asynchronous(o)</code> 给对象o加锁时，对象o的锁状态会产生如下锁升级的变化。</li>
+</ul></li>
+</ul>
+<h2 id="锁升级">锁升级</h2>
+<ul>
+<li><ul>
+<li>锁升级:无锁态-&gt;偏向锁-&gt;轻量级锁-&gt;重量级锁</li>
+</ul></li>
+<li><ul>
+<li>偏向锁（适合一个线程很短时间使用后释放，且反复使用）：包含JavaThread当前线程指针</li>
+</ul></li>
+<li><ul>
+<li>轻量级锁：一旦有线程竞争，就升级为自旋锁。自旋锁：包含线程栈中Lock Record的指针。好处：用户态，所以效率高；坏处：占用CPU资源</li>
+</ul></li>
+<li><ul>
+<li>重量级锁（竞争激烈，自旋超过10次或者等待线程超过CPU核数一半、或者自适应自旋，向操作系统申请锁）：指向互斥量（重量级锁）的指针。好处：锁有队列，当线程没有拥有锁时不消耗CPU资源在wait（也就是自旋线程会阻塞，进入阻塞队列进行等待）</li>
+</ul></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">|--------------------------------------------------------------------------------------------------------------|--------------------|</span><br><span class="line">|                                            Object Header (96 bits)                                           |        State       |</span><br><span class="line">|--------------------------------------------------------------------------------|-----------------------------|--------------------|</span><br><span class="line">|                                  Mark Word (64 bits)                           |    Class Word (32 bits)     |                    |</span><br><span class="line">|--------------------------------------------------------------------------------|-----------------------------|--------------------|</span><br><span class="line">| unused:25 | identity_hashcode:31 | cms_free:1 | age:4 | biased_lock:1 | lock:2 |    OOP to metadata object   |       无锁态        |</span><br><span class="line">|--------------------------------------------------------------------------------|-----------------------------|--------------------|</span><br><span class="line">| thread:54 |       epoch:2        | cms_free:1 | age:4 | biased_lock:1 | lock:2 |    OOP to metadata object   |       偏向锁        |</span><br><span class="line">|--------------------------------------------------------------------------------|-----------------------------|--------------------|</span><br><span class="line">|                         ptr_to_lock_record                            | lock:2 |    OOP to metadata object   | Lightweight Locked |</span><br><span class="line">|--------------------------------------------------------------------------------|-----------------------------|--------------------|</span><br><span class="line">|                     ptr_to_heavyweight_monitor                        | lock:2 |    OOP to metadata object   | Heavyweight Locked |</span><br><span class="line">|--------------------------------------------------------------------------------|-----------------------------|--------------------|</span><br><span class="line">|                                                                       | lock:2 |    OOP to metadata object   |    Marked for GC   |</span><br><span class="line">|--------------------------------------------------------------------------------|-----------------------------|--------------------|</span><br></pre></td></tr></table></figure>
+<h2 id="锁降级">锁降级</h2>
+<p>只发生在GC。忽略。</p>
+<h2 id="锁消除">锁消除</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">void Add(String s1, String s2)&#123;</span><br><span class="line">    StringBuffer sb = new StringBuffer();</span><br><span class="line">    sb.append(s1).append(s2); // StringBuffer 的append是线程安全的，StringBuilder的append是线程不安全的</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>StringBuffer 是用synchronized修饰的线程安全的。jdk如果检测到sb不可能有线程竞争，那jvm自动消除StringBuffer对象内部的锁。</p>
+<h2 id="锁粗化">锁粗化</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void Test(String s)&#123;</span><br><span class="line">    StringBuffer sb = new StringBuffer();</span><br><span class="line">    while (i &lt; 100)&#123;</span><br><span class="line">        sb.append(s);</span><br><span class="line">        ++i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JVM检测到sb的锁可以拿出到while外面</p>
+<h1 id="synchronized-的底层实现">synchronized 的底层实现</h1>
+<p>用了个什么插件可以看到，用synchronized修饰的锁，底层实现就调用了lock cmpxchg</p>
+<p>实际的各个层级 - java代码：synchronized - 字节码实现：monitorenter、moniterexit。也就是在执行过程中自动升级（无锁-偏向锁-自旋锁-重量级锁） - 更底层实现：lock cmpxchg：通过自旋改变一个值</p>
+<h1 id="volatile">volatile</h1>
+<p>volatile的两个含义： - 线程可见性 (下面code解释了) - 禁止指令重排序（禁止乱序）：指的是对这个obj的读写的指令不能乱序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * volatile 关键字，使一个变量在多个线程间可见</span></span><br><span class="line"><span class="comment"> * A B线程都用到一个变量，java默认是A线程中保留一份copy，这样如果B线程修改了该变量，则A线程未必知道</span></span><br><span class="line"><span class="comment"> * 使用volatile关键字，会让所有线程都会读到变量的修改值</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 在下面的代码中，running是存在于堆内存的t对象中</span></span><br><span class="line"><span class="comment"> * 当线程t1开始运行的时候，会把running值从内存中读到t1线程的工作区，在运行过程中直接使用这个copy，并不会每次都去</span></span><br><span class="line"><span class="comment"> * 读取堆内存，这样，当主线程修改running的值之后，t1线程感知不到，所以不会停止运行</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 使用volatile，将会强制所有线程都去堆内存中读取running的值</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * 可以阅读这篇文章进行更深入的理解</span></span><br><span class="line"><span class="comment"> * http://www.cnblogs.com/nexiyi/p/java_memory_model_and_thread.html</span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> * volatile并不能保证多个线程共同修改running变量时所带来的不一致问题，也就是说volatile不能替代synchronized</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> mashibing</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">T01_HelloVolatile</span> </span>&#123;</span><br><span class="line">	<span class="comment">/*volatile*/</span> <span class="keyword">boolean</span> running = <span class="keyword">true</span>; <span class="comment">//对比一下有无volatile的情况下，整个程序运行结果的区别</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;m start&quot;</span>);</span><br><span class="line">		<span class="keyword">while</span>(running) &#123;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(<span class="string">&quot;m end!&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		T01_HelloVolatile t = <span class="keyword">new</span> T01_HelloVolatile();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">new</span> Thread(t::m, <span class="string">&quot;t1&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			TimeUnit.SECONDS.sleep(<span class="number">1</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		t.running = <span class="keyword">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="volatile在jvm里怎么实现的">volatile在JVM里怎么实现的？</h2>
+<p>结论：JVM内存屏障。 先看下面的一些概念，然后就懂了。</p>
+<h3 id="超线程">超线程</h3>
+<p>一个CPU有两个寄存器，一个计算单元。这样就可以两个thread“几乎同时”跑（很少有上下文切换）。所谓的四核八线程也即这个原因</p>
+<h3 id="缓存一致性协议----保证线程可见性">缓存一致性协议 --&gt; 保证线程可见性</h3>
+<ul>
+<li>L1,L2是单个cpu内部的。就是线程本地内存！</li>
+<li>L3是多个cpu共享的</li>
+<li>CPU数据的来源从近及远依次是L1 Cache, L2 Cache, L3 Cache（多个核或者多个CPU公用）以及main memory，也就是先从近的读取，如果没有再逐渐向外读取。</li>
+<li>cache line 缓存行：由于程序局部性原理，会把数据按块读取。一个块就叫一个缓存行，64 bytes</li>
+<li>CPU层级的数据一致性volatile，是以cache line为单位的。</li>
+<li>也就是一旦修改cache line里的任意data，别的L1/L2里的此cacheLine就失效了，要重读！也就是MESI Cache缓存一致性协议。x86 intel CPU的协议，表示modified、exclusive（独占整个缓存行）、shared、invalid（一个cpu修改了另一个的就是失效的）</li>
+<li>缓存行对齐：对于有些特别敏感的数字，会存在线程高竞争的访问，为了保证不发生伪共享（两个数字在同一个缓存行，但长期被两个不同的线程使用），可以使用缓存行对齐的编程方式；可以补齐到64字节，避免volatile可见性带来的效率低下问题。disruptor（环形队列）</li>
+</ul>
+<figure>
+<img src="https://upload-images.jianshu.io/upload_images/10758484-fd71238d1974283e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="jpg" /><figcaption aria-hidden="true">jpg</figcaption>
+</figure>
+<h3 id="内存屏障----禁止指令重排序">内存屏障 --&gt; 禁止指令重排序</h3>
+<ul>
+<li>代码层面 volatile i</li>
+<li>字节码层面 ACC_VOLATILE 加标志</li>
+<li>JVM层面是通过内存屏障来实现</li>
+<li><ul>
+<li>JVM定义了四种接口，LoadLoad, StoreStore, LoadStore,StoreLoad，也是四种内存屏障</li>
+</ul></li>
+<li><ul>
+<li>对volatile 变量 的读写操作加：</li>
+</ul></li>
+<li><ul>
+<li><ul>
+<li>StoreStore, Volatile Write, StoreLoad --&gt; 也就是write-&gt;VolatileWrite-&gt;Read 这样的指令不可以重排序</li>
+</ul></li>
+</ul></li>
+<li><ul>
+<li><ul>
+<li>LoadLoad, Volatile Read, LoadStore --&gt; 也就是Read-&gt;VolatileRead-&gt;Write 这样的指令不可以重排序 （sfence mfence lfence等系统原语）。写操作前后ss和sl，读操作前后ll和ls</li>
+</ul></li>
+</ul></li>
+<li>系统层面 x86:</li>
+<li><ul>
+<li>storeload最终是通过lock指令，锁总线。参考文献<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/zvBxfVrB7czS7qU5SW_n7Q">深入理解java内存屏障</a></li>
+</ul></li>
+</ul>
+<h1 id="比较volatile和synchronized">比较volatile和synchronized</h1>
+<ul>
+<li>volatile 关键字用途：</li>
+<li><ul>
+<li>保证变量的可见性：当一个变量被声明为 volatile 时，它确保了变量的修改对其他线程是可见的。也就是说，如果一个线程修改了 volatile 变量的值，其他线程会立即看到这个修改。这对于标志位或状态标识非常有用。</li>
+</ul></li>
+<li><ul>
+<li>禁止指令重排序：volatile 变量的读写操作不会被重排序，这意味着 volatile 变量的写入操作不会被移到后面执行，确保了写入操作的原子性。</li>
+</ul></li>
+<li><ul>
+<li>因此它不能保证线程安全！</li>
+</ul></li>
+<li>synchronized 关键字用途：</li>
+<li><ul>
+<li>实现互斥锁：synchronized 用于实现互斥锁，可以确保同一时间只有一个线程可以访问被 synchronized 修饰的代码块或方法。这可以用于保护共享资源，防止多线程同时修改它们而导致的数据竞争和不一致性。</li>
+</ul></li>
+<li><ul>
+<li>实现条件同步：synchronized 还可以与 wait() 和 notify()/notifyAll() 方法一起使用，实现线程之间的条件同步。这对于线程等待某个条件满足后再执行特定操作非常有用。</li>
+</ul></li>
+</ul>
+<p>所以，根据需求和具体情况，你可以选择使用 volatile 或 synchronized： - 如果你只需要确保变量的可见性并禁止指令重排序，而不需要互斥锁或条件同步，可以使用 volatile。 - 如果你需要互斥访问共享资源或实现复杂的条件同步，应该使用 synchronized。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag"># 面试</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/05/%E6%90%9C%E7%B4%A2%E5%B9%BF%E5%91%8A%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0/" rel="prev" title="搜索广告架构概述">
+      <i class="fa fa-chevron-left"></i> 搜索广告架构概述
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2048/10/23/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/" rel="next" title="本站简介">
+      本站简介 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">计算机架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">多线程相关基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cas-compare-and-swap-compare-and-exchange"><span class="nav-number">2.1.</span> <span class="nav-text">CAS Compare And Swap (Compare And Exchange)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80"><span class="nav-number">2.2.</span> <span class="nav-text">Java对象布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E5%8D%87%E7%BA%A7"><span class="nav-number">2.3.</span> <span class="nav-text">锁升级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E9%99%8D%E7%BA%A7"><span class="nav-number">2.4.</span> <span class="nav-text">锁降级</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E6%B6%88%E9%99%A4"><span class="nav-number">2.5.</span> <span class="nav-text">锁消除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%81%E7%B2%97%E5%8C%96"><span class="nav-number">2.6.</span> <span class="nav-text">锁粗化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#synchronized-%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">synchronized 的底层实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile"><span class="nav-number">4.</span> <span class="nav-text">volatile</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile%E5%9C%A8jvm%E9%87%8C%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84"><span class="nav-number">4.1.</span> <span class="nav-text">volatile在JVM里怎么实现的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.1.1.</span> <span class="nav-text">超线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AE----%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%8F%AF%E8%A7%81%E6%80%A7"><span class="nav-number">4.1.2.</span> <span class="nav-text">缓存一致性协议 --&gt; 保证线程可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C----%E7%A6%81%E6%AD%A2%E6%8C%87%E4%BB%A4%E9%87%8D%E6%8E%92%E5%BA%8F"><span class="nav-number">4.1.3.</span> <span class="nav-text">内存屏障 --&gt; 禁止指令重排序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%94%E8%BE%83volatile%E5%92%8Csynchronized"><span class="nav-number">5.</span> <span class="nav-text">比较volatile和synchronized</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiayi797</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

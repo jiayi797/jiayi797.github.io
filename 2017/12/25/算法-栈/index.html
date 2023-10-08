@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="大纲  线性 队列 - Queue 栈 - Stack 哈希 - Hash   树形 堆&#x2F;优先队列 - Heap &#x2F; Priority Queue Tire TreeMap">
+  <meta name="description" content="大纲  线性  队列 - Queue 栈 - Stack 哈希 - Hash  树形  堆&#x2F;优先队列 - Heap &#x2F; Priority Queue Tire TreeMap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法-栈">
 <meta property="og:url" content="http://jiayi797.github.io/about/2017/12/25/%E7%AE%97%E6%B3%95-%E6%A0%88/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="大纲  线性 队列 - Queue 栈 - Stack 哈希 - Hash   树形 堆&#x2F;优先队列 - Heap &#x2F; Priority Queue Tire TreeMap">
-<meta property="og:locale">
+<meta property="og:description" content="大纲  线性  队列 - Queue 栈 - Stack 哈希 - Hash  树形  堆&#x2F;优先队列 - Heap &#x2F; Priority Queue Tire TreeMap">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-02-16-20-04.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-02-20-44-52.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-14-19-20.png">
@@ -110,385 +40,218 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-02-16-20-04.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2017/12/25/%E7%AE%97%E6%B3%95-%E6%A0%88/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2017/12/25/算法-栈/"/>
-
-
-
-
-
   <title>算法-栈 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/25/%E7%AE%97%E6%B3%95-%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">算法-栈</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          算法-栈
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T13:11:25+00:00">
-                2017-12-25
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:06+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-12-25 21:11:25" itemprop="dateCreated datePublished" datetime="2017-12-25T21:11:25+08:00">2017-12-25</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  7.3k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:06" itemprop="dateModified" datetime="2018-12-17T15:42:06+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
+
     
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p><strong>大纲</strong></p>
 <ul>
-<li>线性<ul>
+<li>线性
+<ul>
 <li>队列 - Queue</li>
 <li>栈 - Stack</li>
 <li>哈希 - Hash</li>
-</ul>
-</li>
-<li>树形<ul>
+</ul></li>
+<li>树形
+<ul>
 <li>堆/优先队列 - Heap / Priority Queue</li>
 <li>Tire</li>
 <li>TreeMap</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <span id="more"></span>
-
 <p><strong>Queue</strong></p>
 <p>复杂度</p>
-<p>$O(1)$ Push</p>
-<p>$O(1)$ Pop</p>
-<p>$O(1)$ Top</p>
+<p><span class="math inline">\(O(1)\)</span> Push</p>
+<p><span class="math inline">\(O(1)\)</span> Pop</p>
+<p><span class="math inline">\(O(1)\)</span> Top</p>
 <p>一般用在BFS</p>
 <p><strong>Stack</strong></p>
-<p>$O(1)$ Push</p>
-<p>$O(1)$ Pop</p>
-<p>$O(1)$ Top</p>
-<h1 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h1><h2 id="例题1，Min-Stack"><a href="#例题1，Min-Stack" class="headerlink" title="例题1，Min Stack"></a>例题1，Min Stack</h2><p>实现一种支持求min()的栈</p>
+<p><span class="math inline">\(O(1)\)</span> Push</p>
+<p><span class="math inline">\(O(1)\)</span> Pop</p>
+<p><span class="math inline">\(O(1)\)</span> Top</p>
+<h1 id="栈">栈</h1>
+<h2 id="例题1min-stack">例题1，Min Stack</h2>
+<p>实现一种支持求min()的栈</p>
 <p>例如给7,9,10,2,1</p>
 <p>依次加入栈时，会有当前的最小值。即：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">|-----|</span><br><span class="line">   1    -&gt; min = 1</span><br><span class="line">|-----|</span><br><span class="line">   2    -&gt; min = 2</span><br><span class="line">|-----|</span><br><span class="line">  10    -&gt; min = 7</span><br><span class="line">|-----| </span><br><span class="line">   9    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">   7    -&gt; min = 7</span><br><span class="line">|-----|</span><br></pre></td></tr></table></figure>
-
 <p>分析：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">加入一开始将7push进去：</span><br><span class="line"></span><br><span class="line">|-----|</span><br><span class="line">   7    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">  </span><br><span class="line">然后我们加入9，将9与min比较，得到新的min = 7</span><br><span class="line">  </span><br><span class="line">|-----| </span><br><span class="line">   9    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">   7    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">  </span><br><span class="line">再加入10，将10与min比较，得到新的min = 7</span><br><span class="line">  </span><br><span class="line">|-----|</span><br><span class="line">  10    -&gt; min = 7</span><br><span class="line">|-----| </span><br><span class="line">   9    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">   7    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">  </span><br><span class="line">再加入2，将2与min比较，得到新的min = 2</span><br><span class="line">  </span><br><span class="line">|-----|</span><br><span class="line">   2    -&gt; min = 2</span><br><span class="line">|-----|</span><br><span class="line">  10    -&gt; min = 7</span><br><span class="line">|-----| </span><br><span class="line">   9    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">   7    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">  </span><br><span class="line">再加入1，将1与min比较，得到新的min = 1</span><br><span class="line">  </span><br><span class="line">|-----|</span><br><span class="line">   1    -&gt; min = 1</span><br><span class="line">|-----|</span><br><span class="line">   2    -&gt; min = 2</span><br><span class="line">|-----|</span><br><span class="line">  10    -&gt; min = 7</span><br><span class="line">|-----| </span><br><span class="line">   9    -&gt; min = 7</span><br><span class="line">|-----|</span><br><span class="line">   7    -&gt; min = 7</span><br><span class="line">|-----|</span><br></pre></td></tr></table></figure>
-
 <p>那么我们可以把右边的最小值放在一个栈里，我们称它为”最小栈“——表示当前栈元素里的最小值。相当于</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> 原栈            最小栈</span><br><span class="line">|-----|        |-----|</span><br><span class="line">   1              1</span><br><span class="line">|-----|        |-----|</span><br><span class="line">   2              2</span><br><span class="line">|-----|        |-----|</span><br><span class="line">  10              7</span><br><span class="line">|-----|        |-----|</span><br><span class="line">   9              7</span><br><span class="line">|-----|        |-----|</span><br><span class="line">   7              7</span><br><span class="line">|-----|        |-----|</span><br></pre></td></tr></table></figure>
-
 <p>当我们想pop时，只需要同时把最小栈的栈顶也pop出去就好了！！！！！</p>
-<h2 id="例题2，-Implement-Queue-with-Stack"><a href="#例题2，-Implement-Queue-with-Stack" class="headerlink" title="例题2， Implement Queue with Stack"></a>例题2， Implement Queue with Stack</h2><p>我们先研究一下队列和栈，假如我们依次将7,9,10,2,1放入队列和栈，就会变成这样：</p>
+<h2 id="例题2-implement-queue-with-stack">例题2， Implement Queue with Stack</h2>
+<p>我们先研究一下队列和栈，假如我们依次将7,9,10,2,1放入队列和栈，就会变成这样：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 队列                       栈</span><br><span class="line">|-----|                  |-----|</span><br><span class="line">   1     &lt;-- tail           1    &lt;-- tail</span><br><span class="line">|-----|                  |-----|</span><br><span class="line">   2                        2</span><br><span class="line">|-----|                  |-----|</span><br><span class="line">  10                        10</span><br><span class="line">|-----|                  |-----|</span><br><span class="line">   9                        9</span><br><span class="line">|-----|                  |-----|</span><br><span class="line">   7    &lt;-- head            7    &lt;-- head</span><br><span class="line">|-----|                  |-----|</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <ul>
 <li>将上面的队列依次pop出来，那么就会得到7,9,10,2,1</li>
 <li>将上面的栈依次pop出来，就会得到1,2,10,9,7</li>
@@ -496,391 +259,307 @@
 <p>也就是说，此时数据是相反的。那如果我们再用一个栈，那就会把数据再反过来一次。</p>
 <p>队列和栈都是顺序插入的，区别在于队列的出口方向和栈的出口方向是相反的，利用这个性质，如果我们将元素按照顺序插入栈后，再一个个弹出并反向插入另一个栈，那么这第二个栈的出口顺序就和队列是一样的了。所以我们构造两个栈，所有新加的元素都加入输入栈，一旦要出队列时，我们便将输入栈的元素都反向加入输出栈，再输出。需要注意的是，如果输出栈不为空时，说明当前要输出的元素还在输出栈中，所以我们就暂时不用将输入栈的元素加入输出栈（而且加入后也会导致顺序错误）。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;Integer&gt; input;</span><br><span class="line">Stack&lt;Integer&gt; ouput;</span><br><span class="line">/** Initialize your data structure here. */</span><br><span class="line">public MyQueue() &#123;</span><br><span class="line">    input = new Stack&lt;&gt;();</span><br><span class="line">    ouput = new Stack&lt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** Push element x to the back of queue. */</span><br><span class="line">public void push(int x) &#123;</span><br><span class="line">    input.push(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** Removes the element from in front of queue and returns that element. */</span><br><span class="line">public int pop() &#123;</span><br><span class="line">    if(ouput.empty())&#123;</span><br><span class="line">        // 将input中的所有元素全部放入output</span><br><span class="line">        while (!input.empty())&#123;ouput.push(input.pop());&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 输出最后放入的元素</span><br><span class="line">    return ouput.pop();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** Get the front element. */</span><br><span class="line">public int peek() &#123;</span><br><span class="line">    if(ouput.empty())&#123;</span><br><span class="line">        // 将input中的所有元素全部放入output</span><br><span class="line">        while (!input.empty())&#123;ouput.push(input.pop());&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 输出最后放入的元素</span><br><span class="line">    return ouput.peek();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/** Returns whether the queue is empty. */</span><br><span class="line">public boolean empty() &#123;</span><br><span class="line">    return input.empty() &amp;&amp; ouput.empty();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="例题3，Largest-Rectange-in-Histogram"><a href="#例题3，Largest-Rectange-in-Histogram" class="headerlink" title="例题3，Largest Rectange in Histogram"></a>例题3，Largest Rectange in Histogram</h2><p>在一个直方图上找到一个最大的矩形。如下图所示：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-02-16-20-04.png"> </p>
+<h2 id="例题3largest-rectange-in-histogram">例题3，Largest Rectange in Histogram</h2>
+<p>在一个直方图上找到一个最大的矩形。如下图所示：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-02-16-20-04.png" /></p>
 <p><strong>暴力思路</strong></p>
 <p>枚举所有可能的矩形</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i 起点</span><br><span class="line">	<span class="keyword">for</span> j 终点</span><br><span class="line">		area = (j - i) * minH(i,j)</span><br></pre></td></tr></table></figure>
-
-<p>暴力方案：$O(n^3)$</p>
-<p>优化一下：minH(i,j) 可以在遍历j的过程中记录下来，那么复杂度就变成了$O(n^2)$</p>
+<p>暴力方案：<span class="math inline">\(O(n^3)\)</span></p>
+<p>优化一下：minH(i,j) 可以在遍历j的过程中记录下来，那么复杂度就变成了<span class="math inline">\(O(n^2)\)</span></p>
 <p><strong>在此优化</strong></p>
 <p>我们看一下这个情况：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-02-20-44-52.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-02-20-44-52.png" /></p>
 <p>j从i开始到结尾，由于i的高度为1，导致了j怎么扫，最高高度只能为1</p>
 <p>如果i向左边延伸一格，那么就会比上面那个大</p>
 <p>可以发现我们扫了很多无用状态</p>
 <p>换一种思路，先对高度循环：</p>
 <ul>
-<li>假设当前高度为2，那么向右边扫，最多只能到第一个比2小的地方。  –&gt; 2<em>1</em></li>
-<li>假设当前高度为1，那么可以向左向右扫到第一个比1小（不存在），因此1可以扫n格  –&gt; 1*6</li>
-<li>假设当前高度为5，可以向左扫到自己，向右可以扫到6  —&gt; 5 * 2</li>
-<li>…..</li>
+<li>假设当前高度为2，那么向右边扫，最多只能到第一个比2小的地方。 --&gt; 2<em>1</em></li>
+<li>假设当前高度为1，那么可以向左向右扫到第一个比1小（不存在），因此1可以扫n格 --&gt; 1*6</li>
+<li>假设当前高度为5，可以向左扫到自己，向右可以扫到6 ---&gt; 5 * 2</li>
+<li>.....</li>
 </ul>
 <p>总结：对于每个高度来说，只能向左或者向右扫到第一个比它小的元素！</p>
-<p>这样的复杂度是$O(n^2)$</p>
+<p>这样的复杂度是<span class="math inline">\(O(n^2)\)</span></p>
 <p><strong>再次优化</strong></p>
 <p>用栈优化寻找一边较小的元素</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">3</span></span><br><span class="line">  </span><br><span class="line"><span class="number">1.</span> 最开始 栈为空</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 对于<span class="number">2</span>来说，那就先把<span class="number">2</span>入栈</span><br><span class="line">   [<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 对于<span class="number">1</span>来说，<span class="number">1</span>比<span class="number">2</span>小，那么<span class="number">2</span>右边第一个比它小的元素就是<span class="number">1.</span> 那么<span class="number">2</span>的状态确定了，那就把<span class="number">2</span>弹出来，而<span class="number">2</span>的最高面积 = <span class="number">2</span> *(<span class="number">1</span> - <span class="number">0</span>) = <span class="number">2</span></span><br><span class="line">   [<span class="number">1</span>]</span><br><span class="line">   </span><br><span class="line"><span class="number">4.</span> 对于<span class="number">5</span>来说，状态暂时未知，先入栈</span><br><span class="line">   [<span class="number">1</span>,<span class="number">5</span>]</span><br><span class="line">   </span><br><span class="line"><span class="number">5.</span> 对于<span class="number">6</span>来说，状态暂时未知，入栈</span><br><span class="line">   [<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> 对于<span class="number">2</span>来说，<span class="number">2</span>比<span class="number">6</span>小，那么<span class="number">6</span>右边第一个比它小的一定是<span class="number">2.</span> 那么<span class="number">6</span>的最大面积 = <span class="number">6</span>*(<span class="number">4</span>-<span class="number">2</span>-<span class="number">1</span>) = <span class="number">6</span> (<span class="number">4</span>是<span class="number">2</span>的idx,<span class="number">2</span>是<span class="number">5</span>的idx)</span><br><span class="line">  </span><br><span class="line"><span class="number">7.</span> 继续向前看，看<span class="number">5.</span>那么就可以确定<span class="number">5</span>的最大面积 = <span class="number">5</span>*(<span class="number">4</span>-<span class="number">1</span>-<span class="number">1</span>) = <span class="number">10</span></span><br><span class="line">  </span><br><span class="line"><span class="number">8.</span> 此时<span class="number">2</span>大于栈顶了，因此先把<span class="number">2</span>入栈</span><br><span class="line">   [<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">   </span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">  到最后再设置一个高度为<span class="number">0</span>，然后依次把里面的元素pop出来</span><br></pre></td></tr></table></figure>
-
-<p>复杂度：$O(n)$</p>
+<p>复杂度：<span class="math inline">\(O(n)\)</span></p>
 <p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getHeights</span><span class="params">(<span class="keyword">int</span> idx, <span class="keyword">int</span>[] heights)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(idx &gt;= heights.length || idx &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> heights[idx];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">largestRectangleArea</span><span class="params">(<span class="keyword">int</span>[] heights)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(heights.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(heights.length == <span class="number">1</span>) <span class="keyword">return</span> heights[<span class="number">0</span>];</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        stack.push(-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= heights.length; )&#123;</span><br><span class="line">            <span class="keyword">if</span>(getHeights(i, heights) &gt;= getHeights(stack.peek(), heights))&#123;</span><br><span class="line">                stack.push(i);</span><br><span class="line">                ++i;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (!stack.empty() &amp;&amp; getHeights(i, heights) &lt; getHeights(stack.peek(), heights)) &#123;</span><br><span class="line">                <span class="comment">// height[i]是stack.peek()的右边第一个比它小的元素</span></span><br><span class="line">                <span class="keyword">int</span> lastIdx = stack.pop();</span><br><span class="line">                max = Math.max(max, (i - stack.peek() - <span class="number">1</span>) * getHeights(lastIdx, heights));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题4，Max-Tree"><a href="#例题4，Max-Tree" class="headerlink" title="例题4，Max Tree"></a>例题4，Max Tree</h2><p>给一个数组<code>[2,5,6,0,3,1]</code> 。要将这个数组建成一个二叉树。根节点是最大的元素，左子树是将左边的数字传进去，最大值作为根节点</p>
+<h2 id="例题4max-tree">例题4，Max Tree</h2>
+<p>给一个数组<code>[2,5,6,0,3,1]</code> 。要将这个数组建成一个二叉树。根节点是最大的元素，左子树是将左边的数字传进去，最大值作为根节点</p>
 <p><strong>直观思路</strong></p>
-<p>递归方法，建树。复杂度很高$O(n^2)$</p>
+<p>递归方法，建树。复杂度很高<span class="math inline">\(O(n^2)\)</span></p>
 <p><strong>优化方法</strong></p>
 <p>跟上面一样</p>
-<h2 id="单侧较大值问题"><a href="#单侧较大值问题" class="headerlink" title="单侧较大值问题"></a>单侧较大值问题</h2><h3 id="Next-Greater-Element-I"><a href="#Next-Greater-Element-I" class="headerlink" title="Next Greater Element I"></a>Next Greater Element I</h3><p>给一个数组nums1和nums2.其中nums1是nums2的子集。令nums1[i] 在nums2的位置是idx.求 在nums2的[idx…n] 之间比nums2[idx]较大的值是多少。</p>
+<h2 id="单侧较大值问题">单侧较大值问题</h2>
+<h3 id="next-greater-element-i">Next Greater Element I</h3>
+<p>给一个数组nums1和nums2.其中nums1是nums2的子集。令nums1[i] 在nums2的位置是idx.求 在nums2的[idx...n] 之间比nums2[idx]较大的值是多少。</p>
 <p>思路：栈维护当前未解决的数字</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] nextGreaterElement(<span class="keyword">int</span>[] nums1, <span class="keyword">int</span>[] nums2) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[nums1.length];</span><br><span class="line">    Arrays.fill(result, -<span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 对nums2的每个元素求右边第一个比它大的元素</span></span><br><span class="line">    <span class="comment">// 要求右边第一个比它大的，</span></span><br><span class="line">    </span><br><span class="line">    HashMap&lt;Integer, Integer&gt; key2Idx = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums1.length; ++i)&#123;</span><br><span class="line">        key2Idx.put(nums1[i], i);</span><br><span class="line">    &#125;</span><br><span class="line">    Stack&lt;Integer&gt; idxStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    idxStack.push(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums2.length; ++i)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!idxStack.empty() &amp;&amp; nums2[i] &gt; nums2[idxStack.peek()])&#123;</span><br><span class="line">            <span class="comment">// 此时nums2[idxStack.peek()右边第一个larget就是nums2[i]</span></span><br><span class="line">            <span class="keyword">int</span> minerIdx = idxStack.pop();</span><br><span class="line">            <span class="keyword">if</span>(key2Idx.containsKey(nums2[minerIdx]))&#123;</span><br><span class="line">                result[key2Idx.get(nums2[minerIdx])] = nums2[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        idxStack.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Next-Greater-Element-II"><a href="#Next-Greater-Element-II" class="headerlink" title="Next Greater Element II"></a>Next Greater Element II</h3><p>给一个数组，求元素nums[i] 的从[i]到[i+nums.length] 的第一个较大的值。</p>
+<h3 id="next-greater-element-ii">Next Greater Element II</h3>
+<p>给一个数组，求元素nums[i] 的从[i]到[i+nums.length] 的第一个较大的值。</p>
 <p>思路：由于涉及到回旋的问题，因此要多循环一圈</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] nextGreaterElements(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.length == <span class="number">0</span>) <span class="keyword">return</span> nums;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    Arrays.fill(result, -<span class="number">1</span>);</span><br><span class="line">    Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>*nums.length; ++i)&#123;</span><br><span class="line">        <span class="keyword">while</span> (!stack.empty() &amp;&amp; nums[i%nums.length] &gt; nums[stack.peek()])&#123;</span><br><span class="line">            result[stack.pop()] = nums[i%nums.length];</span><br><span class="line">        &#125;</span><br><span class="line">        stack.push(i%nums.length);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>骚操作：利用数组替代栈</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] nextGreaterElements(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] stack = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span> * nums.length];</span><br><span class="line">    <span class="keyword">int</span> top = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    Arrays.fill(res, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length * <span class="number">2</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> idx = i % nums.length;</span><br><span class="line">        <span class="keyword">while</span> (top &gt;= <span class="number">0</span> &amp;&amp; nums[stack[top]] &lt; nums[idx])</span><br><span class="line">            res[stack[top--]] = nums[idx];</span><br><span class="line">        stack[++top] = idx;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Daily-Temperatures"><a href="#Daily-Temperatures" class="headerlink" title="Daily Temperatures"></a>Daily Temperatures</h3><p>给一个数组，代表每天的温度。求每天：要等多少天才可以等到温度更高。</p>
+<h3 id="daily-temperatures">Daily Temperatures</h3>
+<p>给一个数组，代表每天的温度。求每天：要等多少天才可以等到温度更高。</p>
 <p>一样的思路</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] dailyTemperatures(<span class="keyword">int</span>[] temperatures) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[temperatures.length];</span><br><span class="line">    <span class="keyword">if</span>(temperatures.length &lt;= <span class="number">1</span>) <span class="keyword">return</span> result;</span><br><span class="line">    Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; result.length; ++i)&#123;</span><br><span class="line">        <span class="keyword">while</span> (!stack.empty() &amp;&amp; temperatures[i] &gt; temperatures[stack.peek()])&#123;</span><br><span class="line">            result[stack.peek()] = i - stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        stack.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="132-Pattern"><a href="#132-Pattern" class="headerlink" title="132 Pattern"></a>132 Pattern</h2><p>给一个数组，寻找类似132这种顺序的序列，也就是中间最大，右边较小，左边最小</p>
-<p>一开始我的思路是：从左往右遍历，记录当前最小值；如果当前值比最小值大，就再去右边搜索是否存在比最小值大一点，且比这个值小一点的数字。这样复杂度是$O(n^2)$</p>
+<h2 id="pattern">132 Pattern</h2>
+<p>给一个数组，寻找类似132这种顺序的序列，也就是中间最大，右边较小，左边最小</p>
+<p>一开始我的思路是：从左往右遍历，记录当前最小值；如果当前值比最小值大，就再去右边搜索是否存在比最小值大一点，且比这个值小一点的数字。这样复杂度是<span class="math inline">\(O(n^2)\)</span></p>
 <p>好一点的操作我没有想到：从后往前扫；</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">find132pattern</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">    Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> last = Integer.MIN_VALUE;</span><br><span class="line">    <span class="comment">// 三个数字依次为[nums[i], stack.peek, last]</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = nums.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)&#123;</span><br><span class="line">        <span class="comment">// 栈顶最小，栈底最大</span></span><br><span class="line">        <span class="comment">// 如果nums[i] &gt; stack.peek，说明栈顶可以更大，而原来的栈顶就变成了last</span></span><br><span class="line">        <span class="comment">// 弹出里面所有比它小的数字</span></span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty() &amp;&amp; nums[i] &gt; stack.peek())&#123;</span><br><span class="line">            last = stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 此时栈顶最小</span></span><br><span class="line">        stack.push(nums[i]);</span><br><span class="line">        <span class="comment">// 如果nums[i] &lt; last，就说明找到了</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(nums[i] &lt; last) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="括号匹配问题"><a href="#括号匹配问题" class="headerlink" title="括号匹配问题"></a>括号匹配问题</h2><h3 id="Valid-Parentheses"><a href="#Valid-Parentheses" class="headerlink" title="Valid Parentheses"></a>Valid Parentheses</h3><p>给一个字符串，其中元素为<code>&#123;&#125;,(),[]</code>。判断括号是否合法</p>
+<h2 id="括号匹配问题">括号匹配问题</h2>
+<h3 id="valid-parentheses">Valid Parentheses</h3>
+<p>给一个字符串，其中元素为<code>&#123;&#125;,(),[]</code>。判断括号是否合法</p>
 <p>思路：用栈！！！</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(<span class="keyword">char</span> a, <span class="keyword">char</span> b)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (a == <span class="string">&#x27;&#123;&#x27;</span> &amp;&amp; b == <span class="string">&#x27;&#125;&#x27;</span>) ||</span><br><span class="line">            (a == <span class="string">&#x27;[&#x27;</span> &amp;&amp; b == <span class="string">&#x27;]&#x27;</span>) ||</span><br><span class="line">            (a == <span class="string">&#x27;(&#x27;</span> &amp;&amp; b == <span class="string">&#x27;)&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length() &lt;= <span class="number">1</span>)<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    Stack&lt;Character&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27;[&#x27;</span> || s.charAt(i) == <span class="string">&#x27;&#123;&#x27;</span> || s.charAt(i) == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">            stack.push(s.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(stack.empty() || !isMatch(stack.pop(),s.charAt(i)))</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Longest-Valid-Parentheses"><a href="#Longest-Valid-Parentheses" class="headerlink" title="Longest Valid Parentheses"></a>Longest Valid Parentheses</h3><p>给一个字符串，其中元素为<code>()</code> 。判断最长合法括号</p>
+<h3 id="longest-valid-parentheses">Longest Valid Parentheses</h3>
+<p>给一个字符串，其中元素为<code>()</code> 。判断最长合法括号</p>
 <p>思路：用栈。一开始想的太简单，但没那么简单。难点在于如何寻找合法串的开始。例如<code>(()</code> 这种，应该怎样记录呢？</p>
 <p>但事实上应该换一个角度：</p>
-<ol>
+<ol type="1">
 <li><code>stack</code>里面装的一直是“还没配好对的那些可怜的括号的index”</li>
-<li>是<code>&#39;(‘</code>的时候<code>push</code></li>
+<li>是<code>'(‘</code>的时候<code>push</code></li>
 <li>是<code>’)’</code>的时候，说明可能配对了；看<code>stack top</code>是不是左括号，不是的话，<code>push</code>当前的<code>’)’</code>（算是一种对之前<code>push</code>进去的所有东西的清除）</li>
 <li>是的话，<code>pop</code>那个配对的左括号，然后<code>update res</code>：<code>i</code>和<code>top</code>的（最后一个配不成对的）<code>index</code>相减，就是<code>i</code>属于的这一段的当前最长。如果一<code>pop</code>就整个栈空了，说明前面全配好对了，那<code>res</code>就是最大<code>=i+1</code></li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">longestValidParentheses</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">int</span> max = <span class="number">0</span>, curr = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span>[] arr = s.toCharArray();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] == <span class="string">&#x27;)&#x27;</span> &amp;&amp; !stack.empty() &amp;&amp; arr[stack.peek()] == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">            <span class="comment">// arr[i]与arr[stack.peek()]匹配成了一对括号</span></span><br><span class="line">            stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(stack.empty())&#123;</span><br><span class="line">                max = i + <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                max = Math.max(max, i - stack.peek());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Flatten-Nested-List-Iterator"><a href="#Flatten-Nested-List-Iterator" class="headerlink" title="Flatten Nested List Iterator"></a>Flatten Nested List Iterator</h3><p>给一个被嵌套的整数list <code>[[1,1],2,[1,1]]</code>。 要实现这个嵌套列表的hasNext和Next方法。</p>
+<h3 id="flatten-nested-list-iterator">Flatten Nested List Iterator</h3>
+<p>给一个被嵌套的整数list <code>[[1,1],2,[1,1]]</code>。 要实现这个嵌套列表的hasNext和Next方法。</p>
 <p>一开始我用的递归，最后边界条件怎么都过不去。差点气死。</p>
 <p>其实应该是在hasNext里面就进行好转换的。哎。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Stack&lt;NestedInteger&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">NestedIterator</span><span class="params">(List&lt;NestedInteger&gt; nestedList)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = nestedList.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)&#123;</span><br><span class="line">        stack.push(nestedList.get(i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Integer <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> stack.pop().getInteger();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasNext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(stack.empty()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">while</span> (!stack.empty() &amp;&amp; !stack.peek().isInteger())&#123;</span><br><span class="line">        List&lt;NestedInteger&gt; list = stack.pop().getList();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = list.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span> ; --i)&#123;</span><br><span class="line">            stack.push(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> !stack.empty();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Exclusive-Time-of-Functions"><a href="#Exclusive-Time-of-Functions" class="headerlink" title="Exclusive Time of Functions"></a>Exclusive Time of Functions</h3><p>题意：给定一组函数调用日志，格式为”function_id:start_or_end:timestamp”，函数可以递归。求每个函数调用的总时长。</p>
+<h3 id="exclusive-time-of-functions">Exclusive Time of Functions</h3>
+<p>题意：给定一组函数调用日志，格式为"function_id:start_or_end:timestamp"，函数可以递归。求每个函数调用的总时长。</p>
 <p>约定：（1）输入日志将按时间戳记排序，而不是日志ID；（2）输出应按函数id排序；（3）两个函数不会同时开始或结束；（4）函数可以递归调用，并且将最终都会结束；（5）1&lt;= n&lt;= 100。</p>
 <p>这道题一开始我想多了，用了两个栈。其实只用一个就好。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] exclusiveTime(<span class="keyword">int</span> n, List&lt;String&gt; logs) &#123;</span><br><span class="line">     Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">     <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">     String start = <span class="string">&quot;start&quot;</span>;</span><br><span class="line">     <span class="keyword">int</span> prevTime = <span class="number">0</span>; <span class="comment">//上一个任务的截止时间</span></span><br><span class="line">     <span class="keyword">for</span>(String log : logs)&#123;</span><br><span class="line">         String[] status = log.split(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">         <span class="keyword">if</span>(!stack.isEmpty())result[stack.peek()] += (Integer.valueOf(status[<span class="number">2</span>]) - prevTime);</span><br><span class="line">         prevTime = Integer.valueOf(status[<span class="number">2</span>]);</span><br><span class="line">         <span class="comment">//System.out.println(Arrays.toString(status));</span></span><br><span class="line">         <span class="keyword">if</span>(status[<span class="number">1</span>].equals(start))&#123;</span><br><span class="line">             stack.push(Integer.valueOf(status[<span class="number">0</span>]));</span><br><span class="line">         &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">             result[stack.pop()]++;</span><br><span class="line">             prevTime++;</span><br><span class="line">         &#125;</span><br><span class="line">             </span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> result;</span><br><span class="line">     </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Valid-Parenthesis-String"><a href="#Valid-Parenthesis-String" class="headerlink" title="Valid Parenthesis String"></a><a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-parenthesis-string/">Valid Parenthesis String</a></h3><p>给一个字符串<code>&quot;(*))&quot;</code>。 星号代表左括号或右括号或空。求这个括号串是否合法。</p>
-<h2 id="计算问题"><a href="#计算问题" class="headerlink" title="计算问题"></a>计算问题</h2><h3 id="Evaluate-Reverse-Polish-Notation"><a href="#Evaluate-Reverse-Polish-Notation" class="headerlink" title="Evaluate Reverse Polish Notation"></a>Evaluate Reverse Polish Notation</h3><p>计算<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish Notation</a> 形式的数字。即：</p>
+<h3 id="valid-parenthesis-string"><a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-parenthesis-string/">Valid Parenthesis String</a></h3>
+<p>给一个字符串<code>"(*))"</code>。 星号代表左括号或右括号或空。求这个括号串是否合法。</p>
+<h2 id="计算问题">计算问题</h2>
+<h3 id="evaluate-reverse-polish-notation">Evaluate Reverse Polish Notation</h3>
+<p>计算<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish Notation</a> 形式的数字。即：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[&quot;2&quot;, &quot;1&quot;, &quot;+&quot;, &quot;3&quot;, &quot;*&quot;] -&gt; ((2 + 1) * 3) -&gt; 9</span><br><span class="line"> [&quot;4&quot;, &quot;13&quot;, &quot;5&quot;, &quot;/&quot;, &quot;+&quot;] -&gt; (4 + (13 / 5)) -&gt; 6</span><br></pre></td></tr></table></figure>
-
 <p>思路：栈！</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNum</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.equals(<span class="string">&quot;+&quot;</span>) || s.equals(<span class="string">&quot;-&quot;</span>) || s.equals(<span class="string">&quot;*&quot;</span>) || s.equals(<span class="string">&quot;/&quot;</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">evalRPN</span><span class="params">(String[] tokens)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(tokens.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Stack&lt;String&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(String token : tokens)&#123;</span><br><span class="line">        <span class="keyword">if</span>(isNum(token))&#123;stack.push(token); <span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">int</span> val2 = Integer.valueOf(stack.pop());</span><br><span class="line">        <span class="keyword">int</span> val1 = Integer.valueOf(stack.pop());</span><br><span class="line">        <span class="keyword">int</span> currResult = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(token.equals(<span class="string">&quot;+&quot;</span>))&#123;currResult = val1 + val2;&#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(token.equals(<span class="string">&quot;-&quot;</span>))&#123;currResult = val1 - val2;&#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(token.equals(<span class="string">&quot;*&quot;</span>))&#123;currResult = val1 * val2;&#125;</span><br><span class="line">        <span class="keyword">else</span> currResult = val1 / val2;</span><br><span class="line">        stack.push(String.valueOf(currResult));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Integer.valueOf(stack.pop());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Basic-Calculator-II"><a href="#Basic-Calculator-II" class="headerlink" title="Basic Calculator II"></a>Basic Calculator II</h3><p>求一个计算式的值。其中计算式含加减乘除，但不含括号。</p>
+<h3 id="basic-calculator-ii">Basic Calculator II</h3>
+<p>求一个计算式的值。其中计算式含加减乘除，但不含括号。</p>
 <p><strong>方法1，栈</strong></p>
 <p>一开始没想明白。其实思路很简单。</p>
 <p>因为乘法和除法不仅要知道下一个数，也要知道上一个数。所以我们用一个栈把上次的数存起来，遇到加减法就直接将数字压入栈中，遇到乘除法就把栈顶拿出来乘或除一下新数，再压回去。最后我们把栈里所有数加起来就行了。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] getNum(String s, <span class="keyword">int</span> i)&#123;</span><br><span class="line">        <span class="keyword">int</span> num  = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(Character.isDigit(s.charAt(i)))&#123;</span><br><span class="line">                num = num * <span class="number">10</span> + (<span class="keyword">int</span>)(s.charAt(i) - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;num, i&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">char</span> sig = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">            <span class="comment">// 获取符号</span></span><br><span class="line">            <span class="keyword">if</span>(!Character.isDigit(s.charAt(i)) &amp;&amp; s.charAt(i) != <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                sig = s.charAt(i);</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 获取符号后面跟的数字</span></span><br><span class="line">            <span class="keyword">int</span>[] temp = getNum(s, i);</span><br><span class="line">            <span class="keyword">int</span> num = temp[<span class="number">0</span>];</span><br><span class="line">            i = temp[<span class="number">1</span>];</span><br><span class="line">            <span class="comment">// 如果是加减，则只需要把后面的这个数字push进栈</span></span><br><span class="line">            <span class="keyword">if</span>(sig == <span class="string">&#x27;+&#x27;</span>)</span><br><span class="line">                    stack.push(num);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">                    stack.push(-num);</span><br><span class="line">            <span class="comment">// 如果是乘除，则要把上一个数字pop出来与下一个数字做运算，然后扔回栈</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;*&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(stack.empty()) stack.push(num);</span><br><span class="line">                <span class="keyword">else</span> stack.push(stack.pop() * num);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;/&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(stack.empty()) stack.push(num);</span><br><span class="line">                <span class="keyword">else</span> stack.push(stack.pop() / num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty())&#123;</span><br><span class="line">            result += stack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>方法2</strong></p>
 <p>栈只是在乘除的时候用到，而且仅仅用到了上一个数字。因此我们可以去掉栈，只需要保留上一个数字。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">int</span>[] getNum(String s, <span class="keyword">int</span> i)&#123;</span><br><span class="line">    <span class="keyword">int</span> num  = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">        <span class="keyword">if</span>(Character.isDigit(s.charAt(i)))&#123;</span><br><span class="line">            num = num * <span class="number">10</span> + (<span class="keyword">int</span>)(s.charAt(i) - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;num, i&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> sig = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 获取第一个数字</span></span><br><span class="line">    <span class="keyword">int</span>[] temp = getNum(s, i);</span><br><span class="line">    <span class="keyword">int</span> lastNum = temp[<span class="number">0</span>];</span><br><span class="line">    i = temp[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">        <span class="comment">// 获取符号</span></span><br><span class="line">        <span class="keyword">if</span>(!Character.isDigit(s.charAt(i)) &amp;&amp; s.charAt(i) != <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">            sig = s.charAt(i);</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 获取符号后面跟的数字</span></span><br><span class="line">        temp = getNum(s, i);</span><br><span class="line">        <span class="keyword">int</span> num = temp[<span class="number">0</span>];</span><br><span class="line">        i = temp[<span class="number">1</span>];</span><br><span class="line">        <span class="comment">// 如果是加减，则只需要把后面的这个数字作为lastNum，且把上一个lastNum加到result里</span></span><br><span class="line">        <span class="keyword">if</span>(sig == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">            result += lastNum;</span><br><span class="line">            lastNum = num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">            result += lastNum;</span><br><span class="line">            lastNum = -num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果是乘除，那就把这个数字与上一个数字相乘</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;*&#x27;</span>)&#123;</span><br><span class="line">            lastNum = lastNum * num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;/&#x27;</span>)&#123;</span><br><span class="line">            lastNum = lastNum / num;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result + lastNum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Basic-Calculator"><a href="#Basic-Calculator" class="headerlink" title="Basic Calculator"></a>Basic Calculator</h3><p>这是上一题的升级版。计算带括号的加减法。</p>
+<h3 id="basic-calculator">Basic Calculator</h3>
+<p>这是上一题的升级版。计算带括号的加减法。</p>
 <p>我的思路是将括号内部的运算看做一个整体。但事实上之后看题才知道没有乘除。。。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] calculateBase(String s, <span class="keyword">int</span> i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= s.length()) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> LastNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                ++i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 获取符号</span></span><br><span class="line">            <span class="keyword">char</span> sig = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>(!Character.isDigit(s.charAt(i)) &amp;&amp;</span><br><span class="line">                    s.charAt(i) != <span class="string">&#x27; &#x27;</span> &amp;&amp;</span><br><span class="line">                    s.charAt(i) != <span class="string">&#x27;(&#x27;</span> &amp;&amp;</span><br><span class="line">                    s.charAt(i) != <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                sig = s.charAt(i);</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 获取符号后面的数字</span></span><br><span class="line">            <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">// 如果是括号，那就把括号后面的部分看成一个整体</span></span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span>[] temp = calculateBase(s, i + <span class="number">1</span>);</span><br><span class="line">                i = temp[<span class="number">0</span>];</span><br><span class="line">                num = temp[<span class="number">1</span>];</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123; <span class="comment">// 如果不是括号，那就正常计算，与原来一样</span></span><br><span class="line">                num = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">                    <span class="keyword">if</span>(Character.isDigit(s.charAt(i)))&#123;</span><br><span class="line">                        num = num * <span class="number">10</span> + (<span class="keyword">int</span>)(s.charAt(i) - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                        ++i;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                        ++i;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          <span class="comment">// 如果是加减，则只需要把后面的这个数字作为lastNum，且把上一个lastNum加到result里</span></span><br><span class="line">            <span class="keyword">if</span>(sig == <span class="string">&#x27;+&#x27;</span>)&#123;</span><br><span class="line">                result += LastNum;</span><br><span class="line">                LastNum = num;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;-&#x27;</span>)&#123;</span><br><span class="line">                result += LastNum;</span><br><span class="line">                LastNum = -num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, result + LastNum&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> calculateBase(s, <span class="number">0</span>)[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>大神代码</strong></p>
 <p>自己写的依然很啰嗦。下面瞻仰一下大神的代码。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// using stack to deal with parenthese</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span> || s.length()==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;Integer&gt;();</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> multiplier = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s.length(); i++) &#123;</span><br><span class="line">            <span class="keyword">char</span> c = s.charAt(i);</span><br><span class="line">            <span class="comment">// 获取数字</span></span><br><span class="line">            <span class="keyword">if</span>(c&gt;=<span class="string">&#x27;0&#x27;</span> &amp;&amp; c&lt;=<span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">int</span> digit = c-<span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                num = num*<span class="number">10</span> + digit;</span><br><span class="line">             <span class="comment">// 如果是加减，就正常计算</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(c==<span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">                result += num*multiplier;</span><br><span class="line">                num = <span class="number">0</span>;</span><br><span class="line">                multiplier = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(c==<span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">                result += num*multiplier ;</span><br><span class="line">                num = <span class="number">0</span>;</span><br><span class="line">                multiplier =-<span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 如果是括号，就先把原来的result看做一个整体push进去</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(c==<span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">                stack.push(result);</span><br><span class="line">                stack.push(multiplier);</span><br><span class="line">                result = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">// num = 0;</span></span><br><span class="line">                multiplier = <span class="number">1</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span>(c==<span class="string">&#x27;)&#x27;</span>) &#123;</span><br><span class="line">                <span class="comment">// current result</span></span><br><span class="line">                result += num*multiplier;</span><br><span class="line">                <span class="comment">// last multiplier</span></span><br><span class="line">                result *= stack.pop();</span><br><span class="line">                result += stack.pop();</span><br><span class="line">                <span class="comment">// result = 0;</span></span><br><span class="line">                num = <span class="number">0</span>;</span><br><span class="line">                <span class="comment">// multiplier = 1;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        result += num*multiplier;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Basic-Calculator-III"><a href="#Basic-Calculator-III" class="headerlink" title="Basic Calculator III"></a>Basic Calculator III</h3><p>带括号的加减乘除。</p>
+<h3 id="basic-calculator-iii">Basic Calculator III</h3>
+<p>带括号的加减乘除。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] calculateBase(String s, <span class="keyword">int</span> i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= s.length()) <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, <span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> LastNum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; s.length() &amp;&amp; s.charAt(i) == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                ++i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 获取符号</span></span><br><span class="line">            <span class="keyword">char</span> sig = <span class="string">&#x27;+&#x27;</span>;</span><br><span class="line">            <span class="keyword">if</span>(!Character.isDigit(s.charAt(i)) &amp;&amp;</span><br><span class="line">                    s.charAt(i) != <span class="string">&#x27; &#x27;</span> &amp;&amp;</span><br><span class="line">                    s.charAt(i) != <span class="string">&#x27;(&#x27;</span> &amp;&amp;</span><br><span class="line">                    s.charAt(i) != <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                sig = s.charAt(i);</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; s.length() &amp;&amp; s.charAt(i) == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                ++i;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 获取符号后面的数字</span></span><br><span class="line">            <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">// 如果是括号，那就把括号后面的部分看成一个整体</span></span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span>[] temp = calculateBase(s, i + <span class="number">1</span>);</span><br><span class="line">                i = temp[<span class="number">0</span>];</span><br><span class="line">                num = temp[<span class="number">1</span>];</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123; <span class="comment">// 如果不是括号，那就正常计算，与原来一样</span></span><br><span class="line">                num = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span> (i &lt; s.length())&#123;</span><br><span class="line">                    <span class="keyword">if</span>(Character.isDigit(s.charAt(i)))&#123;</span><br><span class="line">                        num = num * <span class="number">10</span> + (<span class="keyword">int</span>)(s.charAt(i) - <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                        ++i;</span><br><span class="line">                    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                        ++i;</span><br><span class="line">                    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果是加减，则只需要把后面的这个数字作为lastNum，且把上一个lastNum加到result里</span></span><br><span class="line">            <span class="keyword">if</span>(sig == <span class="string">&#x27;+&#x27;</span>)&#123;</span><br><span class="line">                result += LastNum;</span><br><span class="line">                LastNum = num;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;-&#x27;</span>)&#123;</span><br><span class="line">                result += LastNum;</span><br><span class="line">                LastNum = -num;</span><br><span class="line">                <span class="comment">// 如果是乘除，那就把这个数字与上一个数字相乘</span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;*&#x27;</span>)&#123;</span><br><span class="line">                LastNum = num * LastNum;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(sig == <span class="string">&#x27;/&#x27;</span>)&#123;</span><br><span class="line">                LastNum = LastNum / num;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; s.length() &amp;&amp; s.charAt(i) == <span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i, result + LastNum&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> calculateBase(s, <span class="number">0</span>)[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="其它问题"><a href="#其它问题" class="headerlink" title="其它问题"></a>其它问题</h2><h3 id="Simplify-Path"><a href="#Simplify-Path" class="headerlink" title="Simplify Path"></a>Simplify Path</h3><p>简化路径。<strong>path</strong> = <code>&quot;/a/./b/../../c/&quot;</code>, =&gt; <code>&quot;/c&quot;</code></p>
+<h2 id="其它问题">其它问题</h2>
+<h3 id="simplify-path">Simplify Path</h3>
+<p>简化路径。<strong>path</strong> = <code>"/a/./b/../../c/"</code>, =&gt; <code>"/c"</code></p>
 <p>此题我觉得关键之处在于，知道路径是由<code>/</code> 符号分割的。因此可以用<code>/</code> 号分割后计算</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> /../代表上一层路径</span><br><span class="line">/./代表本层路径</span><br><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">helper</span><span class="params">(String path)</span></span>&#123;</span><br><span class="line">    Deque&lt;String&gt; stack = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    String[] segments = path.split(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(String seg : segments)&#123;</span><br><span class="line">        <span class="keyword">if</span>(seg.length()== <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(seg.equals(<span class="string">&quot;..&quot;</span>))&#123;</span><br><span class="line">            <span class="keyword">if</span>(!stack.isEmpty()) stack.pop();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(seg.equals(<span class="string">&quot;.&quot;</span>))&#123;<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            stack.push(seg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">     <span class="keyword">while</span> (!stack.isEmpty())&#123;</span><br><span class="line">        sb.append(<span class="string">&quot;/&quot;</span>);</span><br><span class="line">        sb.append(stack.pollLast());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sb.length() == <span class="number">0</span> ? <span class="string">&quot;/&quot;</span> : sb.toString();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">simplifyPath</span><span class="params">(String path)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> helper(path);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Longest-Absolute-File-Path"><a href="#Longest-Absolute-File-Path" class="headerlink" title="Longest Absolute File Path"></a>Longest Absolute File Path</h3><p>给一个路径<code>&quot;dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext&quot;</code>。  其中<code>\n\t file</code> 代表第一层路径下的文件file ，<code>\n\t\t</code> 代表第二层路径下的文件。比如上面给的这个路径表示</p>
+<h3 id="longest-absolute-file-path">Longest Absolute File Path</h3>
+<p>给一个路径<code>"dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"</code>。 其中<code>\n\t file</code> 代表第一层路径下的文件file ，<code>\n\t\t</code> 代表第二层路径下的文件。比如上面给的这个路径表示</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dir</span><br><span class="line">    subdir1</span><br><span class="line">    subdir2</span><br><span class="line">        file.ext</span><br></pre></td></tr></table></figure>
-
 <p>求一个路径str下，路径的字符个数最多的那个文件的路径字符个数</p>
 <p>思路：用两个栈。一个栈维护当前的深度（即第几层文件），另一个栈维护当前文件的路径字符个数。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**\n\t代表第一层目录</span></span><br><span class="line"><span class="comment"> * \n\t\t 代表第二层目录</span></span><br><span class="line"><span class="comment"> * 每多一个\t就往下走一个目录**/</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">count_t</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (count &lt; s.length() &amp;&amp; s.charAt(count) == <span class="string">&#x27;\t&#x27;</span>)&#123;</span><br><span class="line">        ++count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isFile</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> c : s.toCharArray())&#123;</span><br><span class="line">        <span class="keyword">if</span>(c == <span class="string">&#x27;.&#x27;</span>) ++count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count &gt; <span class="number">0</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthLongestPath</span><span class="params">(String input)</span> </span>&#123;</span><br><span class="line">    String[] sub = input.split(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(sub.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    Stack&lt;Integer&gt; deep = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    stack.push(sub[<span class="number">0</span>].length() + <span class="number">1</span>);</span><br><span class="line">    deep.push(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> max = isFile(sub[<span class="number">0</span>]) ?  stack.peek() - <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; sub.length; ++i)&#123;</span><br><span class="line">        <span class="keyword">int</span> deepCurr = count_t(sub[i]);</span><br><span class="line">        <span class="keyword">while</span> (!deep.empty() &amp;&amp; deepCurr &lt;= deep.peek())&#123;</span><br><span class="line">            stack.pop();</span><br><span class="line">            deep.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(stack.empty())&#123;</span><br><span class="line">            stack.push(sub[i].length() - deepCurr + <span class="number">1</span>); <span class="comment">// +1代表\的结尾</span></span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">            stack.push(stack.peek() + sub[i].length() - deepCurr + <span class="number">1</span>);</span><br><span class="line">        deep.push(deepCurr);</span><br><span class="line">        <span class="keyword">if</span>(isFile(sub[i]))&#123;</span><br><span class="line">            max = Math.max(stack.peek() - <span class="number">1</span>, max); <span class="comment">// -1代表末尾去除\</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> max;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Min-Stack"><a href="#Min-Stack" class="headerlink" title="Min Stack"></a>Min Stack</h3><p>实现一个能实时输出最小值的栈。</p>
+<h3 id="min-stack">Min Stack</h3>
+<p>实现一个能实时输出最小值的栈。</p>
 <p><strong>思路一：栈 + 优先队列</strong></p>
 <p>/** initialize your data structure here. */</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Node</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">long</span> val;</span><br><span class="line">    <span class="keyword">boolean</span> deleted;</span><br><span class="line">    Node(<span class="keyword">int</span> val) &#123;</span><br><span class="line">        <span class="keyword">this</span>.val = val;</span><br><span class="line">        deleted = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Node o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.val - o.val &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">LinkedList&lt;Node&gt; links;</span><br><span class="line">PriorityQueue&lt;Node&gt; priorityQueue = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MinStack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    links = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    priorityQueue = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    Node xNode = <span class="keyword">new</span> Node(x);</span><br><span class="line">    links.addFirst(xNode);</span><br><span class="line">    priorityQueue.add(xNode);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Node removed = links.removeFirst();</span><br><span class="line">    removed.deleted = <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)links.get(<span class="number">0</span>).val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (priorityQueue.peek().deleted)&#123;</span><br><span class="line">        priorityQueue.poll();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)priorityQueue.peek().val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>思路2，骚操作</strong></p>
 <p>对于当前已经入栈的元素来说，维护当前入栈元素的最小值。相当鸡贼</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** initialize your data structure here. */</span></span><br><span class="line">    </span><br><span class="line">        <span class="keyword">int</span> min = Integer.MAX_VALUE;</span><br><span class="line">        Stack&lt;Integer&gt; stack=<span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x&lt;=min)&#123; <span class="comment">// 如果x比当前栈里所有元素都小，说明x是当前栈的最小值</span></span><br><span class="line">            stack.push(min); <span class="comment">// 先把之前的min入栈</span></span><br><span class="line">            min=x; <span class="comment">// 改变最小值</span></span><br><span class="line">        &#125;</span><br><span class="line">       stack.push(x);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(stack.pop()== min) <span class="comment">//此步已经将-3pop出去</span></span><br><span class="line">            min=stack.pop(); <span class="comment">//此步将-3之前的最小值-2,从stack中pop出去，并将其赋值给min</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> stack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getMin</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> min;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h1><p>$O(1)$ 插入</p>
-<p>$O(1)$ 查找</p>
-<p>$O(1)$ 删除</p>
-<p>问题： Hash Table / Hash Map / Hash Set 的区别是什么？<br>Hash Table - 线程安全<br>Hash Map - 线程不安全</p>
-<p>String的Hash实现原理，复杂度$O(L)$</p>
+<h1 id="hash">Hash</h1>
+<p><span class="math inline">\(O(1)\)</span> 插入</p>
+<p><span class="math inline">\(O(1)\)</span> 查找</p>
+<p><span class="math inline">\(O(1)\)</span> 删除</p>
+<p>问题： Hash Table / Hash Map / Hash Set 的区别是什么？ Hash Table - 线程安全 Hash Map - 线程不安全</p>
+<p>String的Hash实现原理，复杂度<span class="math inline">\(O(L)\)</span></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">hashfunc</span><span class="params">(String key)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; key.length(); ++i)&#123;</span><br><span class="line">    sum = sum * <span class="number">31</span> + (<span class="keyword">int</span>)(key.charAt(i)); <span class="comment">// 相当于31进制</span></span><br><span class="line">    sum = sum % HASH_TABLE_SIZE; <span class="comment">// 这样不会溢出，不然加加加会溢出</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>相当于$ab =mod (a \times 31^2 + b \times 31)$</p>
+<p>相当于<span class="math inline">\(ab =mod (a \times 31^2 + b \times 31)\)</span></p>
 <p><strong>解决Hash冲突的两种办法：</strong></p>
 <ul>
-<li>Open Hashing : 开散列/拉链法。每个地方都是一个链表<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-14-19-20.png"></li>
-<li>Close Hashing : 线性探测法。 10和39的idx一样。10先插入，因此39插入时就依次放入下一个坑<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-14-23-32.png"><br>缺点：删除时，需要将删掉的这个元素直接设置为deleted<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-14-25-49.png"> </li>
+<li>Open Hashing : 开散列/拉链法。每个地方都是一个链表 <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-14-19-20.png" /></li>
+<li>Close Hashing : 线性探测法。 10和39的idx一样。10先插入，因此39插入时就依次放入下一个坑 <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-14-23-32.png" /> 缺点：删除时，需要将删掉的这个元素直接设置为deleted <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-14-25-49.png" /></li>
 </ul>
 <p><strong>ReHahsing</strong></p>
 <p>解决放不下的问题？ —— 不够了就乘2</p>
 <p>这是一道题，回头看看</p>
-<h2 id="例题1，-LRU-Cache"><a href="#例题1，-LRU-Cache" class="headerlink" title="例题1， LRU Cache"></a>例题1， LRU Cache</h2><p>双链表 + Hash</p>
-<h2 id="Word-Pattern"><a href="#Word-Pattern" class="headerlink" title="Word Pattern"></a>Word Pattern</h2><p>给两个字符串，判断这两个字符串是否能匹配。匹配的样例如下：</p>
-<ol>
-<li>pattern = <code>&quot;abba&quot;</code>, str = <code>&quot;dog cat cat dog&quot;</code> should return true.</li>
-<li>pattern = <code>&quot;abba&quot;</code>, str = <code>&quot;dog cat cat fish&quot;</code> should return false.</li>
-<li>pattern = <code>&quot;aaaa&quot;</code>, str = <code>&quot;dog cat cat dog&quot;</code> should return false.</li>
-<li>pattern = <code>&quot;abba&quot;</code>, str = <code>&quot;dog dog dog dog&quot;</code> should return false.</li>
+<h2 id="例题1-lru-cache">例题1， LRU Cache</h2>
+<p>双链表 + Hash</p>
+<h2 id="word-pattern">Word Pattern</h2>
+<p>给两个字符串，判断这两个字符串是否能匹配。匹配的样例如下：</p>
+<ol type="1">
+<li>pattern = <code>"abba"</code>, str = <code>"dog cat cat dog"</code> should return true.</li>
+<li>pattern = <code>"abba"</code>, str = <code>"dog cat cat fish"</code> should return false.</li>
+<li>pattern = <code>"aaaa"</code>, str = <code>"dog cat cat dog"</code> should return false.</li>
+<li>pattern = <code>"abba"</code>, str = <code>"dog dog dog dog"</code> should return false.</li>
 </ol>
 <p>思路：双hash表进行一一映射。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">wordPattern</span><span class="params">(String pattern, String str)</span> </span>&#123;</span><br><span class="line">    String[] str_arr = str.split(<span class="string">&quot; &quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>(str_arr.length != pattern.length())<span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    HashMap&lt;Character, String&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    HashMap&lt;String, Character&gt; str2charMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pattern.length(); ++i)&#123;</span><br><span class="line">        <span class="keyword">if</span>(map.containsKey(pattern.charAt(i)))&#123;</span><br><span class="line">            <span class="keyword">if</span>(!map.get(pattern.charAt(i)).equals(str_arr[i])) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(str2charMap.containsKey(str_arr[i])) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            map.put(pattern.charAt(i), str_arr[i]);</span><br><span class="line">            str2charMap.put(str_arr[i], pattern.charAt(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Insert-Delete-GetRandom-O-1"><a href="#Insert-Delete-GetRandom-O-1" class="headerlink" title="Insert Delete GetRandom O(1)"></a>Insert Delete GetRandom O(1)</h2><p>设计一个数据结构，支持插入、删除和随机取的复杂度都是$O(1)$</p>
+<h2 id="insert-delete-getrandom-o1">Insert Delete GetRandom O(1)</h2>
+<p>设计一个数据结构，支持插入、删除和随机取的复杂度都是<span class="math inline">\(O(1)\)</span></p>
 <p>注意一些技巧，特别是remove时的技巧。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;Integer, Integer&gt; set;</span><br><span class="line">    ArrayList&lt;Integer&gt; nums;</span><br><span class="line">    <span class="comment">/**set的key是插入的数字，value是在nums中的idx**/</span></span><br><span class="line">    java.util.Random rand = <span class="keyword">new</span> java.util.Random();</span><br><span class="line">    <span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RandomizedSet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        set = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        nums = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Inserts a value to the set. Returns true if the set did not already contain the specified element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(set.containsKey(val)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        set.put(val,nums.size());</span><br><span class="line">        nums.add(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Removes a value from the set. Returns true if the set contained the specified element. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(set.containsKey(val))&#123;</span><br><span class="line">            <span class="comment">// 为了保证序号正确，先让val与nums中的最后一个交换</span></span><br><span class="line">            <span class="keyword">int</span> idx = set.get(val);</span><br><span class="line">            <span class="keyword">int</span> lastVal = nums.get(nums.size() - <span class="number">1</span>);</span><br><span class="line">            set.replace(lastVal, idx);</span><br><span class="line">            nums.set(idx,lastVal);</span><br><span class="line">            set.remove(val);</span><br><span class="line">            nums.remove(nums.size() - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Get a random element from the set. */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//System.out.println(rand.nextInt(nums.size()));</span></span><br><span class="line">        <span class="keyword">return</span> nums.get(rand.nextInt(nums.size())); <span class="comment">// 注意这个用法</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Insert-Delete-GetRandom-O-1-Duplicates-allowed"><a href="#Insert-Delete-GetRandom-O-1-Duplicates-allowed" class="headerlink" title="Insert Delete GetRandom O(1) - Duplicates allowed"></a>Insert Delete GetRandom O(1) - Duplicates allowed</h2><p>如果允许重复元素出现，那么怎么实现？</p>
+<h2 id="insert-delete-getrandom-o1---duplicates-allowed">Insert Delete GetRandom O(1) - Duplicates allowed</h2>
+<p>如果允许重复元素出现，那么怎么实现？</p>
 <p>那就把idx变成idx列表！</p>
 <p>（为什么不能直接计数呢？因为如果只计数的话，随机输出时，元素比例就不符合原来的比例了）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;Integer, ArrayList&lt;Integer&gt;&gt; set;</span><br><span class="line">ArrayList&lt;Integer&gt; nums;</span><br><span class="line">Random rand = <span class="keyword">new</span> Random();</span><br><span class="line"><span class="comment">/**key : 就是插入的值</span></span><br><span class="line"><span class="comment"> * value :在nums中的idx **/</span></span><br><span class="line"><span class="comment">/** Initialize your data structure here. */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">RandomizedCollection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    set = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    nums = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(set.containsKey(val))&#123;</span><br><span class="line">        set.get(val).add(nums.size());</span><br><span class="line">        nums.add(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        ArrayList idxs = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        idxs.add(nums.size());</span><br><span class="line">        set.put(val,idxs);</span><br><span class="line">        nums.add(val);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Removes a value from the collection. Returns true if the collection contained the specified element. */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(set.containsKey(val))&#123;</span><br><span class="line">        <span class="comment">// 待删除元素的idxs列表</span></span><br><span class="line">        ArrayList&lt;Integer&gt; idxs = set.get(val);</span><br><span class="line">        <span class="comment">// idx = idxs.get(0)</span></span><br><span class="line">        <span class="comment">// 将nums最后一个挪过来</span></span><br><span class="line">        <span class="keyword">if</span>(idxs.get(<span class="number">0</span>) &lt; nums.size() - <span class="number">1</span>) &#123;</span><br><span class="line">            nums.set(idxs.get(<span class="number">0</span>), nums.get(nums.size() - <span class="number">1</span>));</span><br><span class="line">            <span class="comment">// 更新set中挪过来的idx</span></span><br><span class="line">            ArrayList&lt;Integer&gt; lastIdxs = set.get(nums.get(idxs.get(<span class="number">0</span>)));</span><br><span class="line">            <span class="keyword">int</span> deleted = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (deleted &lt; lastIdxs.size()) &#123;</span><br><span class="line">                <span class="keyword">if</span> (lastIdxs.get(deleted) == nums.size() - <span class="number">1</span>) &#123;</span><br><span class="line">                    lastIdxs.remove(deleted);</span><br><span class="line">                &#125;</span><br><span class="line">                deleted += <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            lastIdxs.add(idxs.get(<span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 删除</span></span><br><span class="line">        nums.remove(nums.size() - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(idxs.size() == <span class="number">1</span>)&#123;set.remove(val);&#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;idxs.remove(<span class="number">0</span>);&#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** Get a random element from the collection. */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRandom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums.size() == <span class="number">0</span>) <span class="keyword">return</span>  -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> nums.get(rand.nextInt(nums.size()));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Sort-Characters-By-Frequency"><a href="#Sort-Characters-By-Frequency" class="headerlink" title="Sort Characters By Frequency"></a>Sort Characters By Frequency</h2><p>题意：给一个字符串”tree”，按照字母频率输出“eetr”或”eert”</p>
+<h2 id="sort-characters-by-frequency">Sort Characters By Frequency</h2>
+<p>题意：给一个字符串"tree"，按照字母频率输出“eetr”或"eert"</p>
 <p>思路：直接用hashMap统计每个字符的次数，然后按照次数排序并输出。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">frequencySort</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        HashMap&lt;Character,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">char</span> c : s.toCharArray() )&#123;</span><br><span class="line">            <span class="keyword">if</span>( map.containsKey(c) )&#123;</span><br><span class="line">                map.replace(c,map.get(c)+<span class="number">1</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                map.put(c,<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Map.Entry&lt;Character,Integer&gt;&gt; list = <span class="keyword">new</span> LinkedList&lt;Map.Entry&lt;Character,Integer&gt;&gt;(map.entrySet());</span><br><span class="line">        Collections.sort( list, <span class="keyword">new</span> Comparator&lt;Map.Entry&lt;Character,Integer&gt;&gt;() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Map.Entry&lt;Character,Integer&gt; o1, Map.Entry&lt;Character,Integer&gt; o2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (o2.getValue()).compareTo( o1.getValue() );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">int</span> times;</span><br><span class="line">        StringBuilder result = <span class="keyword">new</span> StringBuilder(s.length());</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Character,Integer&gt; entry : list) &#123;</span><br><span class="line">            times = entry.getValue();</span><br><span class="line">            <span class="keyword">while</span> (times&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                result.append(entry.getKey());</span><br><span class="line">                --times;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这道题还有另一种精妙的O(n)思路，只是有点浪费空间：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">frequencySort</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> c : s.toCharArray()) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(c)) &#123;</span><br><span class="line">                map.put(c, map.get(c) + <span class="number">1</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(c, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Character&gt; [] bucket = <span class="keyword">new</span> List[s.length() + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> key : map.keySet()) &#123;</span><br><span class="line">            <span class="keyword">int</span> frequency = map.get(key);</span><br><span class="line">            <span class="keyword">if</span> (bucket[frequency] == <span class="keyword">null</span>) &#123;</span><br><span class="line">                bucket[frequency] = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">            &#125;</span><br><span class="line">            bucket[frequency].add(key);</span><br><span class="line">        &#125;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> pos = bucket.length - <span class="number">1</span>; pos &gt;=<span class="number">0</span>; pos--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (bucket[pos] != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">char</span> num : bucket[pos]) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; map.get(num); i++) &#123;</span><br><span class="line">                        sb.append(num);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="堆">堆</h1>
+<p>下节课讲</p>
 
-
-
-<h1 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h1><p>下节课讲</p>
-
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/21/%E7%AE%97%E6%B3%95-%E5%9B%9E%E6%BA%AF%E6%B3%95/" rel="prev" title="算法-回溯法">
+      <i class="fa fa-chevron-left"></i> 算法-回溯法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/11/%E7%AE%97%E6%B3%95-%E5%9B%BE/" rel="next" title="算法-图">
+      算法-图 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/21/%E7%AE%97%E6%B3%95-%E5%9B%9E%E6%BA%AF%E6%B3%95/" rel="next" title="算法-回溯法">
-                <i class="fa fa-chevron-left"></i> 算法-回溯法
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/11/%E7%AE%97%E6%B3%95-%E5%9B%BE/" rel="prev" title="算法-图">
-                算法-图 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88"><span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981%EF%BC%8CMin-Stack"><span class="nav-text">例题1，Min Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982%EF%BC%8C-Implement-Queue-with-Stack"><span class="nav-text">例题2， Implement Queue with Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983%EF%BC%8CLargest-Rectange-in-Histogram"><span class="nav-text">例题3，Largest Rectange in Histogram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984%EF%BC%8CMax-Tree"><span class="nav-text">例题4，Max Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%A7%E8%BE%83%E5%A4%A7%E5%80%BC%E9%97%AE%E9%A2%98"><span class="nav-text">单侧较大值问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-Greater-Element-I"><span class="nav-text">Next Greater Element I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-Greater-Element-II"><span class="nav-text">Next Greater Element II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daily-Temperatures"><span class="nav-text">Daily Temperatures</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#132-Pattern"><span class="nav-text">132 Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-text">括号匹配问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Valid-Parentheses"><span class="nav-text">Valid Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Longest-Valid-Parentheses"><span class="nav-text">Longest Valid Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Flatten-Nested-List-Iterator"><span class="nav-text">Flatten Nested List Iterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exclusive-Time-of-Functions"><span class="nav-text">Exclusive Time of Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Valid-Parenthesis-String"><span class="nav-text">Valid Parenthesis String</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98"><span class="nav-text">计算问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Evaluate-Reverse-Polish-Notation"><span class="nav-text">Evaluate Reverse Polish Notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Calculator-II"><span class="nav-text">Basic Calculator II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Calculator"><span class="nav-text">Basic Calculator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Calculator-III"><span class="nav-text">Basic Calculator III</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E9%97%AE%E9%A2%98"><span class="nav-text">其它问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Simplify-Path"><span class="nav-text">Simplify Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Longest-Absolute-File-Path"><span class="nav-text">Longest Absolute File Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Min-Stack"><span class="nav-text">Min Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hash"><span class="nav-text">Hash</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981%EF%BC%8C-LRU-Cache"><span class="nav-text">例题1， LRU Cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-Pattern"><span class="nav-text">Word Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Insert-Delete-GetRandom-O-1"><span class="nav-text">Insert Delete GetRandom O(1)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Insert-Delete-GetRandom-O-1-Duplicates-allowed"><span class="nav-text">Insert Delete GetRandom O(1) - Duplicates allowed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sort-Characters-By-Frequency"><span class="nav-text">Sort Characters By Frequency</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86"><span class="nav-text">堆</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981min-stack"><span class="nav-number">1.1.</span> <span class="nav-text">例题1，Min Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982-implement-queue-with-stack"><span class="nav-number">1.2.</span> <span class="nav-text">例题2， Implement Queue with Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983largest-rectange-in-histogram"><span class="nav-number">1.3.</span> <span class="nav-text">例题3，Largest Rectange in Histogram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984max-tree"><span class="nav-number">1.4.</span> <span class="nav-text">例题4，Max Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%A7%E8%BE%83%E5%A4%A7%E5%80%BC%E9%97%AE%E9%A2%98"><span class="nav-number">1.5.</span> <span class="nav-text">单侧较大值问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#next-greater-element-i"><span class="nav-number">1.5.1.</span> <span class="nav-text">Next Greater Element I</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next-greater-element-ii"><span class="nav-number">1.5.2.</span> <span class="nav-text">Next Greater Element II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#daily-temperatures"><span class="nav-number">1.5.3.</span> <span class="nav-text">Daily Temperatures</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pattern"><span class="nav-number">1.6.</span> <span class="nav-text">132 Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%AC%E5%8F%B7%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98"><span class="nav-number">1.7.</span> <span class="nav-text">括号匹配问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#valid-parentheses"><span class="nav-number">1.7.1.</span> <span class="nav-text">Valid Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#longest-valid-parentheses"><span class="nav-number">1.7.2.</span> <span class="nav-text">Longest Valid Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flatten-nested-list-iterator"><span class="nav-number">1.7.3.</span> <span class="nav-text">Flatten Nested List Iterator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exclusive-time-of-functions"><span class="nav-number">1.7.4.</span> <span class="nav-text">Exclusive Time of Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#valid-parenthesis-string"><span class="nav-number">1.7.5.</span> <span class="nav-text">Valid Parenthesis String</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98"><span class="nav-number">1.8.</span> <span class="nav-text">计算问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#evaluate-reverse-polish-notation"><span class="nav-number">1.8.1.</span> <span class="nav-text">Evaluate Reverse Polish Notation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#basic-calculator-ii"><span class="nav-number">1.8.2.</span> <span class="nav-text">Basic Calculator II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#basic-calculator"><span class="nav-number">1.8.3.</span> <span class="nav-text">Basic Calculator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#basic-calculator-iii"><span class="nav-number">1.8.4.</span> <span class="nav-text">Basic Calculator III</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E9%97%AE%E9%A2%98"><span class="nav-number">1.9.</span> <span class="nav-text">其它问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#simplify-path"><span class="nav-number">1.9.1.</span> <span class="nav-text">Simplify Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#longest-absolute-file-path"><span class="nav-number">1.9.2.</span> <span class="nav-text">Longest Absolute File Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-stack"><span class="nav-number">1.9.3.</span> <span class="nav-text">Min Stack</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash"><span class="nav-number">2.</span> <span class="nav-text">Hash</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981-lru-cache"><span class="nav-number">2.1.</span> <span class="nav-text">例题1， LRU Cache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word-pattern"><span class="nav-number">2.2.</span> <span class="nav-text">Word Pattern</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-delete-getrandom-o1"><span class="nav-number">2.3.</span> <span class="nav-text">Insert Delete GetRandom O(1)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-delete-getrandom-o1---duplicates-allowed"><span class="nav-number">2.4.</span> <span class="nav-text">Insert Delete GetRandom O(1) - Duplicates allowed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sort-characters-by-frequency"><span class="nav-number">2.5.</span> <span class="nav-text">Sort Characters By Frequency</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A0%86"><span class="nav-number">3.</span> <span class="nav-text">堆</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -889,140 +568,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1033,362 +609,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

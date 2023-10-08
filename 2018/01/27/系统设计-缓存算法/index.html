@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="在学系统设计的时候设计到了缓存过期算法。在此详细研究一下介个。 本文主要参考自详解三种缓存过期策略LFU，FIFO，LRU（附带实现代码） 缓存机制：先分配一定的缓存空间。使用数据的时候先查询缓存空间中是否有该数据的缓存。如果有的话直接拿出来。如果没有的话去其它地方查询，然后同时将查询到的结果放入缓存空间，方便下次调用。伪代码如下： 1234567891011def getUser(user_id">
+  <meta name="description" content="在学系统设计的时候设计到了缓存过期算法。在此详细研究一下介个。 本文主要参考自详解三种缓存过期策略LFU，FIFO，LRU（附带实现代码） 缓存机制：先分配一定的缓存空间。使用数据的时候先查询缓存空间中是否有该数据的缓存。如果有的话直接拿出来。如果没有的话去其它地方查询，然后同时将查询到的结果放入缓存空间，方便下次调用。伪代码如下： 1234567891011def getUser(user">
 <meta property="og:type" content="article">
 <meta property="og:title" content="系统设计-缓存算法">
 <meta property="og:url" content="http://jiayi797.github.io/about/2018/01/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="在学系统设计的时候设计到了缓存过期算法。在此详细研究一下介个。 本文主要参考自详解三种缓存过期策略LFU，FIFO，LRU（附带实现代码） 缓存机制：先分配一定的缓存空间。使用数据的时候先查询缓存空间中是否有该数据的缓存。如果有的话直接拿出来。如果没有的话去其它地方查询，然后同时将查询到的结果放入缓存空间，方便下次调用。伪代码如下： 1234567891011def getUser(user_id">
-<meta property="og:locale">
+<meta property="og:description" content="在学系统设计的时候设计到了缓存过期算法。在此详细研究一下介个。 本文主要参考自详解三种缓存过期策略LFU，FIFO，LRU（附带实现代码） 缓存机制：先分配一定的缓存空间。使用数据的时候先查询缓存空间中是否有该数据的缓存。如果有的话直接拿出来。如果没有的话去其它地方查询，然后同时将查询到的结果放入缓存空间，方便下次调用。伪代码如下： 1234567891011def getUser(user">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-54-58.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-56-25.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-58-34.png">
@@ -112,624 +42,370 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-54-58.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2018/01/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2018/01/27/系统设计-缓存算法/"/>
-
-
-
-
-
   <title>系统设计-缓存算法 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/01/27/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E7%BC%93%E5%AD%98%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">系统设计-缓存算法</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          系统设计-缓存算法
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T07:31:18+00:00">
-                2018-01-27
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:06+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
-                    <span itemprop="name">系统设计</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-01-27 15:31:18" itemprop="dateCreated datePublished" datetime="2018-01-27T15:31:18+08:00">2018-01-27</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:06" itemprop="dateModified" datetime="2018-12-17T15:42:06+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
+
     
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>在学系统设计的时候设计到了缓存过期算法。在此详细研究一下介个。</p>
 <p>本文主要参考自<a target="_blank" rel="noopener" href="http://www.cnblogs.com/s-b-b/p/6047954.html">详解三种缓存过期策略LFU，FIFO，LRU（附带实现代码）</a></p>
 <p>缓存机制：先分配一定的缓存空间。使用数据的时候先查询缓存空间中是否有该数据的缓存。如果有的话直接拿出来。如果没有的话去其它地方查询，然后同时将查询到的结果放入缓存空间，方便下次调用。伪代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUser</span>(<span class="params">user_id</span>):</span></span><br><span class="line">	user = cache.get(user_id)</span><br><span class="line">    <span class="keyword">if</span> user :</span><br><span class="line">      <span class="keyword">return</span> user</span><br><span class="line">    user = database.get(user_id)</span><br><span class="line">    cache.<span class="built_in">set</span>(key, user)</span><br><span class="line">    <span class="keyword">return</span> user</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setUser</span>(<span class="params">user</span>):</span></span><br><span class="line">  cache.delete(user.user_id)</span><br><span class="line">  database.<span class="built_in">set</span>(user)</span><br></pre></td></tr></table></figure>
-
 <p>缓存机制就像上面所说的那样。<code>cache</code> 一般是有有效期的，也就是如果缓存中这个数据过期了，那就从缓存中清理出去。而<code>cache</code> 的实现过程和淘汰机制不同，会导致不同的性能表现。常见的就是IFIO，LRU，LFU缓存过期策略。</p>
-<ol>
+<ol type="1">
 <li>FIFO(First In First Out) : 先进先出。淘汰掉很久以前进来的数据，而新数据等到之后再淘汰。也就是一个队列。</li>
 <li>LRU (Least recently used) : 最近最少使用。淘汰最近不适用的数据</li>
 <li>LFU (Least frequently used) : 最近使用次数最少。淘汰掉使用次数最少的页面。</li>
 </ol>
 <span id="more"></span>
-
-<h1 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h1><p>按照“先进先出（First In，First Out）”的原理淘汰数据，正好符合队列的特性，数据结构上使用队列Queue来实现。</p>
+<h1 id="fifo">FIFO</h1>
+<p>按照“先进先出（First In，First Out）”的原理淘汰数据，正好符合队列的特性，数据结构上使用队列Queue来实现。</p>
 <p>如下图：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-54-58.png"> </p>
-<ol>
-<li><p>新访问的数据插入FIFO队列尾部，数据在FIFO队列中顺序移动；</p>
-</li>
-<li><p>淘汰FIFO队列头部的数据；</p>
-</li>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-54-58.png" /></p>
+<ol type="1">
+<li><p>新访问的数据插入FIFO队列尾部，数据在FIFO队列中顺序移动；</p></li>
+<li><p>淘汰FIFO队列头部的数据；</p></li>
 </ol>
-<h1 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h1><p>（Least recently used，最近最少使用）算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。</p>
+<h1 id="lru">LRU</h1>
+<p>（Least recently used，最近最少使用）算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”。</p>
 <p>最常见的实现是使用一个链表保存缓存数据，详细算法实现如下：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-56-25.png"> </p>
-<ol>
-<li>新数据插入到链表头部；</li>
-</ol>
-<ol start="2">
-<li><p>每当缓存命中（即缓存数据被访问），则将数据移到链表头部；</p>
-</li>
-<li><p>当链表满的时候，将链表尾部的数据丢弃。</p>
-</li>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-56-25.png" /></p>
+<ol type="1">
+<li><p>新数据插入到链表头部；</p></li>
+<li><p>每当缓存命中（即缓存数据被访问），则将数据移到链表头部；</p></li>
+<li><p>当链表满的时候，将链表尾部的数据丢弃。</p></li>
 </ol>
 <p><strong>LeetCode题：146. LRU Cache</strong></p>
 <p>要用O(1)的时间复杂度完成LRU算法。</p>
-<p>我的思路：双链表 + <code>HashMap&lt;key, Node&gt;</code> </p>
+<p>我的思路：双链表 + <code>HashMap&lt;key, Node&gt;</code></p>
 <p>代码贼长</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义链表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkList</span></span>&#123;  </span><br><span class="line">    <span class="comment">// 链表节点定义</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">        <span class="comment">// 节点的key和val</span></span><br><span class="line">        <span class="keyword">int</span> key;</span><br><span class="line">        <span class="keyword">int</span> val;</span><br><span class="line">        Node next;<span class="comment">// 后一个节点</span></span><br><span class="line">        Node prev; <span class="comment">// 前一个节点</span></span><br><span class="line">        Node(<span class="keyword">int</span> key,<span class="keyword">int</span> val)&#123;</span><br><span class="line">            <span class="keyword">this</span>.val = val;</span><br><span class="line">            <span class="keyword">this</span>.key = key;</span><br><span class="line">            next = <span class="keyword">null</span>;</span><br><span class="line">            prev = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Node dummyHead; <span class="comment">// 链表头</span></span><br><span class="line">    Node dummyTail; <span class="comment">// 链表尾</span></span><br><span class="line">    <span class="keyword">int</span> size; <span class="comment">// 链表长度</span></span><br><span class="line">    <span class="keyword">int</span> capacity; <span class="comment">// 容量</span></span><br><span class="line">    HashMap&lt;Integer, Node&gt; keyNodeHash; <span class="comment">// 根据key寻找节点位置的Hash表</span></span><br><span class="line">    LinkList(<span class="keyword">int</span> capacity)&#123;</span><br><span class="line">        dummyHead = <span class="keyword">new</span> Node(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        dummyTail = <span class="keyword">new</span> Node(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">        dummyHead.next = dummyTail;</span><br><span class="line">        dummyTail.prev = dummyHead;</span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">        keyNodeHash = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 对外函数，将key，value插入到链表中</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(keyNodeHash.containsKey(key))&#123;</span><br><span class="line">            <span class="comment">// 曾经有这个key时，要更新节点且置顶（相当于把原来的那个删掉了，加了个新的）</span></span><br><span class="line">            Node e = keyNodeHash.get(key); <span class="comment">// 获取节点</span></span><br><span class="line">            e.val = val; <span class="comment">// 更新节点值</span></span><br><span class="line">            setFirst(e);  <span class="comment">// 将这个节点置顶</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(size &gt;= capacity)&#123;</span><br><span class="line">            <span class="comment">// 当链表长度大于容量时，删除末尾的节点,且从hash表中删除这个节点</span></span><br><span class="line">            keyNodeHash.remove(deleteTail().key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 添加节点，且加入hash表</span></span><br><span class="line">        keyNodeHash.put(key, addFirst(key, val)); </span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 对外函数，获取key的value</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(keyNodeHash.containsKey(key))&#123;</span><br><span class="line">            Node setFirstNode = keyNodeHash.get(key);</span><br><span class="line">            setFirst(setFirstNode); <span class="comment">// 将这个节点置顶</span></span><br><span class="line">            <span class="keyword">return</span> keyNodeHash.get(key).val;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 将节点curr插入到链表首</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Node <span class="title">addFirst</span><span class="params">(Node curr)</span></span>&#123;</span><br><span class="line">        curr.next = dummyHead.next;</span><br><span class="line">        dummyHead.next.prev = curr;</span><br><span class="line">        dummyHead.next = curr;</span><br><span class="line">        curr.prev = dummyHead;</span><br><span class="line">        ++size;</span><br><span class="line">        <span class="keyword">return</span> curr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将key value的节点插入链表首</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Node <span class="title">addFirst</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">        Node curr = <span class="keyword">new</span> Node(key, val);</span><br><span class="line">        <span class="keyword">return</span> addFirst(curr);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将节点e置顶（放到链表首部）</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setFirst</span><span class="params">(Node e)</span></span>&#123;</span><br><span class="line">        queue.delete(e);</span><br><span class="line">        queue.addFirst(e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 从链表中删除节点e</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(Node e)</span></span>&#123;</span><br><span class="line">        Node prev = e.prev;</span><br><span class="line">        Node next = e.next;</span><br><span class="line">        prev.next = next;</span><br><span class="line">        next.prev = prev;</span><br><span class="line">        e.prev = <span class="keyword">null</span>;</span><br><span class="line">        e.next = <span class="keyword">null</span>;</span><br><span class="line">        --size;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="comment">// 删除链表的最后一个节点</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> Node <span class="title">deleteTail</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Node deleted = dummyTail.prev;</span><br><span class="line">        delete(deleted);</span><br><span class="line">        <span class="keyword">return</span> deleted;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主代码</span></span><br><span class="line">LinkList queue ;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">    queue = <span class="keyword">new</span> LinkList(capacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//System.out.println(&quot;get&quot; + key);</span></span><br><span class="line">    <span class="keyword">return</span> queue.getValue(key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//System.out.println(&quot;add&quot; + key + &quot;\t&quot; + value);</span></span><br><span class="line">    queue.add(key, value);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="LFU"><a href="#LFU" class="headerlink" title="LFU"></a>LFU</h1><p>（Least Frequently Used）算法根据数据的历史访问频率来淘汰数据，其核心思想是“如果数据过去被访问多次，那么将来被访问的频率也更高”。</p>
+<h1 id="lfu">LFU</h1>
+<p>（Least Frequently Used）算法根据数据的历史访问频率来淘汰数据，其核心思想是“如果数据过去被访问多次，那么将来被访问的频率也更高”。</p>
 <p>LFU的每个数据块都有一个引用计数，所有数据块按照引用计数排序，具有相同引用计数的数据块则按照时间排序。</p>
 <p>具体实现如下：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-58-34.png"> </p>
-<ol>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-27-15-58-34.png" /></p>
+<ol type="1">
 <li>新加入数据插入到队列尾部（因为引用计数为1）；</li>
 <li>队列中的数据被访问后，引用计数增加，队列重新排序；</li>
 <li>当需要淘汰数据时，将已经排序的列表最后的数据块删除。</li>
 </ol>
 <p>实现时，我们只需要考虑keys的增删，然后再外部保持一个key,value的对应关系即可。数据结构的设计如下所示：</p>
-<p> <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-46-58.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-46-58.png" /></p>
 <p>首先这是一个双链表。链表的每个节点为：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> count; <span class="comment">// 代表本节点内的数据所对应的访问次数</span></span><br><span class="line">  LinkedHashSet&lt;Integer&gt; keys; <span class="comment">// 本节点内的所有数据的keys</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>其中，keys是一个LinkedHashSet，它可以按照数据的插入顺序输出，每次输出都是先输出老数据，最后输出新数据。</p>
 <p>我们以leetcode给的样例说明：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">LFUCache cache = new LFUCache( 2 /* capacity */ );</span><br><span class="line"></span><br><span class="line">cache.put(1, 1);</span><br><span class="line">cache.put(2, 2);</span><br><span class="line">cache.get(1);       // returns 1</span><br><span class="line">cache.put(3, 3);    // evicts key 2</span><br><span class="line">cache.get(2);       // returns -1 (not found)</span><br><span class="line">cache.get(3);       // returns 3.</span><br><span class="line">cache.put(4, 4);    // evicts key 1.</span><br><span class="line">cache.get(1);       // returns -1 (not found)</span><br><span class="line">cache.get(3);       // returns 3</span><br><span class="line">cache.get(4);       // returns 4</span><br></pre></td></tr></table></figure>
-
 <p>一开始插入<code>cache.put(1, 1); cache.put(2, 2);</code> ，变成这样</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-49-24.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-49-24.png" /></p>
 <p>然后我们执行<code>cache.get(1); // returns 1</code>，那么变成了：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-52-31.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-52-31.png" /></p>
 <p>然后我们执行<code>cache.put(3, 3);    // evicts key 2</code> 。此时数据个数大于容量2了，就要先把最老的删除，也就是2，然后插入新数据。变成了：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-53-36.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-29-15-53-36.png" /></p>
 <p>之后的操作不再画图阐述。</p>
 <p>那么总的伪代码为：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Node&gt; lists;</span><br><span class="line">HashMap &lt;key, value&gt; kv;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> not exsit &lt;key,value&gt; in kv， <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">   <span class="keyword">else</span> </span><br><span class="line">     move key to next Node <span class="comment">// 将key挪到下一个count节点里</span></span><br><span class="line">     <span class="keyword">return</span> key.value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> exsit &lt;key,OldValue&gt; in kv :  <span class="comment">// 如果曾经存在key</span></span><br><span class="line">    remove key from key.node  <span class="comment">// 就先从list的某个node中将key去除</span></span><br><span class="line">  put &lt;key,value&gt; to kv  <span class="comment">// 给kv里加入key,value</span></span><br><span class="line">  add &lt;key&gt; to count=<span class="number">1</span> node <span class="comment">// 将key加入第一个节点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123; <span class="comment">// 主链表的节点</span></span><br><span class="line">        Node next;</span><br><span class="line">        Node prev;</span><br><span class="line">        LinkedHashSet&lt;Integer&gt; keys;</span><br><span class="line">        <span class="keyword">int</span> count;</span><br><span class="line">        Node(<span class="keyword">int</span> count)&#123;</span><br><span class="line">            <span class="keyword">this</span>.count = count;</span><br><span class="line">            keys = <span class="keyword">new</span> LinkedHashSet&lt;&gt;();</span><br><span class="line">            next = <span class="keyword">null</span>;</span><br><span class="line">            prev = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> Node dummyHead;</span><br><span class="line">    <span class="keyword">private</span> Node dummyTail;</span><br><span class="line">    <span class="keyword">private</span> HashMap&lt;Integer, Integer&gt; keyValueMap;</span><br><span class="line">    <span class="keyword">private</span> HashMap&lt;Integer,Node&gt; keyNodeMap;</span><br><span class="line">    <span class="keyword">int</span> capacity;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LFUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">        keyValueMap = <span class="keyword">new</span> HashMap&lt;&gt;(); <span class="comment">// 提前存储每个&lt;key,value&gt;，这样在之后处理的时候，只需要处理key。</span></span><br><span class="line">        keyNodeMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        dummyHead = <span class="keyword">new</span> Node(<span class="number">0</span>);</span><br><span class="line">        dummyTail = <span class="keyword">new</span> Node(Integer.MAX_VALUE);</span><br><span class="line">        dummyHead.next = dummyTail;</span><br><span class="line">        dummyTail.prev = dummyHead;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(keyValueMap.containsKey(key))&#123;</span><br><span class="line">            increaseCount(key);</span><br><span class="line">            <span class="keyword">return</span> keyValueMap.get(key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(capacity == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(keyValueMap.containsKey(key))&#123;</span><br><span class="line">            keyValueMap.put(key,value);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(keyValueMap.size() &gt;= capacity)&#123;</span><br><span class="line">                <span class="comment">// 当元素个数大于容量时，弹出最不使用且最久远的那个</span></span><br><span class="line">                removeOld();</span><br><span class="line">            &#125;</span><br><span class="line">            keyValueMap.put(key,value);</span><br><span class="line">            addTohead(key);</span><br><span class="line">        &#125;</span><br><span class="line">        increaseCount(key);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addTohead</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        dummyHead.keys.add(key);</span><br><span class="line">        keyNodeMap.put(key, dummyHead);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 将key挪到下一个节点</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">increaseCount</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">        <span class="comment">//获取key所在的node</span></span><br><span class="line">        Node node = keyNodeMap.get(key);</span><br><span class="line">        node.keys.remove(key);</span><br><span class="line">        keyNodeMap.remove(key);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将key所对应的点移到下一个node</span></span><br><span class="line">        <span class="keyword">if</span>(node.next == dummyTail)&#123;</span><br><span class="line">            addNext(node);</span><br><span class="line">        &#125;</span><br><span class="line">        node.next.keys.add(key);</span><br><span class="line">        keyNodeMap.put(key, node.next);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 给node节点添加下一节点</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addNext</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">        Node newNext = <span class="keyword">new</span> Node(node.count + <span class="number">1</span>);</span><br><span class="line">        newNext.next = node.next;</span><br><span class="line">        newNext.prev = node;</span><br><span class="line">        node.next.prev = newNext;</span><br><span class="line">        node.next = newNext;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 移除least frequency used key</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">removeOld</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(keyValueMap.size() == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 因为可能存在keys为空的节点，因此要遍历看看</span></span><br><span class="line">        Node curr = dummyHead;</span><br><span class="line">        <span class="keyword">while</span> (curr.keys.isEmpty())&#123;</span><br><span class="line">            curr = curr.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> LFUKey = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> n : curr.keys)&#123;</span><br><span class="line">            LFUKey = n;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        curr.keys.remove(LFUKey);</span><br><span class="line">        keyNodeMap.remove(LFUKey);</span><br><span class="line">        keyValueMap.remove(LFUKey);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
 <p>注：本来想着用优先队列实现。但是不知道为什么有样例不能通过。气死了</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LFUCache</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> time = <span class="number">0</span>;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Node</span>&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> counter;</span><br><span class="line">        <span class="keyword">int</span> key;</span><br><span class="line">        <span class="keyword">int</span> value;</span><br><span class="line">        <span class="keyword">int</span> timeStamp;</span><br><span class="line">        Node(<span class="keyword">int</span> key, <span class="keyword">int</span> value)&#123;</span><br><span class="line">            <span class="keyword">this</span>.key = key;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            <span class="keyword">this</span>.timeStamp = time++;</span><br><span class="line">            <span class="keyword">this</span>.counter = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">(<span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.counter = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            <span class="keyword">this</span>.timeStamp = time++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot; key=&quot;</span> + key + <span class="string">&quot;,value=&quot;</span> + value + <span class="string">&quot;,counter=&quot;</span> + counter;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Node o)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.counter == o.counter) <span class="keyword">return</span> <span class="keyword">this</span>.timeStamp - o.timeStamp;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.counter - o.counter;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">PivotQueue</span></span>&#123;</span><br><span class="line">        PivotQueue(<span class="keyword">int</span> capcity)&#123;</span><br><span class="line">            <span class="keyword">this</span>.capcity = capcity;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> size = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">int</span> capcity;</span><br><span class="line">        <span class="keyword">private</span> ArrayList&lt;Node&gt; arr = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">public</span> HashMap&lt;Integer, Node&gt; keyIdxMap = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getSize</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> size;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getLeft</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (i &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getRight</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (i &lt;&lt; <span class="number">1</span>) + <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getParent</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> (i - <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 对外接口，根据key获得value</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">(<span class="keyword">int</span> key)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(capcity==<span class="number">0</span>) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(!keyIdxMap.containsKey(key)) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                Node curr = keyIdxMap.get(key);</span><br><span class="line">                <span class="keyword">return</span> get(curr);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 对外接口，将&lt;key,value&gt;插入</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(capcity==<span class="number">0</span>)<span class="keyword">return</span>;</span><br><span class="line">            System.out.println(time + <span class="string">&quot; adding &quot;</span>+key+<span class="string">&quot;\t&quot;</span>+value);</span><br><span class="line">            <span class="keyword">if</span>(keyIdxMap.containsKey(key))&#123;</span><br><span class="line">                reset(arr.indexOf(keyIdxMap.get(key)), value);</span><br><span class="line">                <span class="comment">//System.out.println(&quot;arr&quot; + arr);</span></span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (size &gt;= capcity)&#123;</span><br><span class="line">                poll();</span><br><span class="line">            &#125;</span><br><span class="line">            Node curr = <span class="keyword">new</span> Node(key, value);</span><br><span class="line">            arr.add(curr); <span class="comment">// 将curr加到末尾</span></span><br><span class="line">            keyIdxMap.put(curr.key, curr);</span><br><span class="line">            <span class="comment">// shiftUp</span></span><br><span class="line">            shiftUp(arr.size() - <span class="number">1</span>);</span><br><span class="line">            shiftDown(arr.indexOf(curr));</span><br><span class="line">            ++size;</span><br><span class="line">            <span class="comment">//System.out.println(&quot;keyMap&quot; + keyIdxMap);</span></span><br><span class="line">            <span class="comment">// System.out.println(&quot;arr&quot; + arr);</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 私有接口，弹出堆顶元素</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">poll</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="comment">//System.out.println(&quot;polled &quot;+arr.get(0).key + &quot;,&quot; + arr.get(0).value);</span></span><br><span class="line">            <span class="keyword">int</span> result = arr.get(<span class="number">0</span>).value;</span><br><span class="line">            keyIdxMap.remove(arr.get(<span class="number">0</span>).key);</span><br><span class="line">            swap(<span class="number">0</span>, arr.size() - <span class="number">1</span>);</span><br><span class="line">            arr.remove(arr.size() - <span class="number">1</span>);</span><br><span class="line">            --size;</span><br><span class="line">            shiftDown(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 私有接口，根据curr获取value，同时更新curr节点在树中的顺序</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(Node curr)</span></span>&#123;</span><br><span class="line">            <span class="keyword">int</span> result = curr.value;</span><br><span class="line">            ++curr.counter;</span><br><span class="line">            curr.timeStamp = time++;</span><br><span class="line">            <span class="comment">// node.counter变大之后，可能会比它的子节点大，因此要向下移</span></span><br><span class="line">            shiftDown(arr.indexOf(curr));</span><br><span class="line">            <span class="comment">//System.out.println(&quot;arr&quot; + arr);</span></span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 私有接口，将第i点的节点置顶</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">reset</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> value)</span></span>&#123;</span><br><span class="line">            arr.get(i).reset(value);</span><br><span class="line">            <span class="comment">//node变为新的节点</span></span><br><span class="line">            shiftUp(i);</span><br><span class="line">            shiftDown(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 私有接口，置换i和j 的值</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</span><br><span class="line">            Node a = arr.get(i);</span><br><span class="line">            <span class="keyword">int</span> aCounter = a.counter, aKey = a.key, aValue = a.value, aTimeStamp = a.timeStamp;</span><br><span class="line">            Node b = arr.get(j);</span><br><span class="line">            a.counter = b.counter;</span><br><span class="line">            a.key = b.key;</span><br><span class="line">            a.value = b.value;</span><br><span class="line">            a.timeStamp = b.timeStamp;</span><br><span class="line">            b.counter = aCounter;</span><br><span class="line">            b.key = aKey;</span><br><span class="line">            b.value = aValue;</span><br><span class="line">            b.timeStamp = aTimeStamp;</span><br><span class="line">            keyIdxMap.replace(a.key, a);</span><br><span class="line">            keyIdxMap.replace(b.key, b);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">shiftUp</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span> || arr.get(i).compareTo(arr.get(getParent(i))) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">// node &gt; parent，不用再继续了</span></span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// node &lt; parent，需要将node向上移动</span></span><br><span class="line">            swap(i, getParent(i));</span><br><span class="line">            shiftUp(getParent(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">shiftDown</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;= arr.size()) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">int</span> left = getLeft(i), right = getRight(i);</span><br><span class="line">            <span class="keyword">if</span>(left &gt;= arr.size() &amp;&amp; right &gt;= arr.size()) <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">int</span> smallest = i;</span><br><span class="line">            <span class="keyword">if</span>(left &lt; arr.size() &amp;&amp; arr.get(smallest).compareTo(arr.get(left)) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">// smallest &gt; left</span></span><br><span class="line">                smallest = left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(right &lt; arr.size() &amp;&amp; arr.get(smallest).compareTo(arr.get(right)) &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="comment">// smallest &gt; right</span></span><br><span class="line">                smallest = right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(smallest == i) <span class="keyword">return</span>;</span><br><span class="line">            swap(smallest, i);</span><br><span class="line">            shiftDown(smallest);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    PivotQueue pivotQueue;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LFUCache</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        pivotQueue = <span class="keyword">new</span> PivotQueue(capacity);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> result = pivotQueue.getValue(key);</span><br><span class="line">        System.out.println(time + <span class="string">&quot; getting &quot;</span>+key + <span class="string">&quot; result = &quot;</span> + result);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        pivotQueue.add(key, value);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] arg)</span></span>&#123;</span><br><span class="line">        LFUCache obj = <span class="keyword">new</span> LFUCache(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        obj.put(<span class="number">1</span>,<span class="number">1</span>);</span><br><span class="line">        obj.put(<span class="number">2</span>,<span class="number">2</span>);</span><br><span class="line">        obj.get(<span class="number">1</span>);</span><br><span class="line">        obj.put(<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">        obj.get(<span class="number">2</span>);</span><br><span class="line">        obj.get(<span class="number">3</span>);</span><br><span class="line">        obj.put(<span class="number">4</span>,<span class="number">4</span>);</span><br><span class="line">        obj.get(<span class="number">1</span>);</span><br><span class="line">        System.out.println(obj.get(<span class="number">3</span>));;</span><br><span class="line">        System.out.println(obj.get(<span class="number">4</span>));;</span><br><span class="line"><span class="comment">//        obj.put(1,1);</span></span><br><span class="line"><span class="comment">//        obj.put(2,2);</span></span><br><span class="line"><span class="comment">//        obj.get(1);</span></span><br><span class="line"><span class="comment">//        obj.put(3,3);</span></span><br><span class="line"><span class="comment">//        obj.get(2);</span></span><br><span class="line"><span class="comment">//        obj.get(3);</span></span><br><span class="line"><span class="comment">//        obj.put(4,4);</span></span><br><span class="line"><span class="comment">//        obj.get(1);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/26/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%8E%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ECache/" rel="prev" title="系统设计-从用户系统中理解数据库与Cache">
+      <i class="fa fa-chevron-left"></i> 系统设计-从用户系统中理解数据库与Cache
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/28/Java-Hashtable%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" rel="next" title="Java-Hashtable原理探究">
+      Java-Hashtable原理探究 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/26/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E4%BB%8E%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8ECache/" rel="next" title="系统设计-从用户系统中理解数据库与Cache">
-                <i class="fa fa-chevron-left"></i> 系统设计-从用户系统中理解数据库与Cache
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/28/Java-Hashtable%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" rel="prev" title="Java-Hashtable原理探究">
-                Java-Hashtable原理探究 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#FIFO"><span class="nav-text">FIFO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LRU"><span class="nav-text">LRU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#LFU"><span class="nav-text">LFU</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#fifo"><span class="nav-number">1.</span> <span class="nav-text">FIFO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lru"><span class="nav-number">2.</span> <span class="nav-text">LRU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lfu"><span class="nav-number">3.</span> <span class="nav-text">LFU</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -738,140 +414,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -882,362 +455,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

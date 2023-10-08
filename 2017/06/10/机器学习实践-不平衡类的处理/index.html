@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="特征工程," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="最近在做比赛，发现在工业上，很多分类问题的标签分布都是不平衡的。如参考文献标签倾斜修正方法记要所属，比如用分类器去判断x光片中的癌症，这是一个二元分类问题，由于癌症的比例是非常小的，比如0.001。那么，将这些样本放到大多数分类模型中训练，模型的表现会非常相似，将所有数据都预测为没有癌症，因为这样也可以得到99.999%的准确率。 常见的解决办法参考文献解决真实世界问题：如何在不平衡类上使用机器学">
+  <meta name="description" content="最近在做比赛，发现在工业上，很多分类问题的标签分布都是不平衡的。如参考文献标签倾斜修正方法记要所属，比如用分类器去判断x光片中的癌症，这是一个二元分类问题，由于癌症的比例是非常小的，比如0.001。那么，将这些样本放到大多数分类模型中训练，模型的表现会非常相似，将所有数据都预测为没有癌症，因为这样也可以得到99.999%的准确率。 常见的解决办法 参考文献解决真实世界问题：如何在不平衡类上使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习实践-不平衡类的处理">
 <meta property="og:url" content="http://jiayi797.github.io/about/2017/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E4%B8%8D%E5%B9%B3%E8%A1%A1%E7%B1%BB%E7%9A%84%E5%A4%84%E7%90%86/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="最近在做比赛，发现在工业上，很多分类问题的标签分布都是不平衡的。如参考文献标签倾斜修正方法记要所属，比如用分类器去判断x光片中的癌症，这是一个二元分类问题，由于癌症的比例是非常小的，比如0.001。那么，将这些样本放到大多数分类模型中训练，模型的表现会非常相似，将所有数据都预测为没有癌症，因为这样也可以得到99.999%的准确率。 常见的解决办法参考文献解决真实世界问题：如何在不平衡类上使用机器学">
-<meta property="og:locale">
+<meta property="og:description" content="最近在做比赛，发现在工业上，很多分类问题的标签分布都是不平衡的。如参考文献标签倾斜修正方法记要所属，比如用分类器去判断x光片中的癌症，这是一个二元分类问题，由于癌症的比例是非常小的，比如0.001。那么，将这些样本放到大多数分类模型中训练，模型的表现会非常相似，将所有数据都预测为没有癌症，因为这样也可以得到99.999%的准确率。 常见的解决办法 参考文献解决真实世界问题：如何在不平衡类上使用">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/06/10/593c0b680d2b7.png">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/06/10/593c0bc5aa670.png">
 <meta property="article:published_time" content="2017-06-10T07:26:36.000Z">
@@ -108,634 +38,386 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://ooo.0o0.ooo/2017/06/10/593c0b680d2b7.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2017/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E4%B8%8D%E5%B9%B3%E8%A1%A1%E7%B1%BB%E7%9A%84%E5%A4%84%E7%90%86/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2017/06/10/机器学习实践-不平衡类的处理/"/>
-
-
-
-
-
   <title>机器学习实践-不平衡类的处理 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/06/10/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E4%B8%8D%E5%B9%B3%E8%A1%A1%E7%B1%BB%E7%9A%84%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">机器学习实践-不平衡类的处理</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          机器学习实践-不平衡类的处理
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-10T07:26:36+00:00">
-                2017-06-10
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:01+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%85%BE%E8%AE%AF%E7%AE%97%E6%B3%95%E5%A4%A7%E8%B5%9B-CVR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">腾讯算法大赛-CVR预估</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-06-10 15:26:36" itemprop="dateCreated datePublished" datetime="2017-06-10T15:26:36+08:00">2017-06-10</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.9k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:01" itemprop="dateModified" datetime="2018-12-17T15:42:01+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%85%BE%E8%AE%AF%E7%AE%97%E6%B3%95%E5%A4%A7%E8%B5%9B-CVR%E9%A2%84%E4%BC%B0/" itemprop="url" rel="index"><span itemprop="name">腾讯算法大赛-CVR预估</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <p>最近在做比赛，发现在工业上，很多分类问题的标签分布都是不平衡的。如参考文献<a target="_blank" rel="noopener" href="http://bourneli.github.io/machine-learning/prml/2016/12/19/compensating-for-class-priors.html">标签倾斜修正方法记要</a>所属，比如用分类器去判断x光片中的癌症，这是一个二元分类问题，由于癌症的比例是非常小的，比如0.001。那么，将这些样本放到大多数分类模型中训练，模型的表现会非常相似，将所有数据都预测为没有癌症，因为这样也可以得到99.999%的准确率。</p>
-<h1 id="常见的解决办法"><a href="#常见的解决办法" class="headerlink" title="常见的解决办法"></a>常见的解决办法</h1><p>参考文献<a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/1dd8da6e-ae24-4fc5-ab90-ee39020bc5ff">解决真实世界问题：如何在不平衡类上使用机器学习？</a>说，从不平衡数据中学习，是一项已被研究了 20 年之久的问题。它曾是许多论文、研讨会、特别议程的主题（一项最近的调查就有大约 220 个引用）。人们尝试了许多方法，但结果各不相同，所以至今没有得到明晰的答案。当数据科学家们第一次遇到这个问题，他们往往会问：「如果我的数据是不平衡的，我该怎么做？」而这一问题是没有固定答案的，就像你问「哪个学习算法是最好的」一样：<strong>答案取决于数据。</strong></p>
+<h1 id="常见的解决办法">常见的解决办法</h1>
+<p>参考文献<a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/1dd8da6e-ae24-4fc5-ab90-ee39020bc5ff">解决真实世界问题：如何在不平衡类上使用机器学习？</a>说，从不平衡数据中学习，是一项已被研究了 20 年之久的问题。它曾是许多论文、研讨会、特别议程的主题（一项最近的调查就有大约 220 个引用）。人们尝试了许多方法，但结果各不相同，所以至今没有得到明晰的答案。当数据科学家们第一次遇到这个问题，他们往往会问：「如果我的数据是不平衡的，我该怎么做？」而这一问题是没有固定答案的，就像你问「哪个学习算法是最好的」一样：<strong>答案取决于数据。</strong></p>
 <p>一般来说，有下面几种方法：</p>
 <ul>
-<li><p>什么也不做</p>
-</li>
-<li><p>通过某些方法使得数据更加平衡：</p>
-</li>
+<li><p>什么也不做</p></li>
+<li><p>通过某些方法使得数据更加平衡：</p></li>
 <li><ul>
 <li>对少数类进行过采样</li>
-</ul>
-</li>
+</ul></li>
 <li><ul>
 <li>对多数类进行欠采样</li>
-</ul>
-</li>
+</ul></li>
 <li><ul>
 <li>合成新的少数类</li>
-</ul>
-</li>
+</ul></li>
 <li><ul>
 <li>舍弃所有少数类，切换成一个异常检测框架。</li>
-</ul>
-</li>
-<li><p>在算法层面之上（或之后）：</p>
-</li>
+</ul></li>
+<li><p>在算法层面之上（或之后）：</p></li>
 <li><ul>
 <li>调整类的权重（错误分类成本）</li>
-</ul>
-</li>
+</ul></li>
 <li><ul>
 <li>调整决策阈值</li>
-</ul>
-</li>
+</ul></li>
 <li><ul>
 <li>使已有的算法对少数类更加敏感</li>
-</ul>
-</li>
+</ul></li>
 <li><ul>
 <li>构造一个在不平衡数据上表现更好的全新算法。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1 id="一种标签倾斜修正方法"><a href="#一种标签倾斜修正方法" class="headerlink" title="一种标签倾斜修正方法"></a>一种标签倾斜修正方法</h1><p>参考文献<a href="">Practical Lessons from Predicting Clicks on Ads at<br>Facebook</a>6.3指出，欠采样可以加快训练速度，提升模型表现。需要注意的是，就算数据被欠采样，其实也可以通过在欠采样空间中对预测结果进行修正。例如，在采样之前CTR只有0.1%，那么我们对负样本欠采样0.01，那么CTR就会变为10%。为了修正结果，使得CTR恢复到0.1%,我们可以通过公式：<br>$$q=\frac{p}{p+(1-p)/w}$$<br>其中，$p$是欠采样空间下预测的概率，<br>$w$是对负样本的采样率。</p>
+<h1 id="一种标签倾斜修正方法">一种标签倾斜修正方法</h1>
+<p>参考文献<a href="">Practical Lessons from Predicting Clicks on Ads at Facebook</a>6.3指出，欠采样可以加快训练速度，提升模型表现。需要注意的是，就算数据被欠采样，其实也可以通过在欠采样空间中对预测结果进行修正。例如，在采样之前CTR只有0.1%，那么我们对负样本欠采样0.01，那么CTR就会变为10%。为了修正结果，使得CTR恢复到0.1%,我们可以通过公式： <span class="math display">\[q=\frac{p}{p+(1-p)/w}\]</span> 其中，<span class="math inline">\(p\)</span>是欠采样空间下预测的概率， <span class="math inline">\(w\)</span>是对负样本的采样率。</p>
 <p>在这里我决定先复习一下先验概率、后验概率</p>
-<h2 id="先验概率、后验概率"><a href="#先验概率、后验概率" class="headerlink" title="先验概率、后验概率"></a>先验概率、后验概率</h2><p><strong>先验概率</strong>是指事件尚未发生，对该事件发生的概率的估计，是在缺乏某个事情的情况下描述一个变量。<br>先验概率可以通过已知的关于事件本身的先验知识得到，蒙特卡洛方法也可以用于计算先验概率。<br><strong>后验概率</strong>是指在事件已经发生的条件下，求该事件发生原因是由某个因素引起的可能性的大小，是考虑一个事件之后的条件概率。<br>后验概率可以基于 贝叶斯定理，通过先验概率乘以似然度，再归一化得到。具体来说，贝叶斯公式：<br>$$P(h|D)=\frac{P(D|h)P(h)}{p(D)}$$<br>其中，$P(h)$为$h$的先验概率，$P(h|D)$为$h$的后验概率。<br>通常，事件A在事件B（发生）的条件下的概率，与事件B在事件A（发生）的条件下的概率是不一样的；然而，这两者是有确定的关系的，贝叶斯定理就是这种关系的陈述。贝叶斯公式的一个用途在于通过已知的三个概率函数推出第四个。</p>
-<h2 id="标签倾斜修正"><a href="#标签倾斜修正" class="headerlink" title="标签倾斜修正"></a>标签倾斜修正</h2><p>参考文献<a target="_blank" rel="noopener" href="http://bourneli.github.io/machine-learning/prml/2016/12/19/compensating-for-class-priors.html">标签倾斜修正方法记要</a>通过理论推导来验证这个结论。<br>上参考文献作者提到，PRML的1.5.4节中介绍了一种标签倾斜修正的方法。</p>
-<p>首先，你的模型必须是一个软分类器，即预测值为0到1之间的概率。假设输入向量x，预测标签$C_k$，那么可以用条件概率表示，即计算$p(C_k|x)$的概率。根据贝叶斯公式，条件概率可以如下变化：<br>$$p(C_k|x)=\frac{p(x|C_k)p(C_k)}{p(x)}$$</p>
-<p>上面是没有做重采样时，得到概率。当做重采样时，只是改变了标签$C_k$的先验概率$p(C_k)$，即将$p(C_k)$变为$p’(C_k)$（其实就是标签$C_k$的先验分布而已）。而$p(x)$是条件$x$发生的概率，不会变化。$p(x|C_k)$是后验概率，也不会变化。【问题，为什么不变？我感觉是因为特征是采样前的特征，因此这个没变】</p>
-<p>因为是对负样本进行了抽样，假设对负样本抽样比例为$w$，抽样后：</p>
-<p>$$n’(0)=n(0)\times w,n’(1)=n(1)$$</p>
-<p>易知：<br>$$p(1)=\frac{n(1)}{n(1)+n(0)}=\frac{n’(1)}{n’(1)+n’(0)/ w}$$<br>$$=\frac{p’}{p’+(1-p’)/w}$$<br>其中，$n(C_k)$表示$C_k$的个数</p>
-<p>我们推导出了先验概率$p’(C_k)$与$p(C_k)$的关系。那么，如果我们想修正$p(C_k|x)$，则：</p>
-<p>$$p(1|x) = \frac{p(x|1)p(1)}{p(x)} = \frac{p(x|1)p’(1)p(1)}{p(x)p’(1)}$$<br>$$=p’(1|x)\frac{p(1)}{p’(1)}=p’(1|x)\frac{p}{p’}$$</p>
-<p>而由之前的推导我们可知$p=\frac{p’}{p’+(1-p’)/w}$，代入得：<br>$$p(1|x)=p’(1|x)\frac{p}{p’}=p’(1|x)\frac{\frac{p’}{p’+(1-p’)/w}}{p’}$$<br>$$=p’(1|x)\frac{1}{p’+(1-p’)/w}$$</p>
-<p>需要注意的是，$p’(1|x)$是预测出来的概率，$p’$是抽样之后正样本的比例，而在facebook的论文中，假设$p’\approx p’(1|x)$（也就是说，我们假设了预测集中，1出现的概率=预测出来的为1的概率。我的理解就是，我们完全信任了预测的结果），并记$q=p’(1|x)$则以上公式变为：</p>
-<p>$$p(1|x)=\frac{q}{q+(1-q)/w}$$</p>
-<p>【问题：在预测时，$p’$可不可以变为预测集的正样本比例$p’$】</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在欠采样中，假设对负样本采样率为$w$，则直接将结果按照如下公式修正即可：</p>
-<p>$$p=\frac{q}{q+(1-q)/w}$$</p>
-<p>其中：</p>
-<ul>
-<li>$q$是在欠采样之后，模型预测出来的概率。</li>
-<li>$p$是修正后的概率。</li>
-</ul>
+<h2 id="先验概率后验概率">先验概率、后验概率</h2>
+<p><strong>先验概率</strong>是指事件尚未发生，对该事件发生的概率的估计，是在缺乏某个事情的情况下描述一个变量。 先验概率可以通过已知的关于事件本身的先验知识得到，蒙特卡洛方法也可以用于计算先验概率。 <strong>后验概率</strong>是指在事件已经发生的条件下，求该事件发生原因是由某个因素引起的可能性的大小，是考虑一个事件之后的条件概率。 后验概率可以基于 贝叶斯定理，通过先验概率乘以似然度，再归一化得到。具体来说，贝叶斯公式： <span class="math display">\[P(h|D)=\frac{P(D|h)P(h)}{p(D)}\]</span> 其中，<span class="math inline">\(P(h)\)</span>为<span class="math inline">\(h\)</span>的先验概率，<span class="math inline">\(P(h|D)\)</span>为<span class="math inline">\(h\)</span>的后验概率。 通常，事件A在事件B（发生）的条件下的概率，与事件B在事件A（发生）的条件下的概率是不一样的；然而，这两者是有确定的关系的，贝叶斯定理就是这种关系的陈述。贝叶斯公式的一个用途在于通过已知的三个概率函数推出第四个。</p>
+<h2 id="标签倾斜修正">标签倾斜修正</h2>
+<p>参考文献<a target="_blank" rel="noopener" href="http://bourneli.github.io/machine-learning/prml/2016/12/19/compensating-for-class-priors.html">标签倾斜修正方法记要</a>通过理论推导来验证这个结论。 上参考文献作者提到，PRML的1.5.4节中介绍了一种标签倾斜修正的方法。</p>
+<p>首先，你的模型必须是一个软分类器，即预测值为0到1之间的概率。假设输入向量x，预测标签<span class="math inline">\(C_k\)</span>，那么可以用条件概率表示，即计算<span class="math inline">\(p(C_k|x)\)</span>的概率。根据贝叶斯公式，条件概率可以如下变化： <span class="math display">\[p(C_k|x)=\frac{p(x|C_k)p(C_k)}{p(x)}\]</span></p>
+<p>上面是没有做重采样时，得到概率。当做重采样时，只是改变了标签<span class="math inline">\(C_k\)</span>的先验概率<span class="math inline">\(p(C_k)\)</span>，即将<span class="math inline">\(p(C_k)\)</span>变为<span class="math inline">\(p&#39;(C_k)\)</span>（其实就是标签<span class="math inline">\(C_k\)</span>的先验分布而已）。而<span class="math inline">\(p(x)\)</span>是条件<span class="math inline">\(x\)</span>发生的概率，不会变化。<span class="math inline">\(p(x|C_k)\)</span>是后验概率，也不会变化。【问题，为什么不变？我感觉是因为特征是采样前的特征，因此这个没变】</p>
+<p>因为是对负样本进行了抽样，假设对负样本抽样比例为<span class="math inline">\(w\)</span>，抽样后：</p>
+<p><span class="math display">\[n&#39;(0)=n(0)\times w,n&#39;(1)=n(1)\]</span></p>
+<p>易知： <span class="math display">\[p(1)=\frac{n(1)}{n(1)+n(0)}=\frac{n&#39;(1)}{n&#39;(1)+n&#39;(0)/ w}\]</span> <span class="math display">\[=\frac{p&#39;}{p&#39;+(1-p&#39;)/w}\]</span> 其中，<span class="math inline">\(n(C_k)\)</span>表示<span class="math inline">\(C_k\)</span>的个数</p>
+<p>我们推导出了先验概率<span class="math inline">\(p&#39;(C_k)\)</span>与<span class="math inline">\(p(C_k)\)</span>的关系。那么，如果我们想修正<span class="math inline">\(p(C_k|x)\)</span>，则：</p>
+<p><span class="math display">\[p(1|x) = \frac{p(x|1)p(1)}{p(x)} = \frac{p(x|1)p&#39;(1)p(1)}{p(x)p&#39;(1)}\]</span> <span class="math display">\[=p&#39;(1|x)\frac{p(1)}{p&#39;(1)}=p&#39;(1|x)\frac{p}{p&#39;}\]</span></p>
+<p>而由之前的推导我们可知<span class="math inline">\(p=\frac{p&#39;}{p&#39;+(1-p&#39;)/w}\)</span>，代入得： <span class="math display">\[p(1|x)=p&#39;(1|x)\frac{p}{p&#39;}=p&#39;(1|x)\frac{\frac{p&#39;}{p&#39;+(1-p&#39;)/w}}{p&#39;}\]</span> <span class="math display">\[=p&#39;(1|x)\frac{1}{p&#39;+(1-p&#39;)/w}\]</span></p>
+<p>需要注意的是，<span class="math inline">\(p&#39;(1|x)\)</span>是预测出来的概率，<span class="math inline">\(p&#39;\)</span>是抽样之后正样本的比例，而在facebook的论文中，假设<span class="math inline">\(p&#39;\approx p&#39;(1|x)\)</span>（也就是说，我们假设了预测集中，1出现的概率=预测出来的为1的概率。我的理解就是，我们完全信任了预测的结果），并记<span class="math inline">\(q=p&#39;(1|x)\)</span>则以上公式变为：</p>
+<p><span class="math display">\[p(1|x)=\frac{q}{q+(1-q)/w}\]</span></p>
+<p>【问题：在预测时，<span class="math inline">\(p&#39;\)</span>可不可以变为预测集的正样本比例<span class="math inline">\(p&#39;\)</span>】</p>
+<h2 id="结论">结论</h2>
+<p>在欠采样中，假设对负样本采样率为<span class="math inline">\(w\)</span>，则直接将结果按照如下公式修正即可：</p>
+<p><span class="math display">\[p=\frac{q}{q+(1-q)/w}\]</span></p>
+<p>其中： - <span class="math inline">\(q\)</span>是在欠采样之后，模型预测出来的概率。 - <span class="math inline">\(p\)</span>是修正后的概率。</p>
 <p>当w=0.1时，变换其实为：</p>
-<p><img src="https://ooo.0o0.ooo/2017/06/10/593c0b680d2b7.png"> </p>
+<p><img src="https://ooo.0o0.ooo/2017/06/10/593c0b680d2b7.png" /></p>
 <p>上面是y1=q(不做变换)，下面是本变换y2。</p>
-<p>而如果我们将y3=y1-y2绘出：<br><img src="https://ooo.0o0.ooo/2017/06/10/593c0bc5aa670.png"> </p>
-<p>我们发现，概率大的压缩的小。<br>因为你负样本采样了之后，就是会预测的比实际的高一点，所以要给它压下去。</p>
-<p>附上matlab代码：<br>    q=0.001:0.01:1;<br>    y1=1./(1+(1./q-1)./0.1);<br>    y2 = q;<br>    plot(q,y1);<br>    hold on;<br>    plot(q,y2);<br>    hold on;<br>    y3 = y2-y1;<br>    plot(q,y3)</p>
-<h2 id="小trick（有错，删掉）"><a href="#小trick（有错，删掉）" class="headerlink" title="小trick（有错，删掉）"></a>小trick（有错，删掉）</h2><p>如果在已知样本中，正样本的概率$p$,那么：</p>
-<p>$$p’(1)=\frac{n’(1)}{n’(1)+n’(0)}=\frac{n(1)}{n(1)+n(0)\times w}$$<br>$$=\frac{1}{1+\frac{n(0)\times w}{n(1)}}=\frac{1}{1+\frac{p(0)\times w}{p(1)}}$$<br>$$=\frac{p(1)}{p(1)+p(0)\times w}=\frac{p}{p+(1-p)\times w}$$</p>
-<p>而因为：<br>$$p(1|x)=p’(1|x)\frac{p}{p’}$$</p>
+<p>而如果我们将y3=y1-y2绘出： <img src="https://ooo.0o0.ooo/2017/06/10/593c0bc5aa670.png" /></p>
+<p>我们发现，概率大的压缩的小。 因为你负样本采样了之后，就是会预测的比实际的高一点，所以要给它压下去。</p>
+<p>附上matlab代码： q=0.001:0.01:1; y1=1./(1+(1./q-1)./0.1); y2 = q; plot(q,y1); hold on; plot(q,y2); hold on; y3 = y2-y1; plot(q,y3)</p>
+<h2 id="小trick有错删掉">小trick（有错，删掉）</h2>
+<p>如果在已知样本中，正样本的概率<span class="math inline">\(p\)</span>,那么：</p>
+<p><span class="math display">\[p&#39;(1)=\frac{n&#39;(1)}{n&#39;(1)+n&#39;(0)}=\frac{n(1)}{n(1)+n(0)\times w}\]</span> <span class="math display">\[=\frac{1}{1+\frac{n(0)\times w}{n(1)}}=\frac{1}{1+\frac{p(0)\times w}{p(1)}}\]</span> <span class="math display">\[=\frac{p(1)}{p(1)+p(0)\times w}=\frac{p}{p+(1-p)\times w}\]</span></p>
+<p>而因为： <span class="math display">\[p(1|x)=p&#39;(1|x)\frac{p}{p&#39;}\]</span></p>
 <p>代入得：</p>
-<p>$$p(1|x)=p’(1|x)\frac{p}{\frac{p}{p+(1-p)\times w}}$$<br>$$=p’(1|x)(p+(1-p)\times w)$$</p>
-<p>这里的p是样本中，正样本的概率。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<p><span class="math display">\[p(1|x)=p&#39;(1|x)\frac{p}{\frac{p}{p+(1-p)\times w}}\]</span> <span class="math display">\[=p&#39;(1|x)(p+(1-p)\times w)\]</span></p>
+<p>这里的p是样本中，正样本的概率。 # 参考文献</p>
+<ol type="1">
 <li><a target="_blank" rel="noopener" href="http://bourneli.github.io/machine-learning/prml/2016/12/19/compensating-for-class-priors.html">标签倾斜修正方法记要</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.jiqizhixin.com/articles/1dd8da6e-ae24-4fc5-ab90-ee39020bc5ff">解决真实世界问题：如何在不平衡类上使用机器学习？</a></li>
 <li><a target="_blank" rel="noopener" href="https://mqshen.gitbooks.io/prml/content/">PRML(《模式识别和机器学习》)翻译</a></li>
-<li><a target="_blank" rel="noopener" href="http://bourneli.github.io/ml/2017/05/25/gdbt-lr-facebook-paper.html?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io">GBDT特征转换+LR总结</a></li>
+<li><a target="_blank" rel="noopener" href="http://bourneli.github.io/ml/2017/05/25/gdbt-lr-facebook-paper.html?hmsr=toutiao.io&amp;utm_medium=toutiao.io&amp;utm_source=toutiao.io">GBDT特征转换+LR总结</a></li>
 <li><a target="_blank" rel="noopener" href="http://sighingnow.github.io/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/prior_posterior_probability_and_estimation.html">先验和后验概率以及估计</a></li>
-<li><a href="">Practical Lessons from Predicting Clicks on Ads at<br>Facebook</a></li>
+<li><a href="">Practical Lessons from Predicting Clicks on Ads at Facebook</a></li>
 </ol>
 
-      
     </div>
 
-    <div>
-      
-        
+    
+    
+    
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/" rel="tag"># 特征工程</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/06/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-Tencent_CVR%E9%A2%84%E4%BC%B0%E5%88%9D%E8%B5%9B&%E5%A4%8D%E8%B5%9B%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" rel="next" title="机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结">
-                <i class="fa fa-chevron-left"></i> 机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/" rel="tag"># 特征工程</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-word-embedding/" rel="prev" title="机器学习实践-CVR-word-embedding">
-                机器学习实践-CVR-word-embedding <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/06/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-Tencent_CVR%E9%A2%84%E4%BC%B0%E5%88%9D%E8%B5%9B&%E5%A4%8D%E8%B5%9B%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93/" rel="prev" title="机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结">
+      <i class="fa fa-chevron-left"></i> 机器学习实践-CVR-Tencent_CVR预估初赛&复赛思路总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/06/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-CVR-word-embedding/" rel="next" title="机器学习实践-CVR-word-embedding">
+      机器学习实践-CVR-word-embedding <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-text">常见的解决办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E7%A7%8D%E6%A0%87%E7%AD%BE%E5%80%BE%E6%96%9C%E4%BF%AE%E6%AD%A3%E6%96%B9%E6%B3%95"><span class="nav-text">一种标签倾斜修正方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E9%AA%8C%E6%A6%82%E7%8E%87%E3%80%81%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87"><span class="nav-text">先验概率、后验概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E5%80%BE%E6%96%9C%E4%BF%AE%E6%AD%A3"><span class="nav-text">标签倾斜修正</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8Ftrick%EF%BC%88%E6%9C%89%E9%94%99%EF%BC%8C%E5%88%A0%E6%8E%89%EF%BC%89"><span class="nav-text">小trick（有错，删掉）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">常见的解决办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E7%A7%8D%E6%A0%87%E7%AD%BE%E5%80%BE%E6%96%9C%E4%BF%AE%E6%AD%A3%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">一种标签倾斜修正方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E9%AA%8C%E6%A6%82%E7%8E%87%E5%90%8E%E9%AA%8C%E6%A6%82%E7%8E%87"><span class="nav-number">2.1.</span> <span class="nav-text">先验概率、后验概率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E5%80%BE%E6%96%9C%E4%BF%AE%E6%AD%A3"><span class="nav-number">2.2.</span> <span class="nav-text">标签倾斜修正</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">2.3.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8Ftrick%E6%9C%89%E9%94%99%E5%88%A0%E6%8E%89"><span class="nav-number">2.4.</span> <span class="nav-text">小trick（有错，删掉）</span></a></li></ol></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -744,140 +426,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -888,362 +467,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

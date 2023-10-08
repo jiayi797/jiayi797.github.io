@@ -1,707 +1,398 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="记了点自己有问题的题目">
+  <meta name="description" content="记了点自己有问题的题目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法-DFS">
 <meta property="og:url" content="http://jiayi797.github.io/about/2017/11/21/%E7%AE%97%E6%B3%95-DFS/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
 <meta property="og:description" content="记了点自己有问题的题目">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-11-21T02:07:12.000Z">
 <meta property="article:modified_time" content="2018-12-17T07:42:04.000Z">
 <meta property="article:author" content="jiayi797">
 <meta name="twitter:card" content="summary">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2017/11/21/%E7%AE%97%E6%B3%95-DFS/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2017/11/21/算法-DFS/"/>
-
-
-
-
-
   <title>算法-DFS | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/11/21/%E7%AE%97%E6%B3%95-DFS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">算法-DFS</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          算法-DFS
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T02:07:12+00:00">
-                2017-11-21
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:04+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-11-21 10:07:12" itemprop="dateCreated datePublished" datetime="2017-11-21T10:07:12+08:00">2017-11-21</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3.6k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:04" itemprop="dateModified" datetime="2018-12-17T15:42:04+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <p> 记了点自己有问题的题目</p>
+        <p>记了点自己有问题的题目</p>
 <span id="more"></span>
-
-<h1 id="LeetCode题"><a href="#LeetCode题" class="headerlink" title="LeetCode题"></a>LeetCode题</h1><h2 id="Word-Break-II"><a href="#Word-Break-II" class="headerlink" title="Word Break II"></a>Word Break II</h2><p>给一个str s和一个str[] dict,输出所有s可能被dict拼接的组合。例如</p>
-<p><em>s</em> = <code>&quot;catsanddog&quot;</code>,<br><em>dict</em> = <code>[&quot;cat&quot;, &quot;cats&quot;, &quot;and&quot;, &quot;sand&quot;, &quot;dog&quot;]</code>.</p>
-<p>A solution is <code>[&quot;cats and dog&quot;, &quot;cat sand dog&quot;]</code>.</p>
+<h1 id="leetcode题">LeetCode题</h1>
+<h2 id="word-break-ii">Word Break II</h2>
+<p>给一个str s和一个str[] dict,输出所有s可能被dict拼接的组合。例如</p>
+<p><em>s</em> = <code>"catsanddog"</code>, <em>dict</em> = <code>["cat", "cats", "and", "sand", "dog"]</code>.</p>
+<p>A solution is <code>["cats and dog", "cat sand dog"]</code>.</p>
 <p>一开始我的想法是用DFS维护一个栈，再用Trie优化字符串检索。可惜这种方式会超时。看了别人的代码，就感觉自己宛如一个智障。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">用刀在字符串中切一刀。左边是i个字符，右边是len-i个字符。</span><br><span class="line"></span><br><span class="line">|=======前i个位置=======|</span><br><span class="line">  </span><br><span class="line">|----------|----------|</span><br><span class="line">|<span class="number">1</span>,<span class="number">2</span>,....,i|i+<span class="number">1</span>,..,len|</span><br><span class="line">|----------|----------|</span><br><span class="line"></span><br><span class="line">如果：左边是字典里的词，右边是可以wordbreak的，那么把左边的字符串加到右边算出来的List中，生成新的list返回。</span><br><span class="line"></span><br><span class="line">边界条件：</span><br><span class="line"><span class="number">1.</span> 当输入字符串为空的时候，应该给出一个空解。这个很重要，否则这个递归是不能运行的。</span><br><span class="line"><span class="number">2.</span> 递归时i应该从<span class="number">1</span>开始递归，因为我们要把这个问题分解为<span class="number">2</span>个部分，如果你左边给<span class="number">0</span>，那就是死循环。</span><br><span class="line"></span><br><span class="line">记忆：</span><br><span class="line">为了加快DFS的速度，我们应该添加记忆，也就是说，算过的字符串不要再重复计算。举例子：</span><br><span class="line">apple n feng</span><br><span class="line">app len feng</span><br><span class="line">如果存在以上<span class="number">2</span>种划分，那么feng这个字符串会被反复计算，在这里至少计算了<span class="number">2</span>次。我们使用一个Hashmap把对应字符串的解记下来，这样就能避免重复的计算。 否则这一道题目会超时。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">wordBreak</span><span class="params">(String s, Set&lt;String&gt; wordDict)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> DFS(s, wordDict, <span class="keyword">new</span> HashMap&lt;String, LinkedList&lt;String&gt;&gt;());</span><br><span class="line">&#125;       </span><br><span class="line"></span><br><span class="line"><span class="comment">// DFS function returns an array including all substrings derived from s.</span></span><br><span class="line"><span class="function">List&lt;String&gt; <span class="title">DFS</span><span class="params">(String s, Set&lt;String&gt; wordDict, HashMap&lt;String, LinkedList&lt;String&gt;&gt;map)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (map.containsKey(s)) </span><br><span class="line">        <span class="keyword">return</span> map.get(s);</span><br><span class="line">        </span><br><span class="line">    LinkedList&lt;String&gt;res = <span class="keyword">new</span> LinkedList&lt;String&gt;();     </span><br><span class="line">    <span class="keyword">if</span> (s.length() == <span class="number">0</span>) &#123; <span class="comment">// 给出一个空解</span></span><br><span class="line">        res.add(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;               </span><br><span class="line">    <span class="keyword">for</span> (String word : wordDict) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s.startsWith(word)) &#123;<span class="comment">//如果左边是字典里的词</span></span><br><span class="line">            List&lt;String&gt;sublist = DFS(s.substring(word.length()), wordDict, map);<span class="comment">//如果有返回值，就会加入res里</span></span><br><span class="line">            <span class="keyword">for</span> (String sub : sublist) </span><br><span class="line">                res.add(word + (sub.isEmpty() ? <span class="string">&quot;&quot;</span> : <span class="string">&quot; &quot;</span>) + sub);               </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;       </span><br><span class="line">    map.put(s, res);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Palindrome-Partitioning"><a href="#Palindrome-Partitioning" class="headerlink" title="Palindrome Partitioning"></a>Palindrome Partitioning</h2><p>给一个str，输出它所有的可能的回文子串。</p>
-<p>For example, given <em>s</em> = <code>&quot;aab&quot;</code>,Return</p>
+<h2 id="palindrome-partitioning">Palindrome Partitioning</h2>
+<p>给一个str，输出它所有的可能的回文子串。</p>
+<p>For example, given <em>s</em> = <code>"aab"</code>,Return</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [&quot;aa&quot;,&quot;b&quot;],</span><br><span class="line">  [&quot;a&quot;,&quot;a&quot;,&quot;b&quot;]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
 <p>这道题我借鉴了上一题的解法，</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">用刀在字符串中切一刀。左边是i个字符，右边是len-i个字符。</span><br><span class="line"></span><br><span class="line">|=======前i个位置=======|</span><br><span class="line">  </span><br><span class="line">|----------|----------|</span><br><span class="line">|<span class="number">1</span>,<span class="number">2</span>,....,i|i+<span class="number">1</span>,..,len|</span><br><span class="line">|----------|----------|</span><br><span class="line"></span><br><span class="line">如果：左边是回文序列，那就先把左边的放着。先算右边。最后把左边的str加到右边list中的每个结果前，再返回即可。</span><br><span class="line"></span><br><span class="line">记忆：</span><br><span class="line">同时也保存了一个hash表，存储第i位置之后的所有回文组合方式。</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    HashMap&lt;Integer,List&lt;List&lt;String&gt;&gt;&gt; map;</span><br><span class="line">    <span class="keyword">boolean</span>[][] ifPalindrome; <span class="comment">//存储从i到j是否是回文序列</span></span><br><span class="line">    <span class="comment">//计算从i到j是否是回文序列</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span>[][] palindrome(<span class="keyword">char</span>[] c)&#123;</span><br><span class="line">        <span class="keyword">int</span> n = c.length;</span><br><span class="line">        <span class="keyword">boolean</span>[][] ifPalindrome = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][n];</span><br><span class="line">        <span class="comment">// i 从n开始下降</span></span><br><span class="line">        <span class="comment">// j 从i开始到n</span></span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> i = n - <span class="number">2</span>; i &gt;= <span class="number">0</span> ; --i )&#123;</span><br><span class="line">            ifPalindrome[i][i] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> j = i+<span class="number">1</span> ; j &lt; n ; ++j )&#123;</span><br><span class="line">                <span class="keyword">if</span>( c[i] == c[j] )&#123;</span><br><span class="line">                    ifPalindrome[i][j] = j == i + <span class="number">1</span> || j == i + <span class="number">2</span> || ifPalindrome[i+<span class="number">1</span>][j-<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ifPalindrome[n-<span class="number">1</span>][n-<span class="number">1</span>] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> ifPalindrome;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//深度优先遍历</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;List&lt;String&gt;&gt; dfs(<span class="keyword">char</span>[] c,<span class="keyword">int</span> start,<span class="keyword">int</span> n)&#123;</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; thisResult = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>( start == n ) <span class="keyword">return</span> thisResult;</span><br><span class="line">        <span class="keyword">if</span>( map.containsKey(start) )</span><br><span class="line">            <span class="keyword">return</span> map.get(start);</span><br><span class="line"></span><br><span class="line">        StringBuilder strBuilder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = start  ; j &lt; n ; ++j )&#123;</span><br><span class="line">            strBuilder.append(c[j]);</span><br><span class="line">            <span class="comment">// start ,....,j,.....,end</span></span><br><span class="line">            <span class="comment">//如果从start到j是回文序列</span></span><br><span class="line">            <span class="keyword">if</span>( ifPalindrome[start][j] )&#123;</span><br><span class="line">                String preString = strBuilder.toString();<span class="comment">//start...j的str</span></span><br><span class="line">                List&lt;List&lt;String&gt;&gt; afterResult = dfs(c,j+<span class="number">1</span>,n);<span class="comment">//从j+1到n的所有回文串组合</span></span><br><span class="line">                <span class="keyword">if</span>( afterResult.size() == <span class="number">0</span> )&#123; <span class="comment">// preString是末尾元素，且它本身就是回文序列</span></span><br><span class="line">                        List&lt;String&gt; elementUnit = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">                        elementUnit.add(preString);</span><br><span class="line">                        thisResult.add(elementUnit);</span><br><span class="line">                        <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// preString是前缀，且它本身就是回文序列</span></span><br><span class="line">                <span class="keyword">for</span>( List&lt;String&gt; oneAfterResult : afterResult )&#123;</span><br><span class="line">                    List&lt;String&gt; unitResult = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">                    unitResult.add(preString);</span><br><span class="line">                    <span class="keyword">for</span>( String e : oneAfterResult )&#123;</span><br><span class="line">                        unitResult.add(e);</span><br><span class="line">                    &#125;</span><br><span class="line">                    thisResult.add(unitResult);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        map.put(start,thisResult);</span><br><span class="line">        <span class="keyword">return</span> thisResult;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//分割主函数</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;List&lt;String&gt;&gt; partition(String s) &#123;</span><br><span class="line">        map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        ifPalindrome = palindrome(s.toCharArray());</span><br><span class="line">        List&lt;List&lt;String&gt;&gt; res =  dfs( s.toCharArray(), <span class="number">0</span>, s.length() );</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Minesweeper"><a href="#Minesweeper" class="headerlink" title="Minesweeper"></a>Minesweeper</h2><p>扫雷题</p>
+<h2 id="minesweeper">Minesweeper</h2>
+<p>扫雷题</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">E : 没打开的地方</span><br><span class="line">M : 没打开的雷</span><br><span class="line">B : 打开了，周围没有雷</span><br><span class="line">数字<span class="number">1</span>-<span class="number">8</span> ： 打开了，周围有k个雷</span><br><span class="line">X: 打开了的雷</span><br></pre></td></tr></table></figure>
-
 <p>规则：</p>
-<ol>
+<ol type="1">
 <li>点击某点，如果此点为雷，那么将此点设为X，游戏结束</li>
 <li>否则，自动探测周围的8个点，如果某点周围没有雷，则继续深入探测；如果某点周围有雷，则标记雷个数</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] dx = &#123;<span class="number">1</span>, <span class="number">1</span>,<span class="number">1</span>, <span class="number">0</span>,<span class="number">0</span>,-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span>[] dy = &#123;<span class="number">1</span>,-<span class="number">1</span>,<span class="number">0</span>,-<span class="number">1</span>,<span class="number">1</span>, <span class="number">1</span>,-<span class="number">1</span>,<span class="number">0</span> &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="keyword">char</span>[][] board, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x &gt;= board.length || x &lt; <span class="number">0</span> || y &gt;= board[x].length || y &lt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(board[x][y] == <span class="string">&#x27;M&#x27;</span>) <span class="keyword">return</span> ; <span class="comment">// 有雷</span></span><br><span class="line">        <span class="keyword">if</span>(board[x][y] == <span class="string">&#x27;E&#x27;</span>) &#123;</span><br><span class="line">            board[x][y] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">          <span class="comment">// 探测周围有没有雷</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dx.length; ++i) &#123;</span><br><span class="line">                <span class="keyword">int</span> x_neibor = x + dx[i], y_neibor = y + dy[i];</span><br><span class="line">                <span class="keyword">if</span>(x_neibor &gt;= board.length || x_neibor &lt; <span class="number">0</span> || y_neibor &gt;= board[x].length || y_neibor &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span> (board[x_neibor][y_neibor] == <span class="string">&#x27;M&#x27;</span>) &#123;board[x][y] += <span class="number">1</span>;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">          <span class="comment">// 对没有雷的地方继续递归探测</span></span><br><span class="line">            <span class="keyword">if</span>(board[x][y] == <span class="string">&#x27;0&#x27;</span>) &#123;</span><br><span class="line">                board[x][y] = <span class="string">&#x27;B&#x27;</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dx.length; ++i)&#123;</span><br><span class="line">                    helper(board, x + dx[i], y + dy[i] );</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">char</span>[][] updateBoard(<span class="keyword">char</span>[][] board, <span class="keyword">int</span>[] click) &#123;</span><br><span class="line">        <span class="comment">/** E : 没打开的空地</span></span><br><span class="line"><span class="comment">         *  M : 没打开的雷**/</span></span><br><span class="line">        <span class="keyword">if</span>(board[click[<span class="number">0</span>]][click[<span class="number">1</span>]] == <span class="string">&#x27;M&#x27;</span>) board[click[<span class="number">0</span>]][click[<span class="number">1</span>]] = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">        <span class="keyword">else</span> helper(board, click[<span class="number">0</span>],click[<span class="number">1</span>]);</span><br><span class="line">        <span class="keyword">return</span> board;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Remove-Invalid-Parentheses"><a href="#Remove-Invalid-Parentheses" class="headerlink" title="Remove Invalid Parentheses"></a>Remove Invalid Parentheses</h2><p>删除尽量少的括号，使得一个字符串的括号符合要求</p>
+<h2 id="remove-invalid-parentheses">Remove Invalid Parentheses</h2>
+<p>删除尽量少的括号，使得一个字符串的括号符合要求</p>
 <p>实在是没思路，到现在也没做上。先记一下套路吧</p>
 <p><strong>方法1，DFS</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">removeInvalidParentheses</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 分别是多余的左括号和多余的右括号</span></span><br><span class="line">        <span class="keyword">int</span> rmL = <span class="number">0</span>, rmR = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">                ++rmL;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(s.charAt(i) == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">                <span class="keyword">if</span>(rmL &gt; <span class="number">0</span>)&#123; <span class="comment">// 还有多余的左括号</span></span><br><span class="line">                    --rmL;</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123; <span class="comment">// 没有多余的左括号了</span></span><br><span class="line">                    ++rmR;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        Set&lt;String&gt; res = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">        dfs(s, <span class="number">0</span>, res, <span class="keyword">new</span> StringBuilder(), rmL, rmR, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ArrayList&lt;&gt;(res);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(String s, <span class="keyword">int</span> i, Set&lt;String&gt; res, StringBuilder sb, <span class="keyword">int</span> rmL, <span class="keyword">int</span> rmR, <span class="keyword">int</span> open)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = sb.length();</span><br><span class="line">        <span class="comment">// rmL和rmR分别限制着最大的可变边界</span></span><br><span class="line">        <span class="keyword">if</span>(open &lt; <span class="number">0</span> || rmL &lt; <span class="number">0</span> || rmR &lt; <span class="number">0</span>)<span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">if</span>(i == s.length())&#123;</span><br><span class="line">            <span class="keyword">if</span>(open == <span class="number">0</span>)res.contains(sb.toString());</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">char</span> c = s.charAt(i);</span><br><span class="line">        <span class="keyword">if</span>(c == <span class="string">&#x27;(&#x27;</span>)&#123;</span><br><span class="line">            dfs(s, i + <span class="number">1</span>, res, sb, rmL - <span class="number">1</span>,rmR, open); <span class="comment">// 尝试去除（</span></span><br><span class="line">            dfs(s, i + <span class="number">1</span>, res, sb.append(<span class="string">&#x27;(&#x27;</span>), rmL, rmR, open - <span class="number">1</span>);<span class="comment">//不去除</span></span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">&#x27;)&#x27;</span>)&#123;</span><br><span class="line">            dfs(s, i + <span class="number">1</span>, res, sb, rmL, rmR - <span class="number">1</span>, open);<span class="comment">//尝试去除 ）</span></span><br><span class="line">            dfs(s, i + <span class="number">1</span>, res, sb.append(<span class="string">&#x27;)&#x27;</span>), rmL, rmR, open - <span class="number">1</span>);<span class="comment">//不去除</span></span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            dfs(s, i + <span class="number">1</span>,res, sb.append(c),rmL, rmR, open);</span><br><span class="line">        &#125;</span><br><span class="line">        sb.setLength(len); <span class="comment">//重置sb</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
 <p><strong>方法2，套路</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(String s, List&lt;String&gt; ans, <span class="keyword">int</span> last_i, <span class="keyword">int</span> last_j, <span class="keyword">char</span>[] pair)</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> stack = <span class="number">0</span>, i = last_i; i &lt; s.length(); ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == pair[<span class="number">0</span>])++stack;</span><br><span class="line">            <span class="keyword">if</span>(s.charAt(i) == pair[<span class="number">1</span>])--stack;</span><br><span class="line">            <span class="comment">//左括号多于右括号，那就继续循环</span></span><br><span class="line">            <span class="keyword">if</span>(stack &gt; <span class="number">0</span>)<span class="keyword">continue</span>;</span><br><span class="line">            <span class="comment">// 此时左括号少于右括号，一定是不合法的，那就尝试去除一个</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = last_j; j &lt;= i; ++j)&#123;</span><br><span class="line">                <span class="comment">// j是右括号，且j的前一个不是右括号</span></span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(s.charAt(j) == pair[<span class="number">1</span>] &amp;&amp;(j == last_j || s.charAt(j-<span class="number">1</span>) != pair[<span class="number">1</span>]))&#123;</span><br><span class="line">                    remove(s.substring(<span class="number">0</span>,j) + s.substring(j + <span class="number">1</span>), ans, i, j, pair);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 因为之前我们只考虑了删除右括号。那么现在反过来，考虑试一试删除左括号</span></span><br><span class="line">            String reversed = <span class="keyword">new</span> StringBuilder(s).reverse().toString();</span><br><span class="line">            <span class="keyword">if</span> (pair[<span class="number">0</span>] == <span class="string">&#x27;(&#x27;</span>) <span class="comment">// finished left to right</span></span><br><span class="line">                remove(reversed, ans, <span class="number">0</span>, <span class="number">0</span>, <span class="keyword">new</span> <span class="keyword">char</span>[]&#123;<span class="string">&#x27;)&#x27;</span>, <span class="string">&#x27;(&#x27;</span>&#125;);</span><br><span class="line">            <span class="keyword">else</span> <span class="comment">// finished right to left</span></span><br><span class="line">                ans.add(reversed);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Decode-String"><a href="#Decode-String" class="headerlink" title="Decode String"></a>Decode String</h2><p>给一个字符串<code>3[a]2[bc]</code> 。数字表示后面括号里的字符重复次数。求解压之后的字符串。</p>
+<h2 id="decode-string">Decode String</h2>
+<p>给一个字符串<code>3[a]2[bc]</code> 。数字表示后面括号里的字符重复次数。求解压之后的字符串。</p>
 <p>这道题第一遍没想明白，第二遍重写的时候才一气呵成。其实就是dfs，当遇到数字时，就将数字后面的东西视为一个新的str，递归下去，遇到<code>]</code> 就跳出。跳出时需要携带跳出时的结束idx，因此我用了一个Node包装起来</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">  以<span class="number">3</span>[a2[c]]为例</span><br><span class="line">  <span class="number">3</span> [ a <span class="number">2</span> [ c d ] ]</span><br><span class="line">  <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span></span><br><span class="line">  idx = <span class="number">0</span>, 遇到<span class="number">3</span> --&gt; a2[cd]] , 跳过[</span><br><span class="line">  idx = <span class="number">2</span>, 遇到<span class="number">2</span> --&gt; cd]] ,将c、d分别加入sb,然后遇到了](idx = <span class="number">8</span>)，就跳出，返回到上层</span><br><span class="line">  idx = idxEnd = <span class="number">9</span>, 且将`cd`重复<span class="number">2</span>次变为cdcd，此时遇到](idx = <span class="number">9</span>)，再次跳出，返回上层</span><br><span class="line">  idx = idxEnd = <span class="number">10</span>, 且将cdcd加入到sb中，此时sb变成acbcd，跳出，返回上层</span><br><span class="line">  再将acbcd重复<span class="number">3</span>次</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">       String str;</span><br><span class="line">       <span class="keyword">int</span> endIdx;</span><br><span class="line">       Node(String str, <span class="keyword">int</span> endIdx)&#123;</span><br><span class="line">           <span class="keyword">this</span>.str = str;</span><br><span class="line">           <span class="keyword">this</span>.endIdx = endIdx;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isLetter</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> (c &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;z&#x27;</span>) || (c &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;Z&#x27;</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNum</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> c &gt;=<span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> Node <span class="title">helper</span><span class="params">(String s, <span class="keyword">int</span> idx)</span></span>&#123;</span><br><span class="line">       StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">       <span class="keyword">while</span> (idx &lt; s.length())&#123;</span><br><span class="line">           <span class="keyword">while</span> (idx &lt; s.length() &amp;&amp; isLetter(s.charAt(idx)))&#123;</span><br><span class="line">               sb.append(s.charAt(idx++));</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">int</span> numStart = idx;</span><br><span class="line">           <span class="keyword">while</span>(idx &lt; s.length() &amp;&amp; isNum(s.charAt(idx)))&#123;++idx;&#125;</span><br><span class="line">           <span class="keyword">int</span> repeat = <span class="number">0</span>;</span><br><span class="line">           <span class="keyword">if</span>(idx &gt; numStart)&#123;</span><br><span class="line">               repeat = Integer.valueOf(s.substring(numStart, idx));</span><br><span class="line">               Node next = helper(s, idx + <span class="number">1</span>);</span><br><span class="line">               <span class="keyword">while</span> (repeat-- &gt; <span class="number">0</span>)&#123;sb.append(next.str);&#125;</span><br><span class="line">               idx = next.endIdx;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">if</span>(idx &lt; s.length() &amp;&amp; s.charAt(idx) == <span class="string">&#x27;]&#x27;</span>)&#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">new</span> Node(sb.toString(), idx + <span class="number">1</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> Node(sb.toString(), idx + <span class="number">1</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="function"><span class="keyword">public</span> String <span class="title">decodeString</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">return</span> helper(s,<span class="number">0</span>).str;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
 <p>其实再思考了一下，idx完全可以设为全局变量！</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isLetter</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (c &gt;= <span class="string">&#x27;a&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;z&#x27;</span>) || (c &gt;= <span class="string">&#x27;A&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;Z&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isNum</span><span class="params">(<span class="keyword">char</span> c)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c &gt;=<span class="string">&#x27;0&#x27;</span> &amp;&amp; c &lt;= <span class="string">&#x27;9&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> idx = <span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">helper</span><span class="params">(String s)</span></span>&#123;</span><br><span class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">while</span> (idx &lt; s.length())&#123;</span><br><span class="line">            <span class="keyword">while</span> (idx &lt; s.length() &amp;&amp; isLetter(s.charAt(idx)))&#123;</span><br><span class="line">                sb.append(s.charAt(idx++));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> numStart = idx;</span><br><span class="line">            <span class="keyword">while</span>(idx &lt; s.length() &amp;&amp; isNum(s.charAt(idx)))&#123;++idx;&#125;</span><br><span class="line">            <span class="keyword">int</span> repeat = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(idx &gt; numStart)&#123;</span><br><span class="line">                repeat = Integer.valueOf(s.substring(numStart, idx));</span><br><span class="line">                ++idx; <span class="comment">// 跳过[符号</span></span><br><span class="line">                String next = helper(s);</span><br><span class="line">                <span class="keyword">while</span> (repeat-- &gt; <span class="number">0</span>)&#123;sb.append(next);&#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(idx &lt; s.length() &amp;&amp; s.charAt(idx) == <span class="string">&#x27;]&#x27;</span>)&#123;</span><br><span class="line">                ++idx;<span class="comment">//跳过]符号</span></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sb.toString();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">decodeString</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> helper(s);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Pacific-Atlantic-Water-Flow"><a href="#Pacific-Atlantic-Water-Flow" class="headerlink" title="Pacific Atlantic Water Flow"></a>Pacific Atlantic Water Flow</h2><p>给一个矩阵。左和上是太平洋，右和下是大西洋。求中间哪些点的水可以同时流到两个洋</p>
+<h2 id="pacific-atlantic-water-flow">Pacific Atlantic Water Flow</h2>
+<p>给一个矩阵。左和上是太平洋，右和下是大西洋。求中间哪些点的水可以同时流到两个洋</p>
 <p>思路：反向思考。从边界出发，寻找递增的方向。所有递增的都是能流到的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setVisited</span><span class="params">(<span class="keyword">int</span>[][] matrix,<span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> val )</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &gt;= matrix.length || i &lt; <span class="number">0</span> || j &gt;= matrix[i].length || j &lt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(visited[i][j] != <span class="number">0</span> &amp;&amp; visited[i][j] != val)&#123;</span><br><span class="line">        result.add(<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;i,j&#125;);</span><br><span class="line">        visited[i][j] = <span class="number">3</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        visited[i][j] = val;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//System.out.println(i + &quot;\t&quot;  + j + &quot;\t&quot; + visited[i][j] + val);</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> i, <span class="keyword">int</span> j, <span class="keyword">int</span> last, <span class="keyword">int</span> val)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(i &gt;= matrix.length || i &lt; <span class="number">0</span> || j &gt;= matrix[i].length || j &lt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span>(matrix[i][j] &lt; last || visited[i][j] == val || visited[i][j] == <span class="number">3</span>) <span class="keyword">return</span>;</span><br><span class="line">    setVisited(matrix,i, j, val );</span><br><span class="line">    <span class="comment">// 继续探测周围的点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">4</span>; ++k)&#123;</span><br><span class="line">        dfs(matrix, i + di[k], j + dj[k], matrix[i][j], val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">List&lt;<span class="keyword">int</span>[]&gt; result = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line"><span class="keyword">int</span>[][] visited;</span><br><span class="line"><span class="keyword">int</span>[] di = &#123;<span class="number">1</span>,<span class="number">0</span>,-<span class="number">1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] dj = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,-<span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">public</span> List&lt;<span class="keyword">int</span>[]&gt; pacificAtlantic(<span class="keyword">int</span>[][] matrix) &#123;</span><br><span class="line">    <span class="keyword">if</span>(matrix.length == <span class="number">0</span> || matrix[<span class="number">0</span>].length == <span class="number">0</span>)<span class="keyword">return</span> result;</span><br><span class="line">    visited = <span class="keyword">new</span> <span class="keyword">int</span>[matrix.length][matrix[<span class="number">0</span>].length];</span><br><span class="line">    <span class="comment">// pacific : i == 0 or j == 0</span></span><br><span class="line">    <span class="comment">// atlantic : i == matrix.length - 1 or j == matrix[i].length - 1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[<span class="number">0</span>].length; ++j)&#123;</span><br><span class="line">        dfs(matrix, <span class="number">0</span>, j, matrix[<span class="number">0</span>][j], <span class="number">1</span>);<span class="comment">// pacific</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.length; ++i)&#123;</span><br><span class="line">        dfs(matrix, i, <span class="number">0</span>,  matrix[i][<span class="number">0</span>], <span class="number">1</span>);<span class="comment">// pacific</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; matrix[<span class="number">0</span>].length; ++j)&#123;</span><br><span class="line">        dfs(matrix, matrix.length - <span class="number">1</span>, j,matrix[matrix.length - <span class="number">1</span>][j], <span class="number">2</span>);<span class="comment">// atlantic</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; matrix.length; ++i)&#123;</span><br><span class="line">        dfs(matrix, i, matrix[i].length - <span class="number">1</span>,  matrix[i][matrix[i].length - <span class="number">1</span>], <span class="number">2</span>);<span class="comment">// atlantic</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="消除游戏集锦"><a href="#消除游戏集锦" class="headerlink" title="消除游戏集锦"></a>消除游戏集锦</h1><h2 id="Strange-Printer"><a href="#Strange-Printer" class="headerlink" title="Strange Printer"></a>Strange Printer</h2><p>有一种打印方式，每轮只打印元素相同的字符串，打印时还会覆盖原来的字符串。给一个字符串，求打印这个字符串所需要最少的轮数。</p>
+<h1 id="消除游戏集锦">消除游戏集锦</h1>
+<h2 id="strange-printer">Strange Printer</h2>
+<p>有一种打印方式，每轮只打印元素相同的字符串，打印时还会覆盖原来的字符串。给一个字符串，求打印这个字符串所需要最少的轮数。</p>
 <p>我好像理解错题意了。看完了答案，想哭。回头再战。</p>
-<h2 id="Zuma-Game"><a href="#Zuma-Game" class="headerlink" title="Zuma Game"></a>Zuma Game</h2><p>直到三刷才做出来的题。</p>
+<h2 id="zuma-game">Zuma Game</h2>
+<p>直到三刷才做出来的题。</p>
 <p>给两个字符串，字符串board表示现在的球，hand表示手里拿的球。可以把手里的某个颜色球插入到board，使得插入位置相邻的有3个或以上的球颜色一样，就会消除颜色一样的球。</p>
 <p>求能消除所有球时，插入的最小次数。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;Character, Integer&gt; hand_hash;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">findLongestSame</span><span class="params">(String board, <span class="keyword">int</span> start)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> end = start +<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (end &lt; board.length() &amp;&amp; board.charAt(start) == board.charAt(end))&#123;</span><br><span class="line">            ++end;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> counter = end - start;</span><br><span class="line">        <span class="keyword">return</span> counter;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 求board最少插入次数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">helper</span><span class="params">(String board)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(board.length() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> used = <span class="number">1000</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; board.length(); )&#123;</span><br><span class="line">            <span class="comment">//从i开始寻找最长的子数组</span></span><br><span class="line">            <span class="keyword">int</span> counter = findLongestSame(board, i);</span><br><span class="line">            <span class="keyword">if</span>(counter&gt;= <span class="number">3</span>)&#123; <span class="comment">// 从i开始可以消除counter个，那就先消除了！</span></span><br><span class="line">                <span class="keyword">return</span> helper(board.substring(<span class="number">0</span>,i) + board.substring(i+counter));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 否则，看看手里球够不够，尝试消除试一试</span></span><br><span class="line">            <span class="keyword">if</span>(hand_hash.getOrDefault(board.charAt(i), <span class="number">0</span>) + counter &gt;= <span class="number">3</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> used_curr = <span class="number">3</span> - counter;</span><br><span class="line">                hand_hash.replace(board.charAt(i), hand_hash.get(board.charAt(i)) - used_curr);</span><br><span class="line">                used = Math.min(used,</span><br><span class="line">                        used_curr + helper(board.substring(<span class="number">0</span>,i) + board.substring(i + counter)));</span><br><span class="line">                hand_hash.replace(board.charAt(i), hand_hash.get(board.charAt(i)) + used_curr);</span><br><span class="line">            &#125;</span><br><span class="line">            i = i + counter;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> used;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findMinStep</span><span class="params">(String board, String hand)</span> </span>&#123;</span><br><span class="line">        hand_hash = <span class="keyword">new</span> HashMap&lt;&gt;(hand.length());</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> c : hand.toCharArray())&#123;</span><br><span class="line">            hand_hash.put(c, hand_hash.getOrDefault(c, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> result = helper(board);</span><br><span class="line">        <span class="keyword">return</span> result == <span class="number">1000</span> ? -<span class="number">1</span> : result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Remove-Boxes-leetcode"><a href="#Remove-Boxes-leetcode" class="headerlink" title="Remove Boxes leetcode"></a>Remove Boxes leetcode</h2><h1 id="其它递归相关"><a href="#其它递归相关" class="headerlink" title="其它递归相关"></a>其它递归相关</h1><h2 id="Lexicographical-Numbers"><a href="#Lexicographical-Numbers" class="headerlink" title="Lexicographical Numbers"></a>Lexicographical Numbers</h2><p>将[1,n]之间的数字按照字典顺序加入到一个list里</p>
+<h2 id="remove-boxes-leetcode">Remove Boxes leetcode</h2>
+<h1 id="其它递归相关">其它递归相关</h1>
+<h2 id="lexicographical-numbers">Lexicographical Numbers</h2>
+<p>将[1,n]之间的数字按照字典顺序加入到一个list里</p>
 <p>我的思路：递归</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;Integer&gt; <span class="title">helper</span><span class="params">(<span class="keyword">int</span> startNum)</span></span>&#123;</span><br><span class="line">        List&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">if</span>(startNum &gt; n) <span class="keyword">return</span> result;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(startNum + i &gt; n || (startNum == <span class="number">1</span> &amp;&amp; i == <span class="number">9</span>)) <span class="keyword">break</span>;</span><br><span class="line">            result.add(startNum + i);</span><br><span class="line">            result.addAll(helper(<span class="number">10</span>*(startNum + i)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">lexicalOrder</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.n = n;</span><br><span class="line">        List&lt;Integer&gt; result = helper(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p>别人的较快的方案：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">lexicalOrder</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; re = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> cur = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (re.size() &lt; n) &#123;</span><br><span class="line">            re.add(cur);</span><br><span class="line">            <span class="keyword">if</span> ( cur*<span class="number">10</span> &lt;= n)</span><br><span class="line">                cur*=<span class="number">10</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> ( cur % <span class="number">10</span> != <span class="number">9</span> &amp;&amp; cur+<span class="number">1</span> &lt;= n)</span><br><span class="line">                cur+=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">while</span> (cur/<span class="number">10</span> % <span class="number">10</span> == <span class="number">9</span>)</span><br><span class="line">                    cur/=<span class="number">10</span>;</span><br><span class="line">                cur = cur/<span class="number">10</span>+<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> re;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/11/17/%E7%AE%97%E6%B3%95-DP/" rel="prev" title="算法-DP">
+      <i class="fa fa-chevron-left"></i> 算法-DP
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/11/24/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="next" title="算法-1-二分查找">
+      算法-1-二分查找 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/11/17/%E7%AE%97%E6%B3%95-DP/" rel="next" title="算法-DP">
-                <i class="fa fa-chevron-left"></i> 算法-DP
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/24/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE/" rel="prev" title="算法-1-二分查找">
-                算法-1-二分查找 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LeetCode%E9%A2%98"><span class="nav-text">LeetCode题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-Break-II"><span class="nav-text">Word Break II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Palindrome-Partitioning"><span class="nav-text">Palindrome Partitioning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Minesweeper"><span class="nav-text">Minesweeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-Invalid-Parentheses"><span class="nav-text">Remove Invalid Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decode-String"><span class="nav-text">Decode String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pacific-Atlantic-Water-Flow"><span class="nav-text">Pacific Atlantic Water Flow</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E9%99%A4%E6%B8%B8%E6%88%8F%E9%9B%86%E9%94%A6"><span class="nav-text">消除游戏集锦</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Strange-Printer"><span class="nav-text">Strange Printer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zuma-Game"><span class="nav-text">Zuma Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Remove-Boxes-leetcode"><span class="nav-text">Remove Boxes leetcode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E9%80%92%E5%BD%92%E7%9B%B8%E5%85%B3"><span class="nav-text">其它递归相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lexicographical-Numbers"><span class="nav-text">Lexicographical Numbers</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#leetcode%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">LeetCode题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#word-break-ii"><span class="nav-number">1.1.</span> <span class="nav-text">Word Break II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#palindrome-partitioning"><span class="nav-number">1.2.</span> <span class="nav-text">Palindrome Partitioning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#minesweeper"><span class="nav-number">1.3.</span> <span class="nav-text">Minesweeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-invalid-parentheses"><span class="nav-number">1.4.</span> <span class="nav-text">Remove Invalid Parentheses</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decode-string"><span class="nav-number">1.5.</span> <span class="nav-text">Decode String</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pacific-atlantic-water-flow"><span class="nav-number">1.6.</span> <span class="nav-text">Pacific Atlantic Water Flow</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E9%99%A4%E6%B8%B8%E6%88%8F%E9%9B%86%E9%94%A6"><span class="nav-number">2.</span> <span class="nav-text">消除游戏集锦</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#strange-printer"><span class="nav-number">2.1.</span> <span class="nav-text">Strange Printer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zuma-game"><span class="nav-number">2.2.</span> <span class="nav-text">Zuma Game</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-boxes-leetcode"><span class="nav-number">2.3.</span> <span class="nav-text">Remove Boxes leetcode</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E9%80%92%E5%BD%92%E7%9B%B8%E5%85%B3"><span class="nav-number">3.</span> <span class="nav-text">其它递归相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lexicographical-numbers"><span class="nav-number">3.1.</span> <span class="nav-text">Lexicographical Numbers</span></a></li></ol></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -710,140 +401,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -854,362 +442,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

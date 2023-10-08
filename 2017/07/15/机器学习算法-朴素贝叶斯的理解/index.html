@@ -1,689 +1,390 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="贝叶斯理论," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="朴素贝叶斯分类的思想基础参考文献算法杂货铺——分类算法之朴素贝叶斯分类指出，朴素贝叶斯分类是一种十分简单的分类算法，叫它朴素贝叶斯分类是因为这种方法的思想真的很朴素，朴素贝叶斯的思想基础是这样的：对于给出的待分类项，求解在此项出现的条件下各个类别出现的概率，哪个最大，就认为此待分类项属于哪个类别。通俗来说，就好比这么个道理，你在街上看到一个黑人，我问你你猜这哥们哪里来的，你十有八九猜非洲。为什么呢">
+  <meta name="description" content="朴素贝叶斯分类的思想基础 参考文献算法杂货铺——分类算法之朴素贝叶斯分类指出，朴素贝叶斯分类是一种十分简单的分类算法，叫它朴素贝叶斯分类是因为这种方法的思想真的很朴素，朴素贝叶斯的思想基础是这样的：对于给出的待分类项，求解在此项出现的条件下各个类别出现的概率，哪个最大，就认为此待分类项属于哪个类别。通俗来说，就好比这么个道理，你在街上看到一个黑人，我问你你猜这哥们哪里来的，你十有八九猜非洲。为什">
 <meta property="og:type" content="article">
 <meta property="og:title" content="朴素贝叶斯的理解">
 <meta property="og:url" content="http://jiayi797.github.io/about/2017/07/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%9A%84%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="朴素贝叶斯分类的思想基础参考文献算法杂货铺——分类算法之朴素贝叶斯分类指出，朴素贝叶斯分类是一种十分简单的分类算法，叫它朴素贝叶斯分类是因为这种方法的思想真的很朴素，朴素贝叶斯的思想基础是这样的：对于给出的待分类项，求解在此项出现的条件下各个类别出现的概率，哪个最大，就认为此待分类项属于哪个类别。通俗来说，就好比这么个道理，你在街上看到一个黑人，我问你你猜这哥们哪里来的，你十有八九猜非洲。为什么呢">
-<meta property="og:locale">
+<meta property="og:description" content="朴素贝叶斯分类的思想基础 参考文献算法杂货铺——分类算法之朴素贝叶斯分类指出，朴素贝叶斯分类是一种十分简单的分类算法，叫它朴素贝叶斯分类是因为这种方法的思想真的很朴素，朴素贝叶斯的思想基础是这样的：对于给出的待分类项，求解在此项出现的条件下各个类别出现的概率，哪个最大，就认为此待分类项属于哪个类别。通俗来说，就好比这么个道理，你在街上看到一个黑人，我问你你猜这哥们哪里来的，你十有八九猜非洲。为什">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-07-15T07:38:19.000Z">
 <meta property="article:modified_time" content="2018-12-17T07:42:02.000Z">
 <meta property="article:author" content="jiayi797">
 <meta property="article:tag" content="贝叶斯理论">
 <meta name="twitter:card" content="summary">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2017/07/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%9A%84%E7%90%86%E8%A7%A3/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2017/07/15/机器学习算法-朴素贝叶斯的理解/"/>
-
-
-
-
-
   <title>朴素贝叶斯的理解 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/07/15/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%9A%84%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">朴素贝叶斯的理解</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          朴素贝叶斯的理解
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-15T07:38:19+00:00">
-                2017-07-15
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:02+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-07-15 15:38:19" itemprop="dateCreated datePublished" datetime="2017-07-15T15:38:19+08:00">2017-07-15</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.7k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:02" itemprop="dateModified" datetime="2018-12-17T15:42:02+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">机器学习算法</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <h1 id="朴素贝叶斯分类的思想基础"><a href="#朴素贝叶斯分类的思想基础" class="headerlink" title="朴素贝叶斯分类的思想基础"></a>朴素贝叶斯分类的思想基础</h1><p>参考文献<a target="_blank" rel="noopener" href="http://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html">算法杂货铺——分类算法之朴素贝叶斯分类</a>指出，朴素贝叶斯分类是一种十分简单的分类算法，叫它朴素贝叶斯分类是因为这种方法的思想真的很朴素，朴素贝叶斯的<strong>思想基础</strong>是这样的：对于给出的待分类项，求解在此项出现的条件下各个类别出现的概率，哪个最大，就认为此待分类项属于哪个类别。通俗来说，就好比这么个道理，你在街上看到一个黑人，我问你你猜这哥们哪里来的，你十有八九猜非洲。为什么呢？因为黑人中非洲人的比率最高，当然人家也可能是美洲人或亚洲人，但在没有其它可用信息下，我们会选择条件概率最大的类别，这就是朴素贝叶斯的思想基础。</p>
+        <h1 id="朴素贝叶斯分类的思想基础">朴素贝叶斯分类的思想基础</h1>
+<p>参考文献<a target="_blank" rel="noopener" href="http://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html">算法杂货铺——分类算法之朴素贝叶斯分类</a>指出，朴素贝叶斯分类是一种十分简单的分类算法，叫它朴素贝叶斯分类是因为这种方法的思想真的很朴素，朴素贝叶斯的<strong>思想基础</strong>是这样的：对于给出的待分类项，求解在此项出现的条件下各个类别出现的概率，哪个最大，就认为此待分类项属于哪个类别。通俗来说，就好比这么个道理，你在街上看到一个黑人，我问你你猜这哥们哪里来的，你十有八九猜非洲。为什么呢？因为黑人中非洲人的比率最高，当然人家也可能是美洲人或亚洲人，但在没有其它可用信息下，我们会选择条件概率最大的类别，这就是朴素贝叶斯的思想基础。</p>
 <p>将上面的描述形式化描述，就是下面的朴素贝叶斯分类的定义。</p>
-<h1 id="朴素贝叶斯分类的定义和求解"><a href="#朴素贝叶斯分类的定义和求解" class="headerlink" title="朴素贝叶斯分类的定义和求解"></a>朴素贝叶斯分类的定义和求解</h1><ol>
-<li>设$x={a_1,a_2,…,a_m}$为一个待分类项，其中每个$a$是$x$的一个特征属性。</li>
-<li>有类别集合$C={y_1,y_2,…,y_n}$</li>
-<li>计算$P(y_1|x),P(y_2|x),…,P(y_n|x)$。(也就是这个特征成为每个类别的概率)</li>
-<li>如果$P(y_k|x)=max[P(y_1|x),P(y_2|x),…,P(y_n|x)],则x\in y_k$。(选出一个最可能的类别，将这个类别设为x的类别)</li>
+<h1 id="朴素贝叶斯分类的定义和求解">朴素贝叶斯分类的定义和求解</h1>
+<ol type="1">
+<li>设<span class="math inline">\(x={a_1,a_2,...,a_m}\)</span>为一个待分类项，其中每个<span class="math inline">\(a\)</span>是<span class="math inline">\(x\)</span>的一个特征属性。</li>
+<li>有类别集合<span class="math inline">\(C={y_1,y_2,...,y_n}\)</span></li>
+<li>计算<span class="math inline">\(P(y_1|x),P(y_2|x),...,P(y_n|x)\)</span>。(也就是这个特征成为每个类别的概率)</li>
+<li>如果<span class="math inline">\(P(y_k|x)=max[P(y_1|x),P(y_2|x),...,P(y_n|x)],则x\in y_k\)</span>。(选出一个最可能的类别，将这个类别设为x的类别)</li>
 </ol>
-<h2 id="如何计算-P-y-i-x"><a href="#如何计算-P-y-i-x" class="headerlink" title="如何计算$P(y_i|x)$?"></a>如何计算$P(y_i|x)$?</h2><p>问题来了，那么我们应该如何计算第3步当中的$P(y_i|x)$呢？</p>
-<p>$P(y_i|x)$代表在这个$x$的情况下的类别成为$y_i$的概率，一般来说通过建模$p(y|x)$来预测$y$的模型叫“<strong>判别式模型</strong>”。<br>但问题在于如果特征数量n较大或者每个特征能取大量值时，基于概率模型列出概率表变得不现实。所以我们修改这个模型使之变得可行。因此我们可以先对联合概率分布$p(x,y)$建模，然后再由此得出$P(y_i|x)$，这样的是“<strong>生成式模型</strong>”。贝叶斯定理为：<br>$$P(y|x)=\frac{p(x,y)}{p(x)}=\frac{p(y)p(x|y)}{p(x)}\tag{公式0}$$</p>
-<h2 id="因此将问题转化成了：如何基于训练数据D来估计先验-p-y-和似然-p-x-y-？"><a href="#因此将问题转化成了：如何基于训练数据D来估计先验-p-y-和似然-p-x-y-？" class="headerlink" title="因此将问题转化成了：如何基于训练数据D来估计先验$p(y)$和似然$p(x|y)$？"></a>因此将问题转化成了：如何基于训练数据D来估计先验$p(y)$和似然$p(x|y)$？</h2><ul>
-<li>$p(y)$是先验概率，表示样本空间中各类样本所占比例；可以通过统计近似得出；</li>
-<li>$p(x|y)$是各类样本条件下，所有$x$特征分布的概率。假设特征空间$x$有$d$维，且每一维都有2个取值，那么$x$的取值就有$2^d$种。一般来说这远大于训练样本数m。也就是很多取值是覆盖不到的。所以用频率来估计它不可行，因为“未被观测到”和“与出现概率为0”通常是不同的。</li>
+<h2 id="如何计算py_ix">如何计算<span class="math inline">\(P(y_i|x)\)</span>?</h2>
+<p>问题来了，那么我们应该如何计算第3步当中的<span class="math inline">\(P(y_i|x)\)</span>呢？</p>
+<p><span class="math inline">\(P(y_i|x)\)</span>代表在这个<span class="math inline">\(x\)</span>的情况下的类别成为<span class="math inline">\(y_i\)</span>的概率，一般来说通过建模<span class="math inline">\(p(y|x)\)</span>来预测<span class="math inline">\(y\)</span>的模型叫“<strong>判别式模型</strong>”。 但问题在于如果特征数量n较大或者每个特征能取大量值时，基于概率模型列出概率表变得不现实。所以我们修改这个模型使之变得可行。因此我们可以先对联合概率分布<span class="math inline">\(p(x,y)\)</span>建模，然后再由此得出<span class="math inline">\(P(y_i|x)\)</span>，这样的是“<strong>生成式模型</strong>”。贝叶斯定理为： <span class="math display">\[P(y|x)=\frac{p(x,y)}{p(x)}=\frac{p(y)p(x|y)}{p(x)}\tag{公式0}\]</span></p>
+<h2 id="因此将问题转化成了如何基于训练数据d来估计先验py和似然pxy">因此将问题转化成了：如何基于训练数据D来估计先验<span class="math inline">\(p(y)\)</span>和似然<span class="math inline">\(p(x|y)\)</span>？</h2>
+<ul>
+<li><span class="math inline">\(p(y)\)</span>是先验概率，表示样本空间中各类样本所占比例；可以通过统计近似得出；</li>
+<li><span class="math inline">\(p(x|y)\)</span>是各类样本条件下，所有<span class="math inline">\(x\)</span>特征分布的概率。假设特征空间<span class="math inline">\(x\)</span>有<span class="math inline">\(d\)</span>维，且每一维都有2个取值，那么<span class="math inline">\(x\)</span>的取值就有<span class="math inline">\(2^d\)</span>种。一般来说这远大于训练样本数m。也就是很多取值是覆盖不到的。所以用频率来估计它不可行，因为“未被观测到”和“与出现概率为0”通常是不同的。</li>
 </ul>
-<h2 id="现在问题又来了，如何去估计-p-x-y-？"><a href="#现在问题又来了，如何去估计-p-x-y-？" class="headerlink" title="现在问题又来了，如何去估计$p(x|y)$？"></a>现在问题又来了，如何去估计$p(x|y)$？</h2><p>估计类条件概率的通用解决方案：先假定其具有某种确定的概率分布形式，再基于训练样本对概率分布的参数进行估计。</p>
-<h2 id="问题又转化成了-如何进行参数估计？"><a href="#问题又转化成了-如何进行参数估计？" class="headerlink" title="问题又转化成了:如何进行参数估计？"></a>问题又转化成了:如何进行参数估计？</h2><p>为明确起见，我们将$p(x|y)$记作$p(x|θ_y)$。</p>
+<h2 id="现在问题又来了如何去估计pxy">现在问题又来了，如何去估计<span class="math inline">\(p(x|y)\)</span>？</h2>
+<p>估计类条件概率的通用解决方案：先假定其具有某种确定的概率分布形式，再基于训练样本对概率分布的参数进行估计。</p>
+<h2 id="问题又转化成了如何进行参数估计">问题又转化成了:如何进行参数估计？</h2>
+<p>为明确起见，我们将<span class="math inline">\(p(x|y)\)</span>记作<span class="math inline">\(p(x|θ_y)\)</span>。</p>
 <p>根据频率学派的思路，我们可以通过极大似然法来估计参数θ。</p>
-<p>极大似然估计的核心思想是：我们已知$x$已发生，我们再根据实际情况写出$x$发生的概率$p(x_θ)$。目标函数是使得这个概率$p(x_θ)$最大，然后求得$θ$。</p>
-<p>在本问题中，我们有训练样本集$X$，令$X_y$表示训练样本集$X$中第$y$类样本组成的集合，假设这些样本独立同分布。似然函数是某事件发生的概率，也就是$P(X_y|θ_y)$:<br>$$P(X_y|θ_y)=∏_{x\in X_y}P(x|θ_y) \tag{公式1}$$<br><em>小注，上式表达的意思是：</em>$在参数θ_y时，第y类样本集X_y发生的概率 = X_y中每个样本x发生的概率的乘积$</p>
-<p>我们已经知道$X_y|θ_y$这个事件发生了（因为我们观测到了），那就让这个概率$P(X_y|θ_y)$最大化，去求得一个$θ_y$，这就是我们的最终目标——得到$θ_y$。</p>
-<h2 id="如何解出参数？"><a href="#如何解出参数？" class="headerlink" title="如何解出参数？"></a>如何解出参数？</h2><p>如上所述，我们现在的目标是求得一个$θ_y$是的公式1最大。而公式1的连乘操作容易造成下溢，因此我们通常使用对数似然：<br>$$LL(θ_y)=log P(X_y|θ_y)$$<br>$$=\sum_{x\in X_y}log P(x|θ_y)\tag{公式2.1}$$<br>此时我们求得一个$θ_y$，使得公式2.1最大:</p>
-<p>$$θ_y=arg_{θ_y} max LL(θ_y)\tag{公式2.2}$$</p>
-<p>因此，我们只需要知道$p(x|θ)$,就可以求得各$y$类标签取值下的$θ$，就得到了$x$下各label的概率:$P(x|θ_y)$，也就是$P(x|y)$。代入<em>公式0</em>，我们得到了$P(y|x)$。此时我们就<strong>解决了朴素贝叶斯分类的定义的第3步</strong>，这样就能进行下一步了。</p>
-<h2 id="并没有那么简单"><a href="#并没有那么简单" class="headerlink" title="并没有那么简单"></a>并没有那么简单</h2><p>然而，<strong>这个问题并没有这么简单。</strong>在公式2中我们要求得$θ$。假设$x^{(j)}$有$S_j$个取值，那么每个类别下的$θ_y$就有$∏_{j=1}^nS_j$维。且$y$的取值有$k$个，那就是$k∏_{j=1}^nS_j$，这样就很难算，几乎算不出来。</p>
-<h2 id="参数太多，维度爆炸了，怎么办？"><a href="#参数太多，维度爆炸了，怎么办？" class="headerlink" title="参数太多，维度爆炸了，怎么办？"></a>参数太多，维度爆炸了，怎么办？</h2><p>因此，朴素贝叶斯分类器用了<strong>属性条件独立性假设</strong>:对于已知类别，假设所有属性相互独立。</p>
-<p>此时，<em>公式0</em>可以改写成：<br>$$P(y|x)=\frac{p(y)p(x|y)}{p(x)}=\frac{p(y)}{p(x)}∏_{i=1}^dP(x_i|y)\tag{公式4}$$</p>
-<p>而$p(x)$是样本分布，可以认为是常数，所以忽略。<br>按照我们刚刚推导的步骤，想求得$P(y|x)$，我们就回到了朴素贝叶斯分类的定义的第3步，算出公式2.2:</p>
-<p>$$θ_y=arg_{θ_y} max LL(θ_y)=arg max_{y\in Y}P(y)∏_{i=1}^dP(x_i|y)\tag{公式5}$$</p>
+<p>极大似然估计的核心思想是：我们已知<span class="math inline">\(x\)</span>已发生，我们再根据实际情况写出<span class="math inline">\(x\)</span>发生的概率<span class="math inline">\(p(x_θ)\)</span>。目标函数是使得这个概率<span class="math inline">\(p(x_θ)\)</span>最大，然后求得<span class="math inline">\(θ\)</span>。</p>
+<p>在本问题中，我们有训练样本集<span class="math inline">\(X\)</span>，令<span class="math inline">\(X_y\)</span>表示训练样本集<span class="math inline">\(X\)</span>中第<span class="math inline">\(y\)</span>类样本组成的集合，假设这些样本独立同分布。似然函数是某事件发生的概率，也就是<span class="math inline">\(P(X_y|θ_y)\)</span>: <span class="math display">\[P(X_y|θ_y)=∏_{x\in X_y}P(x|θ_y) \tag{公式1}\]</span> <em>小注，上式表达的意思是：</em><span class="math inline">\(在参数θ_y时，第y类样本集X_y发生的概率 = X_y中每个样本x发生的概率的乘积\)</span></p>
+<p>我们已经知道<span class="math inline">\(X_y|θ_y\)</span>这个事件发生了（因为我们观测到了），那就让这个概率<span class="math inline">\(P(X_y|θ_y)\)</span>最大化，去求得一个<span class="math inline">\(θ_y\)</span>，这就是我们的最终目标——得到<span class="math inline">\(θ_y\)</span>。</p>
+<h2 id="如何解出参数">如何解出参数？</h2>
+<p>如上所述，我们现在的目标是求得一个<span class="math inline">\(θ_y\)</span>是的公式1最大。而公式1的连乘操作容易造成下溢，因此我们通常使用对数似然： <span class="math display">\[LL(θ_y)=log P(X_y|θ_y)\]</span> <span class="math display">\[=\sum_{x\in X_y}log P(x|θ_y)\tag{公式2.1}\]</span> 此时我们求得一个<span class="math inline">\(θ_y\)</span>，使得公式2.1最大:</p>
+<p><span class="math display">\[θ_y=arg_{θ_y} max LL(θ_y)\tag{公式2.2}\]</span></p>
+<p>因此，我们只需要知道<span class="math inline">\(p(x|θ)\)</span>,就可以求得各<span class="math inline">\(y\)</span>类标签取值下的<span class="math inline">\(θ\)</span>，就得到了<span class="math inline">\(x\)</span>下各label的概率:<span class="math inline">\(P(x|θ_y)\)</span>，也就是<span class="math inline">\(P(x|y)\)</span>。代入<em>公式0</em>，我们得到了<span class="math inline">\(P(y|x)\)</span>。此时我们就<strong>解决了朴素贝叶斯分类的定义的第3步</strong>，这样就能进行下一步了。</p>
+<h2 id="并没有那么简单">并没有那么简单</h2>
+<p>然而，<strong>这个问题并没有这么简单。</strong>在公式2中我们要求得<span class="math inline">\(θ\)</span>。假设<span class="math inline">\(x^{(j)}\)</span>有<span class="math inline">\(S_j\)</span>个取值，那么每个类别下的<span class="math inline">\(θ_y\)</span>就有<span class="math inline">\(∏_{j=1}^nS_j\)</span>维。且<span class="math inline">\(y\)</span>的取值有<span class="math inline">\(k\)</span>个，那就是<span class="math inline">\(k∏_{j=1}^nS_j\)</span>，这样就很难算，几乎算不出来。</p>
+<h2 id="参数太多维度爆炸了怎么办">参数太多，维度爆炸了，怎么办？</h2>
+<p>因此，朴素贝叶斯分类器用了<strong>属性条件独立性假设</strong>:对于已知类别，假设所有属性相互独立。</p>
+<p>此时，<em>公式0</em>可以改写成： <span class="math display">\[P(y|x)=\frac{p(y)p(x|y)}{p(x)}=\frac{p(y)}{p(x)}∏_{i=1}^dP(x_i|y)\tag{公式4}\]</span></p>
+<p>而<span class="math inline">\(p(x)\)</span>是样本分布，可以认为是常数，所以忽略。 按照我们刚刚推导的步骤，想求得<span class="math inline">\(P(y|x)\)</span>，我们就回到了朴素贝叶斯分类的定义的第3步，算出公式2.2:</p>
+<p><span class="math display">\[θ_y=arg_{θ_y} max LL(θ_y)=arg max_{y\in Y}P(y)∏_{i=1}^dP(x_i|y)\tag{公式5}\]</span></p>
 <p>之后还有半朴素贝叶斯分类器。我们来日再说。</p>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ol>
+<h1 id="参考文献">参考文献</h1>
+<ol type="1">
 <li><a target="_blank" rel="noopener" href="http://www.cnblogs.com/leoo2sk/archive/2010/09/17/naive-bayesian-classifier.html">算法杂货铺——分类算法之朴素贝叶斯分类</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/endymecy/spark-ml-source-analysis/blob/master/%E5%88%86%E7%B1%BB%E5%92%8C%E5%9B%9E%E5%BD%92/%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF/nb.md">朴素贝叶斯</a></li>
 <li><a href="">机器学习，周志华</a></li>
 <li><a href="">概率论与数理统计，华师大出版社</a></li>
 </ol>
-<p>那我们回头看看我们的训练集。训练集是由一个已知分类的集合构成，也就是集合$X$和对应的$y$。也就是说，我们可以通过统计来获得各类别下各特征属性的条件概率估计：<br>$P(a_1|y_1),P(a_2|y_1),…,P(a_m|y_1);$<br>$P(a_1|y_2),P(a_2|y_2),…,P(a_m|y_2);$<br>$…,$<br>$P(a_1|y_n),P(a_2|y_n),…,P(a_m|y_n)$</p>
+<p>那我们回头看看我们的训练集。训练集是由一个已知分类的集合构成，也就是集合<span class="math inline">\(X\)</span>和对应的<span class="math inline">\(y\)</span>。也就是说，我们可以通过统计来获得各类别下各特征属性的条件概率估计： <span class="math inline">\(P(a_1|y_1),P(a_2|y_1),...,P(a_m|y_1);\)</span> <span class="math inline">\(P(a_1|y_2),P(a_2|y_2),...,P(a_m|y_2);\)</span> <span class="math inline">\(...,\)</span> <span class="math inline">\(P(a_1|y_n),P(a_2|y_n),...,P(a_m|y_n)\)</span></p>
 
-      
     </div>
 
-    <div>
-      
-        
+    
+    
+    
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%90%86%E8%AE%BA/" rel="tag"># 贝叶斯理论</a>
-          
-        </div>
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/07/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E6%80%BB%E7%BB%93/" rel="next" title="机器学习算法-总结">
-                <i class="fa fa-chevron-left"></i> 机器学习算法-总结
-              </a>
-            
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%90%86%E8%AE%BA/" rel="tag"># 贝叶斯理论</a>
           </div>
 
-          <span class="post-nav-divider"></span>
+        
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%8E%A2/" rel="prev" title="推荐系统初探">
-                推荐系统初探 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
 
-      
-      
-    </footer>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/07/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E6%80%BB%E7%BB%93/" rel="prev" title="机器学习算法-总结">
+      <i class="fa fa-chevron-left"></i> 机器学习算法-总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/16/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%8E%A2/" rel="next" title="推荐系统初探">
+      推荐系统初探 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E7%9A%84%E6%80%9D%E6%83%B3%E5%9F%BA%E7%A1%80"><span class="nav-text">朴素贝叶斯分类的思想基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E6%B1%82%E8%A7%A3"><span class="nav-text">朴素贝叶斯分类的定义和求解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97-P-y-i-x"><span class="nav-text">如何计算$P(y_i|x)$?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A0%E6%AD%A4%E5%B0%86%E9%97%AE%E9%A2%98%E8%BD%AC%E5%8C%96%E6%88%90%E4%BA%86%EF%BC%9A%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AED%E6%9D%A5%E4%BC%B0%E8%AE%A1%E5%85%88%E9%AA%8C-p-y-%E5%92%8C%E4%BC%BC%E7%84%B6-p-x-y-%EF%BC%9F"><span class="nav-text">因此将问题转化成了：如何基于训练数据D来估计先验$p(y)$和似然$p(x|y)$？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E5%9C%A8%E9%97%AE%E9%A2%98%E5%8F%88%E6%9D%A5%E4%BA%86%EF%BC%8C%E5%A6%82%E4%BD%95%E5%8E%BB%E4%BC%B0%E8%AE%A1-p-x-y-%EF%BC%9F"><span class="nav-text">现在问题又来了，如何去估计$p(x|y)$？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%8F%88%E8%BD%AC%E5%8C%96%E6%88%90%E4%BA%86-%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1%EF%BC%9F"><span class="nav-text">问题又转化成了:如何进行参数估计？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%87%BA%E5%8F%82%E6%95%B0%EF%BC%9F"><span class="nav-text">如何解出参数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E6%B2%A1%E6%9C%89%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95"><span class="nav-text">并没有那么简单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%A4%AA%E5%A4%9A%EF%BC%8C%E7%BB%B4%E5%BA%A6%E7%88%86%E7%82%B8%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="nav-text">参数太多，维度爆炸了，怎么办？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-text">参考文献</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E7%9A%84%E6%80%9D%E6%83%B3%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">朴素贝叶斯分类的思想基础</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%88%86%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E6%B1%82%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">朴素贝叶斯分类的定义和求解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97py_ix"><span class="nav-number">2.1.</span> <span class="nav-text">如何计算\(P(y_i|x)\)?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%A0%E6%AD%A4%E5%B0%86%E9%97%AE%E9%A2%98%E8%BD%AC%E5%8C%96%E6%88%90%E4%BA%86%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AEd%E6%9D%A5%E4%BC%B0%E8%AE%A1%E5%85%88%E9%AA%8Cpy%E5%92%8C%E4%BC%BC%E7%84%B6pxy"><span class="nav-number">2.2.</span> <span class="nav-text">因此将问题转化成了：如何基于训练数据D来估计先验\(p(y)\)和似然\(p(x|y)\)？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E5%9C%A8%E9%97%AE%E9%A2%98%E5%8F%88%E6%9D%A5%E4%BA%86%E5%A6%82%E4%BD%95%E5%8E%BB%E4%BC%B0%E8%AE%A1pxy"><span class="nav-number">2.3.</span> <span class="nav-text">现在问题又来了，如何去估计\(p(x|y)\)？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%8F%88%E8%BD%AC%E5%8C%96%E6%88%90%E4%BA%86%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1"><span class="nav-number">2.4.</span> <span class="nav-text">问题又转化成了:如何进行参数估计？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%87%BA%E5%8F%82%E6%95%B0"><span class="nav-number">2.5.</span> <span class="nav-text">如何解出参数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E6%B2%A1%E6%9C%89%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95"><span class="nav-number">2.6.</span> <span class="nav-text">并没有那么简单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%A4%AA%E5%A4%9A%E7%BB%B4%E5%BA%A6%E7%88%86%E7%82%B8%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="nav-number">2.7.</span> <span class="nav-text">参数太多，维度爆炸了，怎么办？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -692,140 +393,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -836,362 +434,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

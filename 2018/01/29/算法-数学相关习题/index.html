@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="素数判断n是素数解法一，暴解 如果n是素数，那么n不能被任何数（1和n除外）的数字整除。暴力的方法就是从2~n-1进行探测，探测$\frac{n}{k}, k &#x3D; 2,3,…,n-1$ 是否是整数  1234567private boolean ifPrime(int n)&amp;#123;  if(n &lt; 2) return false;  for(int k &#x3D; 2; k &lt; n; ++">
+  <meta name="description" content="素数 判断n是素数 解法一，暴解 如果n是素数，那么n不能被任何数（1和n除外）的数字整除。暴力的方法就是从2~n-1进行探测，探测\(\frac{n}{k}, k &#x3D; 2,3,...,n-1\) 是否是整数 1234567private boolean ifPrime(int n)&amp;#123;  if(n &lt; 2) return false;  for(int k &#x3D; 2; k &amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法-数学相关习题">
 <meta property="og:url" content="http://jiayi797.github.io/about/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="素数判断n是素数解法一，暴解 如果n是素数，那么n不能被任何数（1和n除外）的数字整除。暴力的方法就是从2~n-1进行探测，探测$\frac{n}{k}, k &#x3D; 2,3,…,n-1$ 是否是整数  1234567private boolean ifPrime(int n)&amp;#123;  if(n &lt; 2) return false;  for(int k &#x3D; 2; k &lt; n; ++">
-<meta property="og:locale">
+<meta property="og:description" content="素数 判断n是素数 解法一，暴解 如果n是素数，那么n不能被任何数（1和n除外）的数字整除。暴力的方法就是从2~n-1进行探测，探测\(\frac{n}{k}, k &#x3D; 2,3,...,n-1\) 是否是整数 1234567private boolean ifPrime(int n)&amp;#123;  if(n &lt; 2) return false;  for(int k &#x3D; 2; k &amp;">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-06-22-52-53.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-06-23-04-07.png">
 <meta property="article:published_time" content="2018-01-29T10:10:15.000Z">
@@ -107,625 +37,392 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-06-22-52-53.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2018/01/29/算法-数学相关习题/"/>
-
-
-
-
-
   <title>算法-数学相关习题 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/01/29/%E7%AE%97%E6%B3%95-%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3%E4%B9%A0%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">算法-数学相关习题</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          算法-数学相关习题
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-29T10:10:15+00:00">
-                2018-01-29
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:05+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-01-29 18:10:15" itemprop="dateCreated datePublished" datetime="2018-01-29T18:10:15+08:00">2018-01-29</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1.6k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:05" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <h1 id="素数"><a href="#素数" class="headerlink" title="素数"></a>素数</h1><h2 id="判断n是素数"><a href="#判断n是素数" class="headerlink" title="判断n是素数"></a>判断n是素数</h2><p><strong>解法一，暴解</strong></p>
-<p>如果n是素数，那么n不能被任何数（1和n除外）的数字整除。暴力的方法就是从2~n-1进行探测，探测$\frac{n}{k}, k = 2,3,…,n-1$ 是否是整数 </p>
+        <h1 id="素数">素数</h1>
+<h2 id="判断n是素数">判断n是素数</h2>
+<p><strong>解法一，暴解</strong></p>
+<p>如果n是素数，那么n不能被任何数（1和n除外）的数字整除。暴力的方法就是从2~n-1进行探测，探测<span class="math inline">\(\frac{n}{k}, k = 2,3,...,n-1\)</span> 是否是整数</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">ifPrime</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">2</span>; k &lt; n; ++k)&#123;</span><br><span class="line">    <span class="keyword">if</span>(n % k == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>解法二，优化</strong></p>
-<p>事实上，如果n不是素数，那么一定存在$n = a \times b$ ，而a和b的可能性有：</p>
+<p>事实上，如果n不是素数，那么一定存在<span class="math inline">\(n = a \times b\)</span> ，而a和b的可能性有：</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>a</th>
 <th>b</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>2</td>
 <td>n/2</td>
 </tr>
-<tr>
+<tr class="even">
 <td>3</td>
 <td>n/3</td>
 </tr>
-<tr>
-<td>…</td>
-<td>…</td>
+<tr class="odd">
+<td>...</td>
+<td>...</td>
 </tr>
-<tr>
+<tr class="even">
 <td>n/3</td>
 <td>3</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>n/2</td>
 <td>2</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>我们发现，a和b有重复计算的部分，即如果a &lt; sqrt(n) , 那么b &gt; sqrt(n) 。因此a只用探测到sqrt(n)即可。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">ifPrime</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(n &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  <span class="keyword">int</span> sqrt = (<span class="keyword">int</span>)Math.sqrt(n);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">2</span>; k &lt; sqrt; ++k)&#123;</span><br><span class="line">    <span class="keyword">if</span>(n % k == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>解法三，素数筛——生成素数序列：埃拉托斯特尼筛法</strong></p>
 <p>素数筛能非常高效地生成素数序列。原理是剔除所有可被素数整除的非素数。</p>
-<ol>
+<ol type="1">
 <li>列出2~max所有的数字</li>
 <li>剔除所有2的倍数（2保留）</li>
 <li>剔除下一个没有被划掉的倍数</li>
 <li>循环直到max</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countPrimes</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">boolean</span>[] notPrime = <span class="keyword">new</span> <span class="keyword">boolean</span>[n]; <span class="comment">// notPrime[i]==true代表i-1不是素数</span></span><br><span class="line">       <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i)&#123;</span><br><span class="line">           <span class="keyword">if</span>(notPrime[i] == <span class="keyword">false</span>)&#123;</span><br><span class="line">               ++counter;</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">2</span>; k*i &lt; n; ++k)&#123;</span><br><span class="line">                   notPrime[k*i] = <span class="keyword">true</span>;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> counter;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="面积问题"><a href="#面积问题" class="headerlink" title="面积问题"></a>面积问题</h1><h2 id="Perfect-Rectangle"><a href="#Perfect-Rectangle" class="headerlink" title="Perfect Rectangle"></a>Perfect Rectangle</h2><p>假设一个矩形有四个数表示<code>[a,b,c,d]</code> 。其中<code>[a,b]</code> 代表left bottom角的坐标，<code>[c,d]</code> 表示right top的坐标。给一堆矩形，判断它是否能刚刚好（不重合也不漏缺）地构成一个大的矩形</p>
+<h1 id="面积问题">面积问题</h1>
+<h2 id="perfect-rectangle">Perfect Rectangle</h2>
+<p>假设一个矩形有四个数表示<code>[a,b,c,d]</code> 。其中<code>[a,b]</code> 代表left bottom角的坐标，<code>[c,d]</code> 表示right top的坐标。给一堆矩形，判断它是否能刚刚好（不重合也不漏缺）地构成一个大的矩形</p>
 <p>这道题耗费了较长时间。因为没想通。</p>
-<p>核心思想就是:能够正好围成一个矩形的情况就是: 有且只有: </p>
+<p>核心思想就是:能够正好围成一个矩形的情况就是: 有且只有:</p>
 <ul>
-<li>最左下 最左上 最右下 最右上 的四个点只出现过一次,其他肯定是成对出现的(保证完全覆盖) </li>
+<li>最左下 最左上 最右下 最右上 的四个点只出现过一次,其他肯定是成对出现的(保证完全覆盖)</li>
 <li>上面四个点围成的面积,正好等于所有子矩形的面积之和(保证不重复)</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Pair</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x;</span><br><span class="line">    <span class="keyword">int</span> y;</span><br><span class="line">    Pair(<span class="keyword">int</span> x, <span class="keyword">int</span> y)&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object oo)</span></span>&#123;</span><br><span class="line">        Pair o = (Pair)oo;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.x == o.x &amp;&amp; <span class="keyword">this</span>.y == o.y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>&#123; <span class="comment">//在使用HashSet（contains也是调用HashMap中的方法）、HashMap等集合时，如果用到contains系列方法时，记得需同时重写equals与hashCode方法。</span></span><br><span class="line">        <span class="keyword">return</span> x + y*<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span>  <span class="string">&quot;[&quot;</span>+ x + <span class="string">&quot;,&quot;</span> + y + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> left = <span class="number">0</span>, bottom = <span class="number">1</span>, right = <span class="number">2</span>, top = <span class="number">3</span>;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRectangleCover</span><span class="params">(<span class="keyword">int</span>[][] rectangles)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 能够成矩形的条件：</span></span><br><span class="line">    <span class="comment">// 1. 最边上的四个点只到达了一次</span></span><br><span class="line">    <span class="comment">// 2. 其余的所有点到达了两次</span></span><br><span class="line">    <span class="comment">// 3. 最大矩阵面积 = 所有面积的和 // 这个很容易忽略</span></span><br><span class="line">    HashMap&lt;Pair,Integer&gt; memo = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>[] corner = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rectangles[<span class="number">0</span>].length; ++i)&#123;</span><br><span class="line">        corner[i] = rectangles[<span class="number">0</span>][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> area = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span>[][] corners4 = &#123;&#123;left, bottom&#125;,&#123;right,top&#125;, &#123;left,top&#125;,&#123;right,bottom&#125;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] rectangle : rectangles)&#123;</span><br><span class="line">        corner[left] = Math.min(rectangle[left], corner[left]);</span><br><span class="line">        corner[bottom] = Math.min(rectangle[bottom], corner[bottom]);</span><br><span class="line">        corner[top] = Math.max(rectangle[top],corner[top]);</span><br><span class="line">        corner[right] = Math.max(rectangle[right], corner[right]);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] cor : corners4)&#123;</span><br><span class="line">            Pair pair = <span class="keyword">new</span> Pair(rectangle[cor[<span class="number">0</span>]], rectangle[cor[<span class="number">1</span>]]);</span><br><span class="line">            memo.put(pair, memo.getOrDefault(pair, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        area += (rectangle[<span class="number">2</span>] -rectangle[<span class="number">0</span>])*(rectangle[<span class="number">3</span>] - rectangle[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 检查面积</span></span><br><span class="line">    <span class="keyword">if</span>(area != (corner[<span class="number">2</span>] - corner[<span class="number">0</span>])*(corner[<span class="number">3</span>] - corner[<span class="number">1</span>])) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">// 检查四个角是否只到达了一次</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span>[] cor : corners4)&#123;</span><br><span class="line">        Pair pair = <span class="keyword">new</span> Pair(corner[cor[<span class="number">0</span>]], corner[cor[<span class="number">1</span>]]);</span><br><span class="line">        <span class="keyword">if</span>(memo.getOrDefault(pair,<span class="number">0</span>) != <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        memo.remove(pair);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 检查其余节点是否都是两次</span></span><br><span class="line">    <span class="keyword">for</span>(Map.Entry&lt;Pair, Integer&gt; entry : memo.entrySet())&#123;</span><br><span class="line">        <span class="keyword">if</span>(entry.getValue() != <span class="number">2</span> &amp;&amp; entry.getValue() != <span class="number">4</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Perfect-Number"><a href="#Perfect-Number" class="headerlink" title="Perfect Number"></a>Perfect Number</h2><p>定义完美数字为：除了它自己以外的所有除数相加都等于它本身。判断一个数是不是一个完美数字。</p>
+<h2 id="perfect-number">Perfect Number</h2>
+<p>定义完美数字为：除了它自己以外的所有除数相加都等于它本身。判断一个数是不是一个完美数字。</p>
 <p>与上面的类似解法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">checkPerfectNumber</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num == <span class="number">1</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        <span class="comment">// 寻找所有的除数</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> max = (<span class="keyword">int</span>)Math.sqrt(num);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= max; ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(num % i == <span class="number">0</span>)&#123;</span><br><span class="line">                sum += i;</span><br><span class="line">                sum += num/i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum == num;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="组合数学"><a href="#组合数学" class="headerlink" title="组合数学"></a>组合数学</h1><h2 id="环形染色问题"><a href="#环形染色问题" class="headerlink" title="环形染色问题"></a>环形染色问题</h2><p>如果把一个圆环分成n个区域$A_n$。用m种不同颜色为这n个区域染色。要求相邻两个区域$A_i$ 和 $A_{i+1}$ 颜色不同，则不同的染色方式有多少种？</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-06-22-52-53.png"> </p>
+<h1 id="组合数学">组合数学</h1>
+<h2 id="环形染色问题">环形染色问题</h2>
+<p>如果把一个圆环分成n个区域<span class="math inline">\(A_n\)</span>。用m种不同颜色为这n个区域染色。要求相邻两个区域<span class="math inline">\(A_i\)</span> 和 <span class="math inline">\(A_{i+1}\)</span> 颜色不同，则不同的染色方式有多少种？</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-06-22-52-53.png" /></p>
 <ul>
-<li>对于区域$A_1$ ，有m种染色法；</li>
-<li>对于区域$A_2,…,A_{n-1}$ ，分别有m-1种染色法</li>
-<li>假设暂时不考虑$A_n$ 与$A_1$ ，那么对于区域$A_n$ ，有$m-1$ 种染法。<ul>
-<li>如果$A_n$ 与$A_1$ 同色，那么就将这两个看成同一个区域，这就退化成了n-1个区域的染色种类，即$a_{n-1}$</li>
-</ul>
-</li>
-<li>因此有$$a_n + a_{n-1} = m(m-1)^{n-1}$$</li>
+<li>对于区域<span class="math inline">\(A_1\)</span> ，有m种染色法；</li>
+<li>对于区域<span class="math inline">\(A_2,...,A_{n-1}\)</span> ，分别有m-1种染色法</li>
+<li>假设暂时不考虑<span class="math inline">\(A_n\)</span> 与<span class="math inline">\(A_1\)</span> ，那么对于区域<span class="math inline">\(A_n\)</span> ，有<span class="math inline">\(m-1\)</span> 种染法。
+<ul>
+<li>如果<span class="math inline">\(A_n\)</span> 与<span class="math inline">\(A_1\)</span> 同色，那么就将这两个看成同一个区域，这就退化成了n-1个区域的染色种类，即<span class="math inline">\(a_{n-1}\)</span></li>
+</ul></li>
+<li>因此有<span class="math display">\[a_n + a_{n-1} = m(m-1)^{n-1}\]</span></li>
 </ul>
 <p>接下来通过数列递推公式求通项公式：</p>
-<p>由于对上式两边同时减去$(m-1)^n$：</p>
-<p>$$a_n + a_{n-1} - (m-1)^n = m(m-1)^{n-1} - (m-1)^n$$ ，递推可得：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-06-23-04-07.png"> </p>
+<p>由于对上式两边同时减去<span class="math inline">\((m-1)^n\)</span>：</p>
+<p><span class="math display">\[a_n + a_{n-1} - (m-1)^n = m(m-1)^{n-1} - (m-1)^n\]</span> ，递推可得：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-06-23-04-07.png" /></p>
 <p>因此，环形染色问题的解为：</p>
-<p>$$a_n = (m-1)^n + (-1)^n(m-1)$$</p>
-<h1 id="计算几何"><a href="#计算几何" class="headerlink" title="计算几何"></a>计算几何</h1><h2 id="Valid-Square"><a href="#Valid-Square" class="headerlink" title="Valid Square"></a>Valid Square</h2><p>验证给定的四个点是否能组成正方形。</p>
+<p><span class="math display">\[a_n = (m-1)^n + (-1)^n(m-1)\]</span></p>
+<h1 id="计算几何">计算几何</h1>
+<h2 id="valid-square">Valid Square</h2>
+<p>验证给定的四个点是否能组成正方形。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">validSquare</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span>[] b, <span class="keyword">int</span>[] c, <span class="keyword">int</span>[] d)</span> </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/** 矩形: 对角线一定相等且垂直且平分</span></span><br><span class="line"><span class="comment">        **/</span></span><br><span class="line">        <span class="keyword">if</span>(diagonal(a,b,c,d) &amp;&amp; equal(a,b,c,d) &amp;&amp; divideEqual(a,b,c,d)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(diagonal(a,c,b,d) &amp;&amp; equal(a,c,b,d) &amp;&amp; divideEqual(a,c,b,d)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span>(diagonal(a,d,c,b) &amp;&amp; equal(a,d,c,b) &amp;&amp; divideEqual(a,d,c,b)) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 判断ab与cd互相平分</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">divideEqual</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span>[] b, <span class="keyword">int</span>[] c, <span class="keyword">int</span>[] d)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] media_ab = &#123;a[<span class="number">0</span>] + b[<span class="number">0</span>], a[<span class="number">1</span>] + b[<span class="number">1</span>]&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] media_cd = &#123;c[<span class="number">0</span>] + d[<span class="number">0</span>], c[<span class="number">1</span>] + d[<span class="number">1</span>]&#125;;</span><br><span class="line">        <span class="keyword">return</span> media_ab[<span class="number">0</span>] == media_cd[<span class="number">0</span>] &amp;&amp; media_ab[<span class="number">1</span>] == media_cd[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**判断ab与cd两直线相等**/</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">equal</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span>[] b, <span class="keyword">int</span>[] c, <span class="keyword">int</span>[] d)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dist(a,b) != <span class="number">0</span> &amp;&amp; dist(a,b) == dist(c,d);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">dist</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span>[] b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (a[<span class="number">0</span>]-b[<span class="number">0</span>])*(a[<span class="number">0</span>]-b[<span class="number">0</span>]) + (a[<span class="number">1</span>]-b[<span class="number">1</span>])*(a[<span class="number">1</span>]-b[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    判断ab与cd两直线是否垂直</span></span><br><span class="line"><span class="comment">    **/</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">diagonal</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span>[] b, <span class="keyword">int</span>[] c, <span class="keyword">int</span>[] d)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] vector_ab = &#123;a[<span class="number">0</span>] - b[<span class="number">0</span>], a[<span class="number">1</span>] - b[<span class="number">1</span>]&#125;;</span><br><span class="line">        <span class="keyword">int</span>[] vector_cd = &#123;c[<span class="number">0</span>] - d[<span class="number">0</span>], c[<span class="number">1</span>] - d[<span class="number">1</span>]&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// dot</span></span><br><span class="line">        <span class="keyword">int</span> dot = vector_ab[<span class="number">0</span>]*vector_cd[<span class="number">0</span>] + vector_ab[<span class="number">1</span>]*vector_cd[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">return</span> dot == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/29/Java-LinkedHashMap%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" rel="prev" title="Java-LinkedHashMap原理探究">
+      <i class="fa fa-chevron-left"></i> Java-LinkedHashMap原理探究
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/29/%E7%AE%97%E6%B3%95-%E6%89%AB%E6%8F%8F%E7%BA%BF/" rel="next" title="算法-扫描线">
+      算法-扫描线 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/29/Java-LinkedHashMap%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/" rel="next" title="Java-LinkedHashMap原理探究">
-                <i class="fa fa-chevron-left"></i> Java-LinkedHashMap原理探究
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/29/%E7%AE%97%E6%B3%95-%E6%89%AB%E6%8F%8F%E7%BA%BF/" rel="prev" title="算法-扫描线">
-                算法-扫描线 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A0%E6%95%B0"><span class="nav-text">素数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%ADn%E6%98%AF%E7%B4%A0%E6%95%B0"><span class="nav-text">判断n是素数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E7%A7%AF%E9%97%AE%E9%A2%98"><span class="nav-text">面积问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Perfect-Rectangle"><span class="nav-text">Perfect Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Perfect-Number"><span class="nav-text">Perfect Number</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6"><span class="nav-text">组合数学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%BD%A2%E6%9F%93%E8%89%B2%E9%97%AE%E9%A2%98"><span class="nav-text">环形染色问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95"><span class="nav-text">计算几何</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Valid-Square"><span class="nav-text">Valid Square</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B4%A0%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">素数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%ADn%E6%98%AF%E7%B4%A0%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">判断n是素数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E7%A7%AF%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">面积问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#perfect-rectangle"><span class="nav-number">2.1.</span> <span class="nav-text">Perfect Rectangle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#perfect-number"><span class="nav-number">2.2.</span> <span class="nav-text">Perfect Number</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6"><span class="nav-number">3.</span> <span class="nav-text">组合数学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%BD%A2%E6%9F%93%E8%89%B2%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.</span> <span class="nav-text">环形染色问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95"><span class="nav-number">4.</span> <span class="nav-text">计算几何</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#valid-square"><span class="nav-number">4.1.</span> <span class="nav-text">Valid Square</span></a></li></ol></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -734,140 +431,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -878,362 +472,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

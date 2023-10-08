@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="本次我们探究一下sk-learn的GBDT实现。">
+  <meta name="description" content="本次我们探究一下sk-learn的GBDT实现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法-sklearn GBDT 源码浅读">
 <meta property="og:url" content="http://jiayi797.github.io/about/2018/08/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-sklearn-GBDT-%E6%BA%90%E7%A0%81%E6%B5%85%E8%AF%BB/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
 <meta property="og:description" content="本次我们探究一下sk-learn的GBDT实现。">
-<meta property="og:locale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-08-19-17-11-55.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-08-19-17-25-07.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-02-27.png">
@@ -112,370 +42,205 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-08-19-17-11-55.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2018/08/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-sklearn-GBDT-%E6%BA%90%E7%A0%81%E6%B5%85%E8%AF%BB/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2018/08/19/机器学习算法-sklearn-GBDT-源码浅读/"/>
-
-
-
-
-
   <title>机器学习算法-sklearn GBDT 源码浅读 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/08/19/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-sklearn-GBDT-%E6%BA%90%E7%A0%81%E6%B5%85%E8%AF%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">机器学习算法-sklearn GBDT 源码浅读</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          机器学习算法-sklearn GBDT 源码浅读
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T09:02:11+00:00">
-                2018-08-19
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:02+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-08-19 17:02:11" itemprop="dateCreated datePublished" datetime="2018-08-19T17:02:11+08:00">2018-08-19</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3.8k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:02" itemprop="dateModified" datetime="2018-12-17T15:42:02+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">机器学习算法</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
+
     
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>本次我们探究一下sk-learn的GBDT实现。</p>
 <span id="more"></span>
-
 <p>先从调包开始说起，一般来说我们是这样调用GBDT的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> GradientBoostingRegressor</span><br><span class="line"><span class="comment"># 初始化模型</span></span><br><span class="line">gbdt=GradientBoostingRegressor(</span><br><span class="line">      loss=<span class="string">&#x27;ls&#x27;</span></span><br><span class="line">    , learning_rate=<span class="number">0.1</span></span><br><span class="line">    , n_estimators=<span class="number">100</span></span><br><span class="line">    , subsample=<span class="number">1</span></span><br><span class="line">    , min_samples_split=<span class="number">2</span></span><br><span class="line">    , min_samples_leaf=<span class="number">1</span></span><br><span class="line">    , max_depth=<span class="number">3</span></span><br><span class="line">    , init=<span class="literal">None</span></span><br><span class="line">    , random_state=<span class="literal">None</span></span><br><span class="line">    , max_features=<span class="literal">None</span></span><br><span class="line">    , alpha=<span class="number">0.9</span></span><br><span class="line">    , verbose=<span class="number">0</span></span><br><span class="line">    , max_leaf_nodes=<span class="literal">None</span></span><br><span class="line">    , warm_start=<span class="literal">False</span></span><br><span class="line">)</span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">X = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]])</span><br><span class="line">y= np.array([<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>])</span><br><span class="line">gbdt.fit(X,y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预测</span></span><br><span class="line">X_test = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]])</span><br><span class="line">pred=gbdt.predict(X_test)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(pred.shape[<span class="number">0</span>]):</span><br><span class="line">    <span class="built_in">print</span> (pred[i],test_id[i])</span><br></pre></td></tr></table></figure>
-
 <p>我们首先看一下<code>GradientBoostingRegressor()</code>这个类</p>
-<h1 id="GradientBoostingRegressor类"><a href="#GradientBoostingRegressor类" class="headerlink" title="GradientBoostingRegressor类"></a>GradientBoostingRegressor类</h1><p>大概看一下这个类：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-08-19-17-11-55.png"> </p>
+<h1 id="gradientboostingregressor类">GradientBoostingRegressor类</h1>
+<p>大概看一下这个类：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-08-19-17-11-55.png" /></p>
 <p>我们发现这个类只是实现了一个三个预测接口，并没有<code>fit()</code>方法。说明<code>fit()</code>方法完全是父类的。</p>
 <p>接下来粗略看看这几种方法。</p>
-<h2 id="初始化-init"><a href="#初始化-init" class="headerlink" title="初始化__init__()"></a>初始化<code>__init__()</code></h2><p><code>GradientBoostingRegressor()</code>类的初始化函数如下所示：</p>
+<h2 id="初始化__init__">初始化<code>__init__()</code></h2>
+<p><code>GradientBoostingRegressor()</code>类的初始化函数如下所示：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GradientBoostingRegressor</span>(<span class="params">BaseGradientBoosting, RegressorMixin</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, loss=<span class="string">&#x27;ls&#x27;</span>, learning_rate=<span class="number">0.1</span>, n_estimators=<span class="number">100</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 subsample=<span class="number">1.0</span>, criterion=<span class="string">&#x27;friedman_mse&#x27;</span>, min_samples_split=<span class="number">2</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 min_samples_leaf=<span class="number">1</span>, min_weight_fraction_leaf=<span class="number">0.</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 max_depth=<span class="number">3</span>, min_impurity_decrease=<span class="number">0.</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 min_impurity_split=<span class="literal">None</span>, init=<span class="literal">None</span>, random_state=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 max_features=<span class="literal">None</span>, alpha=<span class="number">0.9</span>, verbose=<span class="number">0</span>, max_leaf_nodes=<span class="literal">None</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">                 warm_start=<span class="literal">False</span>, presort=<span class="string">&#x27;auto&#x27;</span></span>):</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>(GradientBoostingRegressor, self).__init__(</span><br><span class="line">            loss=loss, learning_rate=learning_rate, n_estimators=n_estimators,</span><br><span class="line">            criterion=criterion, min_samples_split=min_samples_split,</span><br><span class="line">            min_samples_leaf=min_samples_leaf,</span><br><span class="line">            min_weight_fraction_leaf=min_weight_fraction_leaf,</span><br><span class="line">            max_depth=max_depth, init=init, subsample=subsample,</span><br><span class="line">            max_features=max_features,</span><br><span class="line">            min_impurity_decrease=min_impurity_decrease,</span><br><span class="line">            min_impurity_split=min_impurity_split,</span><br><span class="line">            random_state=random_state, alpha=alpha, verbose=verbose,</span><br><span class="line">            max_leaf_nodes=max_leaf_nodes, warm_start=warm_start,</span><br><span class="line">            presort=presort)</span><br></pre></td></tr></table></figure>
-
 <p>我们可以看到，<code>GradientBoostingRegressor()</code>这个类继承自<code>BaseGradientBoosting()</code>类，并且初始化函数只调用了父类<code>BaseGradientBoosting()</code>的初始化函数。</p>
 <p>在下一大节我们会详细看<code>BaseGradientBoosting()</code>。</p>
-<h2 id="预测predict"><a href="#预测predict" class="headerlink" title="预测predict()"></a>预测<code>predict()</code></h2><p>预测函数如下所示：</p>
+<h2 id="预测predict">预测<code>predict()</code></h2>
+<p>预测函数如下所示：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">self, X</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Predict regression target for X.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    X : array-like or sparse matrix, shape = [n_samples, n_features]</span></span><br><span class="line"><span class="string">        The input samples. Internally, it will be converted to</span></span><br><span class="line"><span class="string">        ``dtype=np.float32`` and if a sparse matrix is provided</span></span><br><span class="line"><span class="string">        to a sparse ``csr_matrix``.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns</span></span><br><span class="line"><span class="string">    -------</span></span><br><span class="line"><span class="string">    y : array of shape = [n_samples]</span></span><br><span class="line"><span class="string">        The predicted values.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    X = check_array(X, dtype=DTYPE, order=<span class="string">&quot;C&quot;</span>,  accept_sparse=<span class="string">&#x27;csr&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> self._decision_function(X).ravel()</span><br></pre></td></tr></table></figure>
-
 <p>我们可以看到预测函数只是调用了父类的<code>_decision_function(X)</code>。</p>
 <p>以上大概看了一下，发现主要内容还是在父类BaseGradientBoosting中。因此我们接下来详细看BaseGradientBoosting。</p>
-<h1 id="BaseGradientBoosting类"><a href="#BaseGradientBoosting类" class="headerlink" title="BaseGradientBoosting类"></a>BaseGradientBoosting类</h1><p>大概看一眼这个类：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-08-19-17-25-07.png"> </p>
+<h1 id="basegradientboosting类">BaseGradientBoosting类</h1>
+<p>大概看一眼这个类：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-08-19-17-25-07.png" /></p>
 <p>好多方法哦。我们还是只看看fit方法吧。</p>
-<h2 id="训练-fit"><a href="#训练-fit" class="headerlink" title="训练 fit()"></a>训练 <code>fit()</code></h2><p>直接上代码：</p>
+<h2 id="训练-fit">训练 <code>fit()</code></h2>
+<p>直接上代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, X, y, sample_weight=<span class="literal">None</span>, monitor=<span class="literal">None</span></span>):</span></span><br><span class="line">      <span class="string">&quot;&quot;&quot;Fit the gradient boosting model.</span></span><br><span class="line"><span class="string">      &quot;&quot;&quot;</span></span><br><span class="line">      <span class="comment"># ========== 检查输入是否符合要求 =================</span></span><br><span class="line">      <span class="comment"># Check input</span></span><br><span class="line">      X, y = check_X_y(X, y, accept_sparse=[<span class="string">&#x27;csr&#x27;</span>, <span class="string">&#x27;csc&#x27;</span>, <span class="string">&#x27;coo&#x27;</span>], dtype=DTYPE)</span><br><span class="line">      n_samples, self.n_features_ = X.shape</span><br><span class="line">      <span class="keyword">if</span> sample_weight <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">          sample_weight = np.ones(n_samples, dtype=np.float32)</span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">          sample_weight = column_or_1d(sample_weight, warn=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">      check_consistent_length(X, y, sample_weight)</span><br><span class="line"></span><br><span class="line">      y = self._validate_y(y)</span><br><span class="line"></span><br><span class="line">      random_state = check_random_state(self.random_state)</span><br><span class="line">      self._check_params()</span><br><span class="line"><span class="comment"># ============ 初始化 ================</span></span><br><span class="line">      <span class="keyword">if</span> <span class="keyword">not</span> self._is_initialized():</span><br><span class="line">          <span class="comment"># init state</span></span><br><span class="line">          self._init_state()</span><br><span class="line"></span><br><span class="line">          <span class="comment"># fit initial model - FIXME make sample_weight optional</span></span><br><span class="line">          self.init_.fit(X, y, sample_weight)</span><br><span class="line"></span><br><span class="line">          <span class="comment"># init predictions</span></span><br><span class="line">          y_pred = self.init_.predict(X)</span><br><span class="line">          begin_at_stage = <span class="number">0</span></span><br><span class="line">      <span class="keyword">else</span>:</span><br><span class="line">          <span class="comment"># add more estimators to fitted model</span></span><br><span class="line">          <span class="comment"># invariant: warm_start = True</span></span><br><span class="line">          <span class="keyword">if</span> self.n_estimators &lt; self.estimators_.shape[<span class="number">0</span>]:</span><br><span class="line">              <span class="keyword">raise</span> ValueError(<span class="string">&#x27;n_estimators=%d must be larger or equal to &#x27;</span></span><br><span class="line">                               <span class="string">&#x27;estimators_.shape[0]=%d when &#x27;</span></span><br><span class="line">                               <span class="string">&#x27;warm_start==True&#x27;</span></span><br><span class="line">                               % (self.n_estimators,</span><br><span class="line">                                  self.estimators_.shape[<span class="number">0</span>]))</span><br><span class="line">          begin_at_stage = self.estimators_.shape[<span class="number">0</span>]</span><br><span class="line">          y_pred = self._decision_function(X)</span><br><span class="line">          self._resize_state()</span><br><span class="line">  <span class="comment"># ============= 对特征预排序 ============</span></span><br><span class="line">      X_idx_sorted = <span class="literal">None</span></span><br><span class="line">      presort = self.presort</span><br><span class="line">      <span class="comment"># Allow presort to be &#x27;auto&#x27;, which means True if the dataset is dense,</span></span><br><span class="line">      <span class="comment"># otherwise it will be False.</span></span><br><span class="line">      <span class="keyword">if</span> presort == <span class="string">&#x27;auto&#x27;</span> <span class="keyword">and</span> issparse(X):</span><br><span class="line">          presort = <span class="literal">False</span></span><br><span class="line">      <span class="keyword">elif</span> presort == <span class="string">&#x27;auto&#x27;</span>:</span><br><span class="line">          presort = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> presort == <span class="literal">True</span>:</span><br><span class="line">          <span class="keyword">if</span> issparse(X):</span><br><span class="line">              <span class="keyword">raise</span> ValueError(<span class="string">&quot;Presorting is not supported for sparse matrices.&quot;</span>)</span><br><span class="line">          <span class="keyword">else</span>:</span><br><span class="line">              X_idx_sorted = np.asfortranarray(np.argsort(X, axis=<span class="number">0</span>),</span><br><span class="line">                                               dtype=np.int32)</span><br><span class="line">   <span class="comment"># ============= 训练 ========================</span></span><br><span class="line">      <span class="comment"># fit the boosting stages</span></span><br><span class="line">      n_stages = self._fit_stages(X, y, y_pred, sample_weight, random_state,</span><br><span class="line">                                  begin_at_stage, monitor, X_idx_sorted)</span><br><span class="line">      <span class="comment"># change shape of arrays after fit (early-stopping or additional ests)</span></span><br><span class="line">      <span class="keyword">if</span> n_stages != self.estimators_.shape[<span class="number">0</span>]:</span><br><span class="line">          self.estimators_ = self.estimators_[:n_stages]</span><br><span class="line">          self.train_score_ = self.train_score_[:n_stages]</span><br><span class="line">          <span class="keyword">if</span> <span class="built_in">hasattr</span>(self, <span class="string">&#x27;oob_improvement_&#x27;</span>):</span><br><span class="line">              self.oob_improvement_ = self.oob_improvement_[:n_stages]</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> self</span><br></pre></td></tr></table></figure>
-
 <p>可以看到，代码主要分为四部分：</p>
 <ul>
 <li>检查输入</li>
@@ -484,51 +249,51 @@
 <li>训练</li>
 </ul>
 <p>前三部分不详细介绍了，我们主要说一下训练。训练其实调用的是<code>_fit_stages()</code>方法。我们再看看这个方法。</p>
-<h2 id="训练-fit-stages"><a href="#训练-fit-stages" class="headerlink" title="训练 _fit_stages()"></a>训练 <code>_fit_stages()</code></h2><p>上代码：</p>
+<h2 id="训练-_fit_stages">训练 <code>_fit_stages()</code></h2>
+<p>上代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fit_stages</span>(<span class="params">self, X, y, y_pred, sample_weight, random_state,</span></span></span><br><span class="line"><span class="params"><span class="function">                begin_at_stage=<span class="number">0</span>, monitor=<span class="literal">None</span>, X_idx_sorted=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Iteratively fits the stages.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    For each stage it computes the progress (OOB, train score)</span></span><br><span class="line"><span class="string">    and delegates to ``_fit_stage``.</span></span><br><span class="line"><span class="string">    Returns the number of stages fit; might differ from ``n_estimators``</span></span><br><span class="line"><span class="string">    due to early stopping.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># ============== 初始化 =============================</span></span><br><span class="line">    n_samples = X.shape[<span class="number">0</span>]</span><br><span class="line">    do_oob = self.subsample &lt; <span class="number">1.0</span></span><br><span class="line">    sample_mask = np.ones((n_samples, ), dtype=np.<span class="built_in">bool</span>)</span><br><span class="line">    n_inbag = <span class="built_in">max</span>(<span class="number">1</span>, <span class="built_in">int</span>(self.subsample * n_samples))</span><br><span class="line">    loss_ = self.loss_</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Set min_weight_leaf from min_weight_fraction_leaf</span></span><br><span class="line">    <span class="keyword">if</span> self.min_weight_fraction_leaf != <span class="number">0.</span> <span class="keyword">and</span> sample_weight <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        min_weight_leaf = (self.min_weight_fraction_leaf *</span><br><span class="line">                           np.<span class="built_in">sum</span>(sample_weight))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        min_weight_leaf = <span class="number">0.</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> self.verbose:</span><br><span class="line">        verbose_reporter = VerboseReporter(self.verbose)</span><br><span class="line">        verbose_reporter.init(self, begin_at_stage)</span><br><span class="line"></span><br><span class="line">    X_csc = csc_matrix(X) <span class="keyword">if</span> issparse(X) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    X_csr = csr_matrix(X) <span class="keyword">if</span> issparse(X) <span class="keyword">else</span> <span class="literal">None</span></span><br><span class="line">    <span class="comment"># =========== 树迭代！=====================</span></span><br><span class="line">    <span class="comment"># perform boosting iterations</span></span><br><span class="line">    i = begin_at_stage</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(begin_at_stage, self.n_estimators):</span><br><span class="line">        <span class="comment"># subsampling，采样</span></span><br><span class="line">        <span class="keyword">if</span> do_oob:</span><br><span class="line">            sample_mask = _random_sample_mask(n_samples, n_inbag,</span><br><span class="line">                                              random_state)</span><br><span class="line">            <span class="comment"># OOB score before adding this stage</span></span><br><span class="line">            old_oob_score = loss_(y[~sample_mask],</span><br><span class="line">                                  y_pred[~sample_mask],</span><br><span class="line">                                  sample_weight[~sample_mask])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># fit next stage of trees</span></span><br><span class="line">        y_pred = self._fit_stage(i, X, y, y_pred, sample_weight,</span><br><span class="line">                                 sample_mask, random_state, X_idx_sorted,</span><br><span class="line">                                 X_csc, X_csr)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># track deviance (= loss)</span></span><br><span class="line">        <span class="keyword">if</span> do_oob:</span><br><span class="line">            self.train_score_[i] = loss_(y[sample_mask],</span><br><span class="line">                                         y_pred[sample_mask],</span><br><span class="line">                                         sample_weight[sample_mask])</span><br><span class="line">            self.oob_improvement_[i] = (</span><br><span class="line">                old_oob_score - loss_(y[~sample_mask],</span><br><span class="line">                                      y_pred[~sample_mask],</span><br><span class="line">                                      sample_weight[~sample_mask]))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># no need to fancy index w/ no subsampling</span></span><br><span class="line">            self.train_score_[i] = loss_(y, y_pred, sample_weight)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> self.verbose &gt; <span class="number">0</span>:</span><br><span class="line">            verbose_reporter.update(i, self)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> monitor <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">            early_stopping = monitor(i, self, <span class="built_in">locals</span>())</span><br><span class="line">            <span class="keyword">if</span> early_stopping:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> i + <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
 <p>为了方便看，我们把迭代部分的主要代码抽出来：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(begin_at_stage, self.n_estimators):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># fit next stage of trees</span></span><br><span class="line">    y_pred = self._fit_stage(i, X, y, y_pred, sample_weight,</span><br><span class="line">                             sample_mask, random_state, X_idx_sorted,</span><br><span class="line">                             X_csc, X_csr)</span><br><span class="line"></span><br><span class="line">   self.train_score_[i] = loss_(y, y_pred, sample_weight)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>我们可以看到在迭代的每一轮都有一个y_pred的预测值，并在下一轮将这个预测值y_pred再喂进去。而主要函数就是<code>_fit_stage()</code>。那么接下来我们看看这个东西。</p>
-<h2 id="训练-fit-stage"><a href="#训练-fit-stage" class="headerlink" title="训练 _fit_stage()"></a>训练 <code>_fit_stage()</code></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fit_stage</span>(<span class="params">self, i, X, y, y_pred, sample_weight, sample_mask,</span></span></span><br><span class="line"><span class="params"><span class="function">                random_state, X_idx_sorted, X_csc=<span class="literal">None</span>, X_csr=<span class="literal">None</span></span>):</span></span><br><span class="line">     <span class="string">&quot;&quot;&quot;Fit another stage of ``n_classes_`` trees to the boosting model. &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">     <span class="keyword">assert</span> sample_mask.dtype == np.<span class="built_in">bool</span></span><br><span class="line">     loss = self.loss_</span><br><span class="line">     original_y = y</span><br><span class="line">     <span class="comment"># k代表类别个数！</span></span><br><span class="line">     <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(loss.K):</span><br><span class="line">         <span class="keyword">if</span> loss.is_multi_class:</span><br><span class="line">             y = np.array(original_y == k, dtype=np.float64)</span><br><span class="line"></span><br><span class="line">         residual = loss.negative_gradient(y, y_pred, k=k,</span><br><span class="line">                                           sample_weight=sample_weight)</span><br><span class="line"></span><br><span class="line">         <span class="comment"># induce regression tree on residuals</span></span><br><span class="line">         tree = DecisionTreeRegressor(</span><br><span class="line">             criterion=self.criterion,</span><br><span class="line">             splitter=<span class="string">&#x27;best&#x27;</span>,</span><br><span class="line">             max_depth=self.max_depth,</span><br><span class="line">             min_samples_split=self.min_samples_split,</span><br><span class="line">             min_samples_leaf=self.min_samples_leaf,</span><br><span class="line">             min_weight_fraction_leaf=self.min_weight_fraction_leaf,</span><br><span class="line">             min_impurity_decrease=self.min_impurity_decrease,</span><br><span class="line">             min_impurity_split=self.min_impurity_split,</span><br><span class="line">             max_features=self.max_features,</span><br><span class="line">             max_leaf_nodes=self.max_leaf_nodes,</span><br><span class="line">             random_state=random_state,</span><br><span class="line">             presort=self.presort)</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> self.subsample &lt; <span class="number">1.0</span>:</span><br><span class="line">             <span class="comment"># no inplace multiplication!</span></span><br><span class="line">             sample_weight = sample_weight * sample_mask.astype(np.float64)</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> X_csc <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">             tree.fit(X_csc, residual, sample_weight=sample_weight,</span><br><span class="line">                      check_input=<span class="literal">False</span>, X_idx_sorted=X_idx_sorted)</span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">             tree.fit(X, residual, sample_weight=sample_weight,</span><br><span class="line">                      check_input=<span class="literal">False</span>, X_idx_sorted=X_idx_sorted)</span><br><span class="line"></span><br><span class="line">         <span class="comment"># update tree leaves</span></span><br><span class="line">         <span class="keyword">if</span> X_csr <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">             loss.update_terminal_regions(tree.tree_, X_csr, y, residual, y_pred,</span><br><span class="line">                                          sample_weight, sample_mask,</span><br><span class="line">                                          self.learning_rate, k=k)</span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">             loss.update_terminal_regions(tree.tree_, X, y, residual, y_pred,</span><br><span class="line">                                          sample_weight, sample_mask,</span><br><span class="line">                                          self.learning_rate, k=k)</span><br><span class="line"></span><br><span class="line">         <span class="comment"># add tree to ensemble</span></span><br><span class="line">         self.estimators_[i, k] = tree</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
-
+<h2 id="训练-_fit_stage">训练 <code>_fit_stage()</code></h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fit_stage</span>(<span class="params">self, i, X, y, y_pred, sample_weight, sample_mask,</span></span></span><br><span class="line"><span class="params"><span class="function">                random_state, X_idx_sorted, X_csc=<span class="literal">None</span>, X_csr=<span class="literal">None</span></span>):</span></span><br><span class="line">     <span class="string">&quot;&quot;&quot;Fit another stage of ``n_classes_`` trees to the boosting model. &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">     <span class="keyword">assert</span> sample_mask.dtype == np.<span class="built_in">bool</span></span><br><span class="line">     loss = self.loss_</span><br><span class="line">     original_y = y</span><br><span class="line">     <span class="comment"># k代表类别个数！</span></span><br><span class="line">     <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(loss.K):</span><br><span class="line">         <span class="keyword">if</span> loss.is_multi_class:</span><br><span class="line">             y = np.array(original_y == k, dtype=np.float64)</span><br><span class="line"></span><br><span class="line">         residual = loss.negative_gradient(y, y_pred, k=k,</span><br><span class="line">                                           sample_weight=sample_weight)</span><br><span class="line"></span><br><span class="line">         <span class="comment"># induce regression tree on residuals</span></span><br><span class="line">         tree = DecisionTreeRegressor(</span><br><span class="line">             criterion=self.criterion,</span><br><span class="line">             splitter=<span class="string">&#x27;best&#x27;</span>,</span><br><span class="line">             max_depth=self.max_depth,</span><br><span class="line">             min_samples_split=self.min_samples_split,</span><br><span class="line">             min_samples_leaf=self.min_samples_leaf,</span><br><span class="line">             min_weight_fraction_leaf=self.min_weight_fraction_leaf,</span><br><span class="line">             min_impurity_decrease=self.min_impurity_decrease,</span><br><span class="line">             min_impurity_split=self.min_impurity_split,</span><br><span class="line">             max_features=self.max_features,</span><br><span class="line">             max_leaf_nodes=self.max_leaf_nodes,</span><br><span class="line">             random_state=random_state,</span><br><span class="line">             presort=self.presort)</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> self.subsample &lt; <span class="number">1.0</span>:</span><br><span class="line">             <span class="comment"># no inplace multiplication!</span></span><br><span class="line">             sample_weight = sample_weight * sample_mask.astype(np.float64)</span><br><span class="line"></span><br><span class="line">         <span class="keyword">if</span> X_csc <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">             tree.fit(X_csc, residual, sample_weight=sample_weight,</span><br><span class="line">                      check_input=<span class="literal">False</span>, X_idx_sorted=X_idx_sorted)</span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">             tree.fit(X, residual, sample_weight=sample_weight,</span><br><span class="line">                      check_input=<span class="literal">False</span>, X_idx_sorted=X_idx_sorted)</span><br><span class="line"></span><br><span class="line">         <span class="comment"># update tree leaves</span></span><br><span class="line">         <span class="keyword">if</span> X_csr <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">             loss.update_terminal_regions(tree.tree_, X_csr, y, residual, y_pred,</span><br><span class="line">                                          sample_weight, sample_mask,</span><br><span class="line">                                          self.learning_rate, k=k)</span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">             loss.update_terminal_regions(tree.tree_, X, y, residual, y_pred,</span><br><span class="line">                                          sample_weight, sample_mask,</span><br><span class="line">                                          self.learning_rate, k=k)</span><br><span class="line"></span><br><span class="line">         <span class="comment"># add tree to ensemble</span></span><br><span class="line">         self.estimators_[i, k] = tree</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
 <p>为了方便起见，我们抽取出重要的几行：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_fit_stage</span>(<span class="params">self, i, X, y, y_pred, sample_weight, sample_mask,</span></span></span><br><span class="line"><span class="params"><span class="function">                random_state, X_idx_sorted, X_csc=<span class="literal">None</span>, X_csr=<span class="literal">None</span></span>):</span></span><br><span class="line">     <span class="string">&quot;&quot;&quot;Fit another stage of ``n_classes_`` trees to the boosting model. &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">     <span class="keyword">assert</span> sample_mask.dtype == np.<span class="built_in">bool</span></span><br><span class="line">     loss = self.loss_</span><br><span class="line">     original_y = y</span><br><span class="line">     <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(loss.K):</span><br><span class="line">         <span class="comment"># ======== 计算损失函数的负梯度（残差）</span></span><br><span class="line">         residual = loss.negative_gradient(y, y_pred, k=k,</span><br><span class="line">                                           sample_weight=sample_weight)</span><br><span class="line">         <span class="comment"># ======= 迭代一颗树</span></span><br><span class="line">         <span class="comment"># induce regression tree on residuals</span></span><br><span class="line">         tree = DecisionTreeRegressor(</span><br><span class="line">             criterion=self.criterion,</span><br><span class="line">             splitter=<span class="string">&#x27;best&#x27;</span>,</span><br><span class="line">             max_depth=self.max_depth,</span><br><span class="line">             min_samples_split=self.min_samples_split,</span><br><span class="line">             min_samples_leaf=self.min_samples_leaf,</span><br><span class="line">             min_weight_fraction_leaf=self.min_weight_fraction_leaf,</span><br><span class="line">             min_impurity_decrease=self.min_impurity_decrease,</span><br><span class="line">             min_impurity_split=self.min_impurity_split,</span><br><span class="line">             max_features=self.max_features,</span><br><span class="line">             max_leaf_nodes=self.max_leaf_nodes,</span><br><span class="line">             random_state=random_state,</span><br><span class="line">             presort=self.presort)</span><br><span class="line"></span><br><span class="line">         <span class="comment">#=== 注意这里拟合目标是负梯度residual！</span></span><br><span class="line">         tree.fit(X, residual, sample_weight=sample_weight,</span><br><span class="line">                      check_input=<span class="literal">False</span>, X_idx_sorted=X_idx_sorted)</span><br><span class="line"></span><br><span class="line">         loss.update_terminal_regions(tree.tree_, X, y, residual, y_pred,</span><br><span class="line">                                          sample_weight, sample_mask,</span><br><span class="line">                                          self.learning_rate, k=k)</span><br><span class="line">         <span class="comment"># add tree to ensemble</span></span><br><span class="line">         self.estimators_[i, k] = tree</span><br><span class="line">     <span class="keyword">return</span> y_pred</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，就是很典型很典型的”梯度提升”过程啊！</p>
+<p>可以看到，就是很典型很典型的"梯度提升"过程啊！</p>
 <ul>
 <li>计算上一轮的残差residual</li>
 <li>迭代一颗新树，树的拟合目标y就是residual</li>
 </ul>
 <p>嗯现在过程就很明朗了！接下来要解决的就是究竟如何生成单颗树了！那就让我们看看DecisionTreeRegressor类吧！</p>
-<h1 id="DecisionTreeRegressor类"><a href="#DecisionTreeRegressor类" class="headerlink" title="DecisionTreeRegressor类"></a>DecisionTreeRegressor类</h1><p>大概看一眼这个类：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-02-27.png"> </p>
+<h1 id="decisiontreeregressor类">DecisionTreeRegressor类</h1>
+<p>大概看一眼这个类：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-02-27.png" /></p>
 <p>只有两个方法，而且方法里是直接调用的父类接口，那我们下面重点放在父类BaseDecisionTree类上！</p>
-<h1 id="BaseDecisionTree类"><a href="#BaseDecisionTree类" class="headerlink" title="BaseDecisionTree类"></a>BaseDecisionTree类</h1><p>这个类写了一颗树是怎样训练的。</p>
+<h1 id="basedecisiontree类">BaseDecisionTree类</h1>
+<p>这个类写了一颗树是怎样训练的。</p>
 <p>大概看一眼：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-02-53.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-02-53.png" /></p>
 <p>那么我们重点看fit。fit方法代码比较长，简短来看其实就是：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fit</span>(<span class="params">self, X, y, sample_weight=<span class="literal">None</span>, check_input=<span class="literal">True</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">        X_idx_sorted=<span class="literal">None</span></span>):</span></span><br><span class="line"></span><br><span class="line">  ....省略很多代码....</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Build tree 建树</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># criterion - 评价标准</span></span><br><span class="line">    criterion = CRITERIA_REG[self.criterion](self.n_outputs_,</span><br><span class="line">                                                     n_samples)</span><br><span class="line">    <span class="comment"># SPLITTERS - 分裂器</span></span><br><span class="line">    SPLITTERS = SPARSE_SPLITTERS <span class="keyword">if</span> issparse(X) <span class="keyword">else</span> DENSE_SPLITTERS</span><br><span class="line"></span><br><span class="line">    splitter = SPLITTERS[self.splitter](criterion,</span><br><span class="line">                                            self.max_features_,</span><br><span class="line">                                            min_samples_leaf,</span><br><span class="line">                                            min_weight_leaf,</span><br><span class="line">                                            random_state,</span><br><span class="line">                                            self.presort)</span><br><span class="line">    <span class="comment"># 树</span></span><br><span class="line">    self.tree_ = Tree(self.n_features_, self.n_classes_, self.n_outputs_)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果max_leaf_nodes没给定，就深度优先建树；如果给定了，就用BestFirst的策略建树</span></span><br><span class="line">    <span class="comment"># Use BestFirst if max_leaf_nodes given; use DepthFirst otherwise</span></span><br><span class="line">    <span class="keyword">if</span> max_leaf_nodes &lt; <span class="number">0</span>:</span><br><span class="line">        builder = DepthFirstTreeBuilder(splitter, min_samples_split,</span><br><span class="line">                                        min_samples_leaf,</span><br><span class="line">                                        min_weight_leaf,</span><br><span class="line">                                        max_depth,</span><br><span class="line">                                        self.min_impurity_decrease,</span><br><span class="line">                                        min_impurity_split)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        builder = BestFirstTreeBuilder(splitter, min_samples_split,</span><br><span class="line">                                       min_samples_leaf,</span><br><span class="line">                                       min_weight_leaf,</span><br><span class="line">                                       max_depth,</span><br><span class="line">                                       max_leaf_nodes,</span><br><span class="line">                                       self.min_impurity_decrease,</span><br><span class="line">                                       min_impurity_split)</span><br><span class="line"> </span><br><span class="line">    builder.build(self.tree_, X, y, sample_weight, X_idx_sorted)</span><br><span class="line"></span><br><span class="line">    self.n_classes_ = self.n_classes_[<span class="number">0</span>]</span><br><span class="line">    self.classes_ = self.classes_[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> self</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>也就是说，在确定各种参数（评价标准、分裂标准、树生长方式等）后，用DF或BF方式生成树。我们主要看深度优先建树。</p>
-<h1 id="DepthFirstTreeBuilder类"><a href="#DepthFirstTreeBuilder类" class="headerlink" title="DepthFirstTreeBuilder类"></a>DepthFirstTreeBuilder类</h1><p>大概扫一眼：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-03-23.png"> </p>
+<h1 id="depthfirsttreebuilder类">DepthFirstTreeBuilder类</h1>
+<p>大概扫一眼：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-03-23.png" /></p>
 <p>我们知道上面的代码调用了build()函数。</p>
-<h2 id="建树"><a href="#建树" class="headerlink" title="建树"></a>建树</h2><p>那我们仔细看看这个，卧槽居然是空的，pass??? 不可以！中华民族的女人绝不服输！我去网上找找！</p>
+<h2 id="建树">建树</h2>
+<p>那我们仔细看看这个，卧槽居然是空的，pass??? 不可以！中华民族的女人绝不服输！我去网上找找！</p>
 <p>嗯原来这个是用Cython写的，在这里<a target="_blank" rel="noopener" href="https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/tree/_tree.pyx">_tree.pyx</a></p>
 <p>代码非常长。首先我们回顾一下深度优先的非递归写法，利用栈向左探底，再扔进去右。而这份代码也是遵从了这样的思路。总体架构：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># push root node onto stack</span></span><br><span class="line">rc = stack.push(<span class="number">0</span>, n_node_samples, <span class="number">0</span>, _TREE_UNDEFINED, <span class="number">0</span>, INFINITY, <span class="number">0</span>)</span><br><span class="line"><span class="keyword">while</span> <span class="keyword">not</span> stack.is_empty():</span><br><span class="line">    <span class="comment"># 栈顶弹出</span></span><br><span class="line">    stack.pop(&amp;stack_record)</span><br><span class="line">    </span><br><span class="line">    【根据stack_record计算当前节点是否应该继续分裂】</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 如果继续分裂，就把左右扔进去</span></span><br><span class="line">    </span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> is_leaf:</span><br><span class="line">        <span class="comment"># Push right child on stack - 将左孩子扔进去</span></span><br><span class="line">        rc = stack.push(split.pos, end, depth + <span class="number">1</span>, node_id, <span class="number">0</span>,</span><br><span class="line">                        split.impurity_right, n_constant_features)</span><br><span class="line">        <span class="comment"># Push left child on stack - 将右孩子扔进去</span></span><br><span class="line">        rc = stack.push(start, split.pos, depth + <span class="number">1</span>, node_id, <span class="number">1</span>,</span><br><span class="line">                            split.impurity_left, n_constant_features)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>那么关键问题就是两个：</p>
-<ol>
+<ol type="1">
 <li>如何判断当前节点是否该继续分裂</li>
 <li>分裂之后变成什么</li>
 </ol>
 <p>我们一个个解决。</p>
-<h2 id="分裂条件"><a href="#分裂条件" class="headerlink" title="分裂条件"></a>分裂条件</h2><p>我们看一下分裂条件：</p>
+<h2 id="分裂条件">分裂条件</h2>
+<p>我们看一下分裂条件：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">n_node_samples = end - start</span><br><span class="line">splitter.node_reset(start, end, &amp;weighted_n_node_samples)</span><br><span class="line"></span><br><span class="line">is_leaf = (depth &gt;= max_depth <span class="keyword">or</span></span><br><span class="line">               n_node_samples &lt; min_samples_split <span class="keyword">or</span></span><br><span class="line">               n_node_samples &lt; <span class="number">2</span> * min_samples_leaf <span class="keyword">or</span></span><br><span class="line">               weighted_n_node_samples &lt; <span class="number">2</span> * min_weight_leaf)</span><br></pre></td></tr></table></figure>
-
 <p>如果当前节点是叶节点，那么它至少满足以下条件的其中之一：</p>
 <ul>
 <li>深度超了 —— depth &gt;= max_depth</li>
@@ -536,33 +301,34 @@
 <li>样本数不足以分裂 —— n_node_samples &lt; 2 * min_samples_leaf</li>
 <li>样本的权重和小于阈值 —— weighted_n_node_samples &lt; 2 * min_weight_leaf</li>
 </ul>
-<h2 id="分裂过程"><a href="#分裂过程" class="headerlink" title="分裂过程"></a>分裂过程</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> is_leaf:</span><br><span class="line">    splitter.node_split(impurity, &amp;split, &amp;n_constant_features)</span><br><span class="line">    is_leaf = (is_leaf <span class="keyword">or</span> split.pos &gt;= end <span class="keyword">or</span></span><br><span class="line">               (split.improvement + EPSILON &lt;</span><br><span class="line">                min_impurity_decrease))</span><br></pre></td></tr></table></figure>
-
+<h2 id="分裂过程">分裂过程</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> is_leaf:</span><br><span class="line">    splitter.node_split(impurity, &amp;split, &amp;n_constant_features)</span><br><span class="line">    is_leaf = (is_leaf <span class="keyword">or</span> split.pos &gt;= end <span class="keyword">or</span></span><br><span class="line">               (split.improvement + EPSILON &lt;</span><br><span class="line">                min_impurity_decrease))</span><br></pre></td></tr></table></figure>
 <p>上述代码表示，如果当前节点是叶节点，那么它至少满足以下条件的其中之一：</p>
 <ul>
 <li>分割位置超出范围 —— split.pos &gt;= end</li>
-<li>本次分裂带来的信息增益提升不够大 —— split.improvement + EPSILON &lt;  min_impurity_decrease</li>
+<li>本次分裂带来的信息增益提升不够大 —— split.improvement + EPSILON &lt; min_impurity_decrease</li>
 </ul>
 <p>那么重点就在于split如何计算的信息增益improvement了！我们看看。回退到之前BaseDecisionTree类的fit方法，我们看到分裂器是 SPLITTERS = SPARSE_SPLITTERS if issparse(X) else DENSE_SPLITTERS。也就是说如果数据是非稀疏的，那就是用DENSE_SPLITTERS来做分裂器。那么我们来看看DENSE_SPLITTERS吧。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DENSE_SPLITTERS = &#123;<span class="string">&quot;best&quot;</span>: _splitter.BestSplitter,</span><br><span class="line">                   <span class="string">&quot;random&quot;</span>: _splitter.RandomSplitter&#125;</span><br></pre></td></tr></table></figure>
-
 <p>那么我们从BestSplitter入手。</p>
-<h2 id="BestSpliter类"><a href="#BestSpliter类" class="headerlink" title="BestSpliter类"></a>BestSpliter类</h2><p>源码：<a target="_blank" rel="noopener" href="https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/tree/_splitter.pyx">_splitter.pyx</a></p>
+<h2 id="bestspliter类">BestSpliter类</h2>
+<p>源码：<a target="_blank" rel="noopener" href="https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/tree/_splitter.pyx">_splitter.pyx</a></p>
 <p>主要看node_split()函数，就是在[start,end]之间寻找一个最优切分点。我把这个函数简化一下。首先我们定义几个feature的区间：</p>
 <ul>
 <li><code>[:n_drawn_constant]</code>，已经用过了的连续（constant）特征。</li>
 <li><code>[n_drawn_constant:n_known_constant]</code>，还没用过的连续特征。</li>
 <li><code>[n_known_constant:n_total_constant]</code>，新发现的连续特征。</li>
-<li><code>[n_total_constant:f_i],</code>还没用过的非连续特征 </li>
-<li><code>[f_i:n_features] </code>表示已经用过了的连续特征</li>
+<li><code>[n_total_constant:f_i],</code>还没用过的非连续特征</li>
+<li><code>[f_i:n_features]</code>表示已经用过了的连续特征</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">cdef <span class="built_in">int</span> node_split(self, double impurity, SplitRecord* split,</span><br><span class="line">                    SIZE_t* n_constant_features) nogil <span class="keyword">except</span> -<span class="number">1</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Find the best split on node samples[start:end]&quot;&quot;&quot;</span></span><br><span class="line">    初始化</span><br><span class="line">    f_i = n_features <span class="comment"># 剩余的feature个数</span></span><br><span class="line">    <span class="keyword">while</span> (f_i &gt; n_total_constants <span class="keyword">and</span>  <span class="comment"># 剩余feature个数过少时停止</span></span><br><span class="line">       (n_visited_features &lt; max_features <span class="keyword">or</span> </span><br><span class="line">        n_visited_features &lt;= n_found_constants + n_drawn_constants)): <span class="comment"># 至少有一个feature是非常数</span></span><br><span class="line">	    <span class="comment"># 随便选一个特征</span></span><br><span class="line">        f_j = rand_int(n_drawn_constants, f_i - n_found_constants,</span><br><span class="line">                           random_state)</span><br><span class="line">        <span class="keyword">if</span> f_j &lt; n_known_constants:</span><br><span class="line">            <span class="comment"># f_j是属于区间[n_drawn_constants, n_known_constants]，也就是说是还没用过的连续特征</span></span><br><span class="line">            <span class="comment">#把f_j放到[:n_drawn_constant]区间的末尾</span></span><br><span class="line">            tmp = features[f_j]</span><br><span class="line">            features[f_j] = features[n_drawn_constants]</span><br><span class="line">            features[n_drawn_constants] = tmp</span><br><span class="line">            n_drawn_constants += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">         <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># f_j 在区间 [n_known_constants, f_i - n_found_constants]，即f_j是新发现的连续特征</span></span><br><span class="line">            <span class="comment"># 将f_j挪到n_total_constants, f_i]区间</span></span><br><span class="line">            f_j += n_found_constants</span><br><span class="line">            current.feature = features[f_j]</span><br><span class="line">            feature_offset = self.X_feature_stride * current.feature</span><br><span class="line">            </span><br><span class="line">            排序工作，并将排序记录下来以便下次使用，省略代码</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 开始寻找分割区间</span></span><br><span class="line">            p = start</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> p &lt; end:</span><br><span class="line">                p += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> p &lt; end:</span><br><span class="line">                    current.pos = p</span><br><span class="line">                    <span class="comment"># Reject if min_samples_leaf is not guaranteed</span></span><br><span class="line">                    <span class="comment"># 如果当前分割点分割后，左右节点个数过少，就跳过</span></span><br><span class="line">                    <span class="keyword">if</span> (((current.pos - start) &lt; min_samples_leaf) <span class="keyword">or</span></span><br><span class="line">                        ((end - current.pos) &lt; min_samples_leaf)):</span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">					  <span class="comment"># 计算当前节点分割点的评价标准</span></span><br><span class="line">                        self.criterion.update(current.pos)</span><br><span class="line"></span><br><span class="line">                        <span class="comment"># Reject if min_weight_leaf is not satisfied</span></span><br><span class="line">                        <span class="keyword">if</span> ((self.criterion.weighted_n_left &lt; min_weight_leaf) <span class="keyword">or</span></span><br><span class="line">                            (self.criterion.weighted_n_right &lt; min_weight_leaf)):</span><br><span class="line">                            <span class="keyword">continue</span></span><br><span class="line">                        current_proxy_improvement = self.criterion.proxy_impurity_improvement()</span><br><span class="line">				       <span class="comment"># 选择最好收益的作为当前分割点</span></span><br><span class="line">                        <span class="keyword">if</span> current_proxy_improvement &gt; best_proxy_improvement:</span><br><span class="line">                            best_proxy_improvement = current_proxy_improvement</span><br><span class="line">                            <span class="comment"># sum of halves is used to avoid infinite value</span></span><br><span class="line">                            current.threshold = Xf[p - <span class="number">1</span>] / <span class="number">2.0</span> + Xf[p] / <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line">                            <span class="keyword">if</span> ((current.threshold == Xf[p]) <span class="keyword">or</span></span><br><span class="line">                                (current.threshold == INFINITY) <span class="keyword">or</span></span><br><span class="line">                                (current.threshold == -INFINITY)):</span><br><span class="line">                                current.threshold = Xf[p - <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">                                best = current  <span class="comment"># copy</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>以上的步骤很明朗了。其实就是依次遍历每个特征的每个分裂点，找到一个最好的！</p>
 <p>接下来我们来看看如何评价这个分裂点的好坏。</p>
-<h2 id="Criterion类"><a href="#Criterion类" class="headerlink" title="Criterion类"></a>Criterion类</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/44a6eaa6318c">GBDT源码分析之二：决策树</a>所述，这个类定义和实现了树结构的分裂策略。</p>
+<h2 id="criterion类">Criterion类</h2>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/44a6eaa6318c">GBDT源码分析之二：决策树</a>所述，这个类定义和实现了树结构的分裂策略。</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/scikit-learn/scikit-learn/blob/master/sklearn/tree/_criterion.pyx">_criterion.pyx</a>里主要定义和实现了各种关于不纯度计算的类，包括（下表参考自<a target="_blank" rel="noopener" href="https://tech.youzan.com/ji-qi-xue-xi-da-bian-che-zhi-nan-jue-ce-shu-1/">机器学习搭便车指南–决策树</a>）：</p>
-<h3 id="Criterion接口"><a href="#Criterion接口" class="headerlink" title="Criterion接口"></a>Criterion接口</h3><p>是一个抽象类。主要定义了如下接口：</p>
+<h3 id="criterion接口">Criterion接口</h3>
+<p>是一个抽象类。主要定义了如下接口：</p>
 <ul>
 <li><code>update(new_pos)</code>：将分裂点从原来的pos移动到new_pos. 其实就是将[pos:new_pos]这些点从右节点移动到左节点上。</li>
 <li><code>node_impurity()</code>：计算当前节点的不纯度</li>
@@ -570,256 +336,191 @@
 </ul>
 <p>实现了如下方法：</p>
 <ul>
-<li><code>impurity_improvement()</code>：计算当前节点的不纯度缩减量。计算方式为：<br>$$\frac{N_t}{N}*(Impurity - \frac{N_{tR}}{N_t}\times Impurity_{right} -  \frac{N_{tL}}{N_t}\times Impurity_{left} )$$<br>其中，N是样本个数；N_t是当前节点的样本个数；N_tR 是右节点的样本个数，N_tL是左节点的样本个数</li>
-<li><code>proxy_impurity_improvement()</code>：由于当前节点的不纯度是一个常数, 因此在比较不纯度缩减量时候有更加简单的方法, 这个方法在分裂过程中最常用, impurity_improvement仅当需要计算不纯度缩减绝对值时才用。其实就是以上公式的化简：<br>$$- N_{tR}\times Impurity_{right} - N_{tL}\times Impurity_{left} $$</li>
+<li><code>impurity_improvement()</code>：计算当前节点的不纯度缩减量。计算方式为： <span class="math display">\[\frac{N_t}{N}*(Impurity - \frac{N_{tR}}{N_t}\times Impurity_{right} -  \frac{N_{tL}}{N_t}\times Impurity_{left} )\]</span> 其中，N是样本个数；N_t是当前节点的样本个数；N_tR 是右节点的样本个数，N_tL是左节点的样本个数</li>
+<li><code>proxy_impurity_improvement()</code>：由于当前节点的不纯度是一个常数, 因此在比较不纯度缩减量时候有更加简单的方法, 这个方法在分裂过程中最常用, impurity_improvement仅当需要计算不纯度缩减绝对值时才用。其实就是以上公式的化简： <span class="math display">\[- N_{tR}\times Impurity_{right} - N_{tL}\times Impurity_{left} \]</span></li>
 </ul>
 <p>这里提一下Criterion表示分裂点和左右节点的方法。在Criterion类内置的变量里，有start、pos、end这样三个值，假设样本标签是samples（已排序的），则samples[start: pos]可代表分裂后的左子节点，samples[pos: end]可代表分裂后的右子节点。Criterion类在初始化时其实是空的，仅当构建树的时候才会被使用。</p>
-<h3 id="RegressionCriterion接口"><a href="#RegressionCriterion接口" class="headerlink" title="RegressionCriterion接口"></a>RegressionCriterion接口</h3><p>是回归树的Criterion接口。主要实现了以下方法：</p>
+<h3 id="regressioncriterion接口">RegressionCriterion接口</h3>
+<p>是回归树的Criterion接口。主要实现了以下方法：</p>
 <ul>
-<li><code>update()</code>: 其实就是在更新上面公式的$N_{tR}、N_{tL}$，即左右两边的样本个数，以及左右两边的样本标签y的和。</li>
+<li><code>update()</code>: 其实就是在更新上面公式的<span class="math inline">\(N_{tR}、N_{tL}\)</span>，即左右两边的样本个数，以及左右两边的样本标签y的和。</li>
 </ul>
-<h3 id="MSE-类"><a href="#MSE-类" class="headerlink" title="MSE 类"></a>MSE 类</h3><p>用均方误差实现不纯度impurity的定义。主要实现/重写了以下方法：</p>
+<h3 id="mse-类">MSE 类</h3>
+<p>用均方误差实现不纯度impurity的定义。主要实现/重写了以下方法：</p>
 <ul>
 <li><code>node_impurity()</code>：计算当前节点的不纯度。</li>
 <li><code>proxy_impurity_improvement()</code></li>
 <li><code>children_impurity()</code></li>
 </ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><table>
+<h3 id="总结">总结</h3>
+<table>
 <thead>
-<tr>
+<tr class="header">
 <th>主要类</th>
 <th>功能描述</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>abstract Criterion</td>
 <td>定义了一系列接口：</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Class ClassificationCriterion</td>
 <td>继承 Criterion; 重写node_value方法, 适应分类树的计算</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Class Entropy</td>
 <td>继承ClassificationCriterion; 重写<em>impurity</em>各个方法, 符合entropy的定义</td>
 </tr>
-<tr>
+<tr class="even">
 <td>Class Gini</td>
 <td>继承ClassificationCriterion;</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>Class RegressionCriterion</td>
 <td>继承 Criterion; 重写node_value方法, 适应回归树的计算</td>
 </tr>
-<tr>
+<tr class="even">
 <td>class MSE</td>
 <td>继承 RegressionCriterion主要实现上文提到回归树的不纯度计算方法</td>
 </tr>
-</tbody></table>
-<h1 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h1><p>Boosting:</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-03-49.png"> </p>
+</tbody>
+</table>
+<h1 id="总结-1">总结</h1>
+<p>Boosting:</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-03-49.png" /></p>
 <p>单个树：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-04-07.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-10-26-14-04-07.png" /></p>
 
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/15/ms%E5%AE%9E%E4%B9%A0-%E6%80%BB%E7%BB%93/" rel="prev" title="ms实习-总结">
+      <i class="fa fa-chevron-left"></i> ms实习-总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/23/ms%E5%AE%9E%E4%B9%A0-%E6%8C%87%E6%95%B0%E5%B9%B3%E6%BB%91/" rel="next" title="ms实习-指数平滑">
+      ms实习-指数平滑 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/08/15/ms%E5%AE%9E%E4%B9%A0-%E6%80%BB%E7%BB%93/" rel="next" title="ms实习-总结">
-                <i class="fa fa-chevron-left"></i> ms实习-总结
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/23/ms%E5%AE%9E%E4%B9%A0-%E6%8C%87%E6%95%B0%E5%B9%B3%E6%BB%91/" rel="prev" title="ms实习-指数平滑">
-                ms实习-指数平滑 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GradientBoostingRegressor%E7%B1%BB"><span class="nav-text">GradientBoostingRegressor类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96-init"><span class="nav-text">初始化__init__()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E6%B5%8Bpredict"><span class="nav-text">预测predict()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BaseGradientBoosting%E7%B1%BB"><span class="nav-text">BaseGradientBoosting类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-fit"><span class="nav-text">训练 fit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-fit-stages"><span class="nav-text">训练 _fit_stages()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-fit-stage"><span class="nav-text">训练 _fit_stage()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DecisionTreeRegressor%E7%B1%BB"><span class="nav-text">DecisionTreeRegressor类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BaseDecisionTree%E7%B1%BB"><span class="nav-text">BaseDecisionTree类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DepthFirstTreeBuilder%E7%B1%BB"><span class="nav-text">DepthFirstTreeBuilder类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E6%A0%91"><span class="nav-text">建树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A3%82%E6%9D%A1%E4%BB%B6"><span class="nav-text">分裂条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A3%82%E8%BF%87%E7%A8%8B"><span class="nav-text">分裂过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BestSpliter%E7%B1%BB"><span class="nav-text">BestSpliter类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Criterion%E7%B1%BB"><span class="nav-text">Criterion类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Criterion%E6%8E%A5%E5%8F%A3"><span class="nav-text">Criterion接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RegressionCriterion%E6%8E%A5%E5%8F%A3"><span class="nav-text">RegressionCriterion接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MSE-%E7%B1%BB"><span class="nav-text">MSE 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gradientboostingregressor%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">GradientBoostingRegressor类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96__init__"><span class="nav-number">1.1.</span> <span class="nav-text">初始化__init__()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E6%B5%8Bpredict"><span class="nav-number">1.2.</span> <span class="nav-text">预测predict()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#basegradientboosting%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">BaseGradientBoosting类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-fit"><span class="nav-number">2.1.</span> <span class="nav-text">训练 fit()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-_fit_stages"><span class="nav-number">2.2.</span> <span class="nav-text">训练 _fit_stages()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83-_fit_stage"><span class="nav-number">2.3.</span> <span class="nav-text">训练 _fit_stage()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decisiontreeregressor%E7%B1%BB"><span class="nav-number">3.</span> <span class="nav-text">DecisionTreeRegressor类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#basedecisiontree%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">BaseDecisionTree类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#depthfirsttreebuilder%E7%B1%BB"><span class="nav-number">5.</span> <span class="nav-text">DepthFirstTreeBuilder类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E6%A0%91"><span class="nav-number">5.1.</span> <span class="nav-text">建树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A3%82%E6%9D%A1%E4%BB%B6"><span class="nav-number">5.2.</span> <span class="nav-text">分裂条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E8%A3%82%E8%BF%87%E7%A8%8B"><span class="nav-number">5.3.</span> <span class="nav-text">分裂过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bestspliter%E7%B1%BB"><span class="nav-number">5.4.</span> <span class="nav-text">BestSpliter类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#criterion%E7%B1%BB"><span class="nav-number">5.5.</span> <span class="nav-text">Criterion类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#criterion%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.5.1.</span> <span class="nav-text">Criterion接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#regressioncriterion%E6%8E%A5%E5%8F%A3"><span class="nav-number">5.5.2.</span> <span class="nav-text">RegressionCriterion接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mse-%E7%B1%BB"><span class="nav-number">5.5.3.</span> <span class="nav-text">MSE 类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.5.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -828,140 +529,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -972,362 +570,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

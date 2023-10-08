@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="链表链表考点  会不会写程序 - 类、指针、引用等  知识点  链表中的Dummy Node 基本链表技能 链表的Two Pointers(Fast-slow pointers)  入门题 123456789101112131415161718192021222324void print()&amp;#123;  for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D;">
+  <meta name="description" content="链表 链表考点  会不会写程序 - 类、指针、引用等  知识点  链表中的Dummy Node 基本链表技能 链表的Two Pointers(Fast-slow pointers)  入门题 123456789101112131415161718192021222324void print()&amp;#123;  for(ListNode node &#x3D; head; node !&#x3D;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法-链表">
 <meta property="og:url" content="http://jiayi797.github.io/about/2017/12/04/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="链表链表考点  会不会写程序 - 类、指针、引用等  知识点  链表中的Dummy Node 基本链表技能 链表的Two Pointers(Fast-slow pointers)  入门题 123456789101112131415161718192021222324void print()&amp;#123;  for(ListNode node &#x3D; head; node !&#x3D; null; node &#x3D;">
-<meta property="og:locale">
+<meta property="og:description" content="链表 链表考点  会不会写程序 - 类、指针、引用等  知识点  链表中的Dummy Node 基本链表技能 链表的Two Pointers(Fast-slow pointers)  入门题 123456789101112131415161718192021222324void print()&amp;#123;  for(ListNode node &#x3D; head; node !&#x3D;">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-04-20-24-02.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-04-22-53-44.png">
 <meta property="article:published_time" content="2017-12-04T07:43:40.000Z">
@@ -107,344 +37,180 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-04-20-24-02.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2017/12/04/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2017/12/04/算法-链表/"/>
-
-
-
-
-
   <title>算法-链表 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/04/%E7%AE%97%E6%B3%95-%E9%93%BE%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">算法-链表</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          算法-链表
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T07:43:40+00:00">
-                2017-12-04
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:05+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-12-04 15:43:40" itemprop="dateCreated datePublished" datetime="2017-12-04T15:43:40+08:00">2017-12-04</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3.9k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:05" itemprop="dateModified" datetime="2018-12-17T15:42:05+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><p><strong>链表考点</strong></p>
+        <h1 id="链表">链表</h1>
+<p><strong>链表考点</strong></p>
 <ul>
 <li>会不会写程序 - 类、指针、引用等</li>
 </ul>
@@ -456,451 +222,317 @@
 </ul>
 <p><strong>入门题</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span>(ListNode node = head; node != <span class="keyword">null</span>; node = node.next)&#123;</span><br><span class="line">    System.out.print(node.val);</span><br><span class="line">    System.out.print(<span class="string">&quot;-&gt;&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  System.out.println(<span class="string">&quot;null&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  ListNode node1 = <span class="keyword">new</span> ListNode(<span class="number">1</span>);</span><br><span class="line">  ListNode node2 = <span class="keyword">new</span> ListNode(<span class="number">2</span>);</span><br><span class="line">  ListNode node3 = <span class="keyword">new</span> ListNode(<span class="number">3</span>);</span><br><span class="line">  </span><br><span class="line">  ListNode head = node1;</span><br><span class="line">  </span><br><span class="line">  node1.next = node2;</span><br><span class="line">  node2.next = node3;</span><br><span class="line">  </span><br><span class="line">  print(head); <span class="comment">// 输出啥？</span></span><br><span class="line">  </span><br><span class="line">  node1 = node2;</span><br><span class="line">  </span><br><span class="line">  print(head); <span class="comment">// 输出啥？</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>答案：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="keyword">null</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="keyword">null</span></span><br></pre></td></tr></table></figure>
-
 <p>思路：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">初始：</span><br><span class="line"></span><br><span class="line">  n1      n2        n3</span><br><span class="line">[<span class="number">1</span>,-]--&gt; [<span class="number">2</span>,-]--&gt; [<span class="number">3</span>,<span class="keyword">null</span>]</span><br><span class="line">===================================</span><br><span class="line">head = n1 : </span><br><span class="line"></span><br><span class="line"> head</span><br><span class="line">  n1      n2        n3</span><br><span class="line">[<span class="number">1</span>,-]--&gt; [<span class="number">2</span>,-]--&gt; [<span class="number">3</span>,<span class="keyword">null</span>]</span><br><span class="line"></span><br><span class="line">sizeof(head) = <span class="number">4</span> </span><br><span class="line">===================================</span><br><span class="line">n1 = n2 : </span><br><span class="line"></span><br><span class="line"> head     n1</span><br><span class="line">          n2        n3</span><br><span class="line">[<span class="number">1</span>,-]--&gt; [<span class="number">2</span>,-]--&gt; [<span class="number">3</span>,<span class="keyword">null</span>]</span><br></pre></td></tr></table></figure>
-
-
-
 <span id="more"></span>
-
-<h1 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h1><h2 id="例题1，Remove-Duplicates-from-Sorted-List"><a href="#例题1，Remove-Duplicates-from-Sorted-List" class="headerlink" title="例题1，Remove Duplicates from Sorted List"></a>例题1，Remove Duplicates from Sorted List</h2><p>将有序链表去重</p>
-<h2 id="例题2，Remove-Duplicates-from-Sorted-List-II"><a href="#例题2，Remove-Duplicates-from-Sorted-List-II" class="headerlink" title="例题2，Remove Duplicates from Sorted List II"></a>例题2，Remove Duplicates from Sorted List II</h2><p>将有序链表中的全部重复元素删除</p>
+<h1 id="例题">例题</h1>
+<h2 id="例题1remove-duplicates-from-sorted-list">例题1，Remove Duplicates from Sorted List</h2>
+<p>将有序链表去重</p>
+<h2 id="例题2remove-duplicates-from-sorted-list-ii">例题2，Remove Duplicates from Sorted List II</h2>
+<p>将有序链表中的全部重复元素删除</p>
 <p>思路：使用dummy node</p>
 <p>当链表结构发生变化时，使用dummy node</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">套路：伪节点</span><br><span class="line"></span><br><span class="line"><span class="comment">// 伪节点</span></span><br><span class="line">          head</span><br><span class="line"> dummy     n1       n2         n3</span><br><span class="line"> [,-]--&gt; [<span class="number">1</span>,-]--&gt; [<span class="number">2</span>,-]--&gt; [<span class="number">3</span>,<span class="keyword">null</span>]</span><br><span class="line"></span><br><span class="line">ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">dummy.next = head;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> dummy.next;</span><br></pre></td></tr></table></figure>
-
 <p>删除节点p方式：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-04-20-24-02.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-04-20-24-02.png" /></p>
 <p>开始写了！</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">dummy.next = head;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 前继节点和当前节点</span></span><br><span class="line">ListNode prev = dummy;</span><br><span class="line">ListNode curt = head;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">null</span> != curt)&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">null</span> != curt.next &amp;&amp; curt.val == curt.next.val)&#123;<span class="comment">// 如果重复了</span></span><br><span class="line">    <span class="keyword">int</span> val = curt.val;</span><br><span class="line">    <span class="keyword">while</span>(curt != <span class="keyword">null</span> &amp;&amp; curt.val == val)&#123;</span><br><span class="line">      curt = curt.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// curt == null or curt.val != val</span></span><br><span class="line">    prev.next = curt;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123; <span class="comment">// 如果不重复</span></span><br><span class="line">    prev = curt;</span><br><span class="line">    curt = curt.next;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> dummy.next; <span class="comment">// 这里需要注意一下</span></span><br></pre></td></tr></table></figure>
-
 <p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplicates</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">null</span> == head)<span class="keyword">return</span> head;</span><br><span class="line">  ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">  dummy.next = head;</span><br><span class="line"></span><br><span class="line">  ListNode prev = dummy;</span><br><span class="line">  ListNode curt = head;</span><br><span class="line">  <span class="keyword">while</span> (<span class="keyword">null</span> != curt)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span> != curt.next &amp;&amp; curt.val == curt.next.val)&#123;</span><br><span class="line">      <span class="keyword">int</span> temp = curt.val;</span><br><span class="line">      curt = curt.next;</span><br><span class="line">      <span class="keyword">while</span> (<span class="keyword">null</span> != curt &amp;&amp; curt.val == temp)&#123;</span><br><span class="line">        curt = curt.next;</span><br><span class="line">      &#125;</span><br><span class="line">      prev.next = curt;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      prev = curt;</span><br><span class="line">      curt = curt.next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题，Remove-Linked-List-Elements"><a href="#例题，Remove-Linked-List-Elements" class="headerlink" title="例题，Remove Linked List Elements"></a>例题，Remove Linked List Elements</h2><p>删除链表中的某个节点</p>
+<h2 id="例题remove-linked-list-elements">例题，Remove Linked List Elements</h2>
+<p>删除链表中的某个节点</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">removeElements</span><span class="params">(ListNode head, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head)<span class="keyword">return</span> head;</span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummy.next = head;</span><br><span class="line"></span><br><span class="line">        ListNode prev = dummy;</span><br><span class="line">        ListNode curt = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != curt)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curt.val == val)&#123;</span><br><span class="line">                curt = curt.next;</span><br><span class="line">                prev.next = curt;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                prev = curt;</span><br><span class="line">                curt = curt.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题3，Reverse-Linked-List"><a href="#例题3，Reverse-Linked-List" class="headerlink" title="例题3，Reverse Linked List"></a>例题3，Reverse Linked List</h2><p>将链表反转</p>
+<h2 id="例题3reverse-linked-list">例题3，Reverse Linked List</h2>
+<p>将链表反转</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">ListNode curt = head;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>( <span class="keyword">null</span> != curt)&#123;</span><br><span class="line">  ListNode temp = curt.next;</span><br><span class="line">  curt.next = prev;</span><br><span class="line">  prev = curt;</span><br><span class="line">  curt = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> prev;</span><br></pre></td></tr></table></figure>
-
 <p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">null</span> == head)&#123;<span class="keyword">return</span> head;&#125;</span><br><span class="line">  ListNode curt = head;</span><br><span class="line">  ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">  ListNode temp;</span><br><span class="line">  <span class="keyword">while</span> (<span class="keyword">null</span> != curt)&#123;</span><br><span class="line">    temp = curt.next;</span><br><span class="line">    curt.next = prev;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span> != temp) &#123;</span><br><span class="line">      prev = curt;</span><br><span class="line">      curt = temp;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> curt; <span class="comment">// 如果这里返回prev的话就不用中间的判断temp是否为空了</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题4，Reverse-Linked-List-II"><a href="#例题4，Reverse-Linked-List-II" class="headerlink" title="例题4，Reverse Linked List II"></a>例题4，Reverse Linked List II</h2><p>将一个链表的m到n反转</p>
+<h2 id="例题4reverse-linked-list-ii">例题4，Reverse Linked List II</h2>
+<p>将一个链表的m到n反转</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">拆解问题</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> 寻找第m个点</span><br><span class="line"><span class="number">2.</span> 将m-n反转</span><br><span class="line"><span class="number">3.</span> 把整个链表连成一个链表！(如下图所示)</span><br></pre></td></tr></table></figure>
-
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-04-22-53-44.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-04-22-53-44.png" /></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(m &gt;= n || head == <span class="keyword">null</span>)&#123;</span><br><span class="line">  <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">dummy.next = head;</span><br><span class="line"></span><br><span class="line">ListNode prev = dummy;</span><br><span class="line"></span><br><span class="line"><span class="comment">//find m-th</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; m ; ++i)&#123;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">null</span> == head)&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	head = head.next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">ListNode premNode = head;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">null</span> == head)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line">ListNode mNode = head.next;</span><br><span class="line"></span><br><span class="line"><span class="comment">// reverse m - n</span></span><br><span class="line">ListNode nNode = mNode, postnNode = mNode.next;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = m; i &lt; n; i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">null</span> == postnNode)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ListNode temp = postnNode.next;</span><br><span class="line">  postnNODE.next = nNode;</span><br><span class="line">  nNode = postnNode;</span><br><span class="line">  postnNode = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// connect m-1 -&gt; n, m - &gt; n+1</span></span><br><span class="line">mNode.next = postnNode;</span><br><span class="line">premNode.next = nNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> dummy.next;</span><br></pre></td></tr></table></figure>
-
 <p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseBetween</span><span class="params">(ListNode head, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  ListNode curt = head;</span><br><span class="line">  ListNode prev = <span class="keyword">null</span>;</span><br><span class="line">  <span class="comment">// find m</span></span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span> ; i &lt; m ; ++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span> == curt.next) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    prev = curt;</span><br><span class="line">    curt = curt.next;</span><br><span class="line">  &#125;</span><br><span class="line">  ListNode mNodePrev = prev;</span><br><span class="line">  ListNode mNode = curt;</span><br><span class="line">  <span class="comment">// reverse m - n</span></span><br><span class="line">  ListNode next = curt.next;</span><br><span class="line">  n = n - m + <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="keyword">null</span> != curt &amp;&amp; n &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    next = curt.next;</span><br><span class="line">    curt.next = prev;</span><br><span class="line">    prev = curt;</span><br><span class="line">    curt = next;</span><br><span class="line">    --n;</span><br><span class="line">  &#125;</span><br><span class="line">  ListNode nNode = prev;</span><br><span class="line">  mNode.next = next;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">null</span> == mNodePrev)&#123;</span><br><span class="line">    <span class="keyword">return</span> nNode;</span><br><span class="line">  &#125;</span><br><span class="line">  mNodePrev.next = nNode;</span><br><span class="line">  <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题5，Reverse-Nodes-in-k-Group"><a href="#例题5，Reverse-Nodes-in-k-Group" class="headerlink" title="例题5，Reverse Nodes in k-Group"></a>例题5，Reverse Nodes in k-Group</h2><p>将链表按照k大小的组，反转。如果最后不够k个，则保持原样。</p>
+<h2 id="例题5reverse-nodes-in-k-group">例题5，Reverse Nodes in k-Group</h2>
+<p>将链表按照k大小的组，反转。如果最后不够k个，则保持原样。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseKGroup</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummy.next = head;</span><br><span class="line"></span><br><span class="line">        ListNode prev = dummy;</span><br><span class="line">        ListNode curt = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> c;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != curt) &#123;</span><br><span class="line">            c = k;</span><br><span class="line">            ListNode firstNodePrev = prev;</span><br><span class="line">            ListNode firstNode = curt;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">null</span> == curt) <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">null</span> != curt &amp;&amp; c &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                ListNode next = curt.next;</span><br><span class="line">                curt.next = prev;</span><br><span class="line">                prev = curt;</span><br><span class="line">                curt = next;</span><br><span class="line">                --c;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(c &gt; <span class="number">0</span>)&#123; <span class="comment">// 末尾保持原样</span></span><br><span class="line">                c = k - c;</span><br><span class="line">                <span class="keyword">while</span> (c &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                    ListNode last = prev.next;</span><br><span class="line">                    prev.next = curt;</span><br><span class="line">                    curt = prev;</span><br><span class="line">                    prev = last;</span><br><span class="line">                    --c;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> dummy.next;</span><br><span class="line">            &#125;</span><br><span class="line">            firstNodePrev.next = prev;</span><br><span class="line">            firstNode.next = curt;</span><br><span class="line"></span><br><span class="line">            prev = firstNode;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="例题6，Partition-List"><a href="#例题6，Partition-List" class="headerlink" title="例题6，Partition List"></a>例题6，Partition List</h2><p>要求把小于x的元素放到链表前面</p>
+<h2 id="例题6partition-list">例题6，Partition List</h2>
+<p>要求把小于x的元素放到链表前面</p>
 <p>思路：排两个队，小的一队，大的一队</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">null</span> == head)&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ListNode leftDummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">ListNode rightDummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">ListNode left = leftDummy, right = rightDummy; <span class="comment">// 左右队伍的尾巴</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(<span class="keyword">null</span> != head)&#123;</span><br><span class="line">  <span class="keyword">if</span>(head.val &lt; x)&#123;</span><br><span class="line">    left.next = head;</span><br><span class="line">    left = head;</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    right.next = head;</span><br><span class="line">    right = head;</span><br><span class="line">  &#125;</span><br><span class="line">  head = head.next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">right.next = <span class="keyword">null</span>;</span><br><span class="line">left.next = rightDummy.next;</span><br><span class="line"><span class="keyword">return</span> leftDummy.next;</span><br><span class="line"></span><br><span class="line">代码：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">partition</span><span class="params">(ListNode head, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        ListNode leftTail = <span class="keyword">new</span> ListNode(<span class="number">0</span>),</span><br><span class="line">                rightTail = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        ListNode leftHead = leftTail, rightHead = rightTail;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != head)&#123;</span><br><span class="line">            <span class="keyword">if</span>(head.val &lt; x)&#123;</span><br><span class="line">                leftTail.next = head;</span><br><span class="line">                leftTail = leftTail.next;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                rightTail.next = head;</span><br><span class="line">                rightTail = rightTail.next;</span><br><span class="line">            &#125;</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        rightTail.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 合并</span></span><br><span class="line">        leftTail.next = rightHead.next;</span><br><span class="line">        <span class="keyword">return</span> leftHead.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="Basic-Skills-in-Linked-List"><a href="#Basic-Skills-in-Linked-List" class="headerlink" title="Basic Skills in Linked List"></a>Basic Skills in Linked List</h1><p>增、删、反转、合并、中点</p>
-<h1 id="Fast-slow-Pointers问题"><a href="#Fast-slow-Pointers问题" class="headerlink" title="Fast-slow Pointers问题"></a>Fast-slow Pointers问题</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">链表中点的骚操作</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">getMiddle</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head.next;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+<h1 id="basic-skills-in-linked-list">Basic Skills in Linked List</h1>
+<p>增、删、反转、合并、中点</p>
+<h1 id="fast-slow-pointers问题">Fast-slow Pointers问题</h1>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">链表中点的骚操作</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">getMiddle</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head.next;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>应用场景：</p>
-<ol>
+<ol type="1">
 <li>链表中点</li>
 <li>移除倒数第N个元素</li>
 <li>Linked List Cycle I，II</li>
 <li>Rotate List</li>
 </ol>
-<h2 id="例题7，Sort-List"><a href="#例题7，Sort-List" class="headerlink" title="例题7，Sort List"></a>例题7，Sort List</h2><p>用O(nlogn)的时间和空间复杂度排序链表</p>
+<h2 id="例题7sort-list">例题7，Sort List</h2>
+<p>用O(nlogn)的时间和空间复杂度排序链表</p>
 <p>思路：n log n的排序 - 快速排序、归并排序、堆排序</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>排序</th>
 <th>快速排序</th>
 <th>归并排序</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>思路</td>
 <td>先整体有序，后局部（左右有序）有序</td>
 <td>先局部（左右有序）有序，后整体有序</td>
 </tr>
-<tr>
+<tr class="even">
 <td></td>
 <td>不稳定排序（原来在前面的不一定还在前面）</td>
 <td>稳定排序-同样的key保持原来的顺序</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>时间</td>
-<td>$O(nlogn — O(n^2))$</td>
-<td>$O(nlogn)$</td>
+<td><span class="math inline">\(O(nlogn --- O(n^2))\)</span></td>
+<td><span class="math inline">\(O(nlogn)\)</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td>空间</td>
 <td>O(1)</td>
-<td>数组上O(n)，链表上$O(1)$</td>
+<td>数组上O(n)，链表上<span class="math inline">\(O(1)\)</span></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>这道题可以用快排，但其实归并排序更好写</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">关键点：怎么取中点？</span><br><span class="line"></span><br><span class="line">取中点骚操作：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">findMiddle</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">	ListNode slow = head, fast = head.next;</span><br><span class="line">	<span class="comment">// 当fast走完的时候，slow就是中点</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">    	fast = fast.next.next;</span><br><span class="line">    	slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">合并：</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">merge</span><span class="params">(ListNode head1, ListNode head2)</span></span>&#123;</span><br><span class="line">	ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">	ListNode tail = dummy;</span><br><span class="line">    <span class="keyword">while</span>(<span class="keyword">null</span> != head1 &amp;&amp; <span class="keyword">null</span> != head2)&#123;</span><br><span class="line">    	<span class="keyword">if</span>(head1.val &lt; head2.val)&#123;</span><br><span class="line">          tail.next = head1;</span><br><span class="line">          head1 = head1.next;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">          tail.next = head2;</span><br><span class="line">          head2 = head2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        tail = tail.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span> != head1)&#123;</span><br><span class="line">      tail.next = head1;</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">null</span> != head2)&#123;</span><br><span class="line">      tail.next = head2;</span><br><span class="line">      &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dummy.next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">主函数</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">sortList</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">null</span> != head || <span class="keyword">null</span> != head.next)&#123;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 找中点</span></span><br><span class="line">  ListNode mid = findMiddle(head);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 分解问题</span></span><br><span class="line">  ListNode right = sortList(mid.next);</span><br><span class="line">  mid.next = <span class="keyword">null</span>;</span><br><span class="line">  ListNode left = sortList(head);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 合并问题</span></span><br><span class="line">  <span class="keyword">return</span> merge(left,right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>代码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">getMiddle</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head.next;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">merge</span><span class="params">(ListNode right, ListNode left)</span></span>&#123;</span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode head = dummy;</span><br><span class="line">        dummy.next = head;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != right &amp;&amp; <span class="keyword">null</span> != left)&#123;</span><br><span class="line">            <span class="keyword">if</span>(right.val &lt; left.val)&#123;</span><br><span class="line">                head.next = right;</span><br><span class="line">                right = right.next;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                head.next = left;</span><br><span class="line">                left = left.next;</span><br><span class="line">            &#125;</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> != right)&#123;</span><br><span class="line">            head.next = right;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">null</span> != left)&#123;</span><br><span class="line">            head.next = left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">sortList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//归并排序</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head.next) <span class="keyword">return</span> head;</span><br><span class="line">        <span class="comment">// 获取中值</span></span><br><span class="line">        ListNode mid = getMiddle(head);</span><br><span class="line">        <span class="comment">// 分解问题</span></span><br><span class="line">        ListNode right = sortList(mid.next);</span><br><span class="line">        mid.next = <span class="keyword">null</span>;</span><br><span class="line">        ListNode left = sortList(head);</span><br><span class="line">        <span class="comment">// 合并</span></span><br><span class="line">        <span class="keyword">return</span> merge(left,right);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题8，Reorder-List"><a href="#例题8，Reorder-List" class="headerlink" title="例题8，Reorder List"></a>例题8，Reorder List</h2><p>将链表 <em>L</em>0→<em>L</em>1→…→<em>L</em>n-1→<em>L</em>n,  重排序为<em>L</em>0→<em>L**n</em>→<em>L</em>1→<em>L**n</em>-1→<em>L</em>2→<em>L**n</em>-2→…</p>
+<h2 id="例题8reorder-list">例题8，Reorder List</h2>
+<p>将链表 <em>L</em>0→<em>L</em>1→…→<em>L</em>n-1→<em>L</em>n, 重排序为<em>L</em>0→<em>L<strong>n<em>→</em>L<em>1→</em>L</strong>n</em>-1→<em>L</em>2→*L**n*-2→…</p>
 <p>思路：</p>
-<ol>
+<ol type="1">
 <li>找中点</li>
 <li>中点右半部分reverse</li>
 <li>合并</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">getMiddle</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        ListNode fast = head.next;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> slow;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        ListNode last = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != head)&#123;</span><br><span class="line">            ListNode temp = head.next;</span><br><span class="line">            head.next = last;</span><br><span class="line">            last = head;</span><br><span class="line">            head = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reorderList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 找中点</span></span><br><span class="line">        ListNode mid = getMiddle(head);</span><br><span class="line">        <span class="comment">// 反转 mid - end</span></span><br><span class="line">        ListNode right = reverse(mid.next);</span><br><span class="line">        mid.next = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 合并</span></span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummy.next = head;</span><br><span class="line">        <span class="keyword">boolean</span> fromRight = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != head &amp;&amp; <span class="keyword">null</span> != right) &#123;</span><br><span class="line">            ListNode temp = head.next;</span><br><span class="line">            head.next = right;</span><br><span class="line">            right = right.next;</span><br><span class="line">            head.next.next = temp;</span><br><span class="line">            head = head.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-<h2 id="例题9，Linked-List-Cycle"><a href="#例题9，Linked-List-Cycle" class="headerlink" title="例题9，Linked List Cycle"></a>例题9，Linked List Cycle</h2><p>判断链表里有没有环形</p>
+<h2 id="例题9linked-list-cycle">例题9，Linked List Cycle</h2>
+<p>判断链表里有没有环形</p>
 <p>暴力方法：用hash表</p>
 <p>骚操作：快指针和慢指针如果相遇了，就有环</p>
 <p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        ListNode fast = head.next;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == slow)&#123;<span class="keyword">return</span> <span class="keyword">true</span>;&#125;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="例题10，Linked-List-Cycle-II"><a href="#例题10，Linked-List-Cycle-II" class="headerlink" title="例题10，Linked List Cycle II"></a>例题10，Linked List Cycle II</h2><p>如果有环，找到环的入口</p>
+<h2 id="例题10linked-list-cycle-ii">例题10，Linked List Cycle II</h2>
+<p>如果有环，找到环的入口</p>
 <p>骚操作：快指针和慢指针如果相遇了，就有环。相遇之后，再让head和slow分别开始，每次走一步。相遇后一定是环入口。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">detectCycle</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        ListNode fast = head.next;</span><br><span class="line">        ListNode slow = head;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast == slow)&#123;</span><br><span class="line">                slow = slow.next;</span><br><span class="line">                <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(slow == head)</span><br><span class="line">                        <span class="keyword">return</span> slow;</span><br><span class="line">                    slow = slow.next;</span><br><span class="line">                    head = head.next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            slow = slow.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题11，Rotate-List"><a href="#例题11，Rotate-List" class="headerlink" title="例题11，Rotate List"></a>例题11，Rotate List</h2><ol>
+<h2 id="例题11rotate-list">例题11，Rotate List</h2>
+<ol type="1">
 <li>循环移动</li>
 <li>找到倒数第k个</li>
 <li>断开连上就好</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">rotateRight</span><span class="params">(ListNode head, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span> head;</span><br><span class="line">    <span class="keyword">int</span> n = getLength(head);</span><br><span class="line">    <span class="comment">// 寻找倒数第k个</span></span><br><span class="line">    k = k % n;</span><br><span class="line">    <span class="keyword">if</span>(k == <span class="number">0</span>) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode fast = head;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; k ; ++i)&#123;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode slow = head;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">        fast = fast.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 注意这里的技巧，此时fast = tail</span></span><br><span class="line">    ListNode right = slow.next;</span><br><span class="line">    slow.next = <span class="keyword">null</span>;</span><br><span class="line">    fast.next = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="例题12，Merge-k-Sorted-Lists"><a href="#例题12，Merge-k-Sorted-Lists" class="headerlink" title="例题12，Merge k Sorted Lists"></a>例题12，Merge k Sorted Lists</h2><p>三种方法：</p>
-<ol>
-<li><p>堆，维护当前每个list的head。复杂度$Nlogk$</p>
-</li>
-<li><p>分治法。复杂度$Nlogk$–每个数都经过$logk$ 次合并</p>
+<h2 id="例题12merge-k-sorted-lists">例题12，Merge k Sorted Lists</h2>
+<p>三种方法：</p>
+<ol type="1">
+<li><p>堆，维护当前每个list的head。复杂度<span class="math inline">\(Nlogk\)</span></p></li>
+<li><p>分治法。复杂度<span class="math inline">\(Nlogk\)</span>--每个数都经过<span class="math inline">\(logk\)</span> 次合并</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">         *</span><br><span class="line">        / \</span><br><span class="line">      /     *</span><br><span class="line">    /      / \</span><br><span class="line">  *       /   *</span><br><span class="line"> / \     /   / \ </span><br><span class="line"><span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   <span class="number">5</span></span><br><span class="line"></span><br><span class="line">将两个 k/<span class="number">2</span> 的链表组，合并为一个链表 </span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeKLists</span><span class="params">(ListNode[] lists)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(lists.length == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mergeHelper(lists, <span class="number">0</span>, lists.length - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">mergeHelper</span><span class="params">(ListNode[] lists, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(end == start) <span class="keyword">return</span> lists[start];</span><br><span class="line">        <span class="keyword">int</span> mid = start + (end - start) / <span class="number">2</span>;</span><br><span class="line">        ListNode left = mergeHelper(lists, start, mid);</span><br><span class="line">        ListNode right = mergeHelper(lists,mid + <span class="number">1</span>, end);</span><br><span class="line">        <span class="keyword">return</span> mergeTwoLists(left,right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> ListNode <span class="title">mergeTwoLists</span><span class="params">(ListNode list1, ListNode list2)</span></span>&#123;</span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        ListNode tail = dummy;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != list1 &amp;&amp; <span class="keyword">null</span> != list2)&#123;</span><br><span class="line">            <span class="keyword">if</span>(list1.val &lt; list2.val)&#123;</span><br><span class="line">                tail.next = list1;</span><br><span class="line">                list1 = list1.next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                tail.next = list2;</span><br><span class="line">                list2 = list2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            tail = tail.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> != list1)&#123;</span><br><span class="line">            tail.next = list1;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">null</span> != list2)&#123;</span><br><span class="line">            tail.next = list2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>两两合并，复杂度$Nlogk$</p>
+<li><p>两两合并，复杂度<span class="math inline">\(Nlogk\)</span></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">         <span class="number">9</span></span><br><span class="line">       /  \</span><br><span class="line">      <span class="number">8</span>    \</span><br><span class="line">    /   \   \</span><br><span class="line">  <span class="number">6</span>       <span class="number">7</span>  \</span><br><span class="line"> / \     / \   \ </span><br><span class="line"><span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span>   <span class="number">4</span>   <span class="number">5</span></span><br><span class="line">           </span><br><span class="line">           </span><br><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeKLists</span><span class="params">(List&lt;ListNode&gt; lists)</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(lists.size() == <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">while</span>(lists.size() &gt; <span class="number">1</span>)&#123;</span><br><span class="line">    List&lt;ListNode&gt; new_lists = <span class="keyword">new</span> ArrayList&lt;ListNode&gt;();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i + <span class="number">1</span> &lt; lists.size(); i += <span class="number">2</span>) &#123;</span><br><span class="line">                ListNode merged_list = merge(lists.get(i), lists.get(i+<span class="number">1</span>));</span><br><span class="line">                new_lists.add(merged_list);</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="keyword">if</span> (lists.size() % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">      new_lists.add(lists.get(lists.size() - <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    lists = new_lists;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> lists.get(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">merge</span><span class="params">(ListNode list1, ListNode list2)</span></span>&#123;</span><br><span class="line">  ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">  ListNode tail = dummy;</span><br><span class="line">  <span class="keyword">while</span>(list1 != <span class="keyword">null</span> &amp;&amp; list2 != <span class="keyword">null</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(list1.val &lt; list2.val)&#123;</span><br><span class="line">      tail.next = list1;</span><br><span class="line">      tail = list1;</span><br><span class="line">      list1 = list1.next;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      tail.next = list2;</span><br><span class="line">      tail = list2;</span><br><span class="line">      list2 = list2.next;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (list1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            tail.next = list1;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    tail.next = list2;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="例题13，Copy-List-with-Random-Pointer"><a href="#例题13，Copy-List-with-Random-Pointer" class="headerlink" title="例题13，Copy List with Random Pointer"></a>例题13，Copy List with Random Pointer</h2><p>​</p>
+<h2 id="例题13copy-list-with-random-pointer">例题13，Copy List with Random Pointer</h2>
+<p>​</p>
 <p><code>1 -&gt; 2 -&gt; 3 -&gt; 4...</code></p>
 <p>然后每个点都有一个random指针，随机指</p>
 <p>要求将这个random list 深拷贝一次</p>
 <p>方法一，依次拷贝node.next,用一个哈希表存储每个[oldNode,newNode]</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-
 <p>方法二，骚操作，优化，用O(1)的空间复杂度</p>
 <p>刚才我们存储的是映射关系，老节点-&gt;新节点，用巧妙的方式存储这个关系</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> -&gt; <span class="number">2</span> -&gt; <span class="number">3</span> -&gt; <span class="number">4</span> -&gt; <span class="keyword">null</span></span><br><span class="line"></span><br><span class="line">变成</span><br><span class="line">  </span><br><span class="line"><span class="number">1</span> -&gt; <span class="number">1</span>` -&gt; <span class="number">2</span> -&gt; <span class="number">2</span>` -&gt; <span class="number">3</span> -&gt; <span class="number">3</span>` -&gt; <span class="number">4</span> -&gt; <span class="number">4</span>` -&gt; <span class="keyword">null</span></span><br><span class="line">  </span><br><span class="line">a.next.next --&gt;保留了原来链表的关系</span><br><span class="line">a.next      --&gt;新的链表</span><br><span class="line"></span><br><span class="line">那么如果链表中有random指针，如下</span><br><span class="line"></span><br><span class="line">__            __________</span><br><span class="line">↑↓           ↑          ↓</span><br><span class="line"><span class="number">1</span>  -&gt;  <span class="number">1</span>` -&gt; <span class="number">2</span> -&gt; <span class="number">2</span>` -&gt; <span class="number">3</span> -&gt; <span class="number">3</span>` -&gt; <span class="number">4</span> -&gt; <span class="number">4</span>` -&gt; <span class="keyword">null</span></span><br><span class="line">  </span><br><span class="line">那么复制这个random关系即可！！</span><br><span class="line"></span><br><span class="line">然后再把这个链表拆开即可！</span><br><span class="line"></span><br><span class="line">总结：</span><br><span class="line"><span class="number">1.</span> copy next</span><br><span class="line"><span class="number">2.</span> copy random</span><br><span class="line"><span class="number">3.</span> split</span><br><span class="line"></span><br><span class="line">代码：</span><br><span class="line"><span class="function"><span class="keyword">public</span> RandomListNode <span class="title">copyRandomList</span><span class="params">(RandomListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head) <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// copy next</span></span><br><span class="line">        RandomListNode curr = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">null</span> != curr)&#123;</span><br><span class="line">            RandomListNode copy = <span class="keyword">new</span> RandomListNode(curr.label);</span><br><span class="line">            copy.next = curr.next;</span><br><span class="line">            curr.next = copy;</span><br><span class="line">            curr = curr.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// copy random</span></span><br><span class="line">        curr = head;</span><br><span class="line">        <span class="keyword">while</span>(<span class="keyword">null</span> != curr)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curr.random != <span class="keyword">null</span>)&#123;</span><br><span class="line">                curr.next.random = curr.random.next;</span><br><span class="line">            &#125;</span><br><span class="line">            curr = curr.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// split</span></span><br><span class="line">        RandomListNode dummy = head.next;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != head)&#123;</span><br><span class="line">            RandomListNode temp = head.next;</span><br><span class="line">            head.next = temp.next;</span><br><span class="line">            head = head.next;</span><br><span class="line">            <span class="keyword">if</span> (temp.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">                temp.next = temp.next.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
-<h2 id="Swap-Nodes-in-Pairs"><a href="#Swap-Nodes-in-Pairs" class="headerlink" title="Swap Nodes in Pairs"></a>Swap Nodes in Pairs</h2><p>将链表两两反转</p>
+<h2 id="swap-nodes-in-pairs">Swap Nodes in Pairs</h2>
+<p>将链表两两反转</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(ListNode obj,ListNode prev)</span></span>&#123;</span><br><span class="line">        prev.next = obj.next;</span><br><span class="line">        obj.next = prev.next.next;</span><br><span class="line">        prev.next.next = obj;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">swapPairs</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummy.next = head;</span><br><span class="line">        ListNode prev = dummy;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != head &amp;&amp; <span class="keyword">null</span> != head.next)&#123;</span><br><span class="line">            swap(head,prev);</span><br><span class="line">            head = head.next;</span><br><span class="line">            prev = prev.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="Delete-Node-in-a-Linked-List"><a href="#Delete-Node-in-a-Linked-List" class="headerlink" title="Delete Node in a Linked List"></a>Delete Node in a Linked List</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node != <span class="keyword">null</span> &amp;&amp; node.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            node.val = node.next.val;</span><br><span class="line">            node.next = node.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Palindrome-Linked-List"><a href="#Palindrome-Linked-List" class="headerlink" title="Palindrome Linked List"></a>Palindrome Linked List</h2><p>判断一个list是不是回文串</p>
+<h2 id="delete-node-in-a-linked-list">Delete Node in a Linked List</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteNode</span><span class="params">(ListNode node)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(node != <span class="keyword">null</span> &amp;&amp; node.next != <span class="keyword">null</span>) &#123;</span><br><span class="line">            node.val = node.next.val;</span><br><span class="line">            node.next = node.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="palindrome-linked-list">Palindrome Linked List</h2>
+<p>判断一个list是不是回文串</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">getMiddle</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">    ListNode fast = head.next;</span><br><span class="line">    ListNode slow = head;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">null</span> != fast &amp;&amp; <span class="keyword">null</span> != fast.next)&#123;</span><br><span class="line">        fast = fast.next.next;</span><br><span class="line">        slow = slow.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> ListNode <span class="title">reverse</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">    ListNode last = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">null</span> != head)&#123;</span><br><span class="line">        ListNode temp = head.next;</span><br><span class="line">        head.next = last;</span><br><span class="line">        last = head;</span><br><span class="line">        head = temp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> last;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    <span class="comment">// 找中点</span></span><br><span class="line">    ListNode middle = getMiddle(head);</span><br><span class="line">    ListNode right = middle.next;</span><br><span class="line">    middle.next = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">// 将right反转</span></span><br><span class="line">    right = reverse(right);</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">null</span> != right &amp;&amp; <span class="keyword">null</span> != head &amp;&amp; right.val == head.val)&#123;</span><br><span class="line">        right = right.next;</span><br><span class="line">        head = head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((<span class="keyword">null</span> == head &amp;&amp; <span class="keyword">null</span> == right)||</span><br><span class="line">            (<span class="keyword">null</span> == head.next &amp;&amp; <span class="keyword">null</span> == right)||</span><br><span class="line">            (<span class="keyword">null</span> == right.next &amp;&amp; <span class="keyword">null</span> == head))&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Odd-Even-Linked-List"><a href="#Odd-Even-Linked-List" class="headerlink" title="Odd Even Linked List"></a>Odd Even Linked List</h2><p>将链表的奇数位放前面，偶数位放后面</p>
+<h2 id="odd-even-linked-list">Odd Even Linked List</h2>
+<p>将链表的奇数位放前面，偶数位放后面</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">oddEvenList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span> head;</span><br><span class="line">    ListNode oddDummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    ListNode evenDummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    oddDummy.next = head;</span><br><span class="line">    evenDummy.next = head.next;</span><br><span class="line">    ListNode odd = head;</span><br><span class="line">    ListNode even = head.next;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">null</span> != even &amp;&amp; <span class="keyword">null</span> != even.next)&#123;</span><br><span class="line">        odd.next = even.next;</span><br><span class="line">        even.next = odd.next.next;</span><br><span class="line">        odd = odd.next;</span><br><span class="line">        even = even.next;</span><br><span class="line">    &#125;</span><br><span class="line">    odd.next = evenDummy.next;</span><br><span class="line">    <span class="keyword">return</span> oddDummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Split-Linked-List-in-Parts"><a href="#Split-Linked-List-in-Parts" class="headerlink" title="Split Linked List in Parts"></a>Split Linked List in Parts</h2><p>很无聊的题。</p>
+<h2 id="split-linked-list-in-parts">Split Linked List in Parts</h2>
+<p>很无聊的题。</p>
 <p>将一个链表分为k个部分，每个部分的长度差不得超过1，且前面的长度不得小于后面的长度。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getLength</span><span class="params">(ListNode root)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">null</span> != root)&#123;</span><br><span class="line">        root = root.next;</span><br><span class="line">        ++length;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> length;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> ListNode[] splitListToParts(ListNode root, <span class="keyword">int</span> k) &#123;</span><br><span class="line">    <span class="keyword">int</span> length = getLength(root);</span><br><span class="line">    <span class="keyword">int</span> n = length/k;</span><br><span class="line">    <span class="keyword">int</span> m = length % k;</span><br><span class="line">    ListNode[] results = <span class="keyword">new</span> ListNode[k];</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">null</span> != root)&#123;</span><br><span class="line">        <span class="keyword">int</span> i = m &gt; <span class="number">0</span> ? n : n - <span class="number">1</span>;</span><br><span class="line">        m-=<span class="number">1</span>;</span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummy.next = root;</span><br><span class="line">        <span class="keyword">while</span> (i &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            root = root.next;</span><br><span class="line">            --i;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode temp = root.next;</span><br><span class="line">        root.next = <span class="keyword">null</span>;</span><br><span class="line">        root = temp;</span><br><span class="line">        results[pos] = dummy.next;</span><br><span class="line">        ++pos;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (pos &lt; k)&#123;</span><br><span class="line">        results[pos] = <span class="keyword">null</span>;</span><br><span class="line">        ++pos;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Insertion-Sort-List"><a href="#Insertion-Sort-List" class="headerlink" title="Insertion Sort List"></a>Insertion Sort List</h2><p>实现链表的插入排序 </p>
+<h2 id="insertion-sort-list">Insertion Sort List</h2>
+<p>实现链表的插入排序</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">insertionSortList</span><span class="params">(ListNode head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">null</span> == head || <span class="keyword">null</span> == head.next) <span class="keyword">return</span> head;</span><br><span class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummy.next = head;</span><br><span class="line">        ListNode curt = head;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">null</span> != curt &amp;&amp; <span class="keyword">null</span> != curt.next)&#123;</span><br><span class="line">            <span class="keyword">if</span>(curt.next.val &gt;= curt.val)&#123;</span><br><span class="line">                curt = curt.next;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 将curt.next插入到前面</span></span><br><span class="line">                ListNode prev = dummy.next;</span><br><span class="line">                ListNode insert = curt.next;</span><br><span class="line">                <span class="keyword">if</span>(dummy.next.val &gt;= insert.val)</span><br><span class="line">                    prev = dummy;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">while</span> (prev.next.val &lt; insert.val) &#123;</span><br><span class="line">                        prev = prev.next;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 将curt.next插到prev后面</span></span><br><span class="line">                curt.next = curt.next.next;</span><br><span class="line">                ListNode prevNext = prev.next;</span><br><span class="line">                prev.next = insert;</span><br><span class="line">                insert.next = prevNext;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummy.next;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<h1 id="总结">总结</h1>
+<ul>
 <li>凡是链表结构发生变化的，都需要Dummy Node</li>
-<li>链表常用基本功：<ul>
+<li>链表常用基本功：
+<ul>
 <li>反转 reverse</li>
 <li>归并 merge</li>
 <li>找中点 median</li>
 <li>增删查改</li>
-</ul>
-</li>
+</ul></li>
 <li>Linked List Cycle , 知道怎么做，理解</li>
 <li>Linked List Cycle II，知道怎么做，课后分析一下为什么，背下程序</li>
-<li>Copy List with Random Pointers<ul>
+<li>Copy List with Random Pointers
+<ul>
 <li>能写出hash map方法</li>
 <li>优化方法要能正确实现</li>
-</ul>
-</li>
-<li>Merge k Sorted Arrays<ul>
+</ul></li>
+<li>Merge k Sorted Arrays
+<ul>
 <li>k路归并一定要掌握</li>
 <li>三种方式分别实现，并熟练理解和掌握</li>
 <li>顺便做一下merge k sorted arrays</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1 id="其他题"><a href="#其他题" class="headerlink" title="其他题"></a>其他题</h1><h2 id="Intersection-of-Two-Linked-Lists"><a href="#Intersection-of-Two-Linked-Lists" class="headerlink" title="Intersection of Two Linked Lists"></a>Intersection of Two Linked Lists</h2><p>寻找两个链表的交叉点，如下所示，返回节点c1。如果不存在，返回Null</p>
+<h1 id="其他题">其他题</h1>
+<h2 id="intersection-of-two-linked-lists">Intersection of Two Linked Lists</h2>
+<p>寻找两个链表的交叉点，如下所示，返回节点c1。如果不存在，返回Null</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A:          a1 → a2</span><br><span class="line">                   ↘</span><br><span class="line">                     c1 → c2 → c3</span><br><span class="line">                   ↗            </span><br><span class="line">B:     b1 → b2 → b3</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getLen</span><span class="params">(ListNode head)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (head != <span class="keyword">null</span>)&#123;</span><br><span class="line">            ++length;</span><br><span class="line">            head = head.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> length;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> remainA = getLen(headA);</span><br><span class="line">        <span class="keyword">int</span> remainB = getLen(headB);</span><br><span class="line">        <span class="keyword">while</span> (remainA &gt; remainB)&#123;</span><br><span class="line">            headA = headA.next;</span><br><span class="line">            --remainA;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (remainA &lt; remainB)&#123;</span><br><span class="line">            headB = headB.next;</span><br><span class="line">            --remainB;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 此时remainA == remainB</span></span><br><span class="line">        <span class="keyword">while</span> (headA != <span class="keyword">null</span> &amp;&amp; headB != <span class="keyword">null</span> &amp;&amp; headA != headB)&#123;</span><br><span class="line">            headA = headA.next;</span><br><span class="line">            headB = headB.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(headA == headB) <span class="keyword">return</span> headA;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/11/28/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%88%86%E6%B2%BB/" rel="prev" title="算法-二叉树与分治">
+      <i class="fa fa-chevron-left"></i> 算法-二叉树与分治
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/12/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-3-%E6%9E%84%E5%BB%BA%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="next" title="深度学习实践-1-3-构建浅层神经网络">
+      深度学习实践-1-3-构建浅层神经网络 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/11/28/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%8E%E5%88%86%E6%B2%BB/" rel="next" title="算法-二叉树与分治">
-                <i class="fa fa-chevron-left"></i> 算法-二叉树与分治
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/05/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-3-%E6%9E%84%E5%BB%BA%E6%B5%85%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="prev" title="深度学习实践-1-3-构建浅层神经网络">
-                深度学习实践-1-3-构建浅层神经网络 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-text">链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981%EF%BC%8CRemove-Duplicates-from-Sorted-List"><span class="nav-text">例题1，Remove Duplicates from Sorted List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982%EF%BC%8CRemove-Duplicates-from-Sorted-List-II"><span class="nav-text">例题2，Remove Duplicates from Sorted List II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%8CRemove-Linked-List-Elements"><span class="nav-text">例题，Remove Linked List Elements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983%EF%BC%8CReverse-Linked-List"><span class="nav-text">例题3，Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984%EF%BC%8CReverse-Linked-List-II"><span class="nav-text">例题4，Reverse Linked List II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985%EF%BC%8CReverse-Nodes-in-k-Group"><span class="nav-text">例题5，Reverse Nodes in k-Group</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%986%EF%BC%8CPartition-List"><span class="nav-text">例题6，Partition List</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Skills-in-Linked-List"><span class="nav-text">Basic Skills in Linked List</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fast-slow-Pointers%E9%97%AE%E9%A2%98"><span class="nav-text">Fast-slow Pointers问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%987%EF%BC%8CSort-List"><span class="nav-text">例题7，Sort List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%988%EF%BC%8CReorder-List"><span class="nav-text">例题8，Reorder List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%989%EF%BC%8CLinked-List-Cycle"><span class="nav-text">例题9，Linked List Cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9810%EF%BC%8CLinked-List-Cycle-II"><span class="nav-text">例题10，Linked List Cycle II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9811%EF%BC%8CRotate-List"><span class="nav-text">例题11，Rotate List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9812%EF%BC%8CMerge-k-Sorted-Lists"><span class="nav-text">例题12，Merge k Sorted Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9813%EF%BC%8CCopy-List-with-Random-Pointer"><span class="nav-text">例题13，Copy List with Random Pointer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Swap-Nodes-in-Pairs"><span class="nav-text">Swap Nodes in Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Delete-Node-in-a-Linked-List"><span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Palindrome-Linked-List"><span class="nav-text">Palindrome Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Odd-Even-Linked-List"><span class="nav-text">Odd Even Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Split-Linked-List-in-Parts"><span class="nav-text">Split Linked List in Parts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Insertion-Sort-List"><span class="nav-text">Insertion Sort List</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%A2%98"><span class="nav-text">其他题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intersection-of-Two-Linked-Lists"><span class="nav-text">Intersection of Two Linked Lists</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%93%BE%E8%A1%A8"><span class="nav-number">1.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%981remove-duplicates-from-sorted-list"><span class="nav-number">2.1.</span> <span class="nav-text">例题1，Remove Duplicates from Sorted List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%982remove-duplicates-from-sorted-list-ii"><span class="nav-number">2.2.</span> <span class="nav-text">例题2，Remove Duplicates from Sorted List II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%98remove-linked-list-elements"><span class="nav-number">2.3.</span> <span class="nav-text">例题，Remove Linked List Elements</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%983reverse-linked-list"><span class="nav-number">2.4.</span> <span class="nav-text">例题3，Reverse Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%984reverse-linked-list-ii"><span class="nav-number">2.5.</span> <span class="nav-text">例题4，Reverse Linked List II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%985reverse-nodes-in-k-group"><span class="nav-number">2.6.</span> <span class="nav-text">例题5，Reverse Nodes in k-Group</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%986partition-list"><span class="nav-number">2.7.</span> <span class="nav-text">例题6，Partition List</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#basic-skills-in-linked-list"><span class="nav-number">3.</span> <span class="nav-text">Basic Skills in Linked List</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fast-slow-pointers%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">Fast-slow Pointers问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%987sort-list"><span class="nav-number">4.1.</span> <span class="nav-text">例题7，Sort List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%988reorder-list"><span class="nav-number">4.2.</span> <span class="nav-text">例题8，Reorder List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%989linked-list-cycle"><span class="nav-number">4.3.</span> <span class="nav-text">例题9，Linked List Cycle</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9810linked-list-cycle-ii"><span class="nav-number">4.4.</span> <span class="nav-text">例题10，Linked List Cycle II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9811rotate-list"><span class="nav-number">4.5.</span> <span class="nav-text">例题11，Rotate List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9812merge-k-sorted-lists"><span class="nav-number">4.6.</span> <span class="nav-text">例题12，Merge k Sorted Lists</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E9%A2%9813copy-list-with-random-pointer"><span class="nav-number">4.7.</span> <span class="nav-text">例题13，Copy List with Random Pointer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#swap-nodes-in-pairs"><span class="nav-number">4.8.</span> <span class="nav-text">Swap Nodes in Pairs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete-node-in-a-linked-list"><span class="nav-number">4.9.</span> <span class="nav-text">Delete Node in a Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#palindrome-linked-list"><span class="nav-number">4.10.</span> <span class="nav-text">Palindrome Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#odd-even-linked-list"><span class="nav-number">4.11.</span> <span class="nav-text">Odd Even Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#split-linked-list-in-parts"><span class="nav-number">4.12.</span> <span class="nav-text">Split Linked List in Parts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insertion-sort-list"><span class="nav-number">4.13.</span> <span class="nav-text">Insertion Sort List</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%A2%98"><span class="nav-number">6.</span> <span class="nav-text">其他题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#intersection-of-two-linked-lists"><span class="nav-number">6.1.</span> <span class="nav-text">Intersection of Two Linked Lists</span></a></li></ol></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -909,140 +541,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1053,362 +582,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

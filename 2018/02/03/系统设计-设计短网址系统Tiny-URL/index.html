@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="例如goo.gl 系统设计常见误区以下几个是误区  系统一定巨大无比 —— × 必须用NoSQL  —— × 必须是分布式  —— ×  不可以扔关键词，必须一步步分析。 4S分析法  提问：分析功能&#x2F;需求&#x2F;QPS&#x2F;存储容量——Scenario 画图：根据分析结果设计“可行解”—— Service+Storage 进化：研究可能遇到的问题，优化系统 —— Scale   分析需求需求有两个：  根">
+  <meta name="description" content="例如goo.gl 系统设计常见误区 以下几个是误区  系统一定巨大无比 —— × 必须用NoSQL —— × 必须是分布式 —— ×  不可以扔关键词，必须一步步分析。 4S分析法  提问：分析功能&#x2F;需求&#x2F;QPS&#x2F;存储容量——Scenario 画图：根据分析结果设计“可行解”—— Service+Storage 进化：研究可能遇到的问题，优化系统 —— Scale">
 <meta property="og:type" content="article">
 <meta property="og:title" content="系统设计-设计短网址系统Tiny-URL">
 <meta property="og:url" content="http://jiayi797.github.io/about/2018/02/03/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1%E7%9F%AD%E7%BD%91%E5%9D%80%E7%B3%BB%E7%BB%9FTiny-URL/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="例如goo.gl 系统设计常见误区以下几个是误区  系统一定巨大无比 —— × 必须用NoSQL  —— × 必须是分布式  —— ×  不可以扔关键词，必须一步步分析。 4S分析法  提问：分析功能&#x2F;需求&#x2F;QPS&#x2F;存储容量——Scenario 画图：根据分析结果设计“可行解”—— Service+Storage 进化：研究可能遇到的问题，优化系统 —— Scale   分析需求需求有两个：  根">
-<meta property="og:locale">
+<meta property="og:description" content="例如goo.gl 系统设计常见误区 以下几个是误区  系统一定巨大无比 —— × 必须用NoSQL —— × 必须是分布式 —— ×  不可以扔关键词，必须一步步分析。 4S分析法  提问：分析功能&#x2F;需求&#x2F;QPS&#x2F;存储容量——Scenario 画图：根据分析结果设计“可行解”—— Service+Storage 进化：研究可能遇到的问题，优化系统 —— Scale">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-35-36.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-36-01.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-49-19.png">
@@ -117,390 +47,228 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-35-36.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2018/02/03/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1%E7%9F%AD%E7%BD%91%E5%9D%80%E7%B3%BB%E7%BB%9FTiny-URL/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2018/02/03/系统设计-设计短网址系统Tiny-URL/"/>
-
-
-
-
-
   <title>系统设计-设计短网址系统Tiny-URL | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/02/03/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1%E7%9F%AD%E7%BD%91%E5%9D%80%E7%B3%BB%E7%BB%9FTiny-URL/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">系统设计-设计短网址系统Tiny-URL</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          系统设计-设计短网址系统Tiny-URL
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T14:29:21+00:00">
-                2018-02-03
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:07+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
-                    <span itemprop="name">系统设计</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-02-03 22:29:21" itemprop="dateCreated datePublished" datetime="2018-02-03T22:29:21+08:00">2018-02-03</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:07" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
         <p>例如goo.gl</p>
-<h1 id="系统设计常见误区"><a href="#系统设计常见误区" class="headerlink" title="系统设计常见误区"></a>系统设计常见误区</h1><p><strong>以下几个是误区</strong></p>
+<h1 id="系统设计常见误区">系统设计常见误区</h1>
+<p><strong>以下几个是误区</strong></p>
 <ul>
 <li>系统一定巨大无比 —— ×</li>
-<li>必须用NoSQL  —— ×</li>
-<li>必须是分布式  —— ×</li>
+<li>必须用NoSQL —— ×</li>
+<li>必须是分布式 —— ×</li>
 </ul>
 <p>不可以扔关键词，必须一步步分析。</p>
 <p><strong>4S分析法</strong></p>
-<ol>
+<ol type="1">
 <li>提问：分析功能/需求/QPS/存储容量——Scenario</li>
 <li>画图：根据分析结果设计“可行解”—— Service+Storage</li>
-<li>进化：研究可能遇到的问题，优化系统 —— Scale </li>
+<li>进化：研究可能遇到的问题，优化系统 —— Scale</li>
 </ol>
-<h1 id="分析需求"><a href="#分析需求" class="headerlink" title="分析需求"></a>分析需求</h1><p><strong>需求有两个：</strong></p>
+<h1 id="分析需求">分析需求</h1>
+<p><strong>需求有两个：</strong></p>
 <ul>
-<li>根据长URL生成短URL<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-35-36.png"> </li>
-<li>根据短URL还原长URL<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-36-01.png"> </li>
+<li>根据长URL生成短URL <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-35-36.png" /></li>
+<li>根据短URL还原长URL <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-36-01.png" /></li>
 </ul>
 <p><strong>QPS?</strong></p>
 <p>假设这个是用来给微博做短网址的跳转。那么QPS能有多少？</p>
-<ol>
+<ol type="1">
 <li>询问微博日活用户 —— 约100M</li>
-<li>推算产生一条Tiny URL的QPS<ul>
+<li>推算产生一条Tiny URL的QPS
+<ul>
 <li>假设每个用户平均每天发0.1条微博，</li>
-<li>平均写QPS = 100M * 0.1 / 86400 ~ 100 </li>
-<li>峰值QPS = 100 * 2 = 200 </li>
-</ul>
-</li>
-<li>推算点击一条Tiny URL的QPS<ul>
-<li>假设每个用户平均点1个Tiny URL </li>
+<li>平均写QPS = 100M * 0.1 / 86400 ~ 100</li>
+<li>峰值QPS = 100 * 2 = 200</li>
+</ul></li>
+<li>推算点击一条Tiny URL的QPS
+<ul>
+<li>假设每个用户平均点1个Tiny URL</li>
 <li>平均读QPS = 100M * 1 / 86400 ~ 1k</li>
 <li>峰值QPS = 2k</li>
-</ul>
-</li>
-<li>推算每天产生的新的 URL 所占存储<ul>
+</ul></li>
+<li>推算每天产生的新的 URL 所占存储
+<ul>
 <li>100M * 0.1 ~ 10M 条</li>
 <li>每一条 URL 长度平均 100 算，一共1G</li>
-<li>1T 的硬盘可以用 3 年 </li>
-</ul>
-</li>
+<li>1T 的硬盘可以用 3 年</li>
+</ul></li>
 </ol>
 <p>前3点：2k QPS ，一台SSD支持的MySQL完全可以搞定！</p>
-<h1 id="服务——逻辑块聚类与接口设计"><a href="#服务——逻辑块聚类与接口设计" class="headerlink" title="服务——逻辑块聚类与接口设计"></a>服务——逻辑块聚类与接口设计</h1><p>TinyUrl只有一个UrlService</p>
+<h1 id="服务逻辑块聚类与接口设计">服务——逻辑块聚类与接口设计</h1>
+<p>TinyUrl只有一个UrlService</p>
 <ul>
 <li>本身就是一个小Application</li>
-<li>无需关心其他的 </li>
+<li>无需关心其他的</li>
 </ul>
 <p>函数设计</p>
 <ul>
@@ -509,53 +277,55 @@
 </ul>
 <p>访问端口设计</p>
 <ul>
-<li><code>GET /&lt;short_url&gt;</code><ul>
+<li><code>GET /&lt;short_url&gt;</code>
+<ul>
 <li><code>return a Http redirect response</code></li>
-</ul>
-</li>
-<li><code>POST /data/shorten/</code><ul>
+</ul></li>
+<li><code>POST /data/shorten/</code>
+<ul>
 <li><code>Data = &#123;url: http://xxxx &#125;</code></li>
-<li><code>Return short url </code></li>
+<li><code>Return short url</code></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-49-19.png"> </p>
-<h1 id="数据存取"><a href="#数据存取" class="headerlink" title="数据存取"></a>数据存取</h1><p>两个步骤：</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-22-49-19.png" /></p>
+<h1 id="数据存取">数据存取</h1>
+<p>两个步骤：</p>
 <ul>
 <li>选择存储结构</li>
 <li>细化数据表</li>
 </ul>
-<h2 id="选择存储结构"><a href="#选择存储结构" class="headerlink" title="选择存储结构"></a>选择存储结构</h2><p><strong>SQL vs NoSQL</strong></p>
+<h2 id="选择存储结构">选择存储结构</h2>
+<p><strong>SQL vs NoSQL</strong></p>
 <ul>
-<li>是否需要支持 Transaction（事务）？<ul>
+<li>是否需要支持 Transaction（事务）？
+<ul>
 <li>NoSQL不支持Transaction</li>
 <li>是否需要丰富的 SQL Query？</li>
-</ul>
-</li>
-<li>NoSQL的SQL Query不是太丰富<ul>
+</ul></li>
+<li>NoSQL的SQL Query不是太丰富
+<ul>
 <li>也有一些NoSQL的数据库提供简单的SQL Query支持</li>
-</ul>
-</li>
-<li>是否想偷懒？<ul>
+</ul></li>
+<li>是否想偷懒？
+<ul>
 <li>大多数 Web Framework 与 SQL 数据库兼容得很好</li>
 <li>用SQL比用NoSQL少写很多代码</li>
-</ul>
-</li>
-<li>是否需要Sequential ID？<ul>
+</ul></li>
+<li>是否需要Sequential ID？
+<ul>
 <li>SQL 为你提供了 auto-increment 的 Sequential ID。也就是1,2,3,4,5 …</li>
-<li>NoSQL的ID并不是 Sequential 的 </li>
-</ul>
-</li>
-<li>对QPS的要求有多高？<ul>
+<li>NoSQL的ID并不是 Sequential 的</li>
+</ul></li>
+<li>对QPS的要求有多高？
+<ul>
 <li>NoSQL 的性能更高</li>
-</ul>
-</li>
-<li>对Scalability的要求有多高？<ul>
+</ul></li>
+<li>对Scalability的要求有多高？
+<ul>
 <li>SQL 需要码农自己写代码来 Scale</li>
 <li>还记得Db那节课中怎么做 Sharding，Replica 的么？</li>
-</ul>
-</li>
-<li>NoSQL 这些都帮你做了 </li>
+</ul></li>
+<li>NoSQL 这些都帮你做了</li>
 </ul>
 <p><strong>选择</strong></p>
 <ul>
@@ -566,59 +336,61 @@
 <li>对Scalability的要求有多高？—— 存储和QPS要求都不高，单机都可以搞定。SQL+1</li>
 <li>是否需要Sequential ID？—— 取决于你的算法是什么 : 如何将Long URL 转化为 Short URL</li>
 </ul>
-<h2 id="如何将Long-URL-转化为-Short-URL"><a href="#如何将Long-URL-转化为-Short-URL" class="headerlink" title="如何将Long URL 转化为 Short URL"></a>如何将Long URL 转化为 Short URL</h2><p>**算法1 使用哈希函数 Hash Function（不可行） **</p>
-<p>比如取 Long Url 的 MD5 的最后 6 位——这个方法肯定是有问题的<br>• 优点：快<br>• 缺点：难以设计一个没有冲突的哈希算法 </p>
-<p><strong>算法2：随机生成 + 数据库去重</strong> </p>
-<p>随机一个 6 位的 ShortURL，如果没有被用过，就绑定到该 LongURL<br>• 伪代码如下：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-23-00-12.png"><br>• 优点：实现简单<br>• 缺点：生成短网址的长度随着短网址越来越多变得越来越慢<br>• 可行性：其实能凑合用。在生活中有很多随机编码的，例如机票码、酒店码，是不可重复的，就是用这种方法弄的。</p>
+<h2 id="如何将long-url-转化为-short-url">如何将Long URL 转化为 Short URL</h2>
+<p><strong>算法1 使用哈希函数 Hash Function（不可行） </strong></p>
+<p>比如取 Long Url 的 MD5 的最后 6 位——这个方法肯定是有问题的 • 优点：快 • 缺点：难以设计一个没有冲突的哈希算法</p>
+<p><strong>算法2：随机生成 + 数据库去重</strong></p>
+<p>随机一个 6 位的 ShortURL，如果没有被用过，就绑定到该 LongURL • 伪代码如下： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-03-23-00-12.png" /> • 优点：实现简单 • 缺点：生成短网址的长度随着短网址越来越多变得越来越慢 • 可行性：其实能凑合用。在生活中有很多随机编码的，例如机票码、酒店码，是不可重复的，就是用这种方法弄的。</p>
 <p><strong>算法3：进制转换 Base62</strong></p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-20-55-32.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-20-55-32.png" /></p>
 <ul>
-<li>Base62<ul>
+<li>Base62
+<ul>
 <li>将6位的short url看成一个62进制的数（0-9,a-z,A-Z）</li>
 <li>每个short url对应到一个整数</li>
 <li>该整数对应数据库表的主键——Sequential ID</li>
-</ul>
-</li>
-<li>6位可以表示不同的URL有多少？<ul>
-<li>5位 = $62^5$ = 9亿</li>
-<li>6位 = $62^6$ = 570亿</li>
-<li>7位 = $62^7$ = 35000亿</li>
-</ul>
-</li>
-<li>优缺点<ul>
+</ul></li>
+<li>6位可以表示不同的URL有多少？
+<ul>
+<li>5位 = <span class="math inline">\(62^5\)</span> = 9亿</li>
+<li>6位 = <span class="math inline">\(62^6\)</span> = 570亿</li>
+<li>7位 = <span class="math inline">\(62^7\)</span> = 35000亿</li>
+</ul></li>
+<li>优缺点
+<ul>
 <li>优点：效率高</li>
 <li>缺点：依赖于全局的自增ID</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>算法2与3的比较</strong></p>
 <ul>
-<li><strong>基于随机生成的方法</strong><br>需要根据 Long 查询 Short，也需要根据 Short 查询 Long。基本上work solution如下图所示：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-00-54.png"><br>如果选择用 SQL 型数据库，表结构如下：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-20-58-03.png"><br>并且需要对shortKey和longURL分别建索引<br>• <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95">什么是索引？</a><br>• <a target="_blank" rel="noopener" href="http://www.cnblogs.com/morvenhuang/archive/2009/03/30/1425534.html">索引的原理？</a><br>也可以选用 NoSQL 数据库，但是需要建立两张表（大多数NoSQL数据库不支持二级索引）。以 Cassandra 为例子<br>第一张表：根据 Long 查询 Short<br>row_key=longURL, column_key=ShortURL, value=null or timestamp<br>第二张表：根据 Short 查询 Long<br>row_key=shortURL, column_key=LongURL, value=null or timestamp </li>
-<li><strong>基于进制转换的方法</strong><br>因为需要用到自增ID（Sequential ID），因此只能选择使用 SQL 型数据库。表单结构如下，shortURL 可以不存储在表单里，因为可以根据 id 来进行换算<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-02-19.png"> </li>
+<li><strong>基于随机生成的方法</strong> 需要根据 Long 查询 Short，也需要根据 Short 查询 Long。基本上work solution如下图所示： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-00-54.png" /> 如果选择用 SQL 型数据库，表结构如下： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-20-58-03.png" /> 并且需要对shortKey和longURL分别建索引 • <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B4%A2%E5%BC%95">什么是索引？</a> • <a target="_blank" rel="noopener" href="http://www.cnblogs.com/morvenhuang/archive/2009/03/30/1425534.html">索引的原理？</a> 也可以选用 NoSQL 数据库，但是需要建立两张表（大多数NoSQL数据库不支持二级索引）。以 Cassandra 为例子 第一张表：根据 Long 查询 Short row_key=longURL, column_key=ShortURL, value=null or timestamp 第二张表：根据 Short 查询 Long row_key=shortURL, column_key=LongURL, value=null or timestamp</li>
+<li><strong>基于进制转换的方法</strong> 因为需要用到自增ID（Sequential ID），因此只能选择使用 SQL 型数据库。表单结构如下，shortURL 可以不存储在表单里，因为可以根据 id 来进行换算 <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-02-19.png" /></li>
 </ul>
-<h1 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h1><p><strong>读操作的优化</strong></p>
+<h1 id="优化">优化</h1>
+<p><strong>读操作的优化</strong></p>
 <p>既然读操作比较多，那么可以用cache的方式去提速。</p>
 <ul>
-<li>cache里存什么？<ul>
+<li>cache里存什么？
+<ul>
 <li>long to short(生成新short url时需要)</li>
 <li>short to long(查询short url时需要)</li>
-</ul>
-</li>
-<li>查询的流程图：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-22-22.png"> </li>
+</ul></li>
+<li>查询的流程图： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-22-22.png" /></li>
 </ul>
 <p><strong>如何提速</strong></p>
 <ul>
 <li>利用地理位置信息加速</li>
-<li>优化服务器速度<ul>
+<li>优化服务器速度
+<ul>
 <li>不同地区，使用不同Web服务器</li>
 <li>通过DNS解析不同地区的用户到不同的服务器</li>
-</ul>
-</li>
-<li>优化数据访问速度<ul>
+</ul></li>
+<li>优化数据访问速度
+<ul>
 <li>使用Centralized MySQL + Distributed Memcached</li>
-<li>一个MySQL配多个Memcached, Memcached跨地区分布<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-31-37.png"><br>​</li>
-</ul>
-</li>
+<li>一个MySQL配多个Memcached, Memcached跨地区分布 <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-21-31-37.png" /> ​</li>
+</ul></li>
 </ul>
 <p><strong>如何扩展机器</strong></p>
 <ul>
@@ -627,245 +399,168 @@
 <li>Cache资源不够</li>
 <li>写操作越来越多</li>
 <li>请求太多，无法通过Cache满足</li>
-</ul>
-</li>
+</ul></li>
 <li><p>增加多台数据库可以优化什么？</p>
 <ul>
 <li>解决存不下的问题——Storage角度（TinyURL一般遇不到这种问题）</li>
 <li>解决忙不过来的问题——QPS角度</li>
 <li>TinyURL主要是什么问题？？——忙不过来的问题</li>
-</ul>
-</li>
+</ul></li>
 <li><p>如何解决忙不过来的问题？</p>
 <p><strong>拆分 ：</strong></p>
 <ul>
 <li>纵向切分？不同列放不同数据库？不可行！</li>
-<li>横向拆分？一个表放多个机器？<br>就将不同的short key放到不同的机器上，能解决short 2 long问题。但此时如果要解决long 2 short问题，就不好搞了。可能需要遍历每一个机器。但是回过来问，long 2 short这个问题的意义是什么。没有必要根据long查询short哇。一个long可以对应多个short，因此没必要一个long对应一个short。</li>
-</ul>
-</li>
-</ul>
+<li>横向拆分？一个表放多个机器？ 就将不同的short key放到不同的机器上，能解决short 2 long问题。但此时如果要解决long 2 short问题，就不好搞了。可能需要遍历每一个机器。但是回过来问，long 2 short这个问题的意义是什么。没有必要根据long查询short哇。一个long可以对应多个short，因此没必要一个long对应一个short。</li>
+</ul></li>
+<li><p>如果最开始shortkey为6位，那就增加一位前置位：</p>
 <ul>
-<li>如果最开始shortkey为6位，那就增加一位前置位：<ul>
-<li>AB1234 –&gt; 0AB1234（该前置位由hash(long_url)%62得到（可以用consistent hash算法），因此是唯一的。这个前置位可以作为机器的ID等）</li>
+<li>AB1234 --&gt; 0AB1234（该前置位由hash(long_url)%62得到（可以用consistent hash算法），因此是唯一的。这个前置位可以作为机器的ID等）</li>
 <li>另一种做法，把第一位单独留出来做sharding key，总共还是6位</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p>那么当前的架构就变成了：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-22-18-36.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-22-18-36.png" /></p>
 <p><strong>还有优化的地方吗</strong></p>
 <p>网站服务器 (Web Server) 与 数据库服务器 (Database) 之间的通信问题。</p>
 <p>中心化的服务器集群（Centralized DB set）与 跨地域的 Web Server 之间通信较慢。比如中国的服务器需要访问美国的数据库那么何不让中国的服务器访问中国的数据库？</p>
 <p>如果数据是重复写到中国的数据库，那么如何解决一致性问题？——很难解决</p>
 <p>中国的用户访问时，会被DNS分配中国的服务器，这非常的慢。</p>
 <p>而中国的用户访问的网站一般都是中国的网站，所以我们可以按照网站的地域信息进行 Sharding。（如何获得网站的地域信息？只需要将用户比较常访问的网站弄一张表就好了）</p>
-<p>中国的用户访问美国的网站怎么办？那就让中国的服务器访问美国的数据好了，反正也不会慢多少。中国访问中国是主流需求，优化系统就是要优化主要的需求 </p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-22-23-52.png"> </p>
+<p>中国的用户访问美国的网站怎么办？那就让中国的服务器访问美国的数据好了，反正也不会慢多少。中国访问中国是主流需求，优化系统就是要优化主要的需求</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-02-10-22-23-52.png" /></p>
 <p><strong>能不能提供个性化的URL?</strong></p>
 <p>就是把后面的短url个性化。可以的，只要与其它short不重复就行了。如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">shortURL   longURL</span><br><span class="line">1234AB     www.baidu.com</span><br><span class="line">bd         www.baidu.com</span><br></pre></td></tr></table></figure>
-
 <p>但最好不要新开一列custom。因为这样很浪费空间。</p>
 
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/30/Java-Iterator/" rel="prev" title="Java-Iterator">
+      <i class="fa fa-chevron-left"></i> Java-Iterator
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/02/08/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83%E6%B3%95/" rel="next" title="算法-贪心法">
+      算法-贪心法 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/30/Java-Iterator/" rel="next" title="Java-Iterator">
-                <i class="fa fa-chevron-left"></i> Java-Iterator
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/08/%E7%AE%97%E6%B3%95-%E8%B4%AA%E5%BF%83%E6%B3%95/" rel="prev" title="算法-贪心法">
-                算法-贪心法 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-text">系统设计常见误区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E9%9C%80%E6%B1%82"><span class="nav-text">分析需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E2%80%94%E2%80%94%E9%80%BB%E8%BE%91%E5%9D%97%E8%81%9A%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="nav-text">服务——逻辑块聚类与接口设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96"><span class="nav-text">数据存取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-text">选择存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86Long-URL-%E8%BD%AC%E5%8C%96%E4%B8%BA-Short-URL"><span class="nav-text">如何将Long URL 转化为 Short URL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-text">优化</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="nav-number">1.</span> <span class="nav-text">系统设计常见误区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E9%9C%80%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">分析需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E9%80%BB%E8%BE%91%E5%9D%97%E8%81%9A%E7%B1%BB%E4%B8%8E%E6%8E%A5%E5%8F%A3%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.</span> <span class="nav-text">服务——逻辑块聚类与接口设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96"><span class="nav-number">4.</span> <span class="nav-text">数据存取</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">4.1.</span> <span class="nav-text">选择存储结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%B0%86long-url-%E8%BD%AC%E5%8C%96%E4%B8%BA-short-url"><span class="nav-number">4.2.</span> <span class="nav-text">如何将Long URL 转化为 Short URL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">5.</span> <span class="nav-text">优化</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -874,140 +569,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1018,362 +610,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

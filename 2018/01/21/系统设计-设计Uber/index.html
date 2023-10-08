@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="大纲  RingPop https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;ringpop-node 一个分布式架构 扩展阅读http:&#x2F;&#x2F;ubr.to&#x2F;1S47b8g [Hard] http:&#x2F;&#x2F;bit.ly&#x2F;1Yg2dnd [Hard]   TChannelhttps:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;tchannel 一个高效的RPC协议RPC: Remote Procedure Call G">
+  <meta name="description" content="大纲  RingPop  https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;ringpop-node 一个分布式架构 扩展阅读 http:&#x2F;&#x2F;ubr.to&#x2F;1S47b8g [Hard] http:&#x2F;&#x2F;bit.ly&#x2F;1Yg2dnd [Hard]  TChannel https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;tchannel 一个高效的RPC协议 RPC: Remote Pro">
 <meta property="og:type" content="article">
 <meta property="og:title" content="系统设计-设计Uber">
 <meta property="og:url" content="http://jiayi797.github.io/about/2018/01/21/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1Uber/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="大纲  RingPop https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;ringpop-node 一个分布式架构 扩展阅读http:&#x2F;&#x2F;ubr.to&#x2F;1S47b8g [Hard] http:&#x2F;&#x2F;bit.ly&#x2F;1Yg2dnd [Hard]   TChannelhttps:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;tchannel 一个高效的RPC协议RPC: Remote Procedure Call G">
-<meta property="og:locale">
+<meta property="og:description" content="大纲  RingPop  https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;ringpop-node 一个分布式架构 扩展阅读 http:&#x2F;&#x2F;ubr.to&#x2F;1S47b8g [Hard] http:&#x2F;&#x2F;bit.ly&#x2F;1Yg2dnd [Hard]  TChannel https:&#x2F;&#x2F;github.com&#x2F;uber&#x2F;tchannel 一个高效的RPC协议 RPC: Remote Pro">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-11-55-45.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-11-58-33.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-12-03-11.png">
@@ -126,415 +56,249 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-11-55-45.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2018/01/21/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1Uber/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2018/01/21/系统设计-设计Uber/"/>
-
-
-
-
-
   <title>系统设计-设计Uber | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/01/21/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E8%AE%BE%E8%AE%A1Uber/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">系统设计-设计Uber</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          系统设计-设计Uber
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-21T08:43:42+00:00">
-                2018-01-21
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:07+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
-                    <span itemprop="name">系统设计</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-01-21 16:43:42" itemprop="dateCreated datePublished" datetime="2018-01-21T16:43:42+08:00">2018-01-21</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:07" itemprop="dateModified" datetime="2018-12-17T15:42:07+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">系统设计</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
+
     
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>大纲</p>
 <ul>
-<li>RingPop<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/uber/ringpop-node">https://github.com/uber/ringpop-node</a></li>
+<li>RingPop
+<ul>
+<li>https://github.com/uber/ringpop-node</li>
 <li>一个分布式架构</li>
-<li>扩展阅读<br><a target="_blank" rel="noopener" href="http://ubr.to/1S47b8g">http://ubr.to/1S47b8g</a> [Hard]</li>
-<li><a target="_blank" rel="noopener" href="http://bit.ly/1Yg2dnd">http://bit.ly/1Yg2dnd</a> [Hard]</li>
-</ul>
-</li>
-<li>TChannel<br><a target="_blank" rel="noopener" href="https://github.com/uber/tchannel">https://github.com/uber/tchannel</a></li>
-<li>一个高效的RPC协议<br>RPC: Remote Procedure Call</li>
-<li>Google S2<br><a target="_blank" rel="noopener" href="https://github.com/google/s2-geometry-library-java">https://github.com/google/s2-geometry-library-java</a><br>一个地理位置信息存储与查询的算法</li>
-<li>Riak<br>Dynamo DB 的开源实现 </li>
+<li>扩展阅读 http://ubr.to/1S47b8g [Hard]</li>
+<li>http://bit.ly/1Yg2dnd [Hard]</li>
+</ul></li>
+<li>TChannel https://github.com/uber/tchannel</li>
+<li>一个高效的RPC协议 RPC: Remote Procedure Call</li>
+<li>Google S2 https://github.com/google/s2-geometry-library-java 一个地理位置信息存储与查询的算法</li>
+<li>Riak Dynamo DB 的开源实现</li>
 </ul>
 <span id="more"></span>
-
-<h1 id="Scenario-场景"><a href="#Scenario-场景" class="headerlink" title="Scenario 场景"></a>Scenario 场景</h1><p><strong>需要设计哪些功能？设计到什么地步？</strong></p>
+<h1 id="scenario-场景">Scenario 场景</h1>
+<p><strong>需要设计哪些功能？设计到什么地步？</strong></p>
 <ul>
-<li>第一阶段<ul>
+<li>第一阶段
+<ul>
 <li>Driver report locations 司机报告自己的位置——heart beat模式</li>
 <li>Rider request Uber, match a driver with rider 乘客叫车，匹配一辆车</li>
-</ul>
-</li>
-<li>第二阶段<ul>
+</ul></li>
+<li>第二阶段
+<ul>
 <li>Driver deny/accept a request 司机取消/启动 接单</li>
-<li>Driver cancel a match request  司机取消订单</li>
+<li>Driver cancel a match request 司机取消订单</li>
 <li>Ride cancel a request 乘客取消请求</li>
 <li>Driver pick up a ride/ start a trip 司机接人</li>
 <li>Driver drop off a rider/end a trip 司机送到人</li>
-</ul>
-</li>
-<li>第三阶段<ul>
+</ul></li>
+<li>第三阶段
+<ul>
 <li>Uber Pool</li>
 <li>Uber Eat</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <p><strong>QPS / Stroage</strong></p>
-<p>猜一猜：<br>2011年的QPS?——大约1k.<br>2015年的QPS?</p>
+<p>猜一猜： 2011年的QPS?——大约1k. 2015年的QPS?</p>
 <ul>
-<li>假设20w司机同时在线：<ul>
+<li>假设20w司机同时在线：
+<ul>
 <li>Driver QPS = 200k/4 = 50k，每次汇报200k个请求，每4秒汇报一次；【这个占大头】</li>
 <li>Peek Driver QPS = 50k x 3 = 150k</li>
 <li>Rider QPS可以忽略：不用随时汇报位置，一定远小于Driver QPS</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1 id="Service-服务"><a href="#Service-服务" class="headerlink" title="Service 服务"></a>Service 服务</h1><p>Uber主要干的事情就两件：</p>
+<h1 id="service-服务">Service 服务</h1>
+<p>Uber主要干的事情就两件：</p>
 <ul>
 <li>记录车的位置：GeoService</li>
 <li>匹配打车请求：DispatchService</li>
 </ul>
 <p>大概如下图：</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-11-55-45.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-11-55-45.png" /></p>
 <p>问题：这张图漏掉了什么？—— 司机怎么知道乘客在哪？如果直接让车从GeoService拿用户定位？——这样不太好，GeoService负担太重了</p>
 <p>修改一下框架：</p>
 <p>Driver如何获得打车请求？—— Report location的同时，服务器顺便返回匹配上的打车请求</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-11-58-33.png"></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-11-58-33.png" /></p>
 <ul>
 <li>司机向dispatch service发送位置信息，同时返回匹配的乘客信息</li>
 <li>乘客向dispatch service发送打车请求，同时返回请求</li>
 </ul>
-<p>具体地来看，就是：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-12-03-11.png"> </p>
-<p>问题：<br>Location Table——读多还是写多？—— 写多<br>Trip Table—— 读多还是写多？—— 读多（司机每4秒requst时会去读一下有没有匹配的）</p>
+<p>具体地来看，就是： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-12-03-11.png" /></p>
+<p>问题： Location Table——读多还是写多？—— 写多 Trip Table—— 读多还是写多？—— 读多（司机每4秒requst时会去读一下有没有匹配的）</p>
 <p><strong>存储——细化表单</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trip</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Integer tripId; </span><br><span class="line">    <span class="keyword">public</span> Integer driverId, riderId;</span><br><span class="line">    <span class="keyword">public</span> Double Latitude, Longitude;</span><br><span class="line">    <span class="keyword">public</span> Integer status;</span><br><span class="line">    <span class="keyword">public</span> Datetime createdAt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Location</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> Integer driverId;</span><br><span class="line">    <span class="keyword">public</span> Double Latitude, Longitude;</span><br><span class="line">    <span class="keyword">public</span> Datetime updatedAt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从数据库角度来看，就是：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-12-09-06.png"> </p>
+<p>从数据库角度来看，就是：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-12-09-06.png" /></p>
 <p><strong>问题——如何通过Location Table查询某个乘客周围5公里以内的司机？</strong></p>
 <p>SQL:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Location <span class="keyword">WHERE</span> lat <span class="operator">&lt;</span> myLat <span class="operator">+</span> delta</span><br><span class="line">                       <span class="keyword">AND</span>   lat <span class="operator">&gt;</span> myLat <span class="operator">-</span> delta</span><br><span class="line">                       <span class="keyword">AND</span>   lng <span class="operator">&lt;</span> myLng <span class="operator">+</span> delta</span><br><span class="line">                       <span class="keyword">AND</span>   lng <span class="operator">&gt;</span> myLng <span class="operator">-</span> delta</span><br></pre></td></tr></table></figure>
-
 <p>这个也太复杂了，基本上等同于扫描了一遍所有的数据。</p>
 <p><strong>优化方法</strong></p>
 <p><strong>Google S2</strong></p>
@@ -542,23 +306,23 @@
 <li>基本思想：把二维空间变成一维空间，将地址空间映射到2^64的整数。</li>
 <li>方式：希尔伯特曲线：曲线一笔能勾勒遍这个图，然后图上的每个点编个号，这个编号就是所需要的整数。</li>
 <li>特性：<strong>如果空间上比较接近的两个点，对应的整数也比较接近</strong></li>
-<li>Example: <code>(-30.043800, -51.140220) → 10743750136202470315 </code></li>
+<li>Example: <code>(-30.043800, -51.140220) → 10743750136202470315</code></li>
 </ul>
-<p>但并不是100%保证两个点如果比较近，整数就近，比如：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-27-36.png"> </p>
+<p>但并不是100%保证两个点如果比较近，整数就近，比如：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-27-36.png" /></p>
 <ul>
 <li>两个红点在一维和二维上都上比较近</li>
 <li>但红点和紫点虽然在二维上近，但其实在一维上不太近（属于误差）</li>
 </ul>
-<p>Read more: <a target="_blank" rel="noopener" href="http://bit.ly/1WgMpSJ">http://bit.ly/1WgMpSJ</a><br>Hilbert Curve: <a target="_blank" rel="noopener" href="http://bit.ly/1V16HRa">http://bit.ly/1V16HRa</a></p>
+<p>Read more: http://bit.ly/1WgMpSJ Hilbert Curve: http://bit.ly/1V16HRa</p>
 <p><strong>Geohash</strong></p>
 <ul>
 <li>Peano Curve：将经纬度转化为字符串！</li>
 <li>Base32：0-9, a-z 去掉 (a,i,l,o)——为什么用 base32 ? 因为刚好 25 可以用 5 位二进制表示</li>
 <li>核心思路二分法</li>
 <li>特性：<strong>公共前缀越长，两个点越接近</strong></li>
-<li>Example: <code>(-30.043800, -51.140220) → 6feth68y4tb0</code> </li>
+<li>Example: <code>(-30.043800, -51.140220) → 6feth68y4tb0</code></li>
 </ul>
-<p>Read more: <a target="_blank" rel="noopener" href="http://bit.ly/1S0Qzeo">http://bit.ly/1S0Qzeo</a></p>
+<p>Read more: http://bit.ly/1S0Qzeo</p>
 <p><strong>主要思想</strong>如下所示：</p>
 <ul>
 <li>把地图分成格子；</li>
@@ -567,129 +331,120 @@
 <li>如果我们把linkedIn和google经纬度分别弄成这种方式，我们发现前缀有4个一样；然后facebook远一些。</li>
 <li>那么到底有多远呢？主要参考表：如果两个公共前缀有geohash length个，那么就是对应的</li>
 </ul>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-30-05.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-30-05.png" /></p>
 <p><strong>Geohash的二分优化</strong></p>
 <p>事实上，它还有优化：</p>
 <ul>
 <li>先把地球分成两份，如果这个点在左边，就记为0，右边记为1：</li>
 </ul>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-48-49.png"></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-48-49.png" /></p>
 <ul>
-<li>再横向切一刀，如果在上边就记为0，下边记为1 <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-49-42.png"></li>
+<li>再横向切一刀，如果在上边就记为0，下边记为1 <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-49-42.png" /></li>
 <li>继续切切切，如果切5次，就是一个5位的二进制数字；这个5位的二进制数字可以表达为1位的刚才32位的字符，比如11100表示为W</li>
 <li>总的来说，其实就是比如将经度(-180,180)切一次，然后纬度切切切，如下所示：</li>
 </ul>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-47-15.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-47-15.png" /></p>
 <p><strong>查询半径2公里内的车辆</strong></p>
 <ul>
 <li>根据下表，看出来大概geohash length即前缀5位相同的，差不多在2km内</li>
 <li>而Google的位置为9q9hvu7wbq2s</li>
 <li>找到位置以9qqhv开头的车辆即可！！！！—— 问题：在数据库怎么实现？</li>
 </ul>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-55-17.png"> </p>
-<h1 id="Stroage-数据"><a href="#Stroage-数据" class="headerlink" title="Stroage 数据"></a>Stroage 数据</h1><p>如何找到位置开头以9q9hv开头的车辆？数据库怎么存？</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-14-55-17.png" /></p>
+<h1 id="stroage-数据">Stroage 数据</h1>
+<p>如何找到位置开头以9q9hv开头的车辆？数据库怎么存？</p>
 <ul>
-<li>SQL 数据库<ul>
-<li>首先需要对 geohash 建索引<br><code>CREATE INDEX on geohash</code>;</li>
-<li>使用 Like Query:<br><code>SELECT * FROM location WHERE geohash LIKE &quot;9q9hv%&quot;</code>;</li>
-</ul>
-</li>
-<li>NoSQL - Cassandra<ul>
+<li>SQL 数据库
+<ul>
+<li>首先需要对 geohash 建索引 <code>CREATE INDEX on geohash</code>;</li>
+<li>使用 Like Query: <code>SELECT * FROM location WHERE geohash LIKE "9q9hv%"</code>;</li>
+</ul></li>
+<li>NoSQL - Cassandra
+<ul>
 <li>将 geohash 设为 column key</li>
 <li>使用 <code>range query (9q9hv0, 9q9hvz)</code></li>
-</ul>
-</li>
-<li>NoSQL - Redis / Memcached<ul>
-<li>Driver 的位置分级存储（小技巧）<ul>
+</ul></li>
+<li>NoSQL - Redis / Memcached
+<ul>
+<li>Driver 的位置分级存储（小技巧）
+<ul>
 <li>如 Driver 的位置如果是 9q9hvt，则存储在 9q9hvt， 9q9hv， 9q9h 这 3 个 key 中，而这三个类似于不同的经度；检索时，就依次减小经度进行查询看看有没有车</li>
 <li>6位 geohash 的精度已经在一公里以内，对于 Uber 这类应用足够了</li>
-<li>4位 geohash 的精度在20公里以上了，再大就没意义了，你不会打20公里以外的车 </li>
-</ul>
-</li>
-<li>key = 9q9hvt, value = set of drivers in this location </li>
-</ul>
-</li>
+<li>4位 geohash 的精度在20公里以上了，再大就没意义了，你不会打20公里以外的车</li>
+</ul></li>
+<li>key = 9q9hvt, value = set of drivers in this location</li>
+</ul></li>
 </ul>
 <p><strong>不同数据库比较</strong></p>
 <p>能够熟悉每种数据存储结构的特性，对于面试十分加分！</p>
 <ul>
-<li>SQL 可以，但相对较慢<ul>
+<li>SQL 可以，但相对较慢
+<ul>
 <li>原因1：Like query 很慢，应该尽量避免；即便有index，也很慢</li>
-<li>原因2：Uber 的应用中，Driver 需要实时 Update 自己的地理位置<br>被index的column并不适合经常被修改<br>B+树不停变动，效率低</li>
-</ul>
-</li>
-<li>NoSQL – Cassandra 可以，但相对较慢<ul>
-<li>原因： Driver 的地理位置信息更新频次很高<br>Column Key 是有 index 的，被 index 的 column 不适合经常被“修改”</li>
-</ul>
-</li>
-<li>NoSQL – Memcached 并不合适<ul>
+<li>原因2：Uber 的应用中，Driver 需要实时 Update 自己的地理位置 被index的column并不适合经常被修改 B+树不停变动，效率低</li>
+</ul></li>
+<li>NoSQL – Cassandra 可以，但相对较慢
+<ul>
+<li>原因： Driver 的地理位置信息更新频次很高 Column Key 是有 index 的，被 index 的 column 不适合经常被“修改”</li>
+</ul></li>
+<li>NoSQL – Memcached 并不合适
+<ul>
 <li>原因1：Memcached 没有持久化存储，一旦挂了，数据就丢失</li>
-<li>原因2：Memcached 并不原生支持 set 结构<br>需要读出整个 set，添加一个新元素，然后再把整个set 赋回去 </li>
-</ul>
-</li>
+<li>原因2：Memcached 并不原生支持 set 结构 需要读出整个 set，添加一个新元素，然后再把整个set 赋回去</li>
+</ul></li>
 </ul>
 <p>因此这个题，可以考虑用Redis</p>
 <p><strong>Redis</strong></p>
 <ul>
 <li>数据可持久化</li>
 <li>原生支持list，set等结构</li>
-<li>读写速度接近内存访问速度 &gt;100k QPS </li>
+<li>读写速度接近内存访问速度 &gt;100k QPS</li>
 </ul>
 <p>用Redis怎么做这个呢？</p>
 <p><strong>用户打车角度</strong></p>
 <p>用户发出打车请求，查询给定位置周围的司机</p>
 <ul>
-<li>(lat,lng) → geohash → [driver1, driver2, …]<ul>
+<li>(lat,lng) → geohash → [driver1, driver2, …]
+<ul>
 <li>先查6位的 geohash༌找0.6公里以内的</li>
 <li>如果没有༌再查5位的 geohash༌找2.4公里以内的</li>
-<li>如果没有༌再查4位的 geohash༌找20公里以内的 </li>
-</ul>
-</li>
+<li>如果没有༌再查4位的 geohash༌找20公里以内的</li>
+</ul></li>
 <li>那么上述的过程的数据库长这样：</li>
 </ul>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-16-31.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-16-31.png" /></p>
 <p><strong>匹配司机成功后</strong></p>
 <p>匹配司机成功，用户查询司机所在位置</p>
 <ul>
-<li>driver1 → (lat, lng) </li>
+<li>driver1 → (lat, lng)</li>
 </ul>
-<p>表如下所示：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-17-37.png"> </p>
+<p>表如下所示：<img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-17-37.png" /></p>
 <p><strong>司机角度</strong></p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-19-56.png"> </p>
-<h1 id="可行解总结"><a href="#可行解总结" class="headerlink" title="可行解总结"></a>可行解总结</h1><ol>
-<li><p>乘客发出打车请求，服务器创建一次Trip</p>
-<ol>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-19-56.png" /></p>
+<h1 id="可行解总结">可行解总结</h1>
+<ol type="1">
+<li>乘客发出打车请求，服务器创建一次Trip
+<ol type="1">
 <li>将 trip_id 返回给用户</li>
 <li>乘客每隔几秒询问一次服务器是否匹配成功</li>
+</ol></li>
+<li>服务器找到匹配的司机，写入Trip，状态为等待司机回应</li>
+<li>同时修改 Driver Table 中的司机状态为不可用，并存入对应的 trip_id</li>
+<li>司机汇报自己的位置</li>
+<li>顺便在 Driver Table 中发现有分配给自己的 trip_id</li>
+<li>去 Trip Table 查询对应的 Trip，返回给司机</li>
+<li>司机接受打车请求</li>
+<li>修改 Driver Table, Trip 中的状态信息</li>
+<li>乘客发现自己匹配成功，获得司机信息</li>
+<li>司机拒绝打车请求</li>
+<li>修改 Driver Table，Trip 中的状态信息，标记该司机已经拒绝了该trip</li>
+<li>重新匹配一个司机，重复第2步</li>
 </ol>
-</li>
-<li><p>服务器找到匹配的司机，写入Trip，状态为等待司机回应</p>
-</li>
-<li><p>同时修改 Driver Table 中的司机状态为不可用，并存入对应的 trip_id</p>
-</li>
-<li><p>司机汇报自己的位置</p>
-</li>
-<li><p>顺便在 Driver Table 中发现有分配给自己的 trip_id</p>
-</li>
-<li><p>去 Trip Table 查询对应的 Trip，返回给司机</p>
-</li>
-<li><p>司机接受打车请求</p>
-</li>
-<li><p>修改 Driver Table, Trip 中的状态信息</p>
-</li>
-<li><p>乘客发现自己匹配成功，获得司机信息</p>
-</li>
-<li><p>司机拒绝打车请求</p>
-</li>
-<li><p>修改 Driver Table，Trip 中的状态信息，标记该司机已经拒绝了该trip</p>
-</li>
-<li><p>重新匹配一个司机，重复第2步 </p>
-</li>
-</ol>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-24-53.png"> </p>
-<h1 id="Scale-拓展"><a href="#Scale-拓展" class="headerlink" title="Scale 拓展"></a>Scale 拓展</h1><p>看看有哪些问题没有解决，需要优化；出现故障怎么办</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-15-24-53.png" /></p>
+<h1 id="scale-拓展">Scale 拓展</h1>
+<p>看看有哪些问题没有解决，需要优化；出现故障怎么办</p>
 <p><strong>有什么隐患？</strong></p>
-<p>需求是150k QPS。Redis 的读写效率 &gt; 100 QPS。那么是不是1-2台就可以了？ </p>
+<p>需求是150k QPS。Redis 的读写效率 &gt; 100 QPS。那么是不是1-2台就可以了？</p>
 <p>万一Redis挂了就gg了，分分钟损失几百万！</p>
 <p>解决方式——<strong>DB Sharding</strong></p>
 <ul>
@@ -699,51 +454,52 @@
 <p><strong>按照城市Sharding</strong></p>
 <ul>
 <li>难点1：如何定义城市？</li>
-<li>难点2：如何根据位置信息知道用户在哪个城市？——用多边形代表城市的范围，问题本质变为：求一个点是否在多边形内，属于计算几何问题。<br>城市数目：400个</li>
-<li>万一乘客在两个城市边界怎么办？<ul>
+<li>难点2：如何根据位置信息知道用户在哪个城市？——用多边形代表城市的范围，问题本质变为：求一个点是否在多边形内，属于计算几何问题。 城市数目：400个</li>
+<li>万一乘客在两个城市边界怎么办？
+<ul>
 <li>找到乘客周围的2-3个城市</li>
 <li>这些城市不能隔太远以至于车太远</li>
 <li>汇总多个城市的查询结果</li>
-<li> 这种情况下司机的记录在存哪个城市关系不大 </li>
-</ul>
-</li>
+<li>这种情况下司机的记录在存哪个城市关系不大</li>
+</ul></li>
 </ul>
 <p><strong>如何判断一个乘客是否在机场内？</strong></p>
-<p>同样可以用Geo Fence。类似机场这样的区域有上万个，直接O(N)查询太慢<br>分为两级Fence查询，先找到城市，再在城市中查询Airport Fence<br>Read More: <a target="_blank" rel="noopener" href="http://ubr.to/20qK4F4">http://ubr.to/20qK4F4</a> </p>
+<p>同样可以用Geo Fence。类似机场这样的区域有上万个，直接O(N)查询太慢 分为两级Fence查询，先找到城市，再在城市中查询Airport Fence Read More: http://ubr.to/20qK4F4</p>
 <p><strong>如何减小一个db挂了的损失？</strong></p>
 <ul>
 <li>方法1：Replica by Redis —— Master-Slave</li>
-<li>方法2：Replica by yourself<ul>
+<li>方法2：Replica by yourself
+<ul>
 <li>底层存储的接口将每份数据写3分</li>
-<li>sharding key 从 123(city_id) 扩展为：<ul>
+<li>sharding key 从 123(city_id) 扩展为：
+<ul>
 <li>123-0</li>
 <li>123-1</li>
 <li>123-2</li>
-</ul>
-</li>
+</ul></li>
 <li>读取的时候，从任意一份replica读取数据；读不到的时候，就从其它replica读</li>
-<li>三份replica极有可能存在三个不同机器上，同时挂掉的概率很小<br>当然也有可能不巧存在一个机器上，这个问题如何解决请参考Dynamo DB的论文 </li>
+<li>三份replica极有可能存在三个不同机器上，同时挂掉的概率很小 当然也有可能不巧存在一个机器上，这个问题如何解决请参考Dynamo DB的论文</li>
+</ul></li>
+<li>方法3：让更强大的NoSQL帮你处理——Riak / Cassandra 既然一定需要用多台机器了，那么每台的流量也就没有150k QPS这么高了 用 Riak / Cassandra 等NoSQL数据库，能够帮助你更好的处理 Replica 以及机器挂掉之后恢复的问题</li>
 </ul>
-</li>
-<li>方法3：让更强大的NoSQL帮你处理——Riak / Cassandra<br>既然一定需要用多台机器了，那么每台的流量也就没有150k QPS这么高了<br>用 Riak / Cassandra 等NoSQL数据库，能够帮助你更好的处理 Replica 以及机器挂掉之后恢复的问题 </li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-21-03-55.png"> </p>
-<h1 id="Bit-tigger"><a href="#Bit-tigger" class="headerlink" title="Bit tigger"></a>Bit tigger</h1><p><strong>大纲</strong></p>
+<h1 id="总结">总结</h1>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-03-20-21-03-55.png" /></p>
+<h1 id="bit-tigger">Bit tigger</h1>
+<p><strong>大纲</strong></p>
 <ul>
-<li>Uber 从 0  到 1</li>
+<li>Uber 从 0 到 1</li>
 <li>Uber 从 1 到 1万</li>
 <li>S2 ： 地理信息库</li>
 <li>Ringpop</li>
 </ul>
 <!--more-->
-
 <p><strong>什么是Uber？</strong></p>
 <p>一键打车</p>
 <p><strong>很久以前的Uber</strong></p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-16-54-01.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-16-54-01.png" /></p>
 <p><strong>问题：QPS(每秒请求)是多少呢？</strong></p>
 <p>分析问题：请求有哪些？</p>
-<ol>
+<ol type="1">
 <li>driver的写服务 : 100个车 ， 4秒一次 = 25</li>
 <li>user的读服务 : 会读一个范围内的</li>
 </ol>
@@ -751,265 +507,195 @@
 <p>QPS直接决定了后台服务器的选择！</p>
 <p><strong>人太多怎么办？</strong></p>
 <p>暴力横向扩展PHP</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-12-52.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-12-52.png" /></p>
 <p>能不能扩展MySQL？</p>
 <p>如果将MySQL分成好几个服务器呢？—— 读的时候可能会向各个服务器请求，然后再merge回来。很麻烦哇。</p>
 <p>知识点：</p>
 <p>服务器的负载均衡有两种：</p>
-<ol>
+<ol type="1">
 <li>连接的负载均衡——可以缓存下来需要写入的请求</li>
 </ol>
 <p><strong>其它挑战</strong></p>
-<ol>
+<ol type="1">
 <li>一个司机能不能带两个乘客？（这个架构不能解决）</li>
 <li>有没有可能两个司机一个车？</li>
 <li>一个账号两个车呢？</li>
 </ol>
-<h1 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h1><p><strong>第一个解决的问题应该是什么？</strong></p>
+<h1 id="设计">设计</h1>
+<p><strong>第一个解决的问题应该是什么？</strong></p>
 <p>分发问题！</p>
 <p>数据库设计：</p>
-<ol>
+<ol type="1">
 <li>driver messge</li>
 <li>passager message</li>
 <li>driver - passager 的当前状态 ： OD 、出发时间等</li>
 </ol>
 <p>数据库设计步骤：</p>
-<ol>
+<ol type="1">
 <li>找到所有实体</li>
 <li>设计实体之间的关系</li>
 </ol>
-<p>为什么用MySQL ? </p>
-<ol>
+<p>为什么用MySQL ?</p>
+<ol type="1">
 <li>一般来说NoSQL与SQL性能都差不多</li>
 <li>MySQL相对更简单些</li>
 </ol>
 <p><strong>还缺个啥？</strong></p>
 <p>持久化的支付平台！（Business Logic）</p>
 <p>为啥用python ? 因为后台处理数据更方便</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-27-46.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-27-46.png" /></p>
 <p><strong>升级</strong></p>
 <p>当请求越来越多的时候，就需要一个消息队列</p>
 <p>最大的请求：司机地理位置的更新！</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-29-48.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-29-48.png" /></p>
 <p>mongoDB是文档型的，对接这种log是非常好的</p>
 <p>再升级？</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-32-22.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-32-22.png" /></p>
 <p>js - 服务逻辑</p>
 <p>py - 数据逻辑</p>
 <p><strong>如何避免单点失败？</strong></p>
 <p>master - slave架构</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-34-17.png"> </p>
-<ol>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-21-17-34-17.png" /></p>
+<ol type="1">
 <li>热备份：当master挂掉后用slave</li>
 <li>如果资源有限，可以对外开放slave的读的权限</li>
 </ol>
 <p>各区信息需要同步吗？</p>
-<ol>
+<ol type="1">
 <li>一般不需要</li>
 <li>但是！！！！用户数据！！（万一有的人跑去国外呢）</li>
 </ol>
 <p>这样分区，天然缺点是什么？</p>
 <p>万一有用户刚好在分割线上。。。。</p>
 
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/19/%E7%AE%97%E6%B3%95-%E4%BD%8D%E6%93%8D%E4%BD%9C/" rel="prev" title="算法-位操作">
+      <i class="fa fa-chevron-left"></i> 算法-位操作
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/23/%E7%AE%97%E6%B3%95-%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="next" title="算法-线段树">
+      算法-线段树 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/19/%E7%AE%97%E6%B3%95-%E4%BD%8D%E6%93%8D%E4%BD%9C/" rel="next" title="算法-位操作">
-                <i class="fa fa-chevron-left"></i> 算法-位操作
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/23/%E7%AE%97%E6%B3%95-%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="prev" title="算法-线段树">
-                算法-线段树 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scenario-%E5%9C%BA%E6%99%AF"><span class="nav-text">Scenario 场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Service-%E6%9C%8D%E5%8A%A1"><span class="nav-text">Service 服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stroage-%E6%95%B0%E6%8D%AE"><span class="nav-text">Stroage 数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E8%A1%8C%E8%A7%A3%E6%80%BB%E7%BB%93"><span class="nav-text">可行解总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scale-%E6%8B%93%E5%B1%95"><span class="nav-text">Scale 拓展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bit-tigger"><span class="nav-text">Bit tigger</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1"><span class="nav-text">设计</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#scenario-%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">Scenario 场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#service-%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">Service 服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stroage-%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">Stroage 数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E8%A1%8C%E8%A7%A3%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">可行解总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#scale-%E6%8B%93%E5%B1%95"><span class="nav-number">5.</span> <span class="nav-text">Scale 拓展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bit-tigger"><span class="nav-number">7.</span> <span class="nav-text">Bit tigger</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1"><span class="nav-number">8.</span> <span class="nav-text">设计</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -1018,140 +704,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -1162,362 +745,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

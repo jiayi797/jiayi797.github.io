@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="本文主要参考自吴恩达Coursera深度学习课程 DeepLearning.ai 编程作业（1-4） 吴恩达Coursera课程 DeepLearning.ai 编程作业系列，本文为《神经网络与深度学习》部分的第四周“深层神经网络”的课程作业。 本节的主要内容是：利用之前实现的神经网络，来识别图片中的猫">
+  <meta name="description" content="本文主要参考自吴恩达Coursera深度学习课程 DeepLearning.ai 编程作业（1-4） 吴恩达Coursera课程 DeepLearning.ai 编程作业系列，本文为《神经网络与深度学习》部分的第四周“深层神经网络”的课程作业。 本节的主要内容是：利用之前实现的神经网络，来识别图片中的猫">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习实践-1-4-2-用神经网络识别猫">
 <meta property="og:url" content="http://jiayi797.github.io/about/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-2-%E7%94%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%86%E5%88%AB%E7%8C%AB/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="本文主要参考自吴恩达Coursera深度学习课程 DeepLearning.ai 编程作业（1-4） 吴恩达Coursera课程 DeepLearning.ai 编程作业系列，本文为《神经网络与深度学习》部分的第四周“深层神经网络”的课程作业。 本节的主要内容是：利用之前实现的神经网络，来识别图片中的猫">
-<meta property="og:locale">
+<meta property="og:description" content="本文主要参考自吴恩达Coursera深度学习课程 DeepLearning.ai 编程作业（1-4） 吴恩达Coursera课程 DeepLearning.ai 编程作业系列，本文为《神经网络与深度学习》部分的第四周“深层神经网络”的课程作业。 本节的主要内容是：利用之前实现的神经网络，来识别图片中的猫">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-04.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-15-57-08.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-15-59-23.png">
@@ -112,414 +42,219 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-04.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-2-%E7%94%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%86%E5%88%AB%E7%8C%AB/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2017/12/10/深度学习实践-1-4-2-用神经网络识别猫/"/>
-
-
-
-
-
   <title>深度学习实践-1-4-2-用神经网络识别猫 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-2-%E7%94%A8%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AF%86%E5%88%AB%E7%8C%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">深度学习实践-1-4-2-用神经网络识别猫</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          深度学习实践-1-4-2-用神经网络识别猫
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-10T10:08:04+00:00">
-                2017-12-10
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:42:02+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">深度学习算法</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">神经网络</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2017-12-10 18:08:04" itemprop="dateCreated datePublished" datetime="2017-12-10T18:08:04+08:00">2017-12-10</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  4.5k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:42:02" itemprop="dateModified" datetime="2018-12-17T15:42:02+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">深度学习算法</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">神经网络</span></a>
+                </span>
+            </span>
 
           
 
         </div>
       </header>
+
     
-
+    
+    
     <div class="post-body" itemprop="articleBody">
-
-      
-      
 
       
         <p>本文主要参考自<a target="_blank" rel="noopener" href="http://blog.csdn.net/koala_tree/article/details/78092337">吴恩达Coursera深度学习课程 DeepLearning.ai 编程作业（1-4）</a></p>
 <p>吴恩达Coursera课程 DeepLearning.ai 编程作业系列，本文为《神经网络与深度学习》部分的第四周“深层神经网络”的课程作业。</p>
 <p>本节的主要内容是：利用之前实现的神经网络，来识别图片中的猫</p>
 <span id="more"></span>
-
-<h1 id="import"><a href="#import" class="headerlink" title="import"></a>import</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&quot;ignore&quot;</span>) </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> scipy</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> ndimage</span><br><span class="line"><span class="keyword">from</span> dnn_app_utils_v2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">5.0</span>, <span class="number">4.0</span>) <span class="comment"># set default size of plots</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.interpolation&#x27;</span>] = <span class="string">&#x27;nearest&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.cmap&#x27;</span>] = <span class="string">&#x27;gray&#x27;</span></span><br><span class="line"></span><br><span class="line">%load_ext autoreload</span><br><span class="line">%autoreload <span class="number">2</span></span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
-
+<h1 id="import">import</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&quot;ignore&quot;</span>) </span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> scipy</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> ndimage</span><br><span class="line"><span class="keyword">from</span> dnn_app_utils_v2 <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line">plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">5.0</span>, <span class="number">4.0</span>) <span class="comment"># set default size of plots</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.interpolation&#x27;</span>] = <span class="string">&#x27;nearest&#x27;</span></span><br><span class="line">plt.rcParams[<span class="string">&#x27;image.cmap&#x27;</span>] = <span class="string">&#x27;gray&#x27;</span></span><br><span class="line"></span><br><span class="line">%load_ext autoreload</span><br><span class="line">%autoreload <span class="number">2</span></span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>The autoreload extension is already loaded. To reload it, use:
-  %reload_ext autoreload
-</code></pre>
-<h1 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h1><p>用到“猫-非猫”数据集 <code>data.h5</code> :</p>
-<ul>
-<li>training set : m_train</li>
-<li>test set : m_test</li>
-<li>每个图片的大小是 (num_px, num_px, 3) </li>
-</ul>
+  %reload_ext autoreload</code></pre>
+<h1 id="数据集">数据集</h1>
+<p>用到“猫-非猫”数据集 <code>data.h5</code> : - training set : m_train - test set : m_test - 每个图片的大小是 (num_px, num_px, 3)</p>
 <p>接下来我们将图片加载出来：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span>():</span></span><br><span class="line">    train_dataset = h5py.File(<span class="string">&#x27;datasets/train_catvnoncat.h5&#x27;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">    train_set_x_orig = np.array(train_dataset[<span class="string">&quot;train_set_x&quot;</span>][:]) <span class="comment"># your train set features</span></span><br><span class="line">    train_set_y_orig = np.array(train_dataset[<span class="string">&quot;train_set_y&quot;</span>][:]) <span class="comment"># your train set labels</span></span><br><span class="line"></span><br><span class="line">    test_dataset = h5py.File(<span class="string">&#x27;datasets/test_catvnoncat.h5&#x27;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">    test_set_x_orig = np.array(test_dataset[<span class="string">&quot;test_set_x&quot;</span>][:]) <span class="comment"># your test set features</span></span><br><span class="line">    test_set_y_orig = np.array(test_dataset[<span class="string">&quot;test_set_y&quot;</span>][:]) <span class="comment"># your test set labels</span></span><br><span class="line"></span><br><span class="line">    classes = np.array(test_dataset[<span class="string">&quot;list_classes&quot;</span>][:]) <span class="comment"># the list of classes</span></span><br><span class="line">    </span><br><span class="line">    train_set_y_orig = train_set_y_orig.reshape((<span class="number">1</span>, train_set_y_orig.shape[<span class="number">0</span>]))</span><br><span class="line">    test_set_y_orig = test_set_y_orig.reshape((<span class="number">1</span>, test_set_y_orig.shape[<span class="number">0</span>]))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes</span><br><span class="line"></span><br><span class="line">train_x_orig, train_y, test_x_orig, test_y, classes = load_data()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据集样例</span></span><br><span class="line">index = <span class="number">10</span></span><br><span class="line">plt.imshow(train_x_orig[index])</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;y = &quot;</span> + <span class="built_in">str</span>(train_y[<span class="number">0</span>,index]) + <span class="string">&quot;. It&#x27;s a &quot;</span> + classes[train_y[<span class="number">0</span>,index]].decode(<span class="string">&quot;utf-8&quot;</span>) +  <span class="string">&quot; picture.&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<pre><code>y = 0. It&#39;s a non-cat picture.
-</code></pre>
-<p>​    </p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-04.png"> </p>
+<pre><code>y = 0. It&#39;s a non-cat picture.</code></pre>
+<p>​</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-04.png" /></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 再探数据集</span></span><br><span class="line"></span><br><span class="line">m_train = train_x_orig.shape[<span class="number">0</span>]</span><br><span class="line">num_px = train_x_orig.shape[<span class="number">1</span>]</span><br><span class="line">m_test = test_x_orig.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;训练集样本数: &quot;</span> + <span class="built_in">str</span>(m_train))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;测试集样本数: &quot;</span> + <span class="built_in">str</span>(m_test))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;单张图片shape: (&quot;</span> + <span class="built_in">str</span>(num_px) + <span class="string">&quot;, &quot;</span> + <span class="built_in">str</span>(num_px) + <span class="string">&quot;, 3)&quot;</span>)</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;train_x_orig shape: &quot;</span> + <span class="built_in">str</span>(train_x_orig.shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;train_y shape: &quot;</span> + <span class="built_in">str</span>(train_y.shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;test_x_orig shape: &quot;</span> + <span class="built_in">str</span>(test_x_orig.shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;test_y shape: &quot;</span> + <span class="built_in">str</span>(test_y.shape))</span><br></pre></td></tr></table></figure>
-
 <pre><code>训练集样本数: 209
 测试集样本数: 50
 单张图片shape: (64, 64, 3)
 train_x_orig shape: (209L, 64L, 64L, 3L)
 train_y shape: (1L, 209L)
 test_x_orig shape: (50L, 64L, 64L, 3L)
-test_y shape: (1L, 50L)
-</code></pre>
-<p>为了方便运算，我们需要将图片reshape为标准格式：如下图所示：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-15-57-08.png"><br>而reshape的代码如下所示：</p>
+test_y shape: (1L, 50L)</code></pre>
+<p>为了方便运算，我们需要将图片reshape为标准格式：如下图所示： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-15-57-08.png" /> 而reshape的代码如下所示：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Reshape the training and test examples </span></span><br><span class="line">train_x_flatten = train_x_orig.reshape(train_x_orig.shape[<span class="number">0</span>], -<span class="number">1</span>).T   <span class="comment"># The &quot;-1&quot; makes reshape flatten the remaining dimensions</span></span><br><span class="line">test_x_flatten = test_x_orig.reshape(test_x_orig.shape[<span class="number">0</span>], -<span class="number">1</span>).T</span><br><span class="line"></span><br><span class="line"><span class="comment"># Standardize data to have feature values between 0 and 1.</span></span><br><span class="line">train_x = train_x_flatten/<span class="number">255.</span></span><br><span class="line">test_x = test_x_flatten/<span class="number">255.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;train_x&#x27;s shape: &quot;</span> + <span class="built_in">str</span>(train_x.shape))</span><br><span class="line"><span class="built_in">print</span> (<span class="string">&quot;test_x&#x27;s shape: &quot;</span> + <span class="built_in">str</span>(test_x.shape))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 12,288  =  64×64×3</span></span><br></pre></td></tr></table></figure>
-
 <pre><code>train_x&#39;s shape: (12288L, 209L)
-test_x&#39;s shape: (12288L, 50L)
-</code></pre>
+test_x&#39;s shape: (12288L, 50L)</code></pre>
 <p>接下来来时建立基于深度神经网络的图片分类模型</p>
-<p>建立两个模型：</p>
-<ul>
-<li>两层的神经网络</li>
-<li>L层的深度神经网络</li>
-</ul>
-<h1 id="两层神经网络"><a href="#两层神经网络" class="headerlink" title="两层神经网络"></a>两层神经网络</h1><p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-15-59-23.png"> </p>
+<p>建立两个模型： - 两层的神经网络 - L层的深度神经网络</p>
+<h1 id="两层神经网络">两层神经网络</h1>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-15-59-23.png" /></p>
 <p>上图的模型可以总结为：INPUT -&gt; LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID -&gt; OUTPUT.</p>
-<p>详细地说，也就是：</p>
-<ul>
-<li>输入是将(64,64,3)的图片reshape为(12288,1)的数据，作为 $[x_0,x_1,…,x_{12287}]^T$ - 将上面的X乘上权重向量：$W^{[1]}$ ，而W的大小是 $(n^{[1]}, 12288)$</li>
-<li>然后加上偏置向量，再填入relu函数中，得到了结果$[a_0^{[1]}, a_1^{[1]},…, a_{n^{[1]}-1}^{[1]}]^T$</li>
-<li>重复上面的步骤</li>
-<li>将最终的结果通过sigmoid函数，大于0.5的置为true，否则置为false</li>
-</ul>
+<p>详细地说，也就是： - 输入是将(64,64,3)的图片reshape为(12288,1)的数据，作为 <span class="math inline">\([x_0,x_1,...,x_{12287}]^T\)</span> - 将上面的X乘上权重向量：<span class="math inline">\(W^{[1]}\)</span> ，而W的大小是 <span class="math inline">\((n^{[1]}, 12288)\)</span> - 然后加上偏置向量，再填入relu函数中，得到了结果<span class="math inline">\([a_0^{[1]}, a_1^{[1]},..., a_{n^{[1]}-1}^{[1]}]^T\)</span> - 重复上面的步骤 - 将最终的结果通过sigmoid函数，大于0.5的置为true，否则置为false</p>
 <p>将以上流程包装为函数，即以下几个：(已经在上一节中写过了，此处直接调用）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters</span>(<span class="params">n_x, n_h, n_y</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> parameters </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_activation_forward</span>(<span class="params">A_prev, W, b, activation</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> A, cache</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost</span>(<span class="params">AL, Y</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> cost</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_activation_backward</span>(<span class="params">dA, cache, activation</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> dA_prev, dW, db</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_parameters</span>(<span class="params">parameters, grads, learning_rate</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
-
 <p>接下来我们实现两层的神经网络：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">two_layer_model</span>(<span class="params">X, Y, layer_dims, learning_rate = <span class="number">0.0075</span>, num_iterations = <span class="number">3000</span>, print_cost = <span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    实现两层神经网络：LINEAR-&gt;RELU-&gt;LINEAR-&gt;SIGMOID</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    输入：</span></span><br><span class="line"><span class="string">    X -- 训练特征 ,n_x 个</span></span><br><span class="line"><span class="string">    Y -- 真实label向量</span></span><br><span class="line"><span class="string">    layer_dims --  (n_x, n_h, n_y)</span></span><br><span class="line"><span class="string">    num_iterations -- 迭代次数</span></span><br><span class="line"><span class="string">    learning_rate -- 学习率</span></span><br><span class="line"><span class="string">    print_cost -- 如果为真，就会每一百次迭代输出一次cost</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- python dict, 包含W1, W2, b1, b2</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(<span class="number">1</span>)</span><br><span class="line">    grads = &#123;&#125;</span><br><span class="line">    costs = []</span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    (n_x, n_h, n_y) = layer_dims</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化</span></span><br><span class="line">    </span><br><span class="line">    parameters = initialize_parameters(n_x, n_h, n_y)</span><br><span class="line">    W1 = parameters[<span class="string">&quot;W1&quot;</span>]</span><br><span class="line">    b1 = parameters[<span class="string">&quot;b1&quot;</span>]</span><br><span class="line">    W2 = parameters[<span class="string">&quot;W2&quot;</span>]</span><br><span class="line">    b2 = parameters[<span class="string">&quot;b2&quot;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 迭代</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, num_iterations):</span><br><span class="line">        <span class="comment"># 前向传播： LINEAR -&gt; RELU -&gt; LINEAR -&gt; SIGMOID</span></span><br><span class="line">        <span class="comment"># 输入 ： X, W1, b1</span></span><br><span class="line">        <span class="comment"># 输出 ： A1, cache1, A2, cache2</span></span><br><span class="line">        A1, cache1 = linear_activation_forward(X, W1, b1, activation = <span class="string">&quot;relu&quot;</span>)</span><br><span class="line">        A2, cache2 = linear_activation_forward(A1,W2, b2, activation = <span class="string">&quot;sigmoid&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算cost</span></span><br><span class="line">        cost = compute_cost(A2, Y)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 初始化反向传播</span></span><br><span class="line">        dA2 = - (np.divide(Y, A2) - np.divide(<span class="number">1</span> - Y, <span class="number">1</span> - A2))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">        <span class="comment"># 输入 ： dA2, cache2, cache1</span></span><br><span class="line">        <span class="comment"># 输出 ： dA1, dW2, db2; also dA0 (not used), dW1, db1</span></span><br><span class="line">        </span><br><span class="line">        dA1, dW2, db2 = linear_activation_backward(dA2, cache2, activation = <span class="string">&quot;sigmoid&quot;</span>)</span><br><span class="line">        dA0, dW1, db1 = linear_activation_backward(dA1, cache1, activation = <span class="string">&quot;relu&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        grads[<span class="string">&#x27;dW1&#x27;</span>] = dW1</span><br><span class="line">        grads[<span class="string">&#x27;db1&#x27;</span>] = db1</span><br><span class="line">        grads[<span class="string">&#x27;dW2&#x27;</span>] = dW2</span><br><span class="line">        grads[<span class="string">&#x27;db2&#x27;</span>] = db2</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 更新参数</span></span><br><span class="line">        parameters = update_parameters(parameters, grads, learning_rate)</span><br><span class="line">        </span><br><span class="line">        W1 = parameters[<span class="string">&quot;W1&quot;</span>]</span><br><span class="line">        b1 = parameters[<span class="string">&quot;b1&quot;</span>]</span><br><span class="line">        W2 = parameters[<span class="string">&quot;W2&quot;</span>]</span><br><span class="line">        b2 = parameters[<span class="string">&quot;b2&quot;</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 打印</span></span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Cost after iteration &#123;&#125;: &#123;&#125;&quot;</span>.<span class="built_in">format</span>(i, np.squeeze(cost)))</span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            costs.append(cost)</span><br><span class="line">    </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># plot the cost</span></span><br><span class="line"></span><br><span class="line">    plt.plot(np.squeeze(costs))</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;cost&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;iterations (per tens)&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&quot;Learning rate =&quot;</span> + <span class="built_in">str</span>(learning_rate))</span><br><span class="line">    plt.show()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br><span class="line"></span><br><span class="line">n_x = <span class="number">12288</span>     <span class="comment"># num_px * num_px * 3</span></span><br><span class="line">n_h = <span class="number">7</span></span><br><span class="line">n_y = <span class="number">1</span></span><br><span class="line">layers_dims = (n_x, n_h, n_y)</span><br><span class="line">parameters = two_layer_model(train_x, train_y, layers_dims, num_iterations = <span class="number">2500</span>, print_cost=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <pre><code>Cost after iteration 0: 0.69304973566
 Cost after iteration 100: 0.646432095343
 Cost after iteration 200: 0.632514064791
@@ -544,40 +279,19 @@ Cost after iteration 2000: 0.0743907870432
 Cost after iteration 2100: 0.0663074813227
 Cost after iteration 2200: 0.0591932950104
 Cost after iteration 2300: 0.0533614034856
-Cost after iteration 2400: 0.0485547856288
-</code></pre>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-35.png"> </p>
+Cost after iteration 2400: 0.0485547856288</code></pre>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-35.png" /></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 接下来预测</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">X, y, parameters</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    This function is used to predict the results of a  L-layer neural network.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- data set of examples you would like to label</span></span><br><span class="line"><span class="string">    parameters -- parameters of the trained model</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    p -- predictions for the given dataset X</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    n = <span class="built_in">len</span>(parameters) / <span class="number">2</span> <span class="comment"># number of layers in the neural network</span></span><br><span class="line">    p = np.zeros((<span class="number">1</span>,m))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Forward propagation</span></span><br><span class="line">    probas, caches = L_model_forward(X, parameters)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># convert probas to 0/1 predictions</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, probas.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> probas[<span class="number">0</span>,i] &gt; <span class="number">0.1</span>:</span><br><span class="line">            p[<span class="number">0</span>,i] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p[<span class="number">0</span>,i] = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Accuracy: &quot;</span>  + <span class="built_in">str</span>(<span class="built_in">float</span>(np.<span class="built_in">sum</span>(p == y)/<span class="built_in">float</span>(m))))</span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line">predictions_train = predict(train_x, train_y, parameters)</span><br><span class="line"></span><br><span class="line">predictions_test = predict(test_x, test_y, parameters)</span><br></pre></td></tr></table></figure>
-
 <pre><code>Accuracy: 0.961722488038
-Accuracy: 0.74
-</code></pre>
-<h1 id="L层深度神经网络"><a href="#L层深度神经网络" class="headerlink" title="L层深度神经网络"></a>L层深度神经网络</h1><p>虽然说L层深度神经网络很繁琐，但我们可以通过下面的方式来简化它：<br><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-16-09-01.png"> </p>
+Accuracy: 0.74</code></pre>
+<h1 id="l层深度神经网络">L层深度神经网络</h1>
+<p>虽然说L层深度神经网络很繁琐，但我们可以通过下面的方式来简化它： <img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-16-09-01.png" /></p>
 <p>上图的模型可以总结为：[LINEAR -&gt; RELU] × (L-1) -&gt; LINEAR -&gt; SIGMOID</p>
-<p>详细地说，也就是：</p>
-<ul>
-<li>输入是将(64,64,3)的图片reshape为(12288,1)的数据，作为 $[x_0,x_1,…,x_{12287}]^T$ - 将上面的X乘上权重向量：$W^{[1]}$ ，再加上偏置$b^{[1]}$，作为linear单元</li>
-<li>然后将linear单元的输出填入relu-linear单元。这个过程重复L-1次</li>
-<li>将最终的结果通过sigmoid函数，大于0.5的置为true，否则置为false</li>
-</ul>
-<p>构建方法的流程如下所示：</p>
-<ul>
-<li>初始化参数</li>
-<li>循环：<ul>
-<li>前向传播</li>
-<li>计算cost</li>
-<li>后向传播</li>
-<li>更新参数</li>
-</ul>
-</li>
-<li>用训练参数去预测label</li>
-</ul>
+<p>详细地说，也就是： - 输入是将(64,64,3)的图片reshape为(12288,1)的数据，作为 <span class="math inline">\([x_0,x_1,...,x_{12287}]^T\)</span> - 将上面的X乘上权重向量：<span class="math inline">\(W^{[1]}\)</span> ，再加上偏置<span class="math inline">\(b^{[1]}\)</span>，作为linear单元 - 然后将linear单元的输出填入relu-linear单元。这个过程重复L-1次 - 将最终的结果通过sigmoid函数，大于0.5的置为true，否则置为false</p>
+<p>构建方法的流程如下所示： - 初始化参数 - 循环： - 前向传播 - 计算cost - 后向传播 - 更新参数 - 用训练参数去预测label</p>
 <p>所需的函数为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_deep</span>(<span class="params">layer_dims</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> parameters </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_model_forward</span>(<span class="params">X, parameters</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> AL, caches</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost</span>(<span class="params">AL, Y</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> cost</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_model_backward</span>(<span class="params">AL, Y, caches</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> grads</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_parameters</span>(<span class="params">parameters, grads, learning_rate</span>):</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> parameters</span><br></pre></td></tr></table></figure>
-
-
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_layer_model</span>(<span class="params">X, Y, layers_dims, learning_rate = <span class="number">0.0075</span>, num_iterations = <span class="number">3000</span>, print_cost = <span class="literal">False</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    L层神经网络的实现：[LINEAR-&gt;RELU]*(L-1)-&gt;LINEAR-&gt;SIGMOID</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    输入：</span></span><br><span class="line"><span class="string">    X -- 训练集，shape = (num_px * num_px * 3)</span></span><br><span class="line"><span class="string">    Y -- label向量</span></span><br><span class="line"><span class="string">    layers_dims -- list, 包含每层输入数据的大小</span></span><br><span class="line"><span class="string">    learning_rate -- 学习率</span></span><br><span class="line"><span class="string">    num_iterations -- 迭代次数</span></span><br><span class="line"><span class="string">    print_cost -- 如果为True，就每一百轮打印一次cost</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- 学习到的参数</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 初始化</span></span><br><span class="line">    costs = []</span><br><span class="line">    parameters = initialize_parameters_deep(layers_dims)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 循环</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, num_iterations):</span><br><span class="line">        <span class="comment"># 前向传播 : [LINEAR -&gt; RELU]*(L-1) -&gt; LINEAR -&gt; SIGMOID</span></span><br><span class="line">        AL, caches = L_model_forward(X, parameters)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 计算cost</span></span><br><span class="line">        cost = compute_cost(AL, Y)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 反向传播：</span></span><br><span class="line">        grads = L_model_backward(AL, Y, caches)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 更新参数</span></span><br><span class="line">        parameters = update_parameters(parameters, grads, learning_rate)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># Print the cost every 100 training example</span></span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span> (<span class="string">&quot;Cost after iteration %i: %f&quot;</span> %(i, cost))</span><br><span class="line">        <span class="keyword">if</span> print_cost <span class="keyword">and</span> i % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            costs.append(cost)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># plot the cost</span></span><br><span class="line">    plt.plot(np.squeeze(costs))</span><br><span class="line">    plt.ylabel(<span class="string">&#x27;cost&#x27;</span>)</span><br><span class="line">    plt.xlabel(<span class="string">&#x27;iterations (per tens)&#x27;</span>)</span><br><span class="line">    plt.title(<span class="string">&quot;Learning rate =&quot;</span> + <span class="built_in">str</span>(learning_rate))</span><br><span class="line">    plt.show()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> parameters</span><br><span class="line">       </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">parameters = L_layer_model(train_x, train_y, layers_dims, num_iterations = <span class="number">2500</span>, print_cost = <span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-
 <pre><code>Cost after iteration 0: 0.695046
 Cost after iteration 100: 0.589260
 Cost after iteration 200: 0.523261
@@ -602,231 +316,148 @@ Cost after iteration 2000: 0.035683
 Cost after iteration 2100: 0.032915
 Cost after iteration 2200: 0.030472
 Cost after iteration 2300: 0.028388
-Cost after iteration 2400: 0.026615
-</code></pre>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-49.png"> </p>
+Cost after iteration 2400: 0.026615</code></pre>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-09-49.png" /></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预测</span></span><br><span class="line"></span><br><span class="line">pred_train = predict(train_x, train_y, parameters)</span><br><span class="line"></span><br><span class="line">pred_test = predict(test_x, test_y, parameters)</span><br></pre></td></tr></table></figure>
-
 <pre><code>Accuracy: 0.980861244019
-Accuracy: 0.78
-</code></pre>
-<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><p>首先我们来看看有哪些图片被我们的模型分错了：</p>
+Accuracy: 0.78</code></pre>
+<h1 id="结果分析">结果分析</h1>
+<p>首先我们来看看有哪些图片被我们的模型分错了：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_mislabeled_images(classes, test_x, test_y, pred_test)</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-10-04.png"> </p>
-<p>我们发现主要有以下几类：</p>
-<ul>
-<li>猫的身子是歪的</li>
-<li>猫出现在某种与它颜色相近的地方</li>
-<li>非正常颜色或形状的猫</li>
-<li>摄像角度</li>
-<li>暗照片</li>
-<li>非常大或非常小的猫</li>
-</ul>
-<h1 id="dnn-app-utils-v2-py"><a href="#dnn-app-utils-v2-py" class="headerlink" title="dnn_app_utils_v2.py"></a>dnn_app_utils_v2.py</h1><p>在此附上附录的代码</p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2017-12-10-18-10-04.png" /></p>
+<p>我们发现主要有以下几类： - 猫的身子是歪的 - 猫出现在某种与它颜色相近的地方 - 非正常颜色或形状的猫 - 摄像角度 - 暗照片 - 非常大或非常小的猫</p>
+<h1 id="dnn_app_utils_v2.py">dnn_app_utils_v2.py</h1>
+<p>在此附上附录的代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> h5py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span>(<span class="params">Z</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implements the sigmoid activation in numpy</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    Z -- numpy array of any shape</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    A -- output of sigmoid(z), same shape as Z</span></span><br><span class="line"><span class="string">    cache -- returns Z as well, useful during backpropagation</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    A = <span class="number">1</span>/(<span class="number">1</span>+np.exp(-Z))</span><br><span class="line">    cache = Z</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> A, cache</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">relu</span>(<span class="params">Z</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the RELU function.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    Z -- Output of the linear layer, of any shape</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    A -- Post-activation parameter, of the same shape as Z</span></span><br><span class="line"><span class="string">    cache -- a python dictionary containing &quot;A&quot; ; stored for computing the backward pass efficiently</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    A = np.maximum(<span class="number">0</span>,Z)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span>(A.shape == Z.shape)</span><br><span class="line">    </span><br><span class="line">    cache = Z </span><br><span class="line">    <span class="keyword">return</span> A, cache</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">relu_backward</span>(<span class="params">dA, cache</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the backward propagation for a single RELU unit.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dA -- post-activation gradient, of any shape</span></span><br><span class="line"><span class="string">    cache -- &#x27;Z&#x27; where we store for computing backward propagation efficiently</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dZ -- Gradient of the cost with respect to Z</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    Z = cache</span><br><span class="line">    dZ = np.array(dA, copy=<span class="literal">True</span>) <span class="comment"># just converting dz to a correct object.</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># When z &lt;= 0, you should set dz to 0 as well. </span></span><br><span class="line">    dZ[Z &lt;= <span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span> (dZ.shape == Z.shape)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dZ</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid_backward</span>(<span class="params">dA, cache</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the backward propagation for a single SIGMOID unit.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dA -- post-activation gradient, of any shape</span></span><br><span class="line"><span class="string">    cache -- &#x27;Z&#x27; where we store for computing backward propagation efficiently</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dZ -- Gradient of the cost with respect to Z</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    Z = cache</span><br><span class="line">    </span><br><span class="line">    s = <span class="number">1</span>/(<span class="number">1</span>+np.exp(-Z))</span><br><span class="line">    dZ = dA * s * (<span class="number">1</span>-s)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span> (dZ.shape == Z.shape)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dZ</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span>():</span></span><br><span class="line">    train_dataset = h5py.File(<span class="string">&#x27;datasets/train_catvnoncat.h5&#x27;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">    train_set_x_orig = np.array(train_dataset[<span class="string">&quot;train_set_x&quot;</span>][:]) <span class="comment"># your train set features</span></span><br><span class="line">    train_set_y_orig = np.array(train_dataset[<span class="string">&quot;train_set_y&quot;</span>][:]) <span class="comment"># your train set labels</span></span><br><span class="line"></span><br><span class="line">    test_dataset = h5py.File(<span class="string">&#x27;datasets/test_catvnoncat.h5&#x27;</span>, <span class="string">&quot;r&quot;</span>)</span><br><span class="line">    test_set_x_orig = np.array(test_dataset[<span class="string">&quot;test_set_x&quot;</span>][:]) <span class="comment"># your test set features</span></span><br><span class="line">    test_set_y_orig = np.array(test_dataset[<span class="string">&quot;test_set_y&quot;</span>][:]) <span class="comment"># your test set labels</span></span><br><span class="line"></span><br><span class="line">    classes = np.array(test_dataset[<span class="string">&quot;list_classes&quot;</span>][:]) <span class="comment"># the list of classes</span></span><br><span class="line">    </span><br><span class="line">    train_set_y_orig = train_set_y_orig.reshape((<span class="number">1</span>, train_set_y_orig.shape[<span class="number">0</span>]))</span><br><span class="line">    test_set_y_orig = test_set_y_orig.reshape((<span class="number">1</span>, test_set_y_orig.shape[<span class="number">0</span>]))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> train_set_x_orig, train_set_y_orig, test_set_x_orig, test_set_y_orig, classes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters</span>(<span class="params">n_x, n_h, n_y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Argument:</span></span><br><span class="line"><span class="string">    n_x -- size of the input layer</span></span><br><span class="line"><span class="string">    n_h -- size of the hidden layer</span></span><br><span class="line"><span class="string">    n_y -- size of the output layer</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing your parameters:</span></span><br><span class="line"><span class="string">                    W1 -- weight matrix of shape (n_h, n_x)</span></span><br><span class="line"><span class="string">                    b1 -- bias vector of shape (n_h, 1)</span></span><br><span class="line"><span class="string">                    W2 -- weight matrix of shape (n_y, n_h)</span></span><br><span class="line"><span class="string">                    b2 -- bias vector of shape (n_y, 1)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    W1 = np.random.randn(n_h, n_x)*<span class="number">0.01</span></span><br><span class="line">    b1 = np.zeros((n_h, <span class="number">1</span>))</span><br><span class="line">    W2 = np.random.randn(n_y, n_h)*<span class="number">0.01</span></span><br><span class="line">    b2 = np.zeros((n_y, <span class="number">1</span>))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span>(W1.shape == (n_h, n_x))</span><br><span class="line">    <span class="keyword">assert</span>(b1.shape == (n_h, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">assert</span>(W2.shape == (n_y, n_h))</span><br><span class="line">    <span class="keyword">assert</span>(b2.shape == (n_y, <span class="number">1</span>))</span><br><span class="line">    </span><br><span class="line">    parameters = &#123;<span class="string">&quot;W1&quot;</span>: W1,</span><br><span class="line">                  <span class="string">&quot;b1&quot;</span>: b1,</span><br><span class="line">                  <span class="string">&quot;W2&quot;</span>: W2,</span><br><span class="line">                  <span class="string">&quot;b2&quot;</span>: b2&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> parameters     </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">initialize_parameters_deep</span>(<span class="params">layer_dims</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    layer_dims -- python array (list) containing the dimensions of each layer in our network</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing your parameters &quot;W1&quot;, &quot;b1&quot;, ..., &quot;WL&quot;, &quot;bL&quot;:</span></span><br><span class="line"><span class="string">                    Wl -- weight matrix of shape (layer_dims[l], layer_dims[l-1])</span></span><br><span class="line"><span class="string">                    bl -- bias vector of shape (layer_dims[l], 1)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    np.random.seed(<span class="number">1</span>)</span><br><span class="line">    parameters = &#123;&#125;</span><br><span class="line">    L = <span class="built_in">len</span>(layer_dims)            <span class="comment"># number of layers in the network</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, L):</span><br><span class="line">        parameters[<span class="string">&#x27;W&#x27;</span> + <span class="built_in">str</span>(l)] = np.random.randn(layer_dims[l], layer_dims[l-<span class="number">1</span>]) / np.sqrt(layer_dims[l-<span class="number">1</span>]) <span class="comment">#*0.01</span></span><br><span class="line">        parameters[<span class="string">&#x27;b&#x27;</span> + <span class="built_in">str</span>(l)] = np.zeros((layer_dims[l], <span class="number">1</span>))</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">&#x27;W&#x27;</span> + <span class="built_in">str</span>(l)].shape == (layer_dims[l], layer_dims[l-<span class="number">1</span>]))</span><br><span class="line">        <span class="keyword">assert</span>(parameters[<span class="string">&#x27;b&#x27;</span> + <span class="built_in">str</span>(l)].shape == (layer_dims[l], <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_forward</span>(<span class="params">A, W, b</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the linear part of a layer&#x27;s forward propagation.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A -- activations from previous layer (or input data): (size of previous layer, number of examples)</span></span><br><span class="line"><span class="string">    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)</span></span><br><span class="line"><span class="string">    b -- bias vector, numpy array of shape (size of the current layer, 1)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    Z -- the input of the activation function, also called pre-activation parameter </span></span><br><span class="line"><span class="string">    cache -- a python dictionary containing &quot;A&quot;, &quot;W&quot; and &quot;b&quot; ; stored for computing the backward pass efficiently</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    Z = W.dot(A) + b</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span>(Z.shape == (W.shape[<span class="number">0</span>], A.shape[<span class="number">1</span>]))</span><br><span class="line">    cache = (A, W, b)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> Z, cache</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_activation_forward</span>(<span class="params">A_prev, W, b, activation</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the forward propagation for the LINEAR-&gt;ACTIVATION layer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    A_prev -- activations from previous layer (or input data): (size of previous layer, number of examples)</span></span><br><span class="line"><span class="string">    W -- weights matrix: numpy array of shape (size of current layer, size of previous layer)</span></span><br><span class="line"><span class="string">    b -- bias vector, numpy array of shape (size of the current layer, 1)</span></span><br><span class="line"><span class="string">    activation -- the activation to be used in this layer, stored as a text string: &quot;sigmoid&quot; or &quot;relu&quot;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    A -- the output of the activation function, also called the post-activation value </span></span><br><span class="line"><span class="string">    cache -- a python dictionary containing &quot;linear_cache&quot; and &quot;activation_cache&quot;;</span></span><br><span class="line"><span class="string">             stored for computing the backward pass efficiently</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> activation == <span class="string">&quot;sigmoid&quot;</span>:</span><br><span class="line">        <span class="comment"># Inputs: &quot;A_prev, W, b&quot;. Outputs: &quot;A, activation_cache&quot;.</span></span><br><span class="line">        Z, linear_cache = linear_forward(A_prev, W, b)</span><br><span class="line">        A, activation_cache = sigmoid(Z)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">elif</span> activation == <span class="string">&quot;relu&quot;</span>:</span><br><span class="line">        <span class="comment"># Inputs: &quot;A_prev, W, b&quot;. Outputs: &quot;A, activation_cache&quot;.</span></span><br><span class="line">        Z, linear_cache = linear_forward(A_prev, W, b)</span><br><span class="line">        A, activation_cache = relu(Z)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span> (A.shape == (W.shape[<span class="number">0</span>], A_prev.shape[<span class="number">1</span>]))</span><br><span class="line">    cache = (linear_cache, activation_cache)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> A, cache</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_model_forward</span>(<span class="params">X, parameters</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement forward propagation for the [LINEAR-&gt;RELU]*(L-1)-&gt;LINEAR-&gt;SIGMOID computation</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- data, numpy array of shape (input size, number of examples)</span></span><br><span class="line"><span class="string">    parameters -- output of initialize_parameters_deep()</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    AL -- last post-activation value</span></span><br><span class="line"><span class="string">    caches -- list of caches containing:</span></span><br><span class="line"><span class="string">                every cache of linear_relu_forward() (there are L-1 of them, indexed from 0 to L-2)</span></span><br><span class="line"><span class="string">                the cache of linear_sigmoid_forward() (there is one, indexed L-1)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    caches = []</span><br><span class="line">    A = X</span><br><span class="line">    L = <span class="built_in">len</span>(parameters) // <span class="number">2</span>                  <span class="comment"># number of layers in the neural network</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Implement [LINEAR -&gt; RELU]*(L-1). Add &quot;cache&quot; to the &quot;caches&quot; list.</span></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, L):</span><br><span class="line">        A_prev = A </span><br><span class="line">        A, cache = linear_activation_forward(A_prev, parameters[<span class="string">&#x27;W&#x27;</span> + <span class="built_in">str</span>(l)], parameters[<span class="string">&#x27;b&#x27;</span> + <span class="built_in">str</span>(l)], activation = <span class="string">&quot;relu&quot;</span>)</span><br><span class="line">        caches.append(cache)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Implement LINEAR -&gt; SIGMOID. Add &quot;cache&quot; to the &quot;caches&quot; list.</span></span><br><span class="line">    AL, cache = linear_activation_forward(A, parameters[<span class="string">&#x27;W&#x27;</span> + <span class="built_in">str</span>(L)], parameters[<span class="string">&#x27;b&#x27;</span> + <span class="built_in">str</span>(L)], activation = <span class="string">&quot;sigmoid&quot;</span>)</span><br><span class="line">    caches.append(cache)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span>(AL.shape == (<span class="number">1</span>,X.shape[<span class="number">1</span>]))</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> AL, caches</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_cost</span>(<span class="params">AL, Y</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the cost function defined by equation (7).</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    AL -- probability vector corresponding to your label predictions, shape (1, number of examples)</span></span><br><span class="line"><span class="string">    Y -- true &quot;label&quot; vector (for example: containing 0 if non-cat, 1 if cat), shape (1, number of examples)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    cost -- cross-entropy cost</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    m = Y.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute loss from aL and y.</span></span><br><span class="line">    cost = (<span class="number">1.</span>/m) * (-np.dot(Y,np.log(AL).T) - np.dot(<span class="number">1</span>-Y, np.log(<span class="number">1</span>-AL).T))</span><br><span class="line">    </span><br><span class="line">    cost = np.squeeze(cost)      <span class="comment"># To make sure your cost&#x27;s shape is what we expect (e.g. this turns [[17]] into 17).</span></span><br><span class="line">    <span class="keyword">assert</span>(cost.shape == ())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> cost</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_backward</span>(<span class="params">dZ, cache</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the linear portion of backward propagation for a single layer (layer l)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dZ -- Gradient of the cost with respect to the linear output (of current layer l)</span></span><br><span class="line"><span class="string">    cache -- tuple of values (A_prev, W, b) coming from the forward propagation in the current layer</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev</span></span><br><span class="line"><span class="string">    dW -- Gradient of the cost with respect to W (current layer l), same shape as W</span></span><br><span class="line"><span class="string">    db -- Gradient of the cost with respect to b (current layer l), same shape as b</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    A_prev, W, b = cache</span><br><span class="line">    m = A_prev.shape[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    dW = <span class="number">1.</span>/m * np.dot(dZ,A_prev.T)</span><br><span class="line">    db = <span class="number">1.</span>/m * np.<span class="built_in">sum</span>(dZ, axis = <span class="number">1</span>, keepdims = <span class="literal">True</span>)</span><br><span class="line">    dA_prev = np.dot(W.T,dZ)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">assert</span> (dA_prev.shape == A_prev.shape)</span><br><span class="line">    <span class="keyword">assert</span> (dW.shape == W.shape)</span><br><span class="line">    <span class="keyword">assert</span> (db.shape == b.shape)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dA_prev, dW, db</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">linear_activation_backward</span>(<span class="params">dA, cache, activation</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the backward propagation for the LINEAR-&gt;ACTIVATION layer.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    dA -- post-activation gradient for current layer l </span></span><br><span class="line"><span class="string">    cache -- tuple of values (linear_cache, activation_cache) we store for computing backward propagation efficiently</span></span><br><span class="line"><span class="string">    activation -- the activation to be used in this layer, stored as a text string: &quot;sigmoid&quot; or &quot;relu&quot;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    dA_prev -- Gradient of the cost with respect to the activation (of the previous layer l-1), same shape as A_prev</span></span><br><span class="line"><span class="string">    dW -- Gradient of the cost with respect to W (current layer l), same shape as W</span></span><br><span class="line"><span class="string">    db -- Gradient of the cost with respect to b (current layer l), same shape as b</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    linear_cache, activation_cache = cache</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> activation == <span class="string">&quot;relu&quot;</span>:</span><br><span class="line">        dZ = relu_backward(dA, activation_cache)</span><br><span class="line">        dA_prev, dW, db = linear_backward(dZ, linear_cache)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">elif</span> activation == <span class="string">&quot;sigmoid&quot;</span>:</span><br><span class="line">        dZ = sigmoid_backward(dA, activation_cache)</span><br><span class="line">        dA_prev, dW, db = linear_backward(dZ, linear_cache)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dA_prev, dW, db</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">L_model_backward</span>(<span class="params">AL, Y, caches</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Implement the backward propagation for the [LINEAR-&gt;RELU] * (L-1) -&gt; LINEAR -&gt; SIGMOID group</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    AL -- probability vector, output of the forward propagation (L_model_forward())</span></span><br><span class="line"><span class="string">    Y -- true &quot;label&quot; vector (containing 0 if non-cat, 1 if cat)</span></span><br><span class="line"><span class="string">    caches -- list of caches containing:</span></span><br><span class="line"><span class="string">                every cache of linear_activation_forward() with &quot;relu&quot; (there are (L-1) or them, indexes from 0 to L-2)</span></span><br><span class="line"><span class="string">                the cache of linear_activation_forward() with &quot;sigmoid&quot; (there is one, index L-1)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    grads -- A dictionary with the gradients</span></span><br><span class="line"><span class="string">             grads[&quot;dA&quot; + str(l)] = ... </span></span><br><span class="line"><span class="string">             grads[&quot;dW&quot; + str(l)] = ...</span></span><br><span class="line"><span class="string">             grads[&quot;db&quot; + str(l)] = ... </span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    grads = &#123;&#125;</span><br><span class="line">    L = <span class="built_in">len</span>(caches) <span class="comment"># the number of layers</span></span><br><span class="line">    m = AL.shape[<span class="number">1</span>]</span><br><span class="line">    Y = Y.reshape(AL.shape) <span class="comment"># after this line, Y is the same shape as AL</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Initializing the backpropagation</span></span><br><span class="line">    dAL = - (np.divide(Y, AL) - np.divide(<span class="number">1</span> - Y, <span class="number">1</span> - AL))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Lth layer (SIGMOID -&gt; LINEAR) gradients. Inputs: &quot;AL, Y, caches&quot;. Outputs: &quot;grads[&quot;dAL&quot;], grads[&quot;dWL&quot;], grads[&quot;dbL&quot;]</span></span><br><span class="line">    current_cache = caches[L-<span class="number">1</span>]</span><br><span class="line">    grads[<span class="string">&quot;dA&quot;</span> + <span class="built_in">str</span>(L)], grads[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(L)], grads[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(L)] = linear_activation_backward(dAL, current_cache, activation = <span class="string">&quot;sigmoid&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">reversed</span>(<span class="built_in">range</span>(L-<span class="number">1</span>)):</span><br><span class="line">        <span class="comment"># lth layer: (RELU -&gt; LINEAR) gradients.</span></span><br><span class="line">        current_cache = caches[l]</span><br><span class="line">        dA_prev_temp, dW_temp, db_temp = linear_activation_backward(grads[<span class="string">&quot;dA&quot;</span> + <span class="built_in">str</span>(l + <span class="number">2</span>)], current_cache, activation = <span class="string">&quot;relu&quot;</span>)</span><br><span class="line">        grads[<span class="string">&quot;dA&quot;</span> + <span class="built_in">str</span>(l + <span class="number">1</span>)] = dA_prev_temp</span><br><span class="line">        grads[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(l + <span class="number">1</span>)] = dW_temp</span><br><span class="line">        grads[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(l + <span class="number">1</span>)] = db_temp</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> grads</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_parameters</span>(<span class="params">parameters, grads, learning_rate</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Update parameters using gradient descent</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing your parameters </span></span><br><span class="line"><span class="string">    grads -- python dictionary containing your gradients, output of L_model_backward</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    parameters -- python dictionary containing your updated parameters </span></span><br><span class="line"><span class="string">                  parameters[&quot;W&quot; + str(l)] = ... </span></span><br><span class="line"><span class="string">                  parameters[&quot;b&quot; + str(l)] = ...</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    L = <span class="built_in">len</span>(parameters) // <span class="number">2</span> <span class="comment"># number of layers in the neural network</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Update rule for each parameter. Use a for loop.</span></span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> <span class="built_in">range</span>(L):</span><br><span class="line">        parameters[<span class="string">&quot;W&quot;</span> + <span class="built_in">str</span>(l+<span class="number">1</span>)] = parameters[<span class="string">&quot;W&quot;</span> + <span class="built_in">str</span>(l+<span class="number">1</span>)] - learning_rate * grads[<span class="string">&quot;dW&quot;</span> + <span class="built_in">str</span>(l+<span class="number">1</span>)]</span><br><span class="line">        parameters[<span class="string">&quot;b&quot;</span> + <span class="built_in">str</span>(l+<span class="number">1</span>)] = parameters[<span class="string">&quot;b&quot;</span> + <span class="built_in">str</span>(l+<span class="number">1</span>)] - learning_rate * grads[<span class="string">&quot;db&quot;</span> + <span class="built_in">str</span>(l+<span class="number">1</span>)]</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> parameters</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span>(<span class="params">X, y, parameters</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    This function is used to predict the results of a  L-layer neural network.</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Arguments:</span></span><br><span class="line"><span class="string">    X -- data set of examples you would like to label</span></span><br><span class="line"><span class="string">    parameters -- parameters of the trained model</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Returns:</span></span><br><span class="line"><span class="string">    p -- predictions for the given dataset X</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    m = X.shape[<span class="number">1</span>]</span><br><span class="line">    n = <span class="built_in">len</span>(parameters) // <span class="number">2</span> <span class="comment"># number of layers in the neural network</span></span><br><span class="line">    p = np.zeros((<span class="number">1</span>,m))</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># Forward propagation</span></span><br><span class="line">    probas, caches = L_model_forward(X, parameters)</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># convert probas to 0/1 predictions</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, probas.shape[<span class="number">1</span>]):</span><br><span class="line">        <span class="keyword">if</span> probas[<span class="number">0</span>,i] &gt; <span class="number">0.5</span>:</span><br><span class="line">            p[<span class="number">0</span>,i] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            p[<span class="number">0</span>,i] = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#print results</span></span><br><span class="line">    <span class="comment">#print (&quot;predictions: &quot; + str(p))</span></span><br><span class="line">    <span class="comment">#print (&quot;true labels: &quot; + str(y))</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Accuracy: &quot;</span>  + <span class="built_in">str</span>(np.<span class="built_in">sum</span>((p == y)/m)))</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> p</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_mislabeled_images</span>(<span class="params">classes, X, y, p</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Plots images where predictions and truth were different.</span></span><br><span class="line"><span class="string">    X -- dataset</span></span><br><span class="line"><span class="string">    y -- true labels</span></span><br><span class="line"><span class="string">    p -- predictions</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    a = p + y</span><br><span class="line">    mislabeled_indices = np.asarray(np.where(a == <span class="number">1</span>))</span><br><span class="line">    plt.rcParams[<span class="string">&#x27;figure.figsize&#x27;</span>] = (<span class="number">40.0</span>, <span class="number">40.0</span>) <span class="comment"># set default size of plots</span></span><br><span class="line">    num_images = <span class="built_in">len</span>(mislabeled_indices[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(num_images):</span><br><span class="line">        index = mislabeled_indices[<span class="number">1</span>][i]</span><br><span class="line">        </span><br><span class="line">        plt.subplot(<span class="number">2</span>, num_images, i + <span class="number">1</span>)</span><br><span class="line">        plt.imshow(X[:,index].reshape(<span class="number">64</span>,<span class="number">64</span>,<span class="number">3</span>), interpolation=<span class="string">&#x27;nearest&#x27;</span>)</span><br><span class="line">        plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">        plt.title(<span class="string">&quot;Prediction: &quot;</span> + classes[<span class="built_in">int</span>(p[<span class="number">0</span>,index])].decode(<span class="string">&quot;utf-8&quot;</span>) + <span class="string">&quot; \n Class: &quot;</span> + classes[y[<span class="number">0</span>,index]].decode(<span class="string">&quot;utf-8&quot;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-1-%E6%9E%84%E5%BB%BA%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="prev" title="深度学习实践-1-4-1-构建深层神经网络">
+      <i class="fa fa-chevron-left"></i> 深度学习实践-1-4-1-构建深层神经网络
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/12/11/%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E4%B8%8E%E6%95%B0/" rel="next" title="算法-数组与数">
+      算法-数组与数 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/12/10/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%AE%9E%E8%B7%B5-1-4-1-%E6%9E%84%E5%BB%BA%E6%B7%B1%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="next" title="深度学习实践-1-4-1-构建深层神经网络">
-                <i class="fa fa-chevron-left"></i> 深度学习实践-1-4-1-构建深层神经网络
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/11/%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E4%B8%8E%E6%95%B0/" rel="prev" title="算法-数组与数">
-                算法-数组与数 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#import"><span class="nav-text">import</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%A4%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">两层神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#L%E5%B1%82%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-text">L层深度神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="nav-text">结果分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dnn-app-utils-v2-py"><span class="nav-text">dnn_app_utils_v2.py</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#import"><span class="nav-number">1.</span> <span class="nav-text">import</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">数据集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%A4%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">3.</span> <span class="nav-text">两层神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#l%E5%B1%82%E6%B7%B1%E5%BA%A6%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">4.</span> <span class="nav-text">L层深度神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">结果分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dnn_app_utils_v2.py"><span class="nav-number">6.</span> <span class="nav-text">dnn_app_utils_v2.py</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -835,140 +466,37 @@ Accuracy: 0.78
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -979,362 +507,15 @@ Accuracy: 0.78
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 

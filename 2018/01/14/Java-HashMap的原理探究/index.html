@@ -1,104 +1,34 @@
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+<!-- Referrer Policy调整致不蒜子单页面统计出错:https://senorui.top/posts/c33f.html -->
+<meta name="referrer" content="no-referrer-when-downgrade">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jiayi797.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
 
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-  <meta name="google-site-verification" content="true" />
-
-
-
-
-
-
-
-  <meta name="baidu-site-verification" content="q1zwhBKKPA" />
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="HashMap概述HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是不保证该顺序恒久不变。 此实现假定哈希函数将元素适当地分布在各桶之间，可为基本操作（get和put）提供稳定的性能。 迭代colletction视图所需要的时间与HashMap实例的“容量”（桶的数量）及其大小（键-值映射关系数）成比例。">
+  <meta name="description" content="HashMap概述 HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是不保证该顺序恒久不变。 此实现假定哈希函数将元素适当地分布在各桶之间，可为基本操作（get和put）提供稳定的性能。 迭代colletction视图所需要的时间与HashMap实例的“容量”（桶的数量）及其大小（键-值映射关系数）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java-HashMap的原理探究">
 <meta property="og:url" content="http://jiayi797.github.io/about/2018/01/14/Java-HashMap%E7%9A%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/index.html">
 <meta property="og:site_name" content="甲乙小朋友的房子">
-<meta property="og:description" content="HashMap概述HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是不保证该顺序恒久不变。 此实现假定哈希函数将元素适当地分布在各桶之间，可为基本操作（get和put）提供稳定的性能。 迭代colletction视图所需要的时间与HashMap实例的“容量”（桶的数量）及其大小（键-值映射关系数）成比例。">
-<meta property="og:locale">
+<meta property="og:description" content="HashMap概述 HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是不保证该顺序恒久不变。 此实现假定哈希函数将元素适当地分布在各桶之间，可为基本操作（get和put）提供稳定的性能。 迭代colletction视图所需要的时间与HashMap实例的“容量”（桶的数量）及其大小（键-值映射关系数）">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-14-21-36-42.png">
 <meta property="og:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-14-21-57-57.png">
 <meta property="article:published_time" content="2018-01-14T13:23:40.000Z">
@@ -107,404 +37,235 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-14-21-36-42.png">
 
+<link rel="canonical" href="http://jiayi797.github.io/about/2018/01/14/Java-HashMap%E7%9A%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '',
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: false,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
   };
 </script>
 
-
-
-  <link rel="canonical" href="http://jiayi797.github.io/about/2018/01/14/Java-HashMap的原理探究/"/>
-
-
-
-
-
   <title>Java-HashMap的原理探究 | 甲乙小朋友的房子</title>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
 
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-110169171-1', 'auto');
-  ga('send', 'pageview');
-</script>
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?9856596edaab494b299151eb0e9bb214";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
 
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
 
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
 
+</head>
 
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left page-post-detail ">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">甲乙小朋友的房子</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-      
-        <p class="site-subtitle">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
-      
   </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">甲乙小朋友的房子</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">甲乙小朋友很笨，但甲乙小朋友不会放弃</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
   </div>
 </div>
+
+
+
 
 <nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
+  <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            时光机
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            琐碎
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
-  
+  </li>
+  </ul>
 </nav>
 
 
 
- </div>
+
+</div>
     </header>
 
-    <main id="main" class="main">
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
       <div class="main-inner">
         <div class="content-wrap">
-          <div id="content" class="content">
+          
+
+          <div class="content post posts-expand">
             
 
-  <div id="posts" class="posts-expand">
     
-
-  
-
   
   
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://jiayi797.github.io/about/2018/01/14/Java-HashMap%E7%9A%84%E5%8E%9F%E7%90%86%E6%8E%A2%E7%A9%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20210523.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiayi797">
+      <meta itemprop="description" content=".">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="甲乙小朋友的房子">
     </span>
-
-    
       <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">Java-HashMap的原理探究</h1>
-        
+        <h1 class="post-title" itemprop="name headline">
+          Java-HashMap的原理探究
+        </h1>
 
         <div class="post-meta">
-          <span class="post-time">
-            
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="far fa-calendar"></i>
               </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-14T13:23:40+00:00">
-                2018-01-14
-              </time>
-            
+              <span class="post-meta-item-text">发表于</span>
 
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-17T07:41:59+00:00">
-                2018-12-17
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
+              <time title="创建时间：2018-01-14 21:23:40" itemprop="dateCreated datePublished" datetime="2018-01-14T21:23:40+08:00">2018-01-14</time>
             </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
+              <span class="post-meta-item">
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="far fa-calendar-check"></i>
                 </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  4.8k
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2018-12-17 15:41:59" itemprop="dateModified" datetime="2018-12-17T15:41:59+08:00">2018-12-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
-              
-
-              
-
-              
-            </div>
-          
+            </span>
 
           
 
         </div>
       </header>
-    
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
-      
-
-      
-        <h1 id="HashMap概述"><a href="#HashMap概述" class="headerlink" title="HashMap概述"></a>HashMap概述</h1><p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是不保证该顺序恒久不变。</p>
+        <h1 id="hashmap概述">HashMap概述</h1>
+<p>HashMap是基于哈希表的Map接口的非同步实现。此实现提供所有可选的映射操作，并允许使用null值和null键。此类不保证映射的顺序，特别是不保证该顺序恒久不变。</p>
 <p>此实现假定哈希函数将元素适当地分布在各桶之间，可为基本操作（get和put）提供稳定的性能。</p>
 <p>迭代colletction视图所需要的时间与HashMap实例的“容量”（桶的数量）及其大小（键-值映射关系数）成比例。所以如果迭代性能很重要，则不能将初始容量设置得太高，或者将加载因子设置的太低。</p>
 <p>需要注意的是，HashMap是不同步的。如果多个线程同时访问一个HashMap，若其中某个线程修改了HashMap的结构（即删除或者添加映射关系），那么必须要保持外部同步。</p>
 <span id="more"></span>
-
-<h1 id="HashMap的数据结构"><a href="#HashMap的数据结构" class="headerlink" title="HashMap的数据结构"></a>HashMap的数据结构</h1><p>在Java中，最基本的结构就是数组和指针（引用）。HashMap就是结合了这两种结构进行实现。</p>
+<h1 id="hashmap的数据结构">HashMap的数据结构</h1>
+<p>在Java中，最基本的结构就是数组和指针（引用）。HashMap就是结合了这两种结构进行实现。</p>
 <p><strong>HashMap实际上是一个“链表散列”的数据结构，即数组和链表的结合体</strong></p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-14-21-36-42.png"> </p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-14-21-36-42.png" /></p>
 <p>从上图中可以看出，HashMap 底层就是一个数组结构，数组中的每一项又是一个链表。当新建一个 HashMap 的时候，就会初始化一个数组。</p>
 <p>我们通过 JDK 中的 HashMap 源码进行一些学习，首先看一下构造函数：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Illegal initial capacity: &quot;</span> +</span><br><span class="line">                                               initialCapacity);</span><br><span class="line">        <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">            initialCapacity = MAXIMUM_CAPACITY;</span><br><span class="line">        <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;Illegal load factor: &quot;</span> +</span><br><span class="line">                                               loadFactor);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Find a power of 2 &gt;= initialCapacity</span></span><br><span class="line">        <span class="keyword">int</span> capacity = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (capacity &lt; initialCapacity)</span><br><span class="line">            capacity &lt;&lt;= <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.loadFactor = loadFactor;</span><br><span class="line">        threshold = (<span class="keyword">int</span>)Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + <span class="number">1</span>);</span><br><span class="line">        table = <span class="keyword">new</span> Entry[capacity]; <span class="comment">// 新建数组</span></span><br><span class="line">        useAltHashing = sun.misc.VM.isBooted() &amp;&amp;</span><br><span class="line">                (capacity &gt;= Holder.ALTERNATIVE_HASHING_THRESHOLD);</span><br><span class="line">        init();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>我们看到第18行<code>table = new Entry[capacity];</code> 其实是创建了一个<code>Entry</code> 的数组，其大小为<code>capacity</code> 。那么<code>Entry</code> 又是什么呢？看一下源码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> K key; <span class="comment">//键</span></span><br><span class="line">    V value;     <span class="comment">//值</span></span><br><span class="line">    Entry&lt;K,V&gt; next; <span class="comment">//指向下一个元素的引用 --&gt; 构成了链表</span></span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>我们目前还是只着重核心的部分，Entry 是一个 static class，其中包含了 key 和 value，也就是键值对，另外还包含了一个 next 的 Entry 指针。我们可以总结出：Entry 就是数组中的元素，每个 Entry 其实就是一个 key-value 对，它持有一个指向下一个元素的引用，这就构成了链表。</p>
-<h1 id="HashMap核心方法解读"><a href="#HashMap核心方法解读" class="headerlink" title="HashMap核心方法解读"></a>HashMap核心方法解读</h1><h2 id="put-方法"><a href="#put-方法" class="headerlink" title="put()方法"></a>put()方法</h2><p><strong>流程图</strong></p>
+<h1 id="hashmap核心方法解读">HashMap核心方法解读</h1>
+<h2 id="put方法">put()方法</h2>
+<p><strong>流程图</strong></p>
 <p>下面这个流程图很好地说明了总过程，接下来我们会一步步分析这个步骤。</p>
-<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-14-21-57-57.png"></p>
+<p><img src="http://jiayi797.oss-cn-beijing.aliyuncs.com/2018-01-14-21-57-57.png" /></p>
 <p><strong>put()主方法</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Associates the specified value with the specified key in this map.</span></span><br><span class="line"><span class="comment">     * If the map previously contained a mapping for the key, the old</span></span><br><span class="line"><span class="comment">     * value is replaced.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key key with which the specified value is to be associated</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value value to be associated with the specified key</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the previous value associated with &lt;tt&gt;key&lt;/tt&gt;, or</span></span><br><span class="line"><span class="comment">     *         &lt;tt&gt;null&lt;/tt&gt; if there was no mapping for &lt;tt&gt;key&lt;/tt&gt;.</span></span><br><span class="line"><span class="comment">     *         (A &lt;tt&gt;null&lt;/tt&gt; return can also indicate that the map</span></span><br><span class="line"><span class="comment">     *         previously associated &lt;tt&gt;null&lt;/tt&gt; with &lt;tt&gt;key&lt;/tt&gt;.)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//其允许存放null的key和null的value，当其key为null时，调用putForNullKey方法，放入到table[0]的这个位置</span></span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> putForNullKey(value);</span><br><span class="line">        </span><br><span class="line">		<span class="comment">//1. 通过调用hash方法对key进行哈希，得到哈希之后的数值。</span></span><br><span class="line">        <span class="keyword">int</span> hash = hash(key);</span><br><span class="line">  </span><br><span class="line">        <span class="comment">//2. 根据上一步骤中求出的hash得到在数组中是索引i</span></span><br><span class="line">        <span class="keyword">int</span> i = indexFor(hash, table.length);</span><br><span class="line">  </span><br><span class="line">        <span class="comment">//3.1 如果i处的Entry不为null，则寻找是否存在过key</span></span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;K,V&gt; e = table[i]; e != <span class="keyword">null</span>; e = e.next) &#123;</span><br><span class="line">            Object k;</span><br><span class="line">             <span class="comment">// 3.1.1若曾经有过key值，则直接覆盖</span></span><br><span class="line">            <span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                e.value = value;</span><br><span class="line">                e.recordAccess(<span class="keyword">this</span>);</span><br><span class="line">                <span class="keyword">return</span> oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="comment">// 3.2、3.1.2 : 如果i处Entry为空，或者不曾存在过key，则添加key</span></span><br><span class="line">        modCount++;</span><br><span class="line">        addEntry(hash, key, value, i); <span class="comment">//根据计算出的 hash 值，将 key-value 对放在数组 table 的 i 索引处</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>我们看一下方法的标准注释：在注释中首先提到了，当我们 put 的时候，如果 key 存在了，那么新的 value 会代替旧的 value，并且如果 key 存在的情况下，该方法返回的是旧的 value，如果 key 不存在，那么返回 null。</p>
 <p>从上面的源代码中可以看出：当我们往 HashMap 中 put 元素的时候，先根据 key 的 hashCode 重新计算 hash 值，根据 hash 值得到这个元素在数组中的位置（即下标），如果数组该位置上已经存放有其他元素了，那么在这个位置上的元素将以链表的形式存放，新加入的放在链头，最先加入的放在链尾。如果数组该位置上没有元素，就直接将该元素放到此数组中的该位置上。</p>
 <p>也就是说，put方法主要做了以下几个步骤：</p>
-<ol>
+<ol type="1">
 <li>计算key的hashCode值。其目的是为了尽可能的让键值对可以分不到不同的桶中</li>
 <li>根据hashCode得到在table中的索引i</li>
-<li>将value插入到table中：<ol>
-<li>如果table[i]不为空，则表示两个key的hash值重叠了。那就根据key将值插入table[i]指向的链表中：<ol>
+<li>将value插入到table中：
+<ol type="1">
+<li>如果table[i]不为空，则表示两个key的hash值重叠了。那就根据key将值插入table[i]指向的链表中：
+<ol type="1">
 <li>要么覆盖原来的值（曾经有过这个key）</li>
-<li>要么插入链表末尾（曾经没有过这个key） –&gt; 调用<code>addEntry()</code></li>
-</ol>
-</li>
-<li>如果table[i]为空，就直接插入 –&gt; 调用<code>addEntry()</code></li>
-</ol>
-</li>
+<li>要么插入链表末尾（曾经没有过这个key） --&gt; 调用<code>addEntry()</code></li>
+</ol></li>
+<li>如果table[i]为空，就直接插入 --&gt; 调用<code>addEntry()</code></li>
+</ol></li>
 </ol>
 <p><strong>addEntry()方法</strong></p>
 <p>addEntry(hash, key, value, i)方法根据计算出的 hash 值，将 key-value 对放在数组 table 的 i 索引处。addEntry 是 HashMap 提供的一个包访问权限的方法，代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Adds a new entry with the specified key, value and hash code to</span></span><br><span class="line"><span class="comment">     * the specified bucket.  It is the responsibility of this</span></span><br><span class="line"><span class="comment">     * method to resize the table if appropriate.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * Subclass overrides this to alter the behavior of put method.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEntry</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">int</span> bucketIndex)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> ((size &gt;= threshold) &amp;&amp; (<span class="keyword">null</span> != table[bucketIndex])) &#123;</span><br><span class="line">            resize(<span class="number">2</span> * table.length);</span><br><span class="line">            hash = (<span class="keyword">null</span> != key) ? hash(key) : <span class="number">0</span>;</span><br><span class="line">            bucketIndex = indexFor(hash, table.length);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        createEntry(hash, key, value, bucketIndex);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createEntry</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">int</span> bucketIndex)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取指定 bucketIndex 索引处的 Entry</span></span><br><span class="line">        Entry&lt;K,V&gt; e = table[bucketIndex];</span><br><span class="line">        <span class="comment">// 将新创建的 Entry 放入 bucketIndex 索引处，并让新的 Entry 指向原来的 Entr</span></span><br><span class="line">        table[bucketIndex] = <span class="keyword">new</span> Entry&lt;&gt;(hash, key, value, e);</span><br><span class="line">        size++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>当系统决定存储 HashMap 中的 key-value 对时，完全没有考虑 Entry 中的 value，仅仅只是根据 key 来计算并决定每个 Entry 的存储位置。我们完全可以把 Map 集合中的 value 当成 key 的附属，当系统决定了 key 的存储位置之后，value 随之保存在那里即可。</p>
 <p><strong>hash()方法</strong></p>
 <p>hash(int h)方法根据 key 的 hashCode 重新计算一次散列。此算法加入了高位计算，防止低位不变，高位变化时，造成的 hash 冲突。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> h = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (useAltHashing) &#123;</span><br><span class="line">            <span class="keyword">if</span> (k <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">                <span class="keyword">return</span> sun.misc.Hashing.stringHash32((String) k);</span><br><span class="line">            &#125;</span><br><span class="line">            h = hashSeed;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//得到k的hashcode值</span></span><br><span class="line">        h ^= k.hashCode();</span><br><span class="line">        <span class="comment">//进行计算</span></span><br><span class="line">        h ^= (h &gt;&gt;&gt; <span class="number">20</span>) ^ (h &gt;&gt;&gt; <span class="number">12</span>);</span><br><span class="line">        <span class="keyword">return</span> h ^ (h &gt;&gt;&gt; <span class="number">7</span>) ^ (h &gt;&gt;&gt; <span class="number">4</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>我们可以看到在 HashMap 中要找到某个元素，需要根据 key 的 hash 值来求得对应数组中的位置。如何计算这个位置就是 hash 算法。前面说过 HashMap 的数据结构是数组和链表的结合，所以我们当然希望这个 HashMap 里面的 元素位置尽量的分布均匀些，尽量使得每个位置上的元素数量只有一个，那么当我们用 hash 算法求得这个位置的时候，马上就可以知道对应位置的元素就是我们要的，而不用再去遍历链表，这样就大大优化了查询的效率。</p>
 <p>对于任意给定的对象，只要它的 hashCode() 返回值相同，那么程序调用 hash(int h) 方法所计算得到的 hash 码值总是相同的。我们首先想到的就是把 hash 值对数组长度取模运算，这样一来，元素的分布相对来说是比较均匀的。但是，“模”运算的消耗还是比较大的，在 HashMap 中是这样做的：调用 indexFor(int h, int length) 方法来计算该对象应该保存在 table 数组的哪个索引处。indexFor(int h, int length) 方法的代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns index for hash code h.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">indexFor</span><span class="params">(<span class="keyword">int</span> h, <span class="keyword">int</span> length)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">return</span> h &amp; (length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这个方法非常巧妙，它通过 h &amp; (table.length -1) 来得到该对象的保存位，而 HashMap 底层数组的长度总是 2 的 n 次方，这是 HashMap 在速度上的优化。在 HashMap 构造器中有如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Find a power of 2 &gt;= initialCapacity</span></span><br><span class="line"><span class="keyword">int</span> capacity = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (capacity &lt; initialCapacity)  </span><br><span class="line">        capacity &lt;&lt;= <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
 <p>这段代码保证初始化时 HashMap 的容量总是 2 的 n 次方，即底层数组的长度总是为 2 的 n 次方。</p>
 <p>当 length 总是 2 的 n 次方时，h&amp; (length-1)运算等价于对 length 取模，也就是 h%length，但是 &amp; 比 % 具有更高的效率。这看上去很简单，其实比较有玄机的，我们举个例子来说明：</p>
 <p>假设数组长度分别为 15 和 16，优化后的 hash 码分别为 8 和 9，那么 &amp; 运算后的结果如下：</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>h &amp; (table.length-1)</th>
 <th>hash</th>
 <th></th>
@@ -512,288 +273,225 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr class="odd">
 <td>8 &amp; (15-1)：</td>
 <td>0100</td>
 <td>&amp;</td>
 <td>1110</td>
 <td>= 0100</td>
 </tr>
-<tr>
+<tr class="even">
 <td>9 &amp; (15-1)：</td>
 <td>0101</td>
 <td>&amp;</td>
 <td>1110</td>
 <td>= 0100</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>8 &amp; (16-1)：</td>
 <td>0100</td>
 <td>&amp;</td>
 <td>1111</td>
 <td>= 0100</td>
 </tr>
-<tr>
+<tr class="even">
 <td>9 &amp; (16-1)：</td>
 <td>0101</td>
 <td>&amp;</td>
 <td>1111</td>
 <td>= 0101</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>从上面的例子中可以看出：当它们和 15-1（1110）“与”的时候，产生了相同的结果，也就是说它们会定位到数组中的同一个位置上去，这就产生了碰撞，8 和 9 会被放到数组中的同一个位置上形成链表，那么查询的时候就需要遍历这个链 表，得到8或者9，这样就降低了查询的效率。同时，我们也可以发现，当数组长度为 15 的时候，hash 值会与 15-1（1110）进行“与”，那么最后一位永远是 0，而 0001，0011，0101，1001，1011，0111，1101 这几个位置永远都不能存放元素了，空间浪费相当大，更糟的是这种情况中，数组可以使用的位置比数组长度小了很多，这意味着进一步增加了碰撞的几率，减慢了查询的效率！而当数组长度为16时，即为2的n次方时，2n-1 得到的二进制数的每个位上的值都为 1，这使得在低位上&amp;时，得到的和原 hash 的低位相同，加之 hash(int h)方法对 key 的 hashCode 的进一步优化，加入了高位计算，就使得只有相同的 hash 值的两个值才会被放到数组中的同一个位置上形成链表。</p>
 <p>所以说，当数组长度为 2 的 n 次幂的时候，不同的 key 算得得 index 相同的几率较小，那么数据在数组上分布就比较均匀，也就是说碰撞的几率小，相对的，查询的时候就不用遍历某个位置上的链表，这样查询效率也就较高了。</p>
 <p><strong>总结</strong></p>
 <p>根据上面 put 方法的源代码可以看出，当程序试图将一个key-value对放入HashMap中时，程序首先根据该 key 的 hashCode() 返回值决定该 Entry 的存储位置：如果两个 Entry 的 key 的 hashCode() 返回值相同，那它们的存储位置相同。如果这两个 Entry 的 key 通过 equals 比较返回 true，新添加 Entry 的 value 将覆盖集合中原有 Entry 的 value，但key不会覆盖。如果这两个 Entry 的 key 通过 equals 比较返回 false，新添加的 Entry 将与集合中原有 Entry 形成 Entry 链，而且新添加的 Entry 位于 Entry 链的头部——具体说明继续看 addEntry() 方法的说明。</p>
-<h2 id="get-方法"><a href="#get-方法" class="headerlink" title="get()方法"></a>get()方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns the value to which the specified key is mapped,</span></span><br><span class="line"><span class="comment">     * or &#123;<span class="doctag">@code</span> null&#125; if this map contains no mapping for the key.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;More formally, if this map contains a mapping from a key</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> k&#125; to a value &#123;<span class="doctag">@code</span> v&#125; such that &#123;<span class="doctag">@code</span> (key==null ? k==null :</span></span><br><span class="line"><span class="comment">     * key.equals(k))&#125;, then this method returns &#123;<span class="doctag">@code</span> v&#125;; otherwise</span></span><br><span class="line"><span class="comment">     * it returns &#123;<span class="doctag">@code</span> null&#125;.  (There can be at most one such mapping.)</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;A return value of &#123;<span class="doctag">@code</span> null&#125; does not &lt;i&gt;necessarily&lt;/i&gt;</span></span><br><span class="line"><span class="comment">     * indicate that the map contains no mapping for the key; it&#x27;s also</span></span><br><span class="line"><span class="comment">     * possible that the map explicitly maps the key to &#123;<span class="doctag">@code</span> null&#125;.</span></span><br><span class="line"><span class="comment">     * The &#123;<span class="doctag">@link</span> #containsKey containsKey&#125; operation may be used to</span></span><br><span class="line"><span class="comment">     * distinguish these two cases.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> #put(Object, Object)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> getForNullKey();</span><br><span class="line">        Entry&lt;K,V&gt; entry = getEntry(key);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span> == entry ? <span class="keyword">null</span> : entry.getValue();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">final</span> Entry&lt;K,V&gt; <span class="title">getEntry</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> hash = (key == <span class="keyword">null</span>) ? <span class="number">0</span> : hash(key);</span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</span><br><span class="line">             e != <span class="keyword">null</span>;</span><br><span class="line">             e = e.next) &#123;</span><br><span class="line">            Object k;</span><br><span class="line">            <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                <span class="keyword">return</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="get方法">get()方法</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Returns the value to which the specified key is mapped,</span></span><br><span class="line"><span class="comment">     * or &#123;<span class="doctag">@code</span> null&#125; if this map contains no mapping for the key.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;More formally, if this map contains a mapping from a key</span></span><br><span class="line"><span class="comment">     * &#123;<span class="doctag">@code</span> k&#125; to a value &#123;<span class="doctag">@code</span> v&#125; such that &#123;<span class="doctag">@code</span> (key==null ? k==null :</span></span><br><span class="line"><span class="comment">     * key.equals(k))&#125;, then this method returns &#123;<span class="doctag">@code</span> v&#125;; otherwise</span></span><br><span class="line"><span class="comment">     * it returns &#123;<span class="doctag">@code</span> null&#125;.  (There can be at most one such mapping.)</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * &lt;p&gt;A return value of &#123;<span class="doctag">@code</span> null&#125; does not &lt;i&gt;necessarily&lt;/i&gt;</span></span><br><span class="line"><span class="comment">     * indicate that the map contains no mapping for the key; it&#x27;s also</span></span><br><span class="line"><span class="comment">     * possible that the map explicitly maps the key to &#123;<span class="doctag">@code</span> null&#125;.</span></span><br><span class="line"><span class="comment">     * The &#123;<span class="doctag">@link</span> #containsKey containsKey&#125; operation may be used to</span></span><br><span class="line"><span class="comment">     * distinguish these two cases.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@see</span> #put(Object, Object)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (key == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> getForNullKey();</span><br><span class="line">        Entry&lt;K,V&gt; entry = getEntry(key);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span> == entry ? <span class="keyword">null</span> : entry.getValue();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">final</span> Entry&lt;K,V&gt; <span class="title">getEntry</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> hash = (key == <span class="keyword">null</span>) ? <span class="number">0</span> : hash(key);</span><br><span class="line">        <span class="keyword">for</span> (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</span><br><span class="line">             e != <span class="keyword">null</span>;</span><br><span class="line">             e = e.next) &#123;</span><br><span class="line">            Object k;</span><br><span class="line">            <span class="keyword">if</span> (e.hash == hash &amp;&amp;</span><br><span class="line">                ((k = e.key) == key || (key != <span class="keyword">null</span> &amp;&amp; key.equals(k))))</span><br><span class="line">                <span class="keyword">return</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>有了上面存储时的 hash 算法作为基础，理解起来这段代码就很容易了。从上面的源代码中可以看出：从 HashMap 中 get 元素时，首先计算 key 的 hashCode，找到数组中对应位置的某一元素，然后通过 key 的 equals 方法在对应位置的链表中找到需要的元素。</p>
-<h2 id="归纳"><a href="#归纳" class="headerlink" title="归纳"></a>归纳</h2><p>简单地说，HashMap在底层将key-value当成一个整体进行处理，这个整体就是一个Entry对象。</p>
+<h2 id="归纳">归纳</h2>
+<p>简单地说，HashMap在底层将key-value当成一个整体进行处理，这个整体就是一个Entry对象。</p>
 <ul>
 <li>HashMap底层采用一个<code>Entry[]</code> 数组来保存所有的key-value对。</li>
 <li>当需要存储一个Entry对象时，会根据hash算法来决定其在数组中的存储位置，再根据equals方法决定其在该数组位置上的链表中的存储位置。</li>
 <li>当需要取出一个Entry时，也会根据hash算法找到其在数组中的存储位置，再根据equals方法从该位置的链表中取出该Entry。</li>
 </ul>
-<h1 id="HashMap相关机制"><a href="#HashMap相关机制" class="headerlink" title="HashMap相关机制"></a>HashMap相关机制</h1><h2 id="resize机制（rehash）"><a href="#resize机制（rehash）" class="headerlink" title="resize机制（rehash）"></a>resize机制（rehash）</h2><p>当HashMap中的元素越来越多的时候，hash冲突的几率也越来越高，因为数组的长度时固定的。所以为了提高查询的效率，就需要对HashMap的数组进行扩容。那么此时最消耗性能的点就出现了：原数组中的每一个数据必须重新计算其在新数组中的位置，并放进去，这就是resize操作。</p>
+<h1 id="hashmap相关机制">HashMap相关机制</h1>
+<h2 id="resize机制rehash">resize机制（rehash）</h2>
+<p>当HashMap中的元素越来越多的时候，hash冲突的几率也越来越高，因为数组的长度时固定的。所以为了提高查询的效率，就需要对HashMap的数组进行扩容。那么此时最消耗性能的点就出现了：原数组中的每一个数据必须重新计算其在新数组中的位置，并放进去，这就是resize操作。</p>
 <p>那么HashMap是什么时候进行扩容的呢？当HashMap中的元素超过<code>threshold = (int)(capacity * loadFactor)</code> 时，就会进行数组扩容。loadFactor的默认值为0.75。其中threshold是HashMap的一个字段。</p>
 <p>每次扩容时，都新建一个2倍的数组，然后重新计算每一个元素在数组中的位置。这是一个非常耗时的操作。所以我们如果预知HashMap中的元素个数，那么预设元素的个数就能有效地提高HashMap的性能。</p>
-<p>而负载因子loadFactor 衡量的是一个散列表的空间使用程度。负载因子越大表示散列的装填程度越高。对于使用链表法的散列表来说，查找元素的平均时间是$O(1+a)$ 。a是链表平均长度。因此如果负载因子越大，对空间的利用更充分，但查找效率就会更低。如果负载因子太小，散列表的数据又过于稀疏，对空间造成严重浪费。</p>
-<h2 id="HashMap的构造器"><a href="#HashMap的构造器" class="headerlink" title="HashMap的构造器"></a>HashMap的构造器</h2><p>HashMap包含以下几个构造器：</p>
+<p>而负载因子loadFactor 衡量的是一个散列表的空间使用程度。负载因子越大表示散列的装填程度越高。对于使用链表法的散列表来说，查找元素的平均时间是<span class="math inline">\(O(1+a)\)</span> 。a是链表平均长度。因此如果负载因子越大，对空间的利用更充分，但查找效率就会更低。如果负载因子太小，散列表的数据又过于稀疏，对空间造成严重浪费。</p>
+<h2 id="hashmap的构造器">HashMap的构造器</h2>
+<p>HashMap包含以下几个构造器：</p>
 <ul>
 <li><code>HashMap()</code> : 构建一个初始容量为16，负载因子为0.75的HashMap。</li>
 <li><code>HashMap(int initialCapcity)</code> : 构建一个初始容量为initialCapcity, 负载因子为0.75的HashMap。</li>
-<li><code>HashMap(int initialCapacity, float loadFactor)</code> : 以指定初始容量、指定的负载因子创建一个HashMap。<ul>
+<li><code>HashMap(int initialCapacity, float loadFactor)</code> : 以指定初始容量、指定的负载因子创建一个HashMap。
+<ul>
 <li>initialCapcity * loadFactor过大时，会造成空间的严重浪费</li>
 <li>initialCapcity * loadFactor过小时，会造成查找效率很低</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Fail-Fast机制"><a href="#Fail-Fast机制" class="headerlink" title="Fail-Fast机制"></a>Fail-Fast机制</h2><p>我们知道 java.util.HashMap 不是线程安全的，因此如果在使用迭代器的过程中有其他线程修改了 map，那么将抛出 ConcurrentModificationException，这就是所谓 fail-fast 策略。</p>
+<h2 id="fail-fast机制">Fail-Fast机制</h2>
+<p>我们知道 java.util.HashMap 不是线程安全的，因此如果在使用迭代器的过程中有其他线程修改了 map，那么将抛出 ConcurrentModificationException，这就是所谓 fail-fast 策略。</p>
 <p>ail-fast 机制是 java 集合(Collection)中的一种错误机制。 当多个线程对同一个集合的内容进行操作时，就可能会产生 fail-fast 事件。</p>
 <p>例如：当某一个线程 A 通过 iterator去遍历某集合的过程中，若该集合的内容被其他线程所改变了；那么线程 A 访问集合时，就会抛出 ConcurrentModificationException 异常，产生 fail-fast 事件。</p>
 <p>这一策略在源码中的实现是通过 modCount 域，modCount 顾名思义就是修改次数，对 HashMap 内容（当然不仅仅是 HashMap 才会有，其他例如 ArrayList 也会）的修改都将增加这个值（大家可以再回头看一下其源码，在很多操作中都有 modCount++ 这句），那么在迭代器初始化过程中会将这个值赋给迭代器的 expectedModCount。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HashIterator() &#123;</span><br><span class="line">    expectedModCount = modCount;</span><br><span class="line">    <span class="keyword">if</span> (size &gt; <span class="number">0</span>) &#123; <span class="comment">// advance to first entry</span></span><br><span class="line">    Entry[] t = table;</span><br><span class="line">    <span class="keyword">while</span> (index &lt; t.length &amp;&amp; (next = t[index++]) == <span class="keyword">null</span>)  </span><br><span class="line">        ;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>在迭代过程中，判断 modCount 跟 expectedModCount 是否相等，如果不相等就表示已经有其他线程修改了 Map：</p>
 <p>注意到 modCount 声明为 volatile，保证线程之间修改的可见性。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">final</span> Entry&lt;K,V&gt; <span class="title">nextEntry</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (modCount != expectedModCount)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> ConcurrentModificationException();</span><br></pre></td></tr></table></figure>
-
 <p>在 HashMap 的 API 中指出：</p>
 <p>由所有 HashMap 类的“collection 视图方法”所返回的迭代器都是快速失败的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭代器本身的 remove 方法，其他任何时间任何方式的修改，迭代器都将抛出 ConcurrentModificationException。因此，面对并发的修改，迭代器很快就会完全失败，而不冒在将来不确定的时间发生任意不确定行为的风险。</p>
 <p>注意，迭代器的快速失败行为不能得到保证，一般来说，存在非同步的并发修改时，不可能作出任何坚决的保证。快速失败迭代器尽最大努力抛出 ConcurrentModificationException。因此，编写依赖于此异常的程序的做法是错误的，正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
 <p><strong>解决方案</strong></p>
 <p>在上文中也提到，fail-fast 机制，是一种错误检测机制。它只能被用来检测错误，因为 JDK 并不保证 fail-fast 机制一定会发生。若在多线程环境下使用 fail-fast 机制的集合，建议使用“java.util.concurrent 包下的类”去取代“java.util 包下的类”。</p>
-<h2 id="HashMap的两种遍历方式"><a href="#HashMap的两种遍历方式" class="headerlink" title="HashMap的两种遍历方式"></a>HashMap的两种遍历方式</h2><h2 id="第一种"><a href="#第一种" class="headerlink" title="第一种"></a>第一种</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">　　Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">　　Iterator iter = map.entrySet().iterator();</span><br><span class="line">　　<span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">Map.Entry entry = (Map.Entry) iter.next();</span><br><span class="line">Object key = entry.getKey();</span><br><span class="line">Object val = entry.getValue();</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="hashmap的两种遍历方式">HashMap的两种遍历方式</h2>
+<h2 id="第一种">第一种</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">　　Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">　　Iterator iter = map.entrySet().iterator();</span><br><span class="line">　　<span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">Map.Entry entry = (Map.Entry) iter.next();</span><br><span class="line">Object key = entry.getKey();</span><br><span class="line">Object val = entry.getValue();</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
 <p>效率高,以后一定要使用此种方式！</p>
-<h2 id="第二种"><a href="#第二种" class="headerlink" title="第二种"></a>第二种</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">　　Iterator iter = map.keySet().iterator();</span><br><span class="line">　　<span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">Object key = iter.next();</span><br><span class="line">Object val = map.get(key);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="第二种">第二种</h2>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">　　Map map = <span class="keyword">new</span> HashMap();</span><br><span class="line">　　Iterator iter = map.keySet().iterator();</span><br><span class="line">　　<span class="keyword">while</span> (iter.hasNext()) &#123;</span><br><span class="line">Object key = iter.next();</span><br><span class="line">Object val = map.get(key);</span><br><span class="line">　　&#125;</span><br></pre></td></tr></table></figure>
 <p>效率低,以后尽量少使用！</p>
-<h1 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h1><p>在Java里，其实HashSet内部是一个HashMap。此处不再过多阐述。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<h1 id="hashset">HashSet</h1>
+<p>在Java里，其实HashSet内部是一个HashMap。此处不再过多阐述。</p>
+<h1 id="参考资料">参考资料</h1>
+<ol type="1">
 <li><a target="_blank" rel="noopener" href="http://wiki.jikexueyuan.com/project/java-collection/hashmap.html">极客学院，HashMap 的实现原理</a></li>
 <li><a target="_blank" rel="noopener" href="https://tech.meituan.com/java-hashmap.html">美团点评技术团队，Java 8系列之重新认识HashMap</a></li>
 </ol>
 
-      
     </div>
 
-    <div>
-      
+    
+    
+    
+
+      <footer class="post-footer">
+
         
 
-      
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/11/%E7%AE%97%E6%B3%95-%E5%9B%BE/" rel="prev" title="算法-图">
+      <i class="fa fa-chevron-left"></i> 算法-图
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/15/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E6%96%B0%E9%B2%9C%E4%BA%8B%E7%B3%BB%E7%BB%9F/" rel="next" title="系统设计-新鲜事系统">
+      系统设计-新鲜事系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/01/11/%E7%AE%97%E6%B3%95-%E5%9B%BE/" rel="next" title="算法-图">
-                <i class="fa fa-chevron-left"></i> 算法-图
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/15/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1-%E6%96%B0%E9%B2%9C%E4%BA%8B%E7%B3%BB%E7%BB%9F/" rel="prev" title="系统设计-新鲜事系统">
-                系统设计-新鲜事系统 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
+      </footer>
+    
   </article>
+  
+  
+  
 
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
 
 
           </div>
           
 
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="SOHUCS"></div>
-    
-  </div>
-
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
-        
           
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
-  <aside id="sidebar" class="sidebar">
+  <aside class="sidebar">
     <div class="sidebar-inner">
 
-      
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/20210523.jpg"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">149</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">34</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">31</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
       <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap%E6%A6%82%E8%BF%B0"><span class="nav-text">HashMap概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">HashMap的数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95%E8%A7%A3%E8%AF%BB"><span class="nav-text">HashMap核心方法解读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#put-%E6%96%B9%E6%B3%95"><span class="nav-text">put()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get-%E6%96%B9%E6%B3%95"><span class="nav-text">get()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E7%BA%B3"><span class="nav-text">归纳</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HashMap%E7%9B%B8%E5%85%B3%E6%9C%BA%E5%88%B6"><span class="nav-text">HashMap相关机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#resize%E6%9C%BA%E5%88%B6%EF%BC%88rehash%EF%BC%89"><span class="nav-text">resize机制（rehash）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-text">HashMap的构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fail-Fast%E6%9C%BA%E5%88%B6"><span class="nav-text">Fail-Fast机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap%E7%9A%84%E4%B8%A4%E7%A7%8D%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F"><span class="nav-text">HashMap的两种遍历方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D"><span class="nav-text">第一种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D"><span class="nav-text">第二种</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HashSet"><span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text">参考资料</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hashmap%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">HashMap概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hashmap%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">HashMap的数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hashmap%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95%E8%A7%A3%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">HashMap核心方法解读</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#put%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">put()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">get()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E7%BA%B3"><span class="nav-number">3.3.</span> <span class="nav-text">归纳</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hashmap%E7%9B%B8%E5%85%B3%E6%9C%BA%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">HashMap相关机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#resize%E6%9C%BA%E5%88%B6rehash"><span class="nav-number">4.1.</span> <span class="nav-text">resize机制（rehash）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashmap%E7%9A%84%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">4.2.</span> <span class="nav-text">HashMap的构造器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fail-fast%E6%9C%BA%E5%88%B6"><span class="nav-number">4.3.</span> <span class="nav-text">Fail-Fast机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashmap%E7%9A%84%E4%B8%A4%E7%A7%8D%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">HashMap的两种遍历方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D"><span class="nav-number">4.5.</span> <span class="nav-text">第一种</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D"><span class="nav-number">4.6.</span> <span class="nav-text">第二种</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hashset"><span class="nav-number">5.</span> <span class="nav-text">HashSet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
       <!--/noindex-->
-      
 
-      
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiayi797</p>
+  <div class="site-description" itemprop="description">.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
 
     </div>
   </aside>
+  <div id="sidebar-dimmer"></div>
 
 
-        
       </div>
     </main>
 
-    <footer id="footer" class="footer">
+    <footer class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        
+
+        
+
+<div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2023</span>
@@ -802,140 +500,37 @@
   </span>
   <span class="author" itemprop="copyrightHolder">jiayi797</span>
 </div>
-
-
-
-<div class="theme-info">
-  <div class="powered-by">感谢hexo.Next</div>
-  <span class="post-count">博客全站共331.9k字</span>
-</div>
-
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+    <span class="post-count">| 博客共334.5k字</span>
+  </div>
 
         
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">
-      <i class="fa fa-user"></i> 访问人次
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      
-    </span>
-  
-
-  
-    <span class="site-pv">
-      <i class="fa fa-eye"></i> 总访问量
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
-</div>
 
 
-        
+
+
+
+
+
+
       </div>
     </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
+<script src="/js/utils.js"></script>
 
-
-
+<script src="/js/motion.js"></script>
 
 
+<script src="/js/schemes/muse.js"></script>
 
 
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -946,362 +541,15 @@
 
 
 
-  
-
-
-
-
-
-  
 
 
 
 
 
 
-  
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "search.xml";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
 
 
 
-
-
-  
-
-  
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
-
-
-  
 
   
 
